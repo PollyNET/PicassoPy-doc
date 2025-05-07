@@ -1,0 +1,40 @@
+﻿..
+  module.rst
+
+ppcpy.io.write2nc
+=================
+
+.. automodule:: ppcpy.io.write2nc
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    adding_fixed_vars
+                    adding_global_attr
+                    adding_refH_vars
+                    get_git_info
+                    write2nc_file
+                    write_channelwise_2_nc_file
+                    write_profile2nc_file
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

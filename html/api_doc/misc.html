@@ -1,0 +1,1527 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ppcpy.misc &#8212; PicassoPy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_doc/misc';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ppcpy.qc" href="qc.html" />
+    <link rel="prev" title="ppcpy.io" href="io.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PicassoPy  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="interface.html">ppcpy.interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration.html">ppcpy.calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess.html">ppcpy.preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloudmask.html">ppcpy.cloudmask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">ppcpy.io</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ppcpy.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qc.html">ppcpy.qc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="retrievals.html">ppcpy.retrievals</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api_doc.html" class="nav-link">API Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ppcpy.misc</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ppcpy-misc">
+<h1>ppcpy.misc<a class="headerlink" href="#ppcpy-misc" title="Link to this heading">#</a></h1>
+<section id="module-ppcpy.misc.helper">
+<span id="ppcpy-misc-helper"></span><h2>ppcpy.misc.helper<a class="headerlink" href="#module-ppcpy.misc.helper" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.detect_path_type">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">detect_path_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullpath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#detect_path_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.detect_path_type" title="Link to this definition">#</a></dt>
+<dd><p>Detect the type of path (Windows or Linux) based on the input.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.os_name">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">os_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#os_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.os_name" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.get_input_path">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">get_input_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_folder</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#get_input_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.get_input_path" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.get_pollyxt_files">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">get_pollyxt_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#get_pollyxt_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.get_pollyxt_files" title="Link to this definition">#</a></dt>
+<dd><p>This function locates multiple pollyxt level0 nc-zip files from one day measurements,
+unzipps the files to output_path
+and returns a list of files to be merged
+and the title of the new merged nc-file</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.get_pollyxt_logbook_files">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">get_pollyxt_logbook_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#get_pollyxt_logbook_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.get_pollyxt_logbook_files" title="Link to this definition">#</a></dt>
+<dd><p>This function locates multiple pollyxt logbook-zip files from one day measurements,
+unzipps the files to output_path
+and  merge them to one file</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.add_to_list">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">add_to_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#add_to_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.add_to_list" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.checking_vars">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">checking_vars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#checking_vars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.checking_vars" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.checking_attr">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">checking_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#checking_attr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.checking_attr" title="Link to this definition">#</a></dt>
+<dd><p>…</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>timestamp</strong><span class="classifier">…</span></dt><dd><p>…</p>
+</dd>
+<dt><strong>device</strong><span class="classifier">…</span></dt><dd><p>…</p>
+</dd>
+<dt><strong>raw_folder</strong><span class="classifier">…</span></dt><dd><p>…</p>
+</dd>
+<dt><strong>output_path</strong><span class="classifier">…</span></dt><dd><p>…</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>…</dt><dd></dd>
+</dl>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Variables ‘force’ and ‘polly_files_list’ are not defined anywhere
+..</p>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.checking_timestamp">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">checking_timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#checking_timestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.checking_timestamp" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.concat_files">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">concat_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#concat_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.concat_files" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.remove_whitespaces_and_replace_dash_with_underscore">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">remove_whitespaces_and_replace_dash_with_underscore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#remove_whitespaces_and_replace_dash_with_underscore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.remove_whitespaces_and_replace_dash_with_underscore" title="Link to this definition">#</a></dt>
+<dd><p>remove whitespaces and replace dashes with underscores</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>string</strong><span class="classifier">str</span></dt><dd><p>String to be modified</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>new_string</strong><span class="classifier">str</span></dt><dd><p>Modified string</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.find_matching_dimension">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">find_matching_dimension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#find_matching_dimension"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.find_matching_dimension" title="Link to this definition">#</a></dt>
+<dd><p>Finds the dimension of a 3D array that matches the length of the reference list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>array (np.ndarray): The 3D NumPy array to check.</strong></dt><dd></dd>
+<dt><strong>reference_list (list): The list to compare the dimension lengths with. This can also be a dict.</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int: The index of the matching dimension, or -1 if no match is found.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.channel_2_variable_mapping">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">channel_2_variable_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_retrievals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channeltags_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#channel_2_variable_mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.channel_2_variable_mapping" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.uniform_filter">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">uniform_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">nan</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#uniform_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.uniform_filter" title="Link to this definition">#</a></dt>
+<dd><p>Uniform smoothing filter.</p>
+<p>The smoothing is applied without padding and the original dimension of the
+input is recreated by filling the reduced edges with a fill value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">(N,) ndarray</span></dt><dd><p>One dimensional input signal.</p>
+</dd>
+<dt><strong>win</strong><span class="classifier">int</span></dt><dd><p>(M,) Width of the filter.</p>
+</dd>
+<dt><strong>fill_val</strong><span class="classifier">float, optional</span></dt><dd><p>Value to be used for filling edges, in order to recreate the input 
+dimension. Default is np.nan.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>out</strong><span class="classifier">ndarray</span></dt><dd><p>Smoothed signal.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Currently only support smoothing of 1D-arrays with a constant window size.</p></li>
+</ul>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2026-02-02: First edition by Buholdt</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.mean_stable">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">mean_stable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minBin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxBin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minRelStd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#mean_stable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.mean_stable" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the mean value of x based on the least fluctuated 
+segment of x. The searching is based on the std inside each window of x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">ndarray</span></dt><dd><p>Signal array.</p>
+</dd>
+<dt><strong>win</strong><span class="classifier">int</span></dt><dd><p>Window width for calculating the relative standard deviation.</p>
+</dd>
+<dt><strong>minBin</strong><span class="classifier">int, optional</span></dt><dd><p>The start index for the mean calculation (default: 1).</p>
+</dd>
+<dt><strong>maxBin</strong><span class="classifier">int, optional</span></dt><dd><p>The end index for the mean calculation (default: length of x).</p>
+</dd>
+<dt><strong>minRelStd</strong><span class="classifier">float, optional</span></dt><dd><p>Minimum relative standard deviation threshold.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>xStable</strong><span class="classifier">float</span></dt><dd><p>Stable mean value.</p>
+</dd>
+<dt><strong>xIndx</strong><span class="classifier">ndarray</span></dt><dd><p>Index of the elements used to calculate the mean value.</p>
+</dd>
+<dt><strong>xRelStd</strong><span class="classifier">float</span></dt><dd><p>Relative uncertainty of the sequences used to calculate the mean values.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2021-05-30: First edition by Zhenping</p></li>
+<li><p>2026-02-04: Changed from scipy.ndimage.uniform_filter1d to uniform_filter</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.smooth2a">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">smooth2a</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#smooth2a"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.smooth2a" title="Link to this definition">#</a></dt>
+<dd><p>Smooths 2D array data while ignoring NaNs.</p>
+<p>This function smooths the data in <code class="docutils literal notranslate"><span class="pre">matrix_in</span></code> using a mean filter over a
+rectangle of size <code class="docutils literal notranslate"><span class="pre">(2*Nr+1)-by-(2*Nc+1)</span></code>. Each element is replaced by the mean
+of the surrounding rectangle, ignoring NaN elements. If an element is NaN,
+it remains NaN in the output. At the edges, as much of the rectangle as fits
+is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>matrix_in</strong><span class="classifier">ndarray</span></dt><dd><p>Original matrix to be smoothed.</p>
+</dd>
+<dt><strong>Nr</strong><span class="classifier">int</span></dt><dd><p>Number of points used to smooth rows.</p>
+</dd>
+<dt><strong>Nc</strong><span class="classifier">int, optional</span></dt><dd><p>Number of points used to smooth columns.
+If not specified, Nc = Nr.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>matrix_out</strong><span class="classifier">ndarray</span></dt><dd><p>Smoothed version of the input matrix.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p>Written by Greg Reeves, March 2009, Division of Biology, Caltech.</p></li>
+<li><p>Inspired by “smooth2” by Kelly Hilands, October 2004, Applied Research Laboratory, Penn State University.</p></li>
+<li><p>Developed from code by Olof Liungman, 1997, Dept. of Oceanography, Earth Sciences Centre, Göteborg University.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.get_wv_pol_telescope_from_dictkeyname">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">get_wv_pol_telescope_from_dictkeyname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keyname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#get_wv_pol_telescope_from_dictkeyname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.get_wv_pol_telescope_from_dictkeyname" title="Link to this definition">#</a></dt>
+<dd><p>translate <cite>{wavelength}_{total|cross|parallel|rr}_{NR|FR|DFOV}</cite> to wavelength, polarisation, telescope separataly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>keyname</strong><span class="classifier">str</span></dt><dd><p>e.g. 532_total_FR.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>wavelength</strong><span class="classifier">str</span></dt><dd><p>eg. ‘532’</p>
+</dd>
+<dt><strong>polarisation</strong><span class="classifier">str</span></dt><dd><p>eg. ‘total’</p>
+</dd>
+<dt><strong>telescope</strong><span class="classifier">str</span></dt><dd><p>eg. ‘FR’</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.idx2time">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">idx2time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cldFreeIdx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nIdx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nHour</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#idx2time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.idx2time" title="Link to this definition">#</a></dt>
+<dd><p>Convert cloud free indecis to cloud free times.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>cldFreeIdx</strong><span class="classifier">np.ndarray</span></dt><dd><p>Cloud free group (start idx, end idx).</p>
+</dd>
+<dt><strong>nIdx</strong><span class="classifier">int</span></dt><dd><p>Number of idx / length of time dimension.</p>
+</dd>
+<dt><strong>nHour</strong><span class="classifier">int</span></dt><dd><p>Number of hours represented in the time dimension.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>out</strong><span class="classifier">str</span></dt><dd><p>Time stamps of cldFreeIdx as a string (eg. 0920_1020)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.default_to_regular">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">default_to_regular</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#default_to_regular"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.default_to_regular" title="Link to this definition">#</a></dt>
+<dd><p>defaultdict to regular dict</p>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.misc.json2nc_mapping">
+<span id="ppcpy-misc-json2nc-mapping"></span><h2>ppcpy.misc.json2nc_mapping<a class="headerlink" href="#module-ppcpy.misc.json2nc_mapping" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.json2nc_mapping.read_json_to_dict">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.json2nc_mapping.</span></span><span class="sig-name descname"><span class="pre">read_json_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/json2nc_mapping.html#read_json_to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.json2nc_mapping.read_json_to_dict" title="Link to this definition">#</a></dt>
+<dd><p>Reads in an existing json-file and outputs a dict-structure</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.json2nc_mapping.create_netcdf_from_dict">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.json2nc_mapping.</span></span><span class="sig-name descname"><span class="pre">create_netcdf_from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nc_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prod</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cldFreeIndx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/json2nc_mapping.html#create_netcdf_from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.json2nc_mapping.create_netcdf_from_dict" title="Link to this definition">#</a></dt>
+<dd><p>Creates a NetCDF file from a structured dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>nc_file_path</strong><span class="classifier">str</span></dt><dd><p>Path to the NetCDF file to create.</p>
+</dd>
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>the data-object of class PicassoProc.</p>
+</dd>
+<dt><strong>data_dict</strong><span class="classifier">dict</span></dt><dd><p>Dictionary with keys ‘global_attributes’, ‘dimensions’, and ‘variables’.</p>
+</dd>
+<dt><strong>compression_level</strong><span class="classifier">int</span></dt><dd><p>a nc-compressionlevel of 1 is a good reference.</p>
+</dd>
+<dt><strong>prod</strong><span class="classifier">str</span></dt><dd><p>e.g. profile, OC_profile, NR_profile, …</p>
+</dd>
+<dt><strong>cldFreeIndx</strong><span class="classifier">int, optional</span></dt><dd><p>If the product to be saved are optical profiles; index of the cloud free
+region for the saved profiles. Else; None. Default is None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Example of <cite>data_dict</cite> structure:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;global_attributes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;title&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Example NetCDF File&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;institution&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;My Organization&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;dimensions&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;time&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">None</span><span class="p">,</span><span class="w">  </span><span class="c1">// Unlimited dimension</span>
+<span class="w">        </span><span class="s2">&quot;lat&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;lon&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">20</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;variables&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;temperature&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;dimensions&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;lon&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="s2">&quot;dtype&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;float32&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;attributes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;units&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;K&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;long_name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Surface temperature&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="s2">&quot;data&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">np</span><span class="p">.</span><span class="nx">random</span><span class="p">.</span><span class="nx">rand</span><span class="p">(</span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">20</span><span class="p">)</span><span class="w">  </span><span class="c1">// Example data</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;pressure&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;dimensions&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;lon&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="s2">&quot;dtype&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;float32&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;attributes&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s2">&quot;units&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Pa&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">&quot;long_name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Surface pressure&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="s2">&quot;data&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">np</span><span class="p">.</span><span class="nx">random</span><span class="p">.</span><span class="nx">rand</span><span class="p">(</span><span class="mf">5</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">20</span><span class="p">)</span><span class="w">  </span><span class="c1">// Example data</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.json2nc_mapping.add_variable_2_json_dict_mapper">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.json2nc_mapping.</span></span><span class="sig-name descname"><span class="pre">add_variable_2_json_dict_mapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/json2nc_mapping.html#add_variable_2_json_dict_mapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.json2nc_mapping.add_variable_2_json_dict_mapper" title="Link to this definition">#</a></dt>
+<dd><p>Adds a new variable to the ‘variables’ section of the given dictionary.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><p>data_dict (dict): The original dictionary structure.
+reference_key (str): The name of the existing variable to reference to (template for new key/variable)
+new_key (str): The name of the new variable to add.
+new_data (np.ndarray, optional): The data for the new variable.
+new_attributes (dict, optional): Additional or updated attributes for the new variable.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.json2nc_mapping.remove_variable_from_json_dict_mapper">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.json2nc_mapping.</span></span><span class="sig-name descname"><span class="pre">remove_variable_from_json_dict_mapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_to_remove</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/json2nc_mapping.html#remove_variable_from_json_dict_mapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.json2nc_mapping.remove_variable_from_json_dict_mapper" title="Link to this definition">#</a></dt>
+<dd><p>Removes a specific variable from the ‘variables’ section of the given dictionary.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><p>data_dict (dict): The original dictionary structure.
+key_to_remove (str): The name of the variable to remove.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.json2nc_mapping.remove_empty_keys_from_dict">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.json2nc_mapping.</span></span><span class="sig-name descname"><span class="pre">remove_empty_keys_from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/json2nc_mapping.html#remove_empty_keys_from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.json2nc_mapping.remove_empty_keys_from_dict" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.json2nc_mapping.update_variable_attribute_of_json_dict_mapper">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.json2nc_mapping.</span></span><span class="sig-name descname"><span class="pre">update_variable_attribute_of_json_dict_mapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/json2nc_mapping.html#update_variable_attribute_of_json_dict_mapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.json2nc_mapping.update_variable_attribute_of_json_dict_mapper" title="Link to this definition">#</a></dt>
+<dd><p>Updates the value of a specific attribute for a specified variable in the data dictionary.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><p>data_dict (dict): The dictionary containing the variables and attributes.
+variable_key (str): The key of the variable to update.
+attribute_key (str): The key of the attribute to update.
+new_value (any): The new value to set for the attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.misc.molecular">
+<span id="ppcpy-misc-molecular"></span><h2>ppcpy.misc.molecular<a class="headerlink" href="#module-ppcpy.misc.molecular" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.air_refractive_index">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">air_refractive_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_humidity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#air_refractive_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.air_refractive_index" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the refractive index of air.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wavelength: Wavelength [nm]</strong></dt><dd></dd>
+<dt><strong>pressure: Atmospheric pressure [hPa]</strong></dt><dd></dd>
+<dt><strong>temperature: Atmospheric temperature [K]</strong></dt><dd></dd>
+<dt><strong>C: CO2 concentration [ppmv]</strong></dt><dd></dd>
+<dt><strong>relative_humidity: Relative humidity [%]</strong></dt><dd></dd>
+<dt><strong>Returns: Refractive index of air.</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.moist_air_density">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">moist_air_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#moist_air_density"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.moist_air_density" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the density of moist air.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pressure: Total pressure [hPa]</strong></dt><dd></dd>
+<dt><strong>temperature: Temperature [K]</strong></dt><dd></dd>
+<dt><strong>C: CO2 concentration [ppmv]</strong></dt><dd></dd>
+<dt><strong>Xw: Molar fraction of water vapor</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.molar_mass_dry_air">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">molar_mass_dry_air</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#molar_mass_dry_air"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.molar_mass_dry_air" title="Link to this definition">#</a></dt>
+<dd><p>Molar mass of dry air as a function of CO2 concentration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>C: CO2 concentration [ppmv]</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Molar mass of dry air [kg/mol]</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.compressibility_of_moist_air">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">compressibility_of_moist_air</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molar_fraction</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#compressibility_of_moist_air"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.compressibility_of_moist_air" title="Link to this definition">#</a></dt>
+<dd><p>Compressibility of moist air.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pressure: Total pressure [hPa]</strong></dt><dd></dd>
+<dt><strong>temperature: Temperature [K]</strong></dt><dd></dd>
+<dt><strong>molar_fraction: Molar fraction of water vapor</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.n_standard_air">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">n_standard_air</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#n_standard_air"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.n_standard_air" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the refractive index of standard air at a given wavelength.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wavelength (float): Wavelength [nm].</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float: Refractive index of standard air.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.n_standard_air_with_CO2">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">n_standard_air_with_CO2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#n_standard_air_with_CO2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.n_standard_air_with_CO2" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the refractive index of air at a specific wavelength with CO2 concentration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wavelength (float): Wavelength [nm].</strong></dt><dd></dd>
+<dt><strong>C (float): CO2 concentration [ppmv].</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float: Refractive index of air for the given CO2 concentration.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.n_water_vapor">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">n_water_vapor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#n_water_vapor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.n_water_vapor" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the refractive index of water vapor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wavelength (float): Wavelength [nm].</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float: Refractive index of water vapor.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.alpha_rayleigh">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">alpha_rayleigh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rh</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#alpha_rayleigh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.alpha_rayleigh" title="Link to this definition">#</a></dt>
+<dd><p>Cacluate the extinction coefficient for Rayleigh scattering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wavelength</strong><span class="classifier">float or array of floats</span></dt><dd><p>Wavelegnth [nm]</p>
+</dd>
+<dt><strong>pressure</strong><span class="classifier">float or array of floats</span></dt><dd><p>Atmospheric pressure [hPa]</p>
+</dd>
+<dt><strong>temperature</strong><span class="classifier">float</span></dt><dd><p>Atmospheric temperature [K]</p>
+</dd>
+<dt><strong>C</strong><span class="classifier">float</span></dt><dd><p>CO2 concentration [ppmv].</p>
+</dd>
+<dt><strong>rh</strong><span class="classifier">float</span></dt><dd><p>Relative humidity from 0 to 100 [%]</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>alpha: float</dt><dd><p>The molecular scattering coefficient [m-1]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.beta_pi_rayleigh">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">beta_pi_rayleigh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rh</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#beta_pi_rayleigh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.beta_pi_rayleigh" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the total Rayleigh backscatter coefficient.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wavelength: float</strong></dt><dd><p>Wavelength [nm]</p>
+</dd>
+<dt><strong>pressure: float</strong></dt><dd><p>The atmospheric pressure [hPa]</p>
+</dd>
+<dt><strong>temperature: float</strong></dt><dd><p>The atmospheric temperature [K]</p>
+</dd>
+<dt><strong>C: float</strong></dt><dd><p>CO2 concentration [ppmv].</p>
+</dd>
+<dt><strong>rh: float</strong></dt><dd><p>Relative humidity from 0 to 100 [%]</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>beta_pi: array</dt><dd><p>molecule backscatter coefficient. [m^{-1}Sr^{-1}]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.dsigma_phi_rayleigh">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">dsigma_phi_rayleigh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rh</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#dsigma_phi_rayleigh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.dsigma_phi_rayleigh" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the angular rayleigh scattering cross section per molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>theta: float</strong></dt><dd><p>Scattering angle [rads]</p>
+</dd>
+<dt><strong>wavelength: float</strong></dt><dd><p>Wavelength [nm]</p>
+</dd>
+<dt><strong>pressure: float</strong></dt><dd><p>The atmospheric pressure [hPa]</p>
+</dd>
+<dt><strong>temperature: float</strong></dt><dd><p>The atmospheric temperature [K]</p>
+</dd>
+<dt><strong>C: float</strong></dt><dd><p>CO2 concentration [ppmv].</p>
+</dd>
+<dt><strong>rh: float</strong></dt><dd><p>Relative humidity from 0 to 100 [%]</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dsigma: float</dt><dd><p>rayleigh-scattering cross section [m2sr-1]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.enhancement_factor_f">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">enhancement_factor_f</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#enhancement_factor_f"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.enhancement_factor_f" title="Link to this definition">#</a></dt>
+<dd><p>Enhancement factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pressure: float</strong></dt><dd><p>Atmospheric pressure [hPa]</p>
+</dd>
+<dt><strong>temperature: float</strong></dt><dd><p>Atmospehric temperature [K]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.kings_factor_atmosphere">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">kings_factor_atmosphere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#kings_factor_atmosphere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.kings_factor_atmosphere" title="Link to this definition">#</a></dt>
+<dd><p>calculate the king factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wavelength: float</strong></dt><dd><p>Unit: nm</p>
+</dd>
+<dt><strong>C: float</strong></dt><dd><p>CO2 concentration in ppmv</p>
+</dd>
+<dt><strong>p_e: float</strong></dt><dd><p>water vapor pressure in hPa</p>
+</dd>
+<dt><strong>p_t: float</strong></dt><dd><p>total air pressure in hPa</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>k: float</dt><dd><p>total atmospheric King’s factor</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://bitbucket.org/iannis_b/lidar_molecular">https://bitbucket.org/iannis_b/lidar_molecular</a></p>
+<p class="rubric">Examples</p>
+<p>k = king_factor_atmosphere(wavelength, C, p_e, p_t)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.kings_factor_N2">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">kings_factor_N2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavenumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#kings_factor_N2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.kings_factor_N2" title="Link to this definition">#</a></dt>
+<dd><dl class="simple">
+<dt>approximates the King’s correction factor for a specific wavenumber.</dt><dd><p>According to Bates, the agreement with experimental values is “rather better than 1 per cent.”</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wavenumber</strong><span class="classifier">float</span></dt><dd></dd>
+<dt><strong>Wavenumber (defined as 1/lamda) in cm-1</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>Fk</strong><span class="classifier">float</span></dt><dd></dd>
+<dt>Kings factor for N2</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The King’s factor is estimated as</p>
+<div class="math notranslate nohighlight">
+\[F_{N_2} = 1.034 + 3.17 \cdot 10^{-4} \cdot \lambda^{-2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda\)</span> is the wavelength in micrometers.</p>
+<p class="rubric">References</p>
+<p>Tomasi, C., Vitale, V., Petkov, B., Lupi, A. &amp; Cacciari, A. Improved
+algorithm for calculations of Rayleigh-scattering optical depth in standard
+atmospheres. Applied Optics 44, 3320 (2005).
+Bates, D. R.: Rayleigh scattering by air, Planetary and Space Science, 32(6),
+785-790, doi:10.1016/0032-0633(84)90102-8, 1984.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.kings_factor_O2">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">kings_factor_O2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavenumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#kings_factor_O2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.kings_factor_O2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.kings_factor_Ar">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">kings_factor_Ar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#kings_factor_Ar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.kings_factor_Ar" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.kings_factor_CO2">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">kings_factor_CO2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#kings_factor_CO2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.kings_factor_CO2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.kings_factor_H2O">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">kings_factor_H2O</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#kings_factor_H2O"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.kings_factor_H2O" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.molar_fraction_water_vapour">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">molar_fraction_water_vapour</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_humidity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#molar_fraction_water_vapour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.molar_fraction_water_vapour" title="Link to this definition">#</a></dt>
+<dd><p>Molar fraction of water vapor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pressure: float</strong></dt><dd><p>Total pressure [hPa]</p>
+</dd>
+<dt><strong>temperature: float</strong></dt><dd><p>Atmospehric temperature [K]</p>
+</dd>
+<dt><strong>relative_humidity:</strong></dt><dd><p>Relative humidity from 0 to 100 [%]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.number_density_at_pt">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">number_density_at_pt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_humidity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ideal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#number_density_at_pt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.number_density_at_pt" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the number density for a given temperature and pressure, taking into account the compressibility of air.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pressure: float or array</strong></dt><dd><p>Pressure in hPa</p>
+</dd>
+<dt><strong>temperature: float or array</strong></dt><dd><p>Temperature in K</p>
+</dd>
+<dt><strong>relative_humidity: float or array (?)</strong></dt><dd><p>? The relative humidity of air (Check)</p>
+</dd>
+<dt><strong>ideal: boolean</strong></dt><dd><p>If False, the compressibility of air is considered. If True, the 
+compressibility is set to 1.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>n: array or array</dt><dd><p>Number density of the atmosphere [m^{-3}]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.phase_function">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">phase_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rh</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#phase_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.phase_function" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the phase function at an angle theta for a specific wavelegth.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>theta: float</strong></dt><dd><p>Scattering angle [rads]</p>
+</dd>
+<dt><strong>wavelength: float</strong></dt><dd><p>Wavelength [nm]</p>
+</dd>
+<dt><strong>pressure: float</strong></dt><dd><p>The atmospheric pressure [hPa]</p>
+</dd>
+<dt><strong>temperature: float</strong></dt><dd><p>The atmospheric temperature [K]</p>
+</dd>
+<dt><strong>C: float</strong></dt><dd><p>CO2 concentration [ppmv].</p>
+</dd>
+<dt><strong>rh: float</strong></dt><dd><p>Relative humidity from 0 to 100 [%]</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>p: float</dt><dd><p>Scattering phase function</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The formula is derived from Bucholtz (1995). A different formula is given in 
+Miles (2001).</p>
+<p>The use of this formula insetad of the wavelenght independent 3/4(1+cos(th)**2)
+improves the results for back and forward scatterring by ~1.5%</p>
+<p>Anthony Bucholtz, “Rayleigh-scattering calculations for the terrestrial atmosphere”, 
+Applied Optics 34, no. 15 (May 20, 1995): 2765-2773.</p>
+<p>R. B Miles, W. R Lempert, and J. N Forkey, “Laser Rayleigh scattering”, 
+Measurement Science and Technology 12 (2001): R33-R51</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.physical_constants">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">physical_constants</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#physical_constants"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.physical_constants" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.pressure_to_rh">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">pressure_to_rh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partial_pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#pressure_to_rh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.pressure_to_rh" title="Link to this definition">#</a></dt>
+<dd><p>Convert water vapour partial pressure to relative humidity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>partial_pressure (float): Water vapour partial pressure [hPa]</strong></dt><dd></dd>
+<dt><strong>temperature (float): Temperature [K]</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float: Relative humidity from 0 to 100 [%]</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.rh_to_pressure">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">rh_to_pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#rh_to_pressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.rh_to_pressure" title="Link to this definition">#</a></dt>
+<dd><p>Convert relative humidity to water vapour partial pressure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>rh (float): Relative humidity from 0 to 100 [%]</strong></dt><dd></dd>
+<dt><strong>temperature (float): Temperature [K]</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float: Water vapour pressure [hPa]</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.rho_atmosphere">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">rho_atmosphere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#rho_atmosphere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.rho_atmosphere" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the depolarization factor of the atmosphere.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wavelength (float or array): Wavelength in nm</strong></dt><dd></dd>
+<dt><strong>C (float): CO2 concentration in ppmv</strong></dt><dd></dd>
+<dt><strong>p_e (float): water-vapor pressure [hPa]</strong></dt><dd></dd>
+<dt><strong>p_t (float): total air pressure [hPa]</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float or array: Depolarization factor</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.saturation_vapor_pressure">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">saturation_vapor_pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#saturation_vapor_pressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.saturation_vapor_pressure" title="Link to this definition">#</a></dt>
+<dd><p>Saturation vapor pressure of water of moist air.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>temperature (float): Atmospheric temperature [K]</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float: Saturation vapor pressure [hPa]</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.sigma_rayleigh">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">sigma_rayleigh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rh</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#sigma_rayleigh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.sigma_rayleigh" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the Rayleigh-scattering cross section per molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wavelength (float): Wavelength [nm]</strong></dt><dd></dd>
+<dt><strong>pressure (float): The atmospheric pressure [hPa]</strong></dt><dd></dd>
+<dt><strong>temperature (float): The atmospheric temperature [K]</strong></dt><dd></dd>
+<dt><strong>C (float): CO2 concentration [ppmv]</strong></dt><dd></dd>
+<dt><strong>rh (float): Relative humidity from 0 to 100 [%]</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float: Rayleigh-scattering cross section [m2]</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.rayleigh_scattering">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">rayleigh_scattering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rh</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#rayleigh_scattering"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.rayleigh_scattering" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the molecular volume backscatter coefficient and extinction coefficient.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wavelength</strong><span class="classifier">float</span></dt><dd><p>Wavelength in nanometers [nm].</p>
+</dd>
+<dt><strong>pressure</strong><span class="classifier">float</span></dt><dd><p>Atmospheric pressure [hPa].</p>
+</dd>
+<dt><strong>temperature</strong><span class="classifier">float</span></dt><dd><p>Atmospheric temperature [K].</p>
+</dd>
+<dt><strong>C</strong><span class="classifier">float</span></dt><dd><p>CO2 concentration [ppmv].</p>
+</dd>
+<dt><strong>rh</strong><span class="classifier">float</span></dt><dd><p>Relative humidity as a percentage (0 to 100).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>beta_mol</strong><span class="classifier">float</span></dt><dd><p>Molecular backscatter coefficient [m^{-1}*sr^{-1}].</p>
+</dd>
+<dt><strong>alpha_mol</strong><span class="classifier">float</span></dt><dd><p>Molecular extinction coefficient [m^{-1}].</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>First edition by Zhenping, 2017-12-16.</p></li>
+<li><p>Based on the Python source code of Ioannis Binietoglou’s [repo](<a class="reference external" href="https://bitbucket.org/iannis_b/lidar_molecular">https://bitbucket.org/iannis_b/lidar_molecular</a>).</p></li>
+<li><p>AI-Translated, 2024-12-03</p></li>
+</ul>
+<p class="rubric">References</p>
+<p>Bucholtz, A.: Rayleigh-scattering calculations for the terrestrial atmosphere, 
+Appl. Opt. 34, 2765-2773 (1995).
+A. Behrendt and T. Nakamura, “Calculation of the calibration constant of polarization lidar and 
+its dependency on atmospheric temperature,” Opt. Express, vol. 10, no. 16, pp. 805-817, 2002.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.calc_profiles">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">calc_profiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">met_profiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelengths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[355,</span> <span class="pre">387,</span> <span class="pre">407,</span> <span class="pre">532,</span> <span class="pre">607,</span> <span class="pre">1058,</span> <span class="pre">1064]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CO2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#calc_profiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.calc_profiles" title="Link to this definition">#</a></dt>
+<dd><p>for a list of xarray averaged meteorology profiles, calculate the rayleigh scattering</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.molecular.calc_2d">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.molecular.</span></span><span class="sig-name descname"><span class="pre">calc_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">met</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelengths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[355,</span> <span class="pre">387,</span> <span class="pre">407,</span> <span class="pre">532,</span> <span class="pre">607,</span> <span class="pre">1058,</span> <span class="pre">1064]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CO2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/molecular.html#calc_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.molecular.calc_2d" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-ppcpy.misc.plot">
+<span id="ppcpy-misc-plot"></span><h2>ppcpy.misc.plot<a class="headerlink" href="#module-ppcpy.misc.plot" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.plot.plot_optical_analysis">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.plot.</span></span><span class="sig-name descname"><span class="pre">plot_optical_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smooth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refH</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/plot.html#plot_optical_analysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.plot.plot_optical_analysis" title="Link to this definition">#</a></dt>
+<dd><p>quick first version of the optical profiles plotting function</p>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.misc.pollyChannelTags">
+<span id="ppcpy-misc-pollychanneltags"></span><h2>ppcpy.misc.pollyChannelTags<a class="headerlink" href="#module-ppcpy.misc.pollyChannelTags" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.pollyChannelTags.pollyChannelTags">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.pollyChannelTags.</span></span><span class="sig-name descname"><span class="pre">pollyChannelTags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chTagsIn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">Channels</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/ppcpy/misc/pollyChannelTags.html#pollyChannelTags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.pollyChannelTags.pollyChannelTags" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.pollyChannelTags.polly_config_channel_corrections">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.pollyChannelTags.</span></span><span class="sig-name descname"><span class="pre">polly_config_channel_corrections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chTagsOut_ls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polly_config_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/pollyChannelTags.html#polly_config_channel_corrections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.pollyChannelTags.polly_config_channel_corrections" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.pollyChannelTags.pollyChannelflags">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.pollyChannelTags.</span></span><span class="sig-name descname"><span class="pre">pollyChannelflags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_dict_length</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">Channels</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/pollyChannelTags.html#pollyChannelflags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.pollyChannelTags.pollyChannelflags" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-ppcpy.misc.startscreen">
+<span id="ppcpy-misc-startscreen"></span><h2>ppcpy.misc.startscreen<a class="headerlink" href="#module-ppcpy.misc.startscreen" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.startscreen.startscreen">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.startscreen.</span></span><span class="sig-name descname"><span class="pre">startscreen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/startscreen.html#startscreen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.startscreen.startscreen" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="io.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ppcpy.io</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="qc.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ppcpy.qc</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.misc.helper">ppcpy.misc.helper</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.detect_path_type"><code class="docutils literal notranslate"><span class="pre">detect_path_type()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.os_name"><code class="docutils literal notranslate"><span class="pre">os_name()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.get_input_path"><code class="docutils literal notranslate"><span class="pre">get_input_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.get_pollyxt_files"><code class="docutils literal notranslate"><span class="pre">get_pollyxt_files()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.get_pollyxt_logbook_files"><code class="docutils literal notranslate"><span class="pre">get_pollyxt_logbook_files()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.add_to_list"><code class="docutils literal notranslate"><span class="pre">add_to_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.checking_vars"><code class="docutils literal notranslate"><span class="pre">checking_vars()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.checking_attr"><code class="docutils literal notranslate"><span class="pre">checking_attr()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.checking_timestamp"><code class="docutils literal notranslate"><span class="pre">checking_timestamp()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.concat_files"><code class="docutils literal notranslate"><span class="pre">concat_files()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.remove_whitespaces_and_replace_dash_with_underscore"><code class="docutils literal notranslate"><span class="pre">remove_whitespaces_and_replace_dash_with_underscore()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.find_matching_dimension"><code class="docutils literal notranslate"><span class="pre">find_matching_dimension()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.channel_2_variable_mapping"><code class="docutils literal notranslate"><span class="pre">channel_2_variable_mapping()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.uniform_filter"><code class="docutils literal notranslate"><span class="pre">uniform_filter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.mean_stable"><code class="docutils literal notranslate"><span class="pre">mean_stable()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.smooth2a"><code class="docutils literal notranslate"><span class="pre">smooth2a()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.get_wv_pol_telescope_from_dictkeyname"><code class="docutils literal notranslate"><span class="pre">get_wv_pol_telescope_from_dictkeyname()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.idx2time"><code class="docutils literal notranslate"><span class="pre">idx2time()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.default_to_regular"><code class="docutils literal notranslate"><span class="pre">default_to_regular()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.misc.json2nc_mapping">ppcpy.misc.json2nc_mapping</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.json2nc_mapping.read_json_to_dict"><code class="docutils literal notranslate"><span class="pre">read_json_to_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.json2nc_mapping.create_netcdf_from_dict"><code class="docutils literal notranslate"><span class="pre">create_netcdf_from_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.json2nc_mapping.add_variable_2_json_dict_mapper"><code class="docutils literal notranslate"><span class="pre">add_variable_2_json_dict_mapper()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.json2nc_mapping.remove_variable_from_json_dict_mapper"><code class="docutils literal notranslate"><span class="pre">remove_variable_from_json_dict_mapper()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.json2nc_mapping.remove_empty_keys_from_dict"><code class="docutils literal notranslate"><span class="pre">remove_empty_keys_from_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.json2nc_mapping.update_variable_attribute_of_json_dict_mapper"><code class="docutils literal notranslate"><span class="pre">update_variable_attribute_of_json_dict_mapper()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.misc.molecular">ppcpy.misc.molecular</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.air_refractive_index"><code class="docutils literal notranslate"><span class="pre">air_refractive_index()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.moist_air_density"><code class="docutils literal notranslate"><span class="pre">moist_air_density()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.molar_mass_dry_air"><code class="docutils literal notranslate"><span class="pre">molar_mass_dry_air()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.compressibility_of_moist_air"><code class="docutils literal notranslate"><span class="pre">compressibility_of_moist_air()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.n_standard_air"><code class="docutils literal notranslate"><span class="pre">n_standard_air()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.n_standard_air_with_CO2"><code class="docutils literal notranslate"><span class="pre">n_standard_air_with_CO2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.n_water_vapor"><code class="docutils literal notranslate"><span class="pre">n_water_vapor()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.alpha_rayleigh"><code class="docutils literal notranslate"><span class="pre">alpha_rayleigh()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.beta_pi_rayleigh"><code class="docutils literal notranslate"><span class="pre">beta_pi_rayleigh()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.dsigma_phi_rayleigh"><code class="docutils literal notranslate"><span class="pre">dsigma_phi_rayleigh()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.enhancement_factor_f"><code class="docutils literal notranslate"><span class="pre">enhancement_factor_f()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.kings_factor_atmosphere"><code class="docutils literal notranslate"><span class="pre">kings_factor_atmosphere()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.kings_factor_N2"><code class="docutils literal notranslate"><span class="pre">kings_factor_N2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.kings_factor_O2"><code class="docutils literal notranslate"><span class="pre">kings_factor_O2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.kings_factor_Ar"><code class="docutils literal notranslate"><span class="pre">kings_factor_Ar()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.kings_factor_CO2"><code class="docutils literal notranslate"><span class="pre">kings_factor_CO2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.kings_factor_H2O"><code class="docutils literal notranslate"><span class="pre">kings_factor_H2O()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.molar_fraction_water_vapour"><code class="docutils literal notranslate"><span class="pre">molar_fraction_water_vapour()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.number_density_at_pt"><code class="docutils literal notranslate"><span class="pre">number_density_at_pt()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.phase_function"><code class="docutils literal notranslate"><span class="pre">phase_function()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.physical_constants"><code class="docutils literal notranslate"><span class="pre">physical_constants()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.pressure_to_rh"><code class="docutils literal notranslate"><span class="pre">pressure_to_rh()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.rh_to_pressure"><code class="docutils literal notranslate"><span class="pre">rh_to_pressure()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.rho_atmosphere"><code class="docutils literal notranslate"><span class="pre">rho_atmosphere()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.saturation_vapor_pressure"><code class="docutils literal notranslate"><span class="pre">saturation_vapor_pressure()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.sigma_rayleigh"><code class="docutils literal notranslate"><span class="pre">sigma_rayleigh()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.rayleigh_scattering"><code class="docutils literal notranslate"><span class="pre">rayleigh_scattering()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.calc_profiles"><code class="docutils literal notranslate"><span class="pre">calc_profiles()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.molecular.calc_2d"><code class="docutils literal notranslate"><span class="pre">calc_2d()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.misc.plot">ppcpy.misc.plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.plot.plot_optical_analysis"><code class="docutils literal notranslate"><span class="pre">plot_optical_analysis()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.misc.pollyChannelTags">ppcpy.misc.pollyChannelTags</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.pollyChannelTags.pollyChannelTags"><code class="docutils literal notranslate"><span class="pre">pollyChannelTags()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.pollyChannelTags.polly_config_channel_corrections"><code class="docutils literal notranslate"><span class="pre">polly_config_channel_corrections()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.pollyChannelTags.pollyChannelflags"><code class="docutils literal notranslate"><span class="pre">pollyChannelflags()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.misc.startscreen">ppcpy.misc.startscreen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.startscreen.startscreen"><code class="docutils literal notranslate"><span class="pre">startscreen()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api_doc/misc.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026 Andi Klamt, Martin Radenz and Håvard Buholdt.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

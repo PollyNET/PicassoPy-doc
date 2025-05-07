@@ -1,0 +1,35 @@
+..
+  module.rst
+
+ppcpy.retrievals.highres
+========================
+
+.. automodule:: ppcpy.retrievals.highres
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    attbsc_2d
+                    voldepol_2d
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

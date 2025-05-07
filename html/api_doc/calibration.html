@@ -1,0 +1,1040 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ppcpy.calibration &#8212; PicassoPy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_doc/calibration';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ppcpy.preprocess" href="preprocess.html" />
+    <link rel="prev" title="ppcpy.interface" href="interface.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PicassoPy  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="interface.html">ppcpy.interface</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ppcpy.calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess.html">ppcpy.preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloudmask.html">ppcpy.cloudmask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">ppcpy.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">ppcpy.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qc.html">ppcpy.qc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="retrievals.html">ppcpy.retrievals</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api_doc.html" class="nav-link">API Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ppcpy.calibration</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ppcpy-calibration">
+<h1>ppcpy.calibration<a class="headerlink" href="#ppcpy-calibration" title="Link to this heading">#</a></h1>
+<section id="module-ppcpy.calibration.lidarconstant">
+<span id="ppcpy-calibration-lidarconstant"></span><h2>ppcpy.calibration.lidarconstant<a class="headerlink" href="#module-ppcpy.calibration.lidarconstant" title="Link to this heading">#</a></h2>
+<p>Testtext for documentation</p>
+<p>contains <code class="xref py py-func docutils literal notranslate"><span class="pre">get_best_LC()</span></code></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.lidarconstant.lc_for_cldFreeGrps">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.lidarconstant.</span></span><span class="sig-name descname"><span class="pre">lc_for_cldFreeGrps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retrieval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/lidarconstant.html#lc_for_cldFreeGrps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.lidarconstant.lc_for_cldFreeGrps" title="Link to this definition">#</a></dt>
+<dd><p>Estimate the lidar constant from the optical profiles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+<dt><strong>retrieval</strong><span class="classifier">str</span></dt><dd><p>Retrieval type. ‘klett’ or ‘raman’.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>LCs</strong><span class="classifier">list</span></dt><dd><p>Lidar constant for retrieval type per channel per cloud free period.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>For NR, done directly form the optical profiles, whereas in the matlab version, the <code class="docutils literal notranslate"><span class="pre">LC*olAttri387.sigRatio</span></code> is taken.</p></li>
+</ul>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Change back to Picasso version to check if lidar calibration constants get more similar.</p>
+</div>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Check if LC’s are normalized with respect to the mean of the profiles.</p>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.calibration.polarization">
+<span id="ppcpy-calibration-polarization"></span><h2>ppcpy.calibration.polarization<a class="headerlink" href="#module-ppcpy.calibration.polarization" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.onemx_onepx">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">onemx_onepx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#onemx_onepx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.onemx_onepx" title="Link to this definition">#</a></dt>
+<dd><p>calculate the fraction of (1-x)/(1+x)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.smooth_signal">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">smooth_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#smooth_signal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.smooth_signal" title="Link to this definition">#</a></dt>
+<dd><p>Uniformly smooth the input signal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>singal</strong><span class="classifier">ndarray</span></dt><dd><p>Signal to be smooth</p>
+</dd>
+<dt><strong>window_len</strong><span class="classifier">int</span></dt><dd><p>Width of the applied uniform filter</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>ndarray</dt><dd><p>Smoothed signal</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2026-02-04: Changed from scipy.ndimage.uniform_filter1d to ppcpy.misc.helper.uniform_filter</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.loadGHK">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">loadGHK</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#loadGHK"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.loadGHK" title="Link to this definition">#</a></dt>
+<dd><p>prepare the GHK parameters, especially if given in TR convert them into GHK</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.calibrateGHK">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">calibrateGHK</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#calibrateGHK"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.calibrateGHK" title="Link to this definition">#</a></dt>
+<dd><p>estimate the polarization calibration from the delta 90 Method <a class="reference internal" href="#rfb58d11321b6-1" id="id3">[1]</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong></dt><dd><p>the input data cube</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>pol_cali</strong><span class="classifier">dict</span></dt><dd><p>polarization factors from delta 90 for each wavelength containing 
+sub-dicts with ‘eta’, ‘eta_std’, ‘time_start’, ‘time_end’, ‘status’</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<p>Function is called here <a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/5f5e4d0fd3dcebe7f87220cf802fcd6f414fe235/lib/interface/picassoProcV3.m#L548">PollyNET/Pollynet_Processing_Chain</a>
+The two most relevant functions here are <a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/dev/lib/calibration/pollyPolCaliGHK.m">PollyNET/Pollynet_Processing_Chain</a>
+which also calls <a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/dev/lib/calibration/depolCaliGHK.m">PollyNET/Pollynet_Processing_Chain</a></p>
+<p class="rubric">References</p>
+<div role="list" class="citation-list">
+<div class="citation" id="rfb58d11321b6-1" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">1</a><span class="fn-bracket">]</span></span>
+<p>Freudenthaler 2016</p>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.depol_cali_ghk">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">depol_cali_ghk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_pang_start_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_pang_stop_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_nang_start_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_nang_stop_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cali_h_indx_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SNRmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dplus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dminus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_len</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smooth_win</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#depol_cali_ghk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.depol_cali_ghk" title="Link to this definition">#</a></dt>
+<dd><p>Polarization calibration for PollyXT lidar system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>signal_t</strong><span class="classifier">ndarray</span></dt><dd><p>Background-removed photon count signal at the total channel.
+Shape: (n_bins, n_profiles)</p>
+</dd>
+<dt><strong>bg_t</strong><span class="classifier">ndarray</span></dt><dd><p>Background at the total channel. Shape: (n_bins, n_profiles)</p>
+</dd>
+<dt><strong>signal_x</strong><span class="classifier">ndarray</span></dt><dd><p>Background-removed photon count signal at the cross channel.
+Shape: (n_bins, n_profiles)</p>
+</dd>
+<dt><strong>bg_x</strong><span class="classifier">ndarray</span></dt><dd><p>Background at the cross channel. Shape: (n_bins, n_profiles)</p>
+</dd>
+<dt><strong>time</strong><span class="classifier">ndarray</span></dt><dd><p>Datetime array representing the measurement time of each profile.</p>
+</dd>
+<dt><strong>pol_cali_pang_start_time, pol_cali_pang_stop_time</strong><span class="classifier">ndarray</span></dt><dd><p>Start and stop times when the polarizer rotates to the positive angle.</p>
+</dd>
+<dt><strong>pol_cali_nang_start_time, pol_cali_nang_stop_time</strong><span class="classifier">ndarray</span></dt><dd><p>Start and stop times when the polarizer rotates to the negative angle.</p>
+</dd>
+<dt><strong>K</strong><span class="classifier">float</span></dt><dd><p>Parameter from GHK to correct the calibration.</p>
+</dd>
+<dt><strong>cali_h_indx_range</strong><span class="classifier">list or tuple</span></dt><dd><p>Range of height indexes to use for polarization calibration.</p>
+</dd>
+<dt><strong>SNRmin</strong><span class="classifier">list</span></dt><dd><p>Minimum SNR for calibration. Length: 4</p>
+</dd>
+<dt><strong>sig_max</strong><span class="classifier">list</span></dt><dd><p>Maximum signal allowed for calibration to prevent pulse pileup.</p>
+</dd>
+<dt><strong>rel_std_dplus, rel_std_dminus</strong><span class="classifier">float</span></dt><dd><p>Maximum relative uncertainty of dplus and dminus allowed.</p>
+</dd>
+<dt><strong>segment_len</strong><span class="classifier">int</span></dt><dd><p>Segment length for testing the variability of calibration results.</p>
+</dd>
+<dt><strong>smooth_win</strong><span class="classifier">int</span></dt><dd><p>Width of the sliding window for smoothing the signal.</p>
+</dd>
+<dt><strong>collect_debug</strong><span class="classifier">bool, default=False</span></dt><dd><p>store and return the intermediate results</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>pol_cali_eta</strong><span class="classifier">list</span></dt><dd><p>Eta values from polarization calibration.</p>
+</dd>
+<dt><strong>pol_cali_eta_std</strong><span class="classifier">list</span></dt><dd><p>Uncertainty of eta values from calibration.</p>
+</dd>
+<dt><strong>pol_cali_start_time, pol_cali_stop_time</strong><span class="classifier">list</span></dt><dd><p>Start and stop times for successful calibration.</p>
+</dd>
+<dt><strong>cali_status</strong><span class="classifier">int</span></dt><dd><p>1 if calibration is successful, 0 otherwise.</p>
+</dd>
+<dt><strong>global_attri</strong><span class="classifier">dict, optional</span></dt><dd><p>Information about the depolarization calibration.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.analyze_segments">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">analyze_segments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dplus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dminus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_len</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dplus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dminus</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#analyze_segments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.analyze_segments" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.calibrateMol">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">calibrateMol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#calibrateMol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.calibrateMol" title="Link to this definition">#</a></dt>
+<dd><p>calibrate the polarization with the molecular signal</p>
+<p>Converted from the matlab code to the best knowledge, but not cross-validated yet</p>
+<div class="admonition-todo admonition" id="id5">
+<p class="admonition-title">Todo</p>
+<p>had to calculate TR_t, TR_c again when calling depol_cali_mol()</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.depol_cali_mol">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">depol_cali_mol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_t_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_c_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minSNR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdrStd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#depol_cali_mol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.depol_cali_mol" title="Link to this definition">#</a></dt>
+<dd><p>Molecular polarization calibration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>signal_t: numeric</strong></dt><dd><p>Total signal (photon count).</p>
+</dd>
+<dt><strong>background_t: numeric</strong></dt><dd><p>Background at total channel (photon count).</p>
+</dd>
+<dt><strong>signal_c: numeric</strong></dt><dd><p>Cross signal (photon count).</p>
+</dd>
+<dt><strong>background_c: numeric</strong></dt><dd><p>Background at cross channel (photon count).</p>
+</dd>
+<dt><strong>TR_t: scalar</strong></dt><dd><p>Transmission ratio at total channel.</p>
+</dd>
+<dt><strong>TR_t_std: scalar</strong></dt><dd><p>Uncertainty of the transmission ratio at total channel.</p>
+</dd>
+<dt><strong>TR_c: scalar</strong></dt><dd><p>Transmission ratio at cross channel.</p>
+</dd>
+<dt><strong>TR_c_std: scalar</strong></dt><dd><p>Uncertainty of the transmission ratio at cross channel.</p>
+</dd>
+<dt><strong>minSNR: float</strong></dt><dd><p>The SNR constraint for the signal strength at reference height.</p>
+</dd>
+<dt><strong>mdr: float</strong></dt><dd><p>Default molecular depolarization ratio.</p>
+</dd>
+<dt><strong>mdrStd: float</strong></dt><dd><p>Default standard deviation of molecular depolarization ratio.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>polCaliEta: array</dt><dd><p>Polarization calibration eta.</p>
+</dd>
+<dt>polCaliEtaStd: array</dt><dd><p>Uncertainty of polarization calibration eta.</p>
+</dd>
+<dt>polCaliFac: array</dt><dd><p>Polarization calibration factor.</p>
+</dd>
+<dt>polCaliFacStd: array</dt><dd><p>Uncertainty of polarization calibration factor.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2021-07-06: First edition by Zhenping</p></li>
+<li><p>2024-12-23: converted to python</p></li>
+</ul>
+<p class="rubric">References</p>
+<p>Baars, H., et al., Aerosol profiling with lidar in the Amazon Basin during the wet and dry season,
+J Geophys Res-Atmos, 117, 10.1029/2012jd018338, 2012.</p>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.calibration.rayleighfit">
+<span id="ppcpy-calibration-rayleighfit"></span><h2>ppcpy.calibration.rayleighfit<a class="headerlink" href="#module-ppcpy.calibration.rayleighfit" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.rayleighfit.getVal">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.rayleighfit.</span></span><span class="sig-name descname"><span class="pre">getVal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/rayleighfit.html#getVal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.rayleighfit.getVal" title="Link to this definition">#</a></dt>
+<dd><p>Get values of array for a set of indices, including robustness
+to NaN indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>height</strong><span class="classifier">ndarray</span></dt><dd><p>Array to be searched.</p>
+</dd>
+<dt><strong>indices</strong><span class="classifier">arry_like</span></dt><dd><p>Indeces of the array, may include NaN values.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>out</strong><span class="classifier">list</span></dt><dd><p>Values of the array at given indices.
+If indx is NaN value is also NaN.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.rayleighfit.rayleighfit">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.rayleighfit.</span></span><span class="sig-name descname"><span class="pre">rayleighfit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/rayleighfit.html#rayleighfit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.rayleighfit.rayleighfit" title="Link to this definition">#</a></dt>
+<dd><p>Rayleighfit …</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>refH</strong><span class="classifier">list of dicts</span></dt><dd><p>Reference heights per channel per cloud free period.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id6">
+<p class="admonition-title">Todo</p>
+<p>Write docstring.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.rayleighfit.smooth_signal">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.rayleighfit.</span></span><span class="sig-name descname"><span class="pre">smooth_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/rayleighfit.html#smooth_signal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.rayleighfit.smooth_signal" title="Link to this definition">#</a></dt>
+<dd><p>Uniformly smooth the input signal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>singal</strong><span class="classifier">ndarray</span></dt><dd><p>Signal to be smooth</p>
+</dd>
+<dt><strong>window_len</strong><span class="classifier">int</span></dt><dd><p>Width of the applied uniform filter</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>ndarray</dt><dd><p>Smoothed signal</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2026-02-04: Changed from scipy.ndimage.uniform_filter1d to ppcpy.misc.helper.uniform_filter</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.rayleighfit.DouglasPeucker">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.rayleighfit.</span></span><span class="sig-name descname"><span class="pre">DouglasPeucker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heightBase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heightTop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxHThick</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/rayleighfit.html#DouglasPeucker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.rayleighfit.DouglasPeucker" title="Link to this definition">#</a></dt>
+<dd><p>Simplify signal according to Douglas-Peucker algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>signal</strong><span class="classifier">ndarray</span></dt><dd><p>Molecule corrected signal. [MHz]</p>
+</dd>
+<dt><strong>height</strong><span class="classifier">ndarray</span></dt><dd><p>Height. [m]</p>
+</dd>
+<dt><strong>epsilon</strong><span class="classifier">float</span></dt><dd><p>Maximum distance.</p>
+</dd>
+<dt><strong>heightBase</strong><span class="classifier">float</span></dt><dd><p>Minimum height for the algorithm. [m]</p>
+</dd>
+<dt><strong>heightTop</strong><span class="classifier">float</span></dt><dd><p>Maximum height for the algorithm. [m]</p>
+</dd>
+<dt><strong>maxHThick</strong><span class="classifier">float</span></dt><dd><p>Maximum spatial thickness of each segment. [m]</p>
+</dd>
+<dt><strong>window_size</strong><span class="classifier">int</span></dt><dd><p>Size of the average smooth window.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>sigIndx</strong><span class="classifier">array</span></dt><dd><p>Index of the signal that stands for different segments of the signal.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2017-12-29: First edition by Zhenping.</p></li>
+<li><p>2018-07-29: Add the height range for the searching instead of SNR restriction.</p></li>
+<li><p>2018-07-31: Add the maxHThick argument to control the maximum thickness of each output segment.</p></li>
+<li><p>2024-12-20: Direct translated from matlab with ai</p></li>
+</ul>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm">https://en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.rayleighfit.DP_algorithm">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.rayleighfit.</span></span><span class="sig-name descname"><span class="pre">DP_algorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointList</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxHThick</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/rayleighfit.html#DP_algorithm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.rayleighfit.DP_algorithm" title="Link to this definition">#</a></dt>
+<dd><p>Recursive implementation of the Douglas-Peucker algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pointList</strong><span class="classifier">list</span></dt><dd><p>List of points [[x1, y1], [x2, y2], …].</p>
+</dd>
+<dt><strong>epsilon</strong><span class="classifier">float</span></dt><dd><p>Maximum distance.</p>
+</dd>
+<dt><strong>maxHThick</strong><span class="classifier">float</span></dt><dd><p>Maximum thickness for each segment.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>sigIndx</strong><span class="classifier">list</span></dt><dd><p>Indices of simplified points.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.rayleighfit.my_dist">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.rayleighfit.</span></span><span class="sig-name descname"><span class="pre">my_dist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointM</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointS</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointE</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/rayleighfit.html#my_dist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.rayleighfit.my_dist" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the perpendicular distance between pointM and the line
+connecting pointS and pointE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pointM</strong><span class="classifier">list</span></dt><dd><p>Middle point [x, y].</p>
+</dd>
+<dt><strong>pointS</strong><span class="classifier">list</span></dt><dd><p>Start point [x, y].</p>
+</dd>
+<dt><strong>pointE</strong><span class="classifier">list</span></dt><dd><p>End point [x, y].</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>d</strong><span class="classifier">float</span></dt><dd><p>Distance.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.rayleighfit.chi2fit">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.rayleighfit.</span></span><span class="sig-name descname"><span class="pre">chi2fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/rayleighfit.html#chi2fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.rayleighfit.chi2fit" title="Link to this definition">#</a></dt>
+<dd><p>CHI2FIT Chi-2 fitting. All the code are translated from the exemplified code in Numerical 
+Recipes in C (2nd Edition). Great help comes from Birgit Heese.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">ndarray</span></dt><dd><p>The length of x should be larger than 1.</p>
+</dd>
+<dt><strong>y</strong><span class="classifier">ndarray</span></dt><dd><p>The measured signal.</p>
+</dd>
+<dt><strong>measure_error</strong><span class="classifier">ndarray</span></dt><dd><p>Measurement errors for the y values.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>a</strong><span class="classifier">float</span></dt><dd><p>Intercept of the linear regression.</p>
+</dd>
+<dt><strong>b</strong><span class="classifier">float</span></dt><dd><p>Slope of the linear regression.</p>
+</dd>
+<dt><strong>sigmaA</strong><span class="classifier">float</span></dt><dd><p>Uncertainty of the intercept.</p>
+</dd>
+<dt><strong>sigmaB</strong><span class="classifier">float</span></dt><dd><p>Uncertainty of the slope.</p>
+</dd>
+<dt><strong>chi2</strong><span class="classifier">float</span></dt><dd><p>Chi-square value.</p>
+</dd>
+<dt><strong>Q</strong><span class="classifier">float</span></dt><dd><p>Goodness of fit.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2018-08-03: First edition by Zhenping.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<p><code class="docutils literal notranslate"><span class="pre">a,</span> <span class="pre">b,</span> <span class="pre">sigmaA,</span> <span class="pre">sigmaB,</span> <span class="pre">chi2,</span> <span class="pre">Q</span> <span class="pre">=</span> <span class="pre">chi2fit(x,</span> <span class="pre">y,</span> <span class="pre">measure_error)</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.rayleighfit.fit_profile">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.rayleighfit.</span></span><span class="sig-name descname"><span class="pre">fit_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_aer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_mol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpIndx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layerThickConstrain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slopeConstrain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SNRConstrain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flagShowDetail</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/rayleighfit.html#fit_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.rayleighfit.fit_profile" title="Link to this definition">#</a></dt>
+<dd><p>Search the clean region with rayleigh fit algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>height</strong><span class="classifier">array_like</span></dt><dd><p>height [m]</p>
+</dd>
+<dt><strong>sig_aer</strong><span class="classifier">array_like</span></dt><dd><p>range corrected signal</p>
+</dd>
+<dt><strong>pc</strong><span class="classifier">array_like</span></dt><dd><p>photon count signal</p>
+</dd>
+<dt><strong>bg</strong><span class="classifier">array_like</span></dt><dd><p>background</p>
+</dd>
+<dt><strong>sig_mol</strong><span class="classifier">array_like</span></dt><dd><p>range corrected molecular signal</p>
+</dd>
+<dt><strong>dpIndx</strong><span class="classifier">array_like</span></dt><dd><p>index of the region calculated by Douglas-Peucker algorithm</p>
+</dd>
+<dt><strong>layerThickConstrain</strong><span class="classifier">float</span></dt><dd><p>constrain for the reference layer thickness [m]</p>
+</dd>
+<dt><strong>slopeConstrain</strong><span class="classifier">float</span></dt><dd><p>constrain for the uncertainty of the regressed extinction coefficient</p>
+</dd>
+<dt><strong>SNRConstrain</strong><span class="classifier">float</span></dt><dd><p>minimum SNR for the signal at the reference height</p>
+</dd>
+<dt><strong>flagShowDetail</strong><span class="classifier">bool, optional</span></dt><dd><p>if True, calculation information will be printed (default: False)</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>tuple</dt><dd><p>(hBIndx, hTIndx) - indices of bottom and top of searched region
+Returns (nan, nan) if region not found</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.calibration.select">
+<span id="ppcpy-calibration-select"></span><h2>ppcpy.calibration.select<a class="headerlink" href="#module-ppcpy.calibration.select" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.select.single_best">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.select.</span></span><span class="sig-name descname"><span class="pre">single_best</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_min</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/select.html#single_best"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.select.single_best" title="Link to this definition">#</a></dt>
+<dd><p>select the best calibration constant</p>
+<p>generalization of lidarconstant.get_best_LC</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>d</strong><span class="classifier">dict</span></dt><dd><p>dict per channel of list of calibration constants</p>
+</dd>
+<dt><strong>name_val</strong><span class="classifier">str</span></dt><dd><p>designator for the actual value</p>
+</dd>
+<dt><strong>name_min</strong><span class="classifier">str</span></dt><dd><p>designator of the minimum</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>best</strong><span class="classifier">dict</span></dt><dd><p>Lidar constants/Etas with lowest standard deviation per channel.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Since <code class="docutils literal notranslate"><span class="pre">LC</span> <span class="pre">=</span> <span class="pre">LC_stable</span></code> and <code class="docutils literal notranslate"><span class="pre">LCStd</span> <span class="pre">=</span> <span class="pre">LC_stable</span> <span class="pre">*</span> <span class="pre">LC_Std</span></code> so will any negative LC also have
+a negative LCStd, and thus be chosen as the best LC.</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2026-02-16: Added additional checks to hinder negative LCs to be chosen.</p></li>
+<li><p>2026-03-27: generalized to also hold for depolarization calibration</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.select.plot_cals">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.select.</span></span><span class="sig-name descname"><span class="pre">plot_cals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">used</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/select.html#plot_cals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.select.plot_cals" title="Link to this definition">#</a></dt>
+<dd><p>plot the calibration constants</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>d</strong><span class="classifier">dict</span></dt><dd><p>the dict as in data_cube</p>
+</dd>
+<dt><strong>param</strong><span class="classifier">str</span></dt><dd><p>the parameter to extract</p>
+</dd>
+<dt><strong>used</strong><span class="classifier">dict</span></dt><dd><p>the LCused or etaused (will produce a dashed line in the plot)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot_cals</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">pol_cali</span><span class="p">,</span> <span class="s1">&#39;eta&#39;</span><span class="p">,</span> <span class="n">used</span><span class="o">=</span><span class="n">data_cube</span><span class="o">.</span><span class="n">etaused</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot_cals</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">LC</span><span class="p">,</span> <span class="s1">&#39;LC&#39;</span><span class="p">,</span> <span class="n">used</span><span class="o">=</span><span class="n">data_cube</span><span class="o">.</span><span class="n">LCused</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="interface.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ppcpy.interface</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="preprocess.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ppcpy.preprocess</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.calibration.lidarconstant">ppcpy.calibration.lidarconstant</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.lidarconstant.lc_for_cldFreeGrps"><code class="docutils literal notranslate"><span class="pre">lc_for_cldFreeGrps()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.calibration.polarization">ppcpy.calibration.polarization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.onemx_onepx"><code class="docutils literal notranslate"><span class="pre">onemx_onepx()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.smooth_signal"><code class="docutils literal notranslate"><span class="pre">smooth_signal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.loadGHK"><code class="docutils literal notranslate"><span class="pre">loadGHK()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.calibrateGHK"><code class="docutils literal notranslate"><span class="pre">calibrateGHK()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.depol_cali_ghk"><code class="docutils literal notranslate"><span class="pre">depol_cali_ghk()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.analyze_segments"><code class="docutils literal notranslate"><span class="pre">analyze_segments()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.calibrateMol"><code class="docutils literal notranslate"><span class="pre">calibrateMol()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.depol_cali_mol"><code class="docutils literal notranslate"><span class="pre">depol_cali_mol()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.calibration.rayleighfit">ppcpy.calibration.rayleighfit</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.rayleighfit.getVal"><code class="docutils literal notranslate"><span class="pre">getVal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.rayleighfit.rayleighfit"><code class="docutils literal notranslate"><span class="pre">rayleighfit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.rayleighfit.smooth_signal"><code class="docutils literal notranslate"><span class="pre">smooth_signal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.rayleighfit.DouglasPeucker"><code class="docutils literal notranslate"><span class="pre">DouglasPeucker()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.rayleighfit.DP_algorithm"><code class="docutils literal notranslate"><span class="pre">DP_algorithm()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.rayleighfit.my_dist"><code class="docutils literal notranslate"><span class="pre">my_dist()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.rayleighfit.chi2fit"><code class="docutils literal notranslate"><span class="pre">chi2fit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.rayleighfit.fit_profile"><code class="docutils literal notranslate"><span class="pre">fit_profile()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.calibration.select">ppcpy.calibration.select</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.select.single_best"><code class="docutils literal notranslate"><span class="pre">single_best()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.select.plot_cals"><code class="docutils literal notranslate"><span class="pre">plot_cals()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api_doc/calibration.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026 Andi Klamt, Martin Radenz and Håvard Buholdt.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

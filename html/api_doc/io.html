@@ -1,0 +1,857 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ppcpy.io &#8212; PicassoPy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_doc/io';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ppcpy.misc" href="misc.html" />
+    <link rel="prev" title="ppcpy.cloudmask" href="cloudmask.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PicassoPy  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="interface.html">ppcpy.interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration.html">ppcpy.calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess.html">ppcpy.preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloudmask.html">ppcpy.cloudmask</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ppcpy.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">ppcpy.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qc.html">ppcpy.qc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="retrievals.html">ppcpy.retrievals</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api_doc.html" class="nav-link">API Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ppcpy.io</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ppcpy-io">
+<h1>ppcpy.io<a class="headerlink" href="#ppcpy-io" title="Link to this heading">#</a></h1>
+<section id="module-ppcpy.io.loadConfigs">
+<span id="ppcpy-io-loadconfigs"></span><h2>ppcpy.io.loadConfigs<a class="headerlink" href="#module-ppcpy.io.loadConfigs" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.loadConfigs.loadPicassoConfig">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">loadPicassoConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">picasso_config_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">picasso_default_config_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#loadPicassoConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.loadPicassoConfig" title="Link to this definition">#</a></dt>
+<dd><p>load the general Picasso config file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>picasso_config_file</strong><span class="classifier">str or path</span></dt><dd><p>the specific config file</p>
+</dd>
+<dt><strong>picasso_default_config_fil</strong><span class="classifier">str or path</span></dt><dd><p>the default (template) file</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>picasso_config_dict</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.loadConfigs.readPollyNetConfigLinkTable">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">readPollyNetConfigLinkTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polly_config_table_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#readPollyNetConfigLinkTable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.readPollyNetConfigLinkTable" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.loadConfigs.fix_indexing">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">fix_indexing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['first_range_gate_indx',</span> <span class="pre">'bgCorRangeIndx',</span> <span class="pre">'bgCorRangeIndxLow',</span> <span class="pre">'bgCorRangeIndxHigh',</span> <span class="pre">'LCMeanMinIndx',</span> <span class="pre">'LCMeanMaxIndx']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#fix_indexing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.fix_indexing" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.loadConfigs.getPollyConfigfromArray">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">getPollyConfigfromArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polly_config_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">picasso_config_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#getPollyConfigfromArray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.getPollyConfigfromArray" title="Link to this definition">#</a></dt>
+<dd><p>function to load the config for the time identified</p>
+<p>aim is to declutter the runscript</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>polly_config_array</strong><span class="classifier">pandas dataframe</span></dt><dd><p>selected line form the links.xlsx</p>
+</dd>
+<dt><strong>picasso_config_dict</strong><span class="classifier">dict</span></dt><dd><p>general picasso config</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>polly_config_dict</strong><span class="classifier">dict</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.loadConfigs.loadPollyConfig">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">loadPollyConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polly_config_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polly_default_config_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#loadPollyConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.loadPollyConfig" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.loadConfigs.checkPollyConfigDict">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">checkPollyConfigDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polly_config_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#checkPollyConfigDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.checkPollyConfigDict" title="Link to this definition">#</a></dt>
+<dd><p>Check and potentially modify polly config dict</p>
+<p>Parameters:
+- polly_config_dict (dict): polly config dict to be checked
+Output:
+- new_polly_config_dict (dict): checked (and modified) polly config dict</p>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.io.readMeteo">
+<span id="ppcpy-io-readmeteo"></span><h2>ppcpy.io.readMeteo<a class="headerlink" href="#module-ppcpy.io.readMeteo" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ppcpy.io.readMeteo.Meteo">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ppcpy.io.readMeteo.</span></span><span class="sig-name descname"><span class="pre">Meteo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meteorDataSource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meteo_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meteo_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/readMeteo.html#Meteo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.readMeteo.Meteo" title="Link to this definition">#</a></dt>
+<dd><p>% LOADMETEOR read meteorological data.
+%
+% USAGE:
+%    [temp, pres, relh, wins, wind, meteorAttri] = loadMeteor(mTime, asl)
+%
+% INPUTS:
+%    mTime: array
+%        query time.
+%    asl: array
+%        height above sea level. (m)
+%
+% KEYWORDS:
+%    meteorDataSource: str
+%        meteorological data type.
+%        e.g., ‘gdas1’(default), ‘standard_atmosphere’, ‘websonde’, ‘radiosonde’, ‘nc_cloudnet’
+%    gdas1Site: str
+%        the GDAS1 site for the current campaign.
+%    meteo_folder: str
+%        the main folder of the GDAS1 profiles (or the cloudnet profiles).
+%    radiosondeSitenum: integer
+%        site number, which can be found in 
+%        doc/radiosonde-station-list.txt.
+%    radiosondeFolder: str
+%        the folder of the sonding files.
+%    radiosondeType: integer
+%        file type of the radiosonde file.
+%        1: radiosonde file for MOSAiC (default)
+%        2: radiosonde file for MUA
+%    flagReadLess: logical
+%        flag to determine whether access meteorological data by certain time
+%        interval. (default: false)
+%    method: char
+%        Interpolation method. (default: ‘nearest’)
+%    isUseLatestGDAS: logical
+%        whether to search the latest available GDAS profile (default: false).
+%
+% OUTPUTS:
+%    temp: matrix (time * height)
+%        temperature for each range bin. [°C]
+%    pres: matrix (time * height)
+%        pressure for each range bin. [hPa]
+%    relh: matrix (time * height)
+%        relative humidity for each range bin. [%]
+%    wins: matrix (time * height)
+%        wind speed. (m/s)
+%    meteorAttri: struct
+%        dataSource: cell
+%            The data source used in the data processing for each cloud-free group.
+%        URL: cell
+%            The data file info for each cloud-free group.
+%        datetime: array
+%            datetime label for the meteorlogical data.
+%
+% HISTORY:
+%    - 2021-05-22: first edition by Zhenping
+%
+% .. Authors: - <a class="reference external" href="mailto:zhenping&#37;&#52;&#48;tropos&#46;de">zhenping<span>&#64;</span>tropos<span>&#46;</span>de</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ppcpy.io.readMeteo.Meteo.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heights</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/readMeteo.html#Meteo.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.readMeteo.Meteo.load" title="Link to this definition">#</a></dt>
+<dd><p>load the data and resample to 15 minute intervals</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppcpy.io.readMeteo.Meteo.get_mean_profiles">
+<span class="sig-name descname"><span class="pre">get_mean_profiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_slice</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/readMeteo.html#Meteo.get_mean_profiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.readMeteo.Meteo.get_mean_profiles" title="Link to this definition">#</a></dt>
+<dd><p>get the mean meteorological profiles</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ppcpy.io.readMeteo.MeteoNcCloudnet">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ppcpy.io.readMeteo.</span></span><span class="sig-name descname"><span class="pre">MeteoNcCloudnet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepattern</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/readMeteo.html#MeteoNcCloudnet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.readMeteo.MeteoNcCloudnet" title="Link to this definition">#</a></dt>
+<dd><p>TODO for now only one filename
+define preferred model</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ppcpy.io.readMeteo.MeteoNcCloudnet.find_path_for_time">
+<span class="sig-name descname"><span class="pre">find_path_for_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/readMeteo.html#MeteoNcCloudnet.find_path_for_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.readMeteo.MeteoNcCloudnet.find_path_for_time" title="Link to this definition">#</a></dt>
+<dd><p>find the files fo a given time</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppcpy.io.readMeteo.MeteoNcCloudnet.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_grid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/readMeteo.html#MeteoNcCloudnet.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.readMeteo.MeteoNcCloudnet.load" title="Link to this definition">#</a></dt>
+<dd><p>load the data</p>
+<p>not quite sure on the interface yet
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">met.load(data_cube.retrievals_highres['time'][0])</span>
+<span class="pre">met.load(datetime.datetime.timestamp(datetime.datetime.strptime(data_cube.date,</span> <span class="pre">'%Y%m%d')))</span>
+<span class="pre">`</span></code></p>
+<dl class="simple">
+<dt>Recipie:</dt><dd><ul class="simple">
+<li><p>load</p></li>
+<li><p>select variables?</p></li>
+<li><p>rename?</p></li>
+<li><p>regrid from (time, level) to (time, lidar heights)</p></li>
+</ul>
+</dd>
+</dl>
+<p>clarify the above ground above sea level issues</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.io.readPollyRawData">
+<span id="ppcpy-io-readpollyrawdata"></span><h2>ppcpy.io.readPollyRawData<a class="headerlink" href="#module-ppcpy.io.readPollyRawData" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.readPollyRawData.readPollyRawData">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.readPollyRawData.</span></span><span class="sig-name descname"><span class="pre">readPollyRawData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/readPollyRawData.html#readPollyRawData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.readPollyRawData.readPollyRawData" title="Link to this definition">#</a></dt>
+<dd><p>read the Polly raw file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>filename</strong><span class="classifier">str</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>data_dict</strong><span class="classifier">dict</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.io.write2nc">
+<span id="ppcpy-io-write2nc"></span><h2>ppcpy.io.write2nc<a class="headerlink" href="#module-ppcpy.io.write2nc" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.write2nc.get_git_info">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">get_git_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#get_git_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.get_git_info" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.write2nc.adding_fixed_vars">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">adding_fixed_vars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_nc_mapping_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#adding_fixed_vars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.adding_fixed_vars" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.write2nc.adding_global_attr">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">adding_global_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_nc_mapping_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#adding_global_attr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.adding_global_attr" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.write2nc.write_channelwise_2_nc_file">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">write_channelwise_2_nc_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PosixPath('/mnt/c/Users/radenz/dev/PicassoPy/PicassoPy')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prod_ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#write_channelwise_2_nc_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.write_channelwise_2_nc_file" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.write2nc.write2nc_file">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">write2nc_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PosixPath('/mnt/c/Users/radenz/dev/PicassoPy/PicassoPy')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prod_ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#write2nc_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.write2nc_file" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.write2nc.write_profile2nc_file">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">write_profile2nc_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PosixPath('/mnt/c/Users/radenz/dev/PicassoPy/PicassoPy')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prod_ls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#write_profile2nc_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.write_profile2nc_file" title="Link to this definition">#</a></dt>
+<dd><p>Saving profile data to NetCDF4 files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object</p>
+</dd>
+<dt><strong>root_dir</strong><span class="classifier">str</span></dt><dd></dd>
+<dt><strong>prod_ls</strong><span class="classifier">list</span></dt><dd><p>List of product names</p>
+</dd>
+<dt><strong>.. TODO::</strong></dt><dd><p>Missing comment in variable attributes.
+Not all retrievals / information needed for the profiles are in data_cube.retrivals_highres…
+write docstring</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.write2nc.adding_mol_profiles">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">adding_mol_profiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_nc_mapping_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cldFreeGrp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#adding_mol_profiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.adding_mol_profiles" title="Link to this definition">#</a></dt>
+<dd><p>Temporarily quick fix for adding molecular profiles as variables to the NetCDF profile outputs</p>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.io.sql_interaction">
+<span id="ppcpy-io-sql-interaction"></span><h2>ppcpy.io.sql_interaction<a class="headerlink" href="#module-ppcpy.io.sql_interaction" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.sql_interaction.string_to_ts">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.sql_interaction.</span></span><span class="sig-name descname"><span class="pre">string_to_ts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/sql_interaction.html#string_to_ts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.sql_interaction.string_to_ts" title="Link to this definition">#</a></dt>
+<dd><p>string of format %Y-%m-%d %H:%M:%S to timestamp (timezone-aware)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.sql_interaction.get_from_sql_db">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.sql_interaction.</span></span><span class="sig-name descname"><span class="pre">get_from_sql_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/sql_interaction.html#get_from_sql_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.sql_interaction.get_from_sql_db" title="Link to this definition">#</a></dt>
+<dd><p>read lidar calibration constant or depol calibration from database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>db_path</strong><span class="classifier">str</span></dt><dd><p>name of the specific sqlite db file.</p>
+</dd>
+<dt><strong>table_name</strong><span class="classifier">str</span></dt><dd><p>default ‘lidar_calibration_constant’</p>
+</dd>
+<dt><strong>ts_interval</strong><span class="classifier">str</span></dt><dd><p>the date or timestamp to look for</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>in calibration storage format</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.sql_interaction.prepare_for_sql_db_writing">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.sql_interaction.</span></span><span class="sig-name descname"><span class="pre">prepare_for_sql_db_writing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ppcpy/io/sql_interaction.html#prepare_for_sql_db_writing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.sql_interaction.prepare_for_sql_db_writing" title="Link to this definition">#</a></dt>
+<dd><p>Collect all necessary variable and save it to a list of tuples for inserting into a SQLite table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd></dd>
+<dt><strong>parameter :str</strong></dt><dd><p>LC or DC</p>
+</dd>
+<dt><strong>method</strong><span class="classifier">str</span></dt><dd><p>klett or raman</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>rows_to_insert</strong><span class="classifier">list of tuples</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.sql_interaction.setup_empty">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.sql_interaction.</span></span><span class="sig-name descname"><span class="pre">setup_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/sql_interaction.html#setup_empty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.sql_interaction.setup_empty" title="Link to this definition">#</a></dt>
+<dd><p>Create/Initialise an empty database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>db_path</strong><span class="classifier">str</span></dt><dd><p>Path to the SQLite database file.</p>
+</dd>
+<dt><strong>table_name</strong><span class="classifier">str</span></dt><dd><p>Name of the target table.</p>
+</dd>
+<dt><strong>column_names</strong><span class="classifier">list of str</span></dt><dd><p>List of column names to insert values into (e.g. [‘col1’, ‘col2’]).</p>
+</dd>
+<dt><strong>data_types</strong><span class="classifier">list of str</span></dt><dd><p>List of SQLite data types for each respective columns (e.g. [‘text’, ‘real’])</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.sql_interaction.write_rows_to_sql_db">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.sql_interaction.</span></span><span class="sig-name descname"><span class="pre">write_rows_to_sql_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows_to_insert</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/sql_interaction.html#write_rows_to_sql_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.sql_interaction.write_rows_to_sql_db" title="Link to this definition">#</a></dt>
+<dd><p>Insert multiple rows into a SQLite table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>db_path</strong><span class="classifier">str</span></dt><dd><p>Path to the SQLite database file.</p>
+</dd>
+<dt><strong>table_name</strong><span class="classifier">str</span></dt><dd><p>Name of the target table.</p>
+</dd>
+<dt><strong>column_names</strong><span class="classifier">list of str</span></dt><dd><p>List of column names to insert values into (e.g. [‘col1’, ‘col2’]).</p>
+</dd>
+<dt><strong>rows_to_insert</strong><span class="classifier">list of tuples</span></dt><dd><p>Data to insert, e.g. [(‘a’, ‘b’), (‘c’, ‘d’)].</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The IGNORE syntax somehow did not work.
+With the UNIQUE colums defined and INSERT OR REPLACE at least the new values are updated.
+Though they are given a new ID.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cloudmask.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ppcpy.cloudmask</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="misc.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ppcpy.misc</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.io.loadConfigs">ppcpy.io.loadConfigs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.loadConfigs.loadPicassoConfig"><code class="docutils literal notranslate"><span class="pre">loadPicassoConfig()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.loadConfigs.readPollyNetConfigLinkTable"><code class="docutils literal notranslate"><span class="pre">readPollyNetConfigLinkTable()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.loadConfigs.fix_indexing"><code class="docutils literal notranslate"><span class="pre">fix_indexing()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.loadConfigs.getPollyConfigfromArray"><code class="docutils literal notranslate"><span class="pre">getPollyConfigfromArray()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.loadConfigs.loadPollyConfig"><code class="docutils literal notranslate"><span class="pre">loadPollyConfig()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.loadConfigs.checkPollyConfigDict"><code class="docutils literal notranslate"><span class="pre">checkPollyConfigDict()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.io.readMeteo">ppcpy.io.readMeteo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.readMeteo.Meteo"><code class="docutils literal notranslate"><span class="pre">Meteo</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.readMeteo.Meteo.load"><code class="docutils literal notranslate"><span class="pre">Meteo.load()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.readMeteo.Meteo.get_mean_profiles"><code class="docutils literal notranslate"><span class="pre">Meteo.get_mean_profiles()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.readMeteo.MeteoNcCloudnet"><code class="docutils literal notranslate"><span class="pre">MeteoNcCloudnet</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.readMeteo.MeteoNcCloudnet.find_path_for_time"><code class="docutils literal notranslate"><span class="pre">MeteoNcCloudnet.find_path_for_time()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.readMeteo.MeteoNcCloudnet.load"><code class="docutils literal notranslate"><span class="pre">MeteoNcCloudnet.load()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.io.readPollyRawData">ppcpy.io.readPollyRawData</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.readPollyRawData.readPollyRawData"><code class="docutils literal notranslate"><span class="pre">readPollyRawData()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.io.write2nc">ppcpy.io.write2nc</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.write2nc.get_git_info"><code class="docutils literal notranslate"><span class="pre">get_git_info()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.write2nc.adding_fixed_vars"><code class="docutils literal notranslate"><span class="pre">adding_fixed_vars()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.write2nc.adding_global_attr"><code class="docutils literal notranslate"><span class="pre">adding_global_attr()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.write2nc.write_channelwise_2_nc_file"><code class="docutils literal notranslate"><span class="pre">write_channelwise_2_nc_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.write2nc.write2nc_file"><code class="docutils literal notranslate"><span class="pre">write2nc_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.write2nc.write_profile2nc_file"><code class="docutils literal notranslate"><span class="pre">write_profile2nc_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.write2nc.adding_mol_profiles"><code class="docutils literal notranslate"><span class="pre">adding_mol_profiles()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.io.sql_interaction">ppcpy.io.sql_interaction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.sql_interaction.string_to_ts"><code class="docutils literal notranslate"><span class="pre">string_to_ts()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.sql_interaction.get_from_sql_db"><code class="docutils literal notranslate"><span class="pre">get_from_sql_db()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.sql_interaction.prepare_for_sql_db_writing"><code class="docutils literal notranslate"><span class="pre">prepare_for_sql_db_writing()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.sql_interaction.setup_empty"><code class="docutils literal notranslate"><span class="pre">setup_empty()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.io.sql_interaction.write_rows_to_sql_db"><code class="docutils literal notranslate"><span class="pre">write_rows_to_sql_db()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api_doc/io.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026 Andi Klamt, Martin Radenz and Håvard Buholdt.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
