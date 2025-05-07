@@ -1,0 +1,25 @@
+..
+  class.rst
+
+ppcpy.io.readMeteo.Meteo
+========================
+
+.. currentmodule:: ppcpy.io.readMeteo
+
+.. autoclass:: Meteo
+    :members:
+    :show-inheritance:
+    :inherited-members:
+
+    
+        
+            .. rubric:: Methods
+
+            .. autosummary::
+                :nosignatures:
+                
+                    ~Meteo.__init__
+                    ~Meteo.get_mean_profiles
+                    ~Meteo.load
+        
+    

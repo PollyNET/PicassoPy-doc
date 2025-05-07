@@ -1,0 +1,719 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ppcpy.retrievals.klettfernald &#8212; PicassoPy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ppcpy/retrievals/klettfernald';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PicassoPy  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ppcpy.retrievals.klettfernald</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ppcpy.retrievals.klettfernald</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">uniform_filter1d</span>
+
+<span class="kn">from</span> <span class="nn">ppcpy.misc.helper</span> <span class="kn">import</span> <span class="n">uniform_filter</span>
+<span class="kn">from</span> <span class="nn">ppcpy.retrievals.collection</span> <span class="kn">import</span> <span class="n">calc_snr</span>
+
+
+<div class="viewcode-block" id="run_cldFreeGrps">
+<a class="viewcode-back" href="../../../api_doc/retrievals.html#ppcpy.retrievals.klettfernald.run_cldFreeGrps">[docs]</a>
+<span class="k">def</span> <span class="nf">run_cldFreeGrps</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">signal</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;TCor&#39;</span><span class="p">,</span> <span class="n">nr</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">collect_debug</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run klett retrieval for each cloud free region.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_cube : object</span>
+<span class="sd">        Main PicassoProc object.</span>
+<span class="sd">    signal : str, optional</span>
+<span class="sd">        Name of the signal to be used for the Klett retrievals. Default is &#39;TCor&#39;.</span>
+<span class="sd">    nr : bool, optional</span>
+<span class="sd">        If true, preform Klett retrieval for FR and NR channels. Otherwise only FR channels. Default is False.</span>
+<span class="sd">    collect_debug : bool, optional</span>
+<span class="sd">        If true, collect debug information. Default is True.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    aerExt : ndarray</span>
+<span class="sd">        Aerosol extinction coefficient [m^{-1}].</span>
+<span class="sd">    aerExtStd : ndarray</span>
+<span class="sd">        Uncertainty of aerosol extinction coefficient [m^{-1}].</span>
+<span class="sd">    aerBsc : ndarray</span>
+<span class="sd">        Aerosol backscatter coefficient [m^{-1}Sr^{-1}].</span>
+<span class="sd">    aerBscStd : ndarray</span>
+<span class="sd">        Uncertainty of aerosol backscatter coefficient [m^{-1}Sr^{-1}].</span>
+<span class="sd">    aerBR : ndarray</span>
+<span class="sd">        Aerosol backscatter ratio.</span>
+<span class="sd">    aerBRStd : ndarray</span>
+<span class="sd">        Statistical uncertainty of aerosol backscatter ratio.</span>
+<span class="sd">    retrieval : str</span>
+<span class="sd">        Name of retrieval type, eg. &#39;klett&#39;.</span>
+<span class="sd">    signal : str</span>
+<span class="sd">        Name of the signal used for the retrievals, eg. &#39;TCor&#39;.</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    **History**</span>
+
+<span class="sd">    - xxxx-xx-xx: TODO: First edition by ...</span>
+<span class="sd">    - 2026-02-09: Modified and cleaned by Buholdt</span>
+<span class="sd">    </span>
+<span class="sd">    .. TODO:: Should sigBGCor, sigTCor or RCS be used for the Klett retrievals?</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">height</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span>
+    <span class="n">config_dict</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;rayleighfit seems to use range in matlab, but the met data should be in height &gt;&gt; RECHECK!&#39;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;at 10km height this is a difference of about 4 indices&#39;</span><span class="p">)</span>
+
+    <span class="n">opt_profiles</span> <span class="o">=</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">clFreeGrps</span><span class="p">))]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting Klett retrieval&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cldFree</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">clFreeGrps</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cldFree &#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">cldFree</span><span class="p">)</span>
+        <span class="n">cldFree</span> <span class="o">=</span> <span class="n">cldFree</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cldFree</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cldFree mod&#39;</span><span class="p">,</span> <span class="n">cldFree</span><span class="p">)</span>
+
+        <span class="c1"># Define channels to run the retrieval for</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">532</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">355</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">1064</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">nr</span><span class="p">:</span>
+            <span class="n">channels</span> <span class="o">+=</span> <span class="p">[(</span><span class="mi">532</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;NR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">355</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;NR&#39;</span><span class="p">)]</span>
+
+        <span class="k">for</span> <span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;== </span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1"> klett =================================&#39;</span><span class="p">)</span>
+
+                <span class="c1"># Telescope type dependent configurations</span>
+                <span class="k">if</span> <span class="n">tel</span> <span class="o">==</span> <span class="s1">&#39;NR&#39;</span><span class="p">:</span>
+                    <span class="n">key_smooth</span> <span class="o">=</span> <span class="s1">&#39;smoothWin_klett_NR_&#39;</span>
+                    <span class="n">keyminSNR</span> <span class="o">=</span> <span class="s1">&#39;minRefSNR_NR_&#39;</span>
+                    <span class="n">key_LR</span> <span class="o">=</span> <span class="s1">&#39;LR_NR_&#39;</span>
+                    <span class="n">refBeta</span> <span class="o">=</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;refBeta_NR_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="sa">f</span><span class="s2">&quot;refBeta_NR_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">config_dict</span> <span class="k">else</span> <span class="kc">None</span>
+                    <span class="c1"># TODO seperate klett and raman refBeta in config file?</span>
+                    <span class="c1"># refBeta = config_dict[f&quot;refBeta_NR_klett_{wv}&quot;] if f&quot;refBeta_NR_klett_{wv}&quot; in config_dict else None</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">key_smooth</span> <span class="o">=</span> <span class="s1">&#39;smoothWin_klett_&#39;</span>
+                    <span class="n">keyminSNR</span> <span class="o">=</span> <span class="s1">&#39;minRefSNR&#39;</span>
+                    <span class="n">key_LR</span> <span class="o">=</span> <span class="s1">&#39;LR&#39;</span>
+                    <span class="n">refBeta</span> <span class="o">=</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;refBeta</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
+
+                <span class="c1"># Elastic signals</span>
+                <span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;sig</span><span class="si">{</span><span class="n">signal</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)])</span>
+                <span class="n">bg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;BG</span><span class="si">{</span><span class="n">signal</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)])</span>
+                <span class="n">molBsc</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_profiles</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mBsc_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                    <span class="c1"># Current temporary version of fernald() does not support NaN values in the signal.</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;NaN-values detected in signal </span><span class="si">{</span><span class="n">signal</span><span class="si">}</span><span class="s1">, skipping Klett retrieval for this channel.&#39;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="c1"># Reference height</span>
+                <span class="n">refHInd</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;refH&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;refInd&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">refHInd</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No valid refHInd found, skipping Klett retrieval for this channel.&#39;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="c1"># Calculate SNR in the reference height</span>
+                <span class="n">SNRRef</span> <span class="o">=</span> <span class="n">calc_snr</span><span class="p">(</span>
+                    <span class="n">signal</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sig</span><span class="p">[</span><span class="n">refHInd</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">refHInd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+                    <span class="n">bg</span><span class="o">=</span><span class="n">bg</span><span class="o">*</span><span class="p">(</span><span class="n">refHInd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">refHInd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="p">)</span>
+
+                <span class="c1"># Checking SNR treshold</span>
+                <span class="k">if</span> <span class="n">SNRRef</span> <span class="o">&lt;</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">keyminSNR</span><span class="si">}{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Signal is too noisy at the reference height, skipping Klett retrival for this channel.&#39;</span><span class="p">,</span> <span class="n">SNRRef</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">keyminSNR</span><span class="si">}{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">])</span>
+                    <span class="k">continue</span>
+
+                <span class="k">if</span> <span class="n">refBeta</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">tel</span> <span class="o">==</span> <span class="s1">&#39;NR&#39;</span><span class="p">:</span>
+                    <span class="c1"># Calculate NR refBeta based on mean FR aerBsc in reference height</span>
+                    <span class="k">if</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">_FR&#39;</span> <span class="ow">in</span> <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                        <span class="k">if</span> <span class="s1">&#39;aerBsc&#39;</span> <span class="ow">in</span> <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">_FR&#39;</span><span class="p">]:</span>
+                            <span class="n">refBeta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">_FR&#39;</span><span class="p">][</span><span class="s1">&#39;aerBsc&#39;</span><span class="p">][</span><span class="n">refHInd</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">refHInd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No valid refBeta found, skipping Klett retrieval for this channel&#39;</span><span class="p">)</span>
+                            <span class="k">continue</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No valid refBeta found, skipping Klett retrieval for this channel&#39;</span><span class="p">)</span>
+                        <span class="k">continue</span>
+                
+                <span class="c1"># Print debug info</span>
+                <span class="k">if</span> <span class="n">collect_debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="s1">&#39;LR &#39;</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key_LR</span><span class="si">}{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">],</span> 
+                        <span class="s1">&#39;refH&#39;</span><span class="p">,</span> <span class="n">height</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">refHInd</span><span class="p">)],</span> 
+                        <span class="s1">&#39;refBeta&#39;</span><span class="p">,</span> <span class="n">refBeta</span><span class="p">,</span>
+                        <span class="s1">&#39;smoothWin_klett&#39;</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key_smooth</span><span class="si">}{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
+                    <span class="p">)</span>
+                
+                <span class="n">prof</span> <span class="o">=</span> <span class="n">fernald</span><span class="p">(</span>
+                    <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
+                    <span class="n">signal</span><span class="o">=</span><span class="n">sig</span><span class="p">,</span>
+                    <span class="n">bg</span><span class="o">=</span><span class="n">bg</span><span class="p">,</span>
+                    <span class="n">LR_aer</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key_LR</span><span class="si">}{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">],</span>
+                    <span class="n">refHInd</span><span class="o">=</span><span class="n">refHInd</span><span class="p">,</span>
+                    <span class="n">refBeta</span><span class="o">=</span><span class="n">refBeta</span><span class="p">,</span>
+                    <span class="n">molBsc</span><span class="o">=</span><span class="n">molBsc</span><span class="p">,</span>
+                    <span class="n">window_size</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key_smooth</span><span class="si">}{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">],</span>
+                    <span class="n">collect_debug</span><span class="o">=</span><span class="n">collect_debug</span>
+                <span class="p">)</span>
+                <span class="n">prof</span><span class="p">[</span><span class="s1">&#39;aerExt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prof</span><span class="p">[</span><span class="s1">&#39;aerBsc&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key_LR</span><span class="si">}{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
+                <span class="n">prof</span><span class="p">[</span><span class="s1">&#39;aerExtStd&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prof</span><span class="p">[</span><span class="s1">&#39;aerBscStd&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key_LR</span><span class="si">}{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
+                <span class="n">prof</span><span class="p">[</span><span class="s1">&#39;retrieval&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;klett&#39;</span>
+                <span class="n">prof</span><span class="p">[</span><span class="s1">&#39;signal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">signal</span>
+                <span class="n">prof</span><span class="p">[</span><span class="s1">&#39;refBeta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">refBeta</span>
+                <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prof</span>
+
+    <span class="k">return</span> <span class="n">opt_profiles</span></div>
+
+
+
+<div class="viewcode-block" id="fernald">
+<a class="viewcode-back" href="../../../api_doc/retrievals.html#ppcpy.retrievals.klettfernald.fernald">[docs]</a>
+<span class="k">def</span> <span class="nf">fernald</span><span class="p">(</span>
+        <span class="n">height</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">signal</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">bg</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">LR_aer</span><span class="p">:</span><span class="nb">float</span><span class="o">|</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">refHInd</span><span class="p">:</span><span class="nb">list</span><span class="p">,</span>
+        <span class="n">refBeta</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">molBsc</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">window_size</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+        <span class="n">collect_debug</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve aerosol backscatter coefficient using the Fernald method.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    height : array_like</span>
+<span class="sd">        Height in meters.</span>
+<span class="sd">    signal : array_like</span>
+<span class="sd">        Elastic signal without background (Photon Count).</span>
+<span class="sd">    bg : array_like</span>
+<span class="sd">        Background signal (Photon Count).</span>
+<span class="sd">    LR_aer : float or array_like</span>
+<span class="sd">        Aerosol lidar ratio [sr].</span>
+<span class="sd">    refHInd : array_like</span>
+<span class="sd">        Reference height index [start, end].</span>
+<span class="sd">    refBeta : float</span>
+<span class="sd">        Aerosol backscatter coefficient at the reference region [m^-1 sr^-1].</span>
+<span class="sd">    molBsc : array_like</span>
+<span class="sd">        Molecular backscatter coefficient [m^-1 sr^-1].</span>
+<span class="sd">    window_size : int, optional</span>
+<span class="sd">        Bins of the smoothing window for the signal. Default is 40 bins.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    aerBsc : ndarray</span>
+<span class="sd">        Aerosol backscatter coefficient [m^-1 sr^-1].</span>
+<span class="sd">    aerBscStd : ndarray</span>
+<span class="sd">        Statistical uncertainty of aerosol backscatter [m^-1 sr^-1].</span>
+<span class="sd">    aerBR : ndarray</span>
+<span class="sd">        Aerosol backscatter ratio.</span>
+<span class="sd">    aerBRStd : ndarray</span>
+<span class="sd">        Statistical uncertainty of aerosol backscatter ratio.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Fernald, F. G.: Analysis of atmospheric lidar observations: some comments,</span>
+<span class="sd">    Appl. Opt., 23, 652-653, 10.1364/AO.23.000652, 1984.</span>
+
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - Temporarily using scipy.ndimage.uniform_filter1d for the smoothing of the RCS instead of</span>
+<span class="sd">      ppcpy.misc.helper.uniform_filter due to some rear but strange issue with propagating</span>
+<span class="sd">      NaN-values in the backwards and forwards retrieval methods. This issue has so far only</span>
+<span class="sd">      been observed at the 355 total NR channel at certain cloud free periods.</span>
+<span class="sd">      ppcpy.misc.helper.uniform_filter is generally preferred over scipy.ndimage.uniform_filter1d</span>
+<span class="sd">      when some few NaN-values at the edges do not cause issues, as should be the case here. </span>
+<span class="sd">      Further investigation into this issue is needed to understand what is causing the NaN-values.</span>
+
+<span class="sd">    .. TODO:: Define m (Unsure if this m addition is needed).</span>
+
+<span class="sd">    **History**</span>
+
+<span class="sd">    - 2021-05-30: First edition by Zhenping.</span>
+<span class="sd">    - 2025-01-03: AI Translation</span>
+<span class="sd">    - 2026-02-04: Changed from scipy.ndimage.uniform_filter1d to ppcpy.misc.helper.uniform_filter</span>
+<span class="sd">    - 2026-02-10: Reverted to using scipy.ndimage.uniform_filter1d due to occational issue with </span>
+<span class="sd">                  propagating NaN-values in the backward and farward retrievals.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Convert units</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">height</span> <span class="o">/</span> <span class="mf">1e3</span>  <span class="c1"># Convert to km</span>
+    <span class="n">molBsc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">molBsc</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e3</span>  <span class="c1"># Convert to km^-1 sr^-1</span>
+    <span class="n">refBeta</span> <span class="o">=</span> <span class="n">refBeta</span> <span class="o">*</span> <span class="mf">1e3</span>  <span class="c1"># Convert to km^-1 sr^-1</span>
+
+    <span class="c1"># Signal noise and initialization</span>
+    <span class="n">totSig</span> <span class="o">=</span> <span class="n">signal</span> <span class="o">+</span> <span class="n">bg</span>
+    <span class="n">totSig</span><span class="p">[</span><span class="n">totSig</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">totSig</span><span class="p">)</span>
+
+    <span class="c1"># Atmospheric molecular radiative parameters</span>
+    <span class="n">LR_mol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">height</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># Reference altitude indices</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">refHInd</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;refH has to be given as base and top&#39;</span>
+    
+    <span class="c1"># Aerosol lidar ratio setup</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">LR_aer</span><span class="p">):</span>
+        <span class="n">LR_aer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">height</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">LR_aer</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">LR_aer</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">LR_aer</span><span class="p">)</span> <span class="o">!=</span> <span class="n">height</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Error in setting LR_aer.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unsupported type for LR_aer.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Range corrected signal (RCS)  # is this correct? should the signal be corrected with range in meters or kilometers?</span>
+    <span class="n">RCS</span> <span class="o">=</span> <span class="n">signal</span> <span class="o">*</span> <span class="n">height</span><span class="o">**</span><span class="mi">2</span>    
+    <span class="c1"># RCS *= (1-0.001764883459848266)</span>
+
+    <span class="c1"># Smoothing signal</span>
+    <span class="c1"># indRefMid = int(np.ceil(np.mean(refHInd)))</span>
+    <span class="n">indRefMid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">refHInd</span><span class="p">)))</span>  <span class="c1"># Changed to round to match matlab implementation more closely | Matlab code: indRefMid = int32(mean(indRefAlt));</span>
+    <span class="c1"># RCS = uniform_filter(RCS, window_size)</span>
+    <span class="n">RCS</span> <span class="o">=</span> <span class="n">uniform_filter1d</span><span class="p">(</span><span class="n">RCS</span><span class="p">,</span> <span class="n">window_size</span><span class="p">)</span>
+    <span class="n">RCS</span><span class="p">[</span><span class="n">indRefMid</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">RCS</span><span class="p">[</span><span class="n">refHInd</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">refHInd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Initialize parameters</span>
+    <span class="n">aerBsc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">height</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="n">aerBsc</span><span class="p">[</span><span class="n">indRefMid</span><span class="p">]</span> <span class="o">=</span> <span class="n">refBeta</span>
+    <span class="n">aerBR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">height</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="n">aerBR</span><span class="p">[</span><span class="n">indRefMid</span><span class="p">]</span> <span class="o">=</span> <span class="n">refBeta</span> <span class="o">/</span> <span class="n">molBsc</span><span class="p">[</span><span class="n">indRefMid</span><span class="p">]</span>
+
+    <span class="c1"># Backward retrieval</span>
+    <span class="k">for</span> <span class="n">iAlt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">indRefMid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="p">((</span><span class="n">LR_aer</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">LR_mol</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">molBsc</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span>
+             <span class="p">(</span><span class="n">LR_aer</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span> <span class="o">-</span> <span class="n">LR_mol</span><span class="p">[</span><span class="n">iAlt</span><span class="p">])</span> <span class="o">*</span> <span class="n">molBsc</span><span class="p">[</span><span class="n">iAlt</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">height</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">height</span><span class="p">[</span><span class="n">iAlt</span><span class="p">])</span>
+        <span class="n">numerator</span> <span class="o">=</span> <span class="n">RCS</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+        <span class="n">denominator1</span> <span class="o">=</span> <span class="n">RCS</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">aerBsc</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">molBsc</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">denominator2</span> <span class="o">=</span> <span class="p">((</span><span class="n">LR_aer</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">RCS</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span>
+                         <span class="n">LR_aer</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span> <span class="o">*</span> <span class="n">numerator</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">height</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">height</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]))</span>
+        <span class="n">aerBsc</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="p">(</span><span class="n">denominator1</span> <span class="o">+</span> <span class="n">denominator2</span><span class="p">)</span> <span class="o">-</span> <span class="n">molBsc</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span>
+        <span class="n">aerBR</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span> <span class="o">=</span> <span class="n">aerBsc</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span> <span class="o">/</span> <span class="n">molBsc</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span>
+
+        <span class="c1"># From Matlab:</span>
+        <span class="c1"># m1 = noise[iAlt + 1] * height[iAlt + 1]**2 / (aerBsc[iAlt + 1] + molBsc[iAlt + 1]) / numerator</span>
+        <span class="c1"># m2 = (LR_aer[iAlt + 1] * noise[iAlt + 1] * height[iAlt + 1]**2 + LR_aer[iAlt] * noise[iAlt] * height[iAlt]**2 * np.exp(A)) * np.abs(height[iAlt + 1] - height[iAlt]) / numerator</span>
+        <span class="c1"># m[iAlt] = m1 + m2</span>
+
+        <span class="c1">#if iAlt &gt; indRefMid - 150:</span>
+        <span class="c1">#    print(f&quot;{iAlt:4d} {A:14.6e} {RCS[iAlt]:14.6e} {numerator:14.6e} {(denominator1 + denominator2):14.6e} {molBsc[iAlt]:14.6e} {aerBsc[iAlt]:14.6e} {aerBR[iAlt]:14.6e}&quot;)</span>
+        <span class="c1">#    print(f&quot;{iAlt:4d} {A:14.6e} {(LR_aer[iAlt + 1] - LR_mol[iAlt + 1]):14.6e} {(LR_aer[iAlt] - LR_mol[iAlt]):14.6e} {(height[iAlt + 1] - height[iAlt]):14.6e}&quot;)</span>
+
+
+    <span class="c1"># Forward retrieval</span>
+    <span class="k">for</span> <span class="n">iAlt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">indRefMid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">height</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="p">((</span><span class="n">LR_aer</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">LR_mol</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">molBsc</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span>
+             <span class="p">(</span><span class="n">LR_aer</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span> <span class="o">-</span> <span class="n">LR_mol</span><span class="p">[</span><span class="n">iAlt</span><span class="p">])</span> <span class="o">*</span> <span class="n">molBsc</span><span class="p">[</span><span class="n">iAlt</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">height</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span> <span class="o">-</span> <span class="n">height</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">numerator</span> <span class="o">=</span> <span class="n">RCS</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">A</span><span class="p">)</span>
+        <span class="n">denominator1</span> <span class="o">=</span> <span class="n">RCS</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">aerBsc</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">molBsc</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">denominator2</span> <span class="o">=</span> <span class="p">((</span><span class="n">LR_aer</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">RCS</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span>
+                         <span class="n">LR_aer</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span> <span class="o">*</span> <span class="n">numerator</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">height</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span> <span class="o">-</span> <span class="n">height</span><span class="p">[</span><span class="n">iAlt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
+        <span class="n">aerBsc</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="p">(</span><span class="n">denominator1</span> <span class="o">-</span> <span class="n">denominator2</span><span class="p">)</span> <span class="o">-</span> <span class="n">molBsc</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span>
+        <span class="n">aerBR</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span> <span class="o">=</span> <span class="n">aerBsc</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span> <span class="o">/</span> <span class="n">molBsc</span><span class="p">[</span><span class="n">iAlt</span><span class="p">]</span>
+
+        <span class="c1"># From Matlab:</span>
+        <span class="c1"># m1 = noise[iAlt - 1] * height[iAlt - 1]**2 / (aerBsc[iAlt - 1] + molBsc[iAlt - 1]) / numerator</span>
+        <span class="c1"># m2 = (LR_aer[iAlt - 1] * noise[iAlt - 1] * height[iAlt - 1]**2 + LR_aer[iAlt] * noise[iAlt] * height[iAlt]**2 * np.exp(-A)) * np.abs(height[iAlt] - height[iAlt - 1]) / numerator</span>
+        <span class="c1"># m[iAlt] = m1 - m2</span>
+
+    <span class="c1"># Convert units back to m^-1 sr^-1</span>
+    <span class="n">aerBsc</span> <span class="o">/=</span> <span class="mf">1e3</span>
+    <span class="n">aerRelBRStd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">noise</span> <span class="o">/</span> <span class="n">signal</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">aerBsc</span> <span class="o">+</span> <span class="n">molBsc</span> <span class="o">/</span> <span class="mf">1e3</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># aerRelBRStd = np.abs((1 + noise / signal) / (1 + m * (aerBsc + molBsc / 1e3)) - 1)    # Matlab version uses m from above to calculate the standard deviation</span>
+    <span class="n">aerBRStd</span> <span class="o">=</span> <span class="n">aerRelBRStd</span> <span class="o">*</span> <span class="n">aerBR</span>
+    <span class="n">aerBscStd</span> <span class="o">=</span> <span class="n">aerRelBRStd</span> <span class="o">*</span> <span class="n">molBsc</span> <span class="o">/</span> <span class="mf">1e3</span> <span class="o">*</span> <span class="n">aerBR</span>
+
+    <span class="c1"># Define output dictionary</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;aerBsc&quot;</span><span class="p">:</span> <span class="n">aerBsc</span><span class="p">,</span> <span class="s2">&quot;aerBscStd&quot;</span><span class="p">:</span> <span class="n">aerBscStd</span><span class="p">,</span> 
+           <span class="s2">&quot;aerBR&quot;</span><span class="p">:</span> <span class="n">aerBR</span><span class="p">,</span> <span class="s2">&quot;aerBRStd&quot;</span><span class="p">:</span> <span class="n">aerBRStd</span><span class="p">}</span>
+    
+    <span class="c1"># Debugging outputs</span>
+    <span class="k">if</span> <span class="n">collect_debug</span><span class="p">:</span>
+        <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;RCS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">RCS</span>
+        <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;signal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">signal</span>
+        <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;molBsc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">molBsc</span>
+        <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;aerBR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aerBR</span>
+    
+    <span class="k">return</span> <span class="n">ret</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026 Andi Klamt, Martin Radenz and Håvard Buholdt.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

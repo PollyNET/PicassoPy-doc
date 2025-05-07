@@ -1,0 +1,34 @@
+..
+  module.rst
+
+ppcpy.misc.plot
+===============
+
+.. automodule:: ppcpy.misc.plot
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    plot_optical_analysis
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

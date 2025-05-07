@@ -1,0 +1,35 @@
+..
+  module.rst
+
+ppcpy.cloudmask.profilesegment
+==============================
+
+.. automodule:: ppcpy.cloudmask.profilesegment
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    clFreeSeg
+                    segment
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

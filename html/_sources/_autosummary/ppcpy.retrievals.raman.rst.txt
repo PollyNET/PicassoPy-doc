@@ -1,0 +1,39 @@
+..
+  module.rst
+
+ppcpy.retrievals.raman
+======================
+
+.. automodule:: ppcpy.retrievals.raman
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    calc_raman_bsc
+                    lidarratio
+                    raman_bsc
+                    raman_ext
+                    run_cldFreeGrps
+                    smoothWin
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

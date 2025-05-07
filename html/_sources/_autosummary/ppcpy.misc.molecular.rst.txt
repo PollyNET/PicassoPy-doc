@@ -1,0 +1,62 @@
+..
+  module.rst
+
+ppcpy.misc.molecular
+====================
+
+.. automodule:: ppcpy.misc.molecular
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    air_refractive_index
+                    alpha_rayleigh
+                    beta_pi_rayleigh
+                    calc_2d
+                    calc_profiles
+                    compressibility_of_moist_air
+                    dsigma_phi_rayleigh
+                    enhancement_factor_f
+                    kings_factor_Ar
+                    kings_factor_CO2
+                    kings_factor_H2O
+                    kings_factor_N2
+                    kings_factor_O2
+                    kings_factor_atmosphere
+                    moist_air_density
+                    molar_fraction_water_vapour
+                    molar_mass_dry_air
+                    n_standard_air
+                    n_standard_air_with_CO2
+                    n_water_vapor
+                    number_density_at_pt
+                    phase_function
+                    physical_constants
+                    pressure_to_rh
+                    rayleigh_scattering
+                    rh_to_pressure
+                    rho_atmosphere
+                    saturation_vapor_pressure
+                    sigma_rayleigh
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

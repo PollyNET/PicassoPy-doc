@@ -1,0 +1,35 @@
+﻿..
+  module.rst
+
+ppcpy.interface
+===============
+
+.. automodule:: ppcpy.interface
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    
+        .. rubric:: Modules
+
+        .. autosummary::
+            :toctree:
+            :template: autosummary/module.rst
+            :recursive:
+            
+                picassoProc
+    
