@@ -1,0 +1,36 @@
+﻿..
+  module.rst
+
+ppcpy.qc.transCor
+=================
+
+.. automodule:: ppcpy.qc.transCor
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    transCorGHK_channel
+                    transCorGHK_cube
+                    transCor_E16_channel
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

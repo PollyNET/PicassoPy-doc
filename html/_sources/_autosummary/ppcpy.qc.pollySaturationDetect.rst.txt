@@ -1,0 +1,34 @@
+..
+  module.rst
+
+ppcpy.qc.pollySaturationDetect
+==============================
+
+.. automodule:: ppcpy.qc.pollySaturationDetect
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    pollySaturationDetect
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

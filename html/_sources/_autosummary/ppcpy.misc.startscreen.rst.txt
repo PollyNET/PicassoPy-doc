@@ -1,0 +1,34 @@
+..
+  module.rst
+
+ppcpy.misc.startscreen
+======================
+
+.. automodule:: ppcpy.misc.startscreen
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    startscreen
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

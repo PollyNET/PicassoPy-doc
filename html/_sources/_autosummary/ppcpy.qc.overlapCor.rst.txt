@@ -1,0 +1,37 @@
+..
+  module.rst
+
+ppcpy.qc.overlapCor
+===================
+
+.. automodule:: ppcpy.qc.overlapCor
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    apply_cube
+                    fixLowest
+                    hFullOLbyGrp
+                    spread
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

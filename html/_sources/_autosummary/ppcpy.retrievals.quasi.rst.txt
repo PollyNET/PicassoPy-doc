@@ -1,0 +1,38 @@
+..
+  module.rst
+
+ppcpy.retrievals.quasi
+======================
+
+.. automodule:: ppcpy.retrievals.quasi
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    detect_liquid_bits
+                    quasi_angstrom
+                    quasi_pdr
+                    target_cat
+                    target_classify
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

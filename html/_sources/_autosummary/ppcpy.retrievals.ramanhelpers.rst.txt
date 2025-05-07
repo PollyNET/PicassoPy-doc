@@ -1,0 +1,39 @@
+﻿..
+  module.rst
+
+ppcpy.retrievals.ramanhelpers
+=============================
+
+.. automodule:: ppcpy.retrievals.ramanhelpers
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    moving_linfit_varied_win
+                    moving_smooth_varied_win
+                    movingslope
+                    movingslope_variedWin
+                    savgol_filter
+                    sigGenWithNoise
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

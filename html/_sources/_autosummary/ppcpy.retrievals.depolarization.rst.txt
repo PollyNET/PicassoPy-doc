@@ -1,0 +1,39 @@
+..
+  module.rst
+
+ppcpy.retrievals.depolarization
+===============================
+
+.. automodule:: ppcpy.retrievals.depolarization
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    calc_pdr
+                    calc_profile_vdr
+                    get_MDR
+                    pardepol_cldFreeGrps
+                    smooth_signal
+                    voldepol_cldFreeGrps
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

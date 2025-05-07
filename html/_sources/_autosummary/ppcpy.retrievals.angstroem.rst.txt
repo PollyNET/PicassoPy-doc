@@ -1,0 +1,36 @@
+..
+  module.rst
+
+ppcpy.retrievals.angstroem
+==========================
+
+.. automodule:: ppcpy.retrievals.angstroem
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    ae_cldFreeGrps
+                    calc_ae
+                    smooth_signal
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    
