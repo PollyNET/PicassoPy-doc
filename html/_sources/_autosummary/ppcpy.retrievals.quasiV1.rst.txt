@@ -1,0 +1,35 @@
+..
+  module.rst
+
+ppcpy.retrievals.quasiV1
+========================
+
+.. automodule:: ppcpy.retrievals.quasiV1
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    quasi_bsc
+                    quasi_retrieval
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

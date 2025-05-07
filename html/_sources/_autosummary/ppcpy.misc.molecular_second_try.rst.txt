@@ -1,0 +1,50 @@
+..
+  module.rst
+
+ppcpy.misc.molecular\_second\_try
+=================================
+
+.. automodule:: ppcpy.misc.molecular_second_try
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    air_refractive_index
+                    beta_pi_cabannes
+                    compressibility_of_moist_air
+                    enhancement_factor_f
+                    moist_air_density
+                    molar_fraction_water_vapor
+                    molar_mass_dry_air
+                    n_standard_air
+                    n_standard_air_with_CO2
+                    n_water_vapor
+                    number_density_at_pt
+                    physical_constants
+                    pressure_to_rh
+                    rayleigh_scattering
+                    rh_to_pressure
+                    saturation_vapor_pressure
+                    sigma_pi_cabannes
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

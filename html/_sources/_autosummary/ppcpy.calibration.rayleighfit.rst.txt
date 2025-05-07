@@ -1,0 +1,40 @@
+..
+  module.rst
+
+ppcpy.calibration.rayleighfit
+=============================
+
+.. automodule:: ppcpy.calibration.rayleighfit
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    DP_algorithm
+                    DouglasPeucker
+                    chi2fit
+                    fit_profile
+                    my_dist
+                    rayleighfit
+                    smooth_signal
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

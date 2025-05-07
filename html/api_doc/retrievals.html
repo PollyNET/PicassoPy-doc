@@ -1,0 +1,1612 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ppcpy.retrievals &#8212; PicassoPy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_doc/retrievals';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="ppcpy.qc" href="qc.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PicassoPy  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="interface.html">ppcpy.interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration.html">ppcpy.calibration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess.html">ppcpy.preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloudmask.html">ppcpy.cloudmask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">ppcpy.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">ppcpy.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qc.html">ppcpy.qc</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ppcpy.retrievals</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api_doc.html" class="nav-link">API Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ppcpy.retrievals</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ppcpy-retrievals">
+<h1>ppcpy.retrievals<a class="headerlink" href="#ppcpy-retrievals" title="Link to this heading">#</a></h1>
+<section id="module-ppcpy.retrievals.collection">
+<span id="ppcpy-retrievals-collection"></span><h2>ppcpy.retrievals.collection<a class="headerlink" href="#module-ppcpy.retrievals.collection" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.collection.calc_snr">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.collection.</span></span><span class="sig-name descname"><span class="pre">calc_snr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/collection.html#calc_snr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.collection.calc_snr" title="Link to this definition">#</a></dt>
+<dd><p>Calculate signal-to-noise ratio (SNR).</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>could have also been in helpers, but that seems more on organizing stuff…
+while this is an calculation, in the matlab version this function is used more than 20 times</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>signal</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>Signal strength.</p>
+</dd>
+<dt><strong>bg</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>Background noise.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>SNR</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>Signal-to-noise ratio. For negative signal values, the SNR is set to 0.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2021-04-21: First edition by Zhenping</p></li>
+<li><p>2024-12-10: Translated with AI, moved to own function</p></li>
+</ul>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p>Heese, B., Flentje, H., Althausen, D., Ansmann, A., and Frey, S.: 
+Ceilometer lidar comparison: backscatter coefficient retrieval and 
+signal-to-noise ratio determination, Atmospheric Measurement Techniques, 
+3, 1763-1770, 2010.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.retrievals.klettfernald">
+<span id="ppcpy-retrievals-klettfernald"></span><h2>ppcpy.retrievals.klettfernald<a class="headerlink" href="#module-ppcpy.retrievals.klettfernald" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.klettfernald.run_cldFreeGrps">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.klettfernald.</span></span><span class="sig-name descname"><span class="pre">run_cldFreeGrps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'TCor'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/retrievals/klettfernald.html#run_cldFreeGrps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.klettfernald.run_cldFreeGrps" title="Link to this definition">#</a></dt>
+<dd><p>Run klett retrieval for each cloud free region.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+<dt><strong>signal</strong><span class="classifier">str, optional</span></dt><dd><p>Name of the signal to be used for the Klett retrievals. Default is ‘TCor’.</p>
+</dd>
+<dt><strong>nr</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, preform Klett retrieval for FR and NR channels. Otherwise only FR channels. Default is False.</p>
+</dd>
+<dt><strong>collect_debug</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, collect debug information. Default is True.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>aerExt</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol extinction coefficient [m^{-1}].</p>
+</dd>
+<dt><strong>aerExtStd</strong><span class="classifier">ndarray</span></dt><dd><p>Uncertainty of aerosol extinction coefficient [m^{-1}].</p>
+</dd>
+<dt><strong>aerBsc</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol backscatter coefficient [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>aerBscStd</strong><span class="classifier">ndarray</span></dt><dd><p>Uncertainty of aerosol backscatter coefficient [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>aerBR</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol backscatter ratio.</p>
+</dd>
+<dt><strong>aerBRStd</strong><span class="classifier">ndarray</span></dt><dd><p>Statistical uncertainty of aerosol backscatter ratio.</p>
+</dd>
+<dt><strong>retrieval</strong><span class="classifier">str</span></dt><dd><p>Name of retrieval type, eg. ‘klett’.</p>
+</dd>
+<dt><strong>signal</strong><span class="classifier">str</span></dt><dd><p>Name of the signal used for the retrievals, eg. ‘TCor’.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>xxxx-xx-xx: TODO: First edition by …</p></li>
+<li><p>2026-02-09: Modified and cleaned by Buholdt</p></li>
+</ul>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Should sigBGCor, sigTCor or RCS be used for the Klett retrievals?</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.klettfernald.fernald">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.klettfernald.</span></span><span class="sig-name descname"><span class="pre">fernald</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LR_aer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refHInd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refBeta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molBsc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ppcpy/retrievals/klettfernald.html#fernald"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.klettfernald.fernald" title="Link to this definition">#</a></dt>
+<dd><p>Retrieve aerosol backscatter coefficient using the Fernald method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>height</strong><span class="classifier">array_like</span></dt><dd><p>Height in meters.</p>
+</dd>
+<dt><strong>signal</strong><span class="classifier">array_like</span></dt><dd><p>Elastic signal without background (Photon Count).</p>
+</dd>
+<dt><strong>bg</strong><span class="classifier">array_like</span></dt><dd><p>Background signal (Photon Count).</p>
+</dd>
+<dt><strong>LR_aer</strong><span class="classifier">float or array_like</span></dt><dd><p>Aerosol lidar ratio [sr].</p>
+</dd>
+<dt><strong>refHInd</strong><span class="classifier">array_like</span></dt><dd><p>Reference height index [start, end].</p>
+</dd>
+<dt><strong>refBeta</strong><span class="classifier">float</span></dt><dd><p>Aerosol backscatter coefficient at the reference region [m^-1 sr^-1].</p>
+</dd>
+<dt><strong>molBsc</strong><span class="classifier">array_like</span></dt><dd><p>Molecular backscatter coefficient [m^-1 sr^-1].</p>
+</dd>
+<dt><strong>window_size</strong><span class="classifier">int, optional</span></dt><dd><p>Bins of the smoothing window for the signal. Default is 40 bins.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>aerBsc</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol backscatter coefficient [m^-1 sr^-1].</p>
+</dd>
+<dt><strong>aerBscStd</strong><span class="classifier">ndarray</span></dt><dd><p>Statistical uncertainty of aerosol backscatter [m^-1 sr^-1].</p>
+</dd>
+<dt><strong>aerBR</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol backscatter ratio.</p>
+</dd>
+<dt><strong>aerBRStd</strong><span class="classifier">ndarray</span></dt><dd><p>Statistical uncertainty of aerosol backscatter ratio.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Temporarily using scipy.ndimage.uniform_filter1d for the smoothing of the RCS instead of
+ppcpy.misc.helper.uniform_filter due to some rear but strange issue with propagating
+NaN-values in the backwards and forwards retrieval methods. This issue has so far only
+been observed at the 355 total NR channel at certain cloud free periods.
+ppcpy.misc.helper.uniform_filter is generally preferred over scipy.ndimage.uniform_filter1d
+when some few NaN-values at the edges do not cause issues, as should be the case here. 
+Further investigation into this issue is needed to understand what is causing the NaN-values.</p></li>
+</ul>
+<div class="admonition-todo admonition" id="id3">
+<p class="admonition-title">Todo</p>
+<p>Define m (Unsure if this m addition is needed).</p>
+</div>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2021-05-30: First edition by Zhenping.</p></li>
+<li><p>2025-01-03: AI Translation</p></li>
+<li><p>2026-02-04: Changed from scipy.ndimage.uniform_filter1d to ppcpy.misc.helper.uniform_filter</p></li>
+<li><dl class="simple">
+<dt>2026-02-10: Reverted to using scipy.ndimage.uniform_filter1d due to occational issue with </dt><dd><p>propagating NaN-values in the backward and farward retrievals.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p class="rubric">References</p>
+<p>Fernald, F. G.: Analysis of atmospheric lidar observations: some comments,
+Appl. Opt., 23, 652-653, 10.1364/AO.23.000652, 1984.</p>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.retrievals.raman">
+<span id="ppcpy-retrievals-raman"></span><h2>ppcpy.retrievals.raman<a class="headerlink" href="#module-ppcpy.retrievals.raman" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.raman.run_cldFreeGrps">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.raman.</span></span><span class="sig-name descname"><span class="pre">run_cldFreeGrps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'TCor'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heightFullOverlap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/retrievals/raman.html#run_cldFreeGrps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.raman.run_cldFreeGrps" title="Link to this definition">#</a></dt>
+<dd><p>Run raman retrieval for each cloud free region.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+<dt><strong>signal</strong><span class="classifier">str, optional</span></dt><dd><p>Name of the signal to be used for the Raman retrievals. Default is ‘TCor’.</p>
+</dd>
+<dt><strong>heightFullOverlap</strong><span class="classifier">list, optional</span></dt><dd><p>List with heights of full overlap per channel per cloud free region. Default is None.</p>
+</dd>
+<dt><strong>nr</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, preform Raman retrieval for FR and NR channels. Otherwise only FR channels. Default is False.</p>
+</dd>
+<dt><strong>collect_debug</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, collect debug information. Default is True.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>aerExt</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol extinction coefficient [m^{-1}].</p>
+</dd>
+<dt><strong>aerExtStd</strong><span class="classifier">ndarray</span></dt><dd><p>Uncertainty of aerosol extinction coefficient [m^{-1}].</p>
+</dd>
+<dt><strong>aerBsc</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol backscatter coefficient [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>aerBscStd</strong><span class="classifier">ndarray</span></dt><dd><p>Uncertainty of aerosol backscatter coefficient [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>LR</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol Lidar ratio [sr].</p>
+</dd>
+<dt><strong>effRes</strong><span class="classifier">ndarray</span></dt><dd><p>Effective resolution of aerosol lidar ratio [m].</p>
+</dd>
+<dt><strong>LRStd</strong><span class="classifier">ndarray</span></dt><dd><p>Uncertainty of aerosol lidar ratio [sr].</p>
+</dd>
+<dt><strong>retrieval</strong><span class="classifier">str</span></dt><dd><p>Name of retrieval type eg. ‘raman’.</p>
+</dd>
+<dt><strong>signal</strong><span class="classifier">str</span></dt><dd><p>Name of the signal used for the retrievals, eg. ‘TCor’.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>xxxx-xx-xx: TODO: First edition by …</p></li>
+<li><p>2026-02-04: Modified and cleaned by Buholdt</p></li>
+<li><p>2026-02-27: Added ext_aer_mod and ext_mol_mod to backscatter calculations.</p></li>
+</ul>
+<div class="admonition-todo admonition" id="id4">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>sigma_angstroem and MC_count are hardcoded. Can this be automated?</p></li>
+<li><p>in raman_ext calulations we use a different hard coded MC_count than the global parameter.</p></li>
+<li><p>Should sigBGCor, sigTCor or RCS be used for the Raman retrievals? RCS dampens the effect form
+the wrong first bin and makes the profile more straight (insted of the s-shape) in the lower bins.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.raman.raman_ext">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.raman.</span></span><span class="sig-name descname"><span class="pre">raman_ext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_emit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_Raman</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha_molecular_elastic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha_molecular_Raman</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_density</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angstrom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'movingslope'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MC_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ppcpy/retrievals/raman.html#raman_ext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.raman.raman_ext" title="Link to this definition">#</a></dt>
+<dd><p>Retrieve the aerosol extinction coefficient with the Raman method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>height</strong><span class="classifier">array_like</span></dt><dd><p>Height [m].</p>
+</dd>
+<dt><strong>sig</strong><span class="classifier">array_like</span></dt><dd><p>Measured Raman signal [Photon Count].</p>
+</dd>
+<dt><strong>lambda_emit</strong><span class="classifier">float</span></dt><dd><p>Wavelength of the emitted laser beam [nm].</p>
+</dd>
+<dt><strong>lambda_Raman</strong><span class="classifier">float</span></dt><dd><p>Wavelength of Raman signal [nm].</p>
+</dd>
+<dt><strong>alpha_molecular_elastic</strong><span class="classifier">array_like</span></dt><dd><p>Molecular scattering coefficient at emitted wavelength [m^{-1} sr^{-1}].</p>
+</dd>
+<dt><strong>alpha_molecular_Raman</strong><span class="classifier">array_like</span></dt><dd><p>Molecular scattering coefficient at Raman wavelength [m^{-1} sr^{-1}].</p>
+</dd>
+<dt><strong>number_density</strong><span class="classifier">array_like</span></dt><dd><p>Molecular number density.</p>
+</dd>
+<dt><strong>angstrom</strong><span class="classifier">float</span></dt><dd><p>Angstrom exponent for aerosol extinction coefficient.</p>
+</dd>
+<dt><strong>window_size</strong><span class="classifier">int</span></dt><dd><p>Window size for smoothing the signal using Savitzky-Golay filter.</p>
+</dd>
+<dt><strong>method</strong><span class="classifier">str, optional</span></dt><dd><p>Method to calculate the slope of the signal. Choices: ‘movingslope’, ‘smoothing’, ‘chi2’. Default is ‘movingslope’.</p>
+</dd>
+<dt><strong>MC_count</strong><span class="classifier">int, optional</span></dt><dd><p>Number of Monte Carlo iterations. Default is 1.</p>
+</dd>
+<dt><strong>bg</strong><span class="classifier">float, optional</span></dt><dd><p>Background signal [Photon Count]. Default is 0.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>ext_aer</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol extinction coefficient [m^-1].</p>
+</dd>
+<dt><strong>ext_error</strong><span class="classifier">ndarray</span></dt><dd><p>Error in aerosol extinction coefficient [m^-1] (only calculated for MC_count &gt; 1).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2021-05-31: First edition by Zhenping</p></li>
+<li><p>2025-01-05: AI supported translation</p></li>
+<li><p>2026-02-04: Cleaned by Buholdt</p></li>
+</ul>
+<div class="admonition-todo admonition" id="id5">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>moving_smooth_varied_win function is not yet implemented.</p></li>
+<li><p>moving_linfit_varied_win function is not yet implemented.</p></li>
+<li><p>Investigate what smothing function is used, Savitzky-Golay or something else?</p></li>
+</ul>
+</div>
+<p class="rubric">References</p>
+<p>Ansmann, A. et al. Independent measurement of extinction and backscatter profiles
+in cirrus clouds by using a combined Raman elastic-backscatter lidar.
+Applied Optics Vol. 31, Issue 33, pp. 7113-7131 (1992).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.raman.raman_bsc">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.raman.</span></span><span class="sig-name descname"><span class="pre">raman_bsc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigElastic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigVRN2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_aer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angstroem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_mol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_mol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_mol_raman</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_mol_raman</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HRefInd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betaRef</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">el_lambda</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inel_lambda</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_aer_el_raman</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_mol_el_raman</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flagSmoothBefore</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgElastic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgVRN2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_ext_aer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_angstroem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MC_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'monte-carlo'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ppcpy/retrievals/raman.html#raman_bsc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.raman.raman_bsc" title="Link to this definition">#</a></dt>
+<dd><p>Calculate aerosol backscatter coefficient and its uncertainty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>height</strong><span class="classifier">ndarray</span></dt><dd><p>Height [m].</p>
+</dd>
+<dt><strong>sigElastic</strong><span class="classifier">ndarray</span></dt><dd><p>Elastic signal [photon count].</p>
+</dd>
+<dt><strong>sigVRN2</strong><span class="classifier">ndarray</span></dt><dd><p>N2 vibration rotational Raman signal [photon count].</p>
+</dd>
+<dt><strong>ext_aer</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol extinction coefficient for elastic wavelength [m^{-1}].</p>
+</dd>
+<dt><strong>angstroem</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol Angstrom exponent.</p>
+</dd>
+<dt><strong>ext_mol</strong><span class="classifier">ndarray</span></dt><dd><p>Molecular extinction coefficient for elastic wavelength [m^{-1}].</p>
+</dd>
+<dt><strong>beta_mol</strong><span class="classifier">ndarray</span></dt><dd><p>Molecular backscatter coefficient for elastic wavelength [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>ext_mol_raman</strong><span class="classifier">ndarray</span></dt><dd><p>Molecular extinction coefficient for inelastic Raman wavelength [m^{-1}].</p>
+</dd>
+<dt><strong>beta_mol_raman :ndarray</strong></dt><dd><p>Molecular backscatter coefficient for inelastic Raman wavelength [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>HRefInd</strong><span class="classifier">list or tuple</span></dt><dd><p>Reference region indices of height array [start, end].</p>
+</dd>
+<dt><strong>betaRef</strong><span class="classifier">float</span></dt><dd><p>Aerosol backscatter coefficient for elastic wavelength at the reference region [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>el_lambda</strong><span class="classifier">float</span></dt><dd><p>Elastic wavelength [nm].</p>
+</dd>
+<dt><strong>inel_lambda</strong><span class="classifier">float</span></dt><dd><p>Inelastic wavelength [nm].</p>
+</dd>
+<dt><strong>ext_aer_el_raman</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Aerosol extinction coefficient for elastic wavelength that initializes the Raman retrieval [m^{-1}]. Default is None.</p>
+</dd>
+<dt><strong>ext_mol_el_raman</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Molecular extinction coefficient for elastic wavelength that initializes the Raman retrieval [m^{-1}]. Default is None.</p>
+</dd>
+<dt><strong>window_size</strong><span class="classifier">int, optional</span></dt><dd><p>Number of smoothing bins to be used. Default is 40.</p>
+</dd>
+<dt><strong>flagSmoothBefore</strong><span class="classifier">bool, optional</span></dt><dd><p>Flag to control the smoothing order. Default is True.</p>
+</dd>
+<dt><strong>bgElastic</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Background of elastic signal [photon count].</p>
+</dd>
+<dt><strong>bgVRN2</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Background of N2 vibration rotational signal [photon count].</p>
+</dd>
+<dt><strong>sigma_ext_aer</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Uncertainty of aerosol extinction coefficient for elastic wavelength [m^{-1}].</p>
+</dd>
+<dt><strong>sigma_angstroem</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Uncertainty of Angstrom exponent.</p>
+</dd>
+<dt><strong>MC_count</strong><span class="classifier">int or list, optional</span></dt><dd><p>Samples for each error source. Default is 3.</p>
+</dd>
+<dt><strong>method</strong><span class="classifier">str, optional</span></dt><dd><p>Computational method (‘monte-carlo’ or ‘analytical’). Default is ‘monte-carlo’.</p>
+</dd>
+<dt><strong>collect_debug</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, collectes debug information. Default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>beta_aer</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol backscatter coefficient [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>aerBscStd</strong><span class="classifier">ndarray</span></dt><dd><p>Uncertainty of aerosol backscatter coefficient [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>LR</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol Lidar ratio [sr].</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>xxxx-xx-xx: First edition by …</p></li>
+<li><p>2026-02-04: Cleaned by Buholdt.</p></li>
+<li><p>2026-02-27: Added ext_aer_mod and ext_mol_mod for better consistancy with the 1064nm channel.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.raman.calc_raman_bsc">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.raman.</span></span><span class="sig-name descname"><span class="pre">calc_raman_bsc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigElastic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigVRN2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_aer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angstroem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_mol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_mol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_mol_raman</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_mol_raman</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HRefInd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betaRef</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">el_lambda</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inel_lambda</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_mol_el_raman</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_aer_el_raman</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flagSmoothBefore</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ppcpy/retrievals/raman.html#calc_raman_bsc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.raman.calc_raman_bsc" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the aerosol backscatter coefficient with the Raman method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>height</strong><span class="classifier">array</span></dt><dd><p>Height [m].</p>
+</dd>
+<dt><strong>sigElastic</strong><span class="classifier">array</span></dt><dd><p>Elastic signal [photon count].</p>
+</dd>
+<dt><strong>sigVRN2</strong><span class="classifier">array</span></dt><dd><p>N2 vibration rotational Raman signal [photon count].</p>
+</dd>
+<dt><strong>ext_aer</strong><span class="classifier">array</span></dt><dd><p>Aerosol extinction coefficient for elastic wavelength [m^{-1}].</p>
+</dd>
+<dt><strong>angstroem</strong><span class="classifier">array</span></dt><dd><p>Aerosol Angstrom exponent.</p>
+</dd>
+<dt><strong>ext_mol</strong><span class="classifier">array</span></dt><dd><p>Molecular extinction coefficient for elastic wavelength [m^{-1}].</p>
+</dd>
+<dt><strong>beta_mol</strong><span class="classifier">array</span></dt><dd><p>Molecular backscatter coefficient for elastic wavelength [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>ext_mol_raman</strong><span class="classifier">array</span></dt><dd><p>Molecular extinction coefficient for inelastic Raman wavelength [m^{-1}].</p>
+</dd>
+<dt><strong>beta_mol_raman</strong><span class="classifier">array</span></dt><dd><p>Molecular backscatter coefficient for inelastic Raman wavelength [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>HRefInd</strong><span class="classifier">list</span></dt><dd><p>Reference region indices of height array [start, end].</p>
+</dd>
+<dt><strong>betaRef</strong><span class="classifier">float</span></dt><dd><p>Aerosol backscatter coefficient for elastic wavelength at the reference region [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>el_lambda</strong><span class="classifier">float</span></dt><dd><p>Elastic wavelength [nm].</p>
+</dd>
+<dt><strong>inel_lambda</strong><span class="classifier">float</span></dt><dd><p>Inelastic Raman wavelength [nm].</p>
+</dd>
+<dt><strong>ext_aer_el_raman</strong><span class="classifier">array, optional</span></dt><dd><p>Aerosol extinction coefficient for elastic wavelength that initializes the Raman retrieval [m^{-1}]. Default is None.</p>
+</dd>
+<dt><strong>ext_mol_el_raman</strong><span class="classifier">array, optional</span></dt><dd><p>Molecular extinction coefficient for elastic wavelength that initializes the Raman retrieval [m^{-1}]. Default is None.</p>
+</dd>
+<dt><strong>window_size</strong><span class="classifier">int, optional</span></dt><dd><p>Number of smoothing bins to be used. Default is 40.</p>
+</dd>
+<dt><strong>flagSmoothBefore</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to smooth the signal before or after calculating the signal ratio. Default is True.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>beta_aer</strong><span class="classifier">array</span></dt><dd><p>Aerosol backscatter coefficient [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>LR</strong><span class="classifier">array</span></dt><dd><p>Aerosol lidar ratio [sr].</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id6">
+<p class="admonition-title">Todo</p>
+<p>Angstroem is an float in beta_aer calculations and an array of shape (1, ) in beta_aer_std claculations.</p>
+</div>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2018-01-02: First edition by Zhenping.</p></li>
+<li><p>2018-07-24: Added ext_mol_factor and ext_aer_factor for wavelength of 1064nm.</p></li>
+<li><p>2018-09-04: Changed smoothing order for signal ridge stability.</p></li>
+<li><p>2024-11-12: Modified by HB for consistency in 2024.</p></li>
+<li><p>2026-02-04: Cleaned by Buholdt</p></li>
+<li><p>2026-02-27: Added ext_aer_el_raman and ext_mol_el_raman for better consistancy with the 1064nm channel.</p></li>
+</ul>
+<p class="rubric">References</p>
+<p>Ansmann, A., et al. (1992). “Independent measurement of extinction and backscatter profiles in cirrus clouds by using a combined Raman elastic-backscatter lidar.” Applied optics 31(33): 7113-7131.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.raman.lidarratio">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.raman.</span></span><span class="sig-name descname"><span class="pre">lidarratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aerExt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aerBsc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hRes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">7.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aerExtStd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aerBscStd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothWinExt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothWinBsc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ppcpy/retrievals/raman.html#lidarratio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.raman.lidarratio" title="Link to this definition">#</a></dt>
+<dd><p>Calculate aerosol lidar ratio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>aerExt</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol extinction coefficient [m^{-1}].</p>
+</dd>
+<dt><strong>aerBsc</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol backscatter coefficient [m^{-1}sr^{-1}].</p>
+</dd>
+<dt><strong>hRes</strong><span class="classifier">float, optional</span></dt><dd><p>Vertical resolution of each height bin [m]. Default is 7.5.</p>
+</dd>
+<dt><strong>aerExtStd</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Uncertainty of aerosol extinction coefficient [m^{-1}].</p>
+</dd>
+<dt><strong>aerBscStd</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Uncertainty of aerosol backscatter coefficient [m^{-1}sr^{-1}].</p>
+</dd>
+<dt><strong>smoothWinExt</strong><span class="classifier">int, optional</span></dt><dd><p>Applied smooth window length for calculating aerosol extinction coefficient. Default is 1.</p>
+</dd>
+<dt><strong>smoothWinBsc</strong><span class="classifier">int, optional</span></dt><dd><p>Applied smooth window length for calculating aerosol backscatter coefficient. Default is 1.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>aerLR</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol lidar ratio [sr].</p>
+</dd>
+<dt><strong>effRes</strong><span class="classifier">float</span></dt><dd><p>Effective resolution of lidar ratio [m].</p>
+</dd>
+<dt><strong>aerLRStd</strong><span class="classifier">ndarray</span></dt><dd><p>Uncertainty of aerosol lidar ratio [sr].</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Though savgol_filter with mode ‘interp’ do not apply padding on the edges while
+smoothing it does preform an interpolation to add in the edges removed by
+the smoothing/convolution operation.</p>
+<p><strong>History</strong></p>
+<p>2021-07-20: First edition by Zhenping (translated to Python)
+2026-02-04: Changed from scipy.signal.savgol_filter to ppcpy.retrievals.ramanhelpers.savgol_filter</p>
+<p class="rubric">References</p>
+<p>Mattis, I., D’Amico, G., Baars, H., Amodeo, A., Madonna, F., and Iarlori, M.: 
+EARLINET Single Calculus Chain–technical–Part 2: Calculation of optical products, 
+Atmospheric Measurement Techniques, 9, 3009-3029, 2016.</p>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.retrievals.ramanhelpers">
+<span id="ppcpy-retrievals-ramanhelpers"></span><h2>ppcpy.retrievals.ramanhelpers<a class="headerlink" href="#module-ppcpy.retrievals.ramanhelpers" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.ramanhelpers.movingslope_variedWin">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.ramanhelpers.</span></span><span class="sig-name descname"><span class="pre">movingslope_variedWin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">winWidth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/retrievals/ramanhelpers.html#movingslope_variedWin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.ramanhelpers.movingslope_variedWin" title="Link to this definition">#</a></dt>
+<dd><p>calculates the slope of the signal with a moving slope.
+This is a wrapper for the <cite>movingslope</cite> function to make it compatible with
+height-independent smoothing windows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>signal</strong><span class="classifier">array_like</span></dt><dd><p>Signal for each bin.</p>
+</dd>
+<dt><strong>winWidth</strong><span class="classifier">int or ndarray</span></dt><dd><p>If winWidth is an integer, the width of the window will be fixed.
+If winWidth is a k x 3 matrix, the width of the window will vary with
+height, like [[1, 20, 3], [18, 30, 5], [25, 40, 7]], which means:
+- The width will be 3 between indices 1 and 20,
+- 5 between indices 18 and 30,
+- and 7 between indices 25 and 40.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>slope</strong><span class="classifier">ndarray</span></dt><dd><p>Slope at each bin.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2018-08-03: First edition by Zhenping.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.ramanhelpers.moving_smooth_varied_win">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.ramanhelpers.</span></span><span class="sig-name descname"><span class="pre">moving_smooth_varied_win</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">winWidth</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/ramanhelpers.html#moving_smooth_varied_win"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.ramanhelpers.moving_smooth_varied_win" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.ramanhelpers.moving_linfit_varied_win">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.ramanhelpers.</span></span><span class="sig-name descname"><span class="pre">moving_linfit_varied_win</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">winWidth</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/ramanhelpers.html#moving_linfit_varied_win"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.ramanhelpers.moving_linfit_varied_win" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.ramanhelpers.movingslope">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.ramanhelpers.</span></span><span class="sig-name descname"><span class="pre">movingslope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">supportlength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modelorder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/retrievals/ramanhelpers.html#movingslope"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.ramanhelpers.movingslope" title="Link to this definition">#</a></dt>
+<dd><p>estimates the local slope of a sequence of points using a sliding window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>vec</strong><span class="classifier">array_like</span></dt><dd><p>Row or column vector to be differentiated. Must have at least 2 elements.</p>
+</dd>
+<dt><strong>supportlength</strong><span class="classifier">int, optional</span></dt><dd><p>Number of points used for the moving window. Default is 3.</p>
+</dd>
+<dt><strong>modelorder</strong><span class="classifier">int, optional</span></dt><dd><p>Defines the order of the windowed model used to estimate the slope.
+Default is 1 (linear model).</p>
+</dd>
+<dt><strong>dt</strong><span class="classifier">float, optional</span></dt><dd><p>Spacing for sequences that do not have unit spacing. Default is 1.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>Dvec</strong><span class="classifier">ndarray</span></dt><dd><p>Derivative estimates, same size and shape as <cite>vec</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>Original MATLAB implementation by John D’Errico (<a class="reference external" href="mailto:woodchips&#37;&#52;&#48;rochester&#46;rr&#46;com">woodchips<span>&#64;</span>rochester<span>&#46;</span>rr<span>&#46;</span>com</a>)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.ramanhelpers.sigGenWithNoise">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.ramanhelpers.</span></span><span class="sig-name descname"><span class="pre">sigGenWithNoise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nProfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'norm'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/retrievals/ramanhelpers.html#sigGenWithNoise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.ramanhelpers.sigGenWithNoise" title="Link to this definition">#</a></dt>
+<dd><p>SIGGENWITHNOISE generate noise-containing signal with a certain noise-adding algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>signal</strong><span class="classifier">array</span></dt><dd><p>Signal strength.</p>
+</dd>
+<dt><strong>noise</strong><span class="classifier">array, optional</span></dt><dd><p>Noise. Unit should be the same as signal. Default is sqrt(signal).</p>
+</dd>
+<dt><strong>nProfile</strong><span class="classifier">int, optional</span></dt><dd><p>Number of signal profiles to generate. Default is 1.</p>
+</dd>
+<dt><strong>method</strong><span class="classifier">str, optional</span></dt><dd><p>‘norm’: Normally distributed noise -&gt; signalGen = signal + norm * noise.
+‘poisson’: Poisson distributed noise -&gt; signalGen = poisson(signal, nProfile).
+Default is ‘norm’.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>signalGen</strong><span class="classifier">array</span></dt><dd><p>Noise-containing signal. Shape is (len(signal), nProfile).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2021-06-13: First edition by Zhenping.</p></li>
+<li><p>2026-02-04: Modifications to reduce computational time, Buholdt</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.retrievals.depolarization">
+<span id="ppcpy-retrievals-depolarization"></span><h2>ppcpy.retrievals.depolarization<a class="headerlink" href="#module-ppcpy.retrievals.depolarization" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.depolarization.smooth_signal">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.depolarization.</span></span><span class="sig-name descname"><span class="pre">smooth_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/retrievals/depolarization.html#smooth_signal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.depolarization.smooth_signal" title="Link to this definition">#</a></dt>
+<dd><p>Uniformly smooth the input signal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>singal</strong><span class="classifier">ndarray</span></dt><dd><p>Signal to be smooth</p>
+</dd>
+<dt><strong>window_len</strong><span class="classifier">int</span></dt><dd><p>Width of the applied uniform filter</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>ndarray</dt><dd><p>Smoothed signal</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2026-02-04: Changed from scipy.ndimage.uniform_filter1d to ppcpy.misc.helper.uniform_filter</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.depolarization.voldepol_cldFreeGrps">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.depolarization.</span></span><span class="sig-name descname"><span class="pre">voldepol_cldFreeGrps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ret_prof_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/depolarization.html#voldepol_cldFreeGrps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.depolarization.voldepol_cldFreeGrps" title="Link to this definition">#</a></dt>
+<dd><div class="admonition-todo admonition" id="id7">
+<p class="admonition-title">Todo</p>
+<p>Should the GHK-Transmission corrected (TCor) or the Background corrected (BGCor)
+signal be used for calculating the volume depolarisation ratio?</p>
+</div>
+<p>With the GHK formula the BGCor signal has to be used (in the current implementation, the voldepol is even 
+needed to perform the polarization-transmission-correction</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.depolarization.calc_profile_vdr">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.depolarization.</span></span><span class="sig-name descname"><span class="pre">calc_profile_vdr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Gt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Gr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ht</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Hr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voldepol_error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag_smooth_before</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/depolarization.html#calc_profile_vdr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.depolarization.calc_profile_vdr" title="Link to this definition">#</a></dt>
+<dd><p>Calculate volume depolarization ratio using GHK parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sigt</strong><span class="classifier">ndarray</span></dt><dd><p>Signal strength of the total channel [photon count].</p>
+</dd>
+<dt><strong>sigc</strong><span class="classifier">ndarray</span></dt><dd><p>Signal strength of the cross channel [photon count].</p>
+</dd>
+<dt><strong>Gt</strong><span class="classifier">float</span></dt><dd><p>G parameter in the total channel.</p>
+</dd>
+<dt><strong>Gc</strong><span class="classifier">float</span></dt><dd><p>G parameter in the cross channel.</p>
+</dd>
+<dt><strong>Ht</strong><span class="classifier">float</span></dt><dd><p>H parameter in the total channel.</p>
+</dd>
+<dt><strong>Hc</strong><span class="classifier">float</span></dt><dd><p>H parameter in the cross channel.</p>
+</dd>
+<dt><strong>eta</strong><span class="classifier">float</span></dt><dd><p>Depolarization calibration constant.</p>
+</dd>
+<dt><strong>voldepol_error</strong><span class="classifier">float</span></dt><dd><p>Systematic uncertainty coefficient (constant term).
+Systematic uncertainty coefficient (linear term).
+Systematic uncertainty coefficient (quadratic term).</p>
+</dd>
+<dt><strong>smooth_window</strong><span class="classifier">int, optional</span></dt><dd><p>The width of the sliding smoothing window for the signal. Default is 1.</p>
+</dd>
+<dt><strong>flag_smooth_before</strong><span class="classifier">bool, optional</span></dt><dd><p>Flag to control whether smoothing is applied before or after the signal ratio. Default is True.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>vol_depol</strong><span class="classifier">ndarray</span></dt><dd><p>Volume depolarization ratio.</p>
+</dd>
+<dt><strong>vol_depol_std</strong><span class="classifier">ndarray</span></dt><dd><p>Uncertainty of the volume depolarization ratio.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2018-09-02: First edition by Zhenping</p></li>
+<li><p>2018-09-04: Change the smoothing order. Smoothing the signal ratio instead of smoothing the signal.</p></li>
+<li><p>2019-05-24: Add ‘flag_smooth_before’ to control the smoothing order.</p></li>
+<li><p>2024-08-13: MH: Change calculation to GHK parameters and eta as depolarization constant.</p></li>
+</ul>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p>Engelmann, R. et al. The automated multiwavelength Raman polarization and water-vapor lidar Polly XT: 
+the neXT generation. Atmospheric Measurement Techniques 9, 1767-1784 (2016).</p></li>
+<li><p>Freudenthaler, V. et al. Depolarization ratio profiling at several wavelengths in pure Saharan dust 
+during SAMUM 2006. Tellus B 61, 165-179 (2009).</p></li>
+<li><p>Freudenthaler, V. About the effects of polarising optics on lidar signals and the Delta90 calibration. 
+Atmos. Meas. Tech., 9, 4181–4255 (2016).</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.depolarization.get_MDR">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.depolarization.</span></span><span class="sig-name descname"><span class="pre">get_MDR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vdr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vdrStd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refHInd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/depolarization.html#get_MDR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.depolarization.get_MDR" title="Link to this definition">#</a></dt>
+<dd><p>get the vdr at reference height</p>
+<p>in the matlab pollynet processing chain this is done by recalculating vdr for the
+reference height chunk 
+(Pollynet_Processing_Chain/lib/calibration/pollyMDRGHK.m)</p>
+<p>Assuming that it is more efficient to use the precalculated vdr</p>
+<p>The snr criterion is missing for this very first version</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.depolarization.pardepol_cldFreeGrps">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.depolarization.</span></span><span class="sig-name descname"><span class="pre">pardepol_cldFreeGrps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ret_prof_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/depolarization.html#pardepol_cldFreeGrps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.depolarization.pardepol_cldFreeGrps" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.depolarization.calc_pdr">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.depolarization.</span></span><span class="sig-name descname"><span class="pre">calc_pdr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vol_depol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vol_depol_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aer_bsc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aer_bsc_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_bsc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_depol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_depol_std</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/depolarization.html#calc_pdr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.depolarization.calc_pdr" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the particle depolarization ratio and estimate its standard deviation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>vol_depol</strong><span class="classifier">ndarray</span></dt><dd><p>Volume depolarization ratio.</p>
+</dd>
+<dt><strong>vol_depol_std</strong><span class="classifier">ndarray</span></dt><dd><p>Standard deviation of volume depolarization ratio.</p>
+</dd>
+<dt><strong>aer_bsc</strong><span class="classifier">ndarray</span></dt><dd><p>Aerosol backscatter coefficient [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>aer_bsc_std</strong><span class="classifier">ndarray</span></dt><dd><p>Standard deviation of aerosol backscatter coefficient [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>mol_bsc</strong><span class="classifier">ndarray</span></dt><dd><p>Molecule backscatter coefficient [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>mol_depol</strong><span class="classifier">float</span></dt><dd><p>Molecule depolarization ratio, dependent on central wavelength and IF bandwidth.</p>
+</dd>
+<dt><strong>mol_depol_std</strong><span class="classifier">float</span></dt><dd><p>Standard deviation of molecule depolarization ratio.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>par_depol</strong><span class="classifier">ndarray</span></dt><dd><p>Particle depolarization ratio.</p>
+</dd>
+<dt><strong>par_depol_std</strong><span class="classifier">ndarray</span></dt><dd><p>Standard deviation of particle depolarization ratio.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2021-05-31: First edition by Zhenping</p></li>
+<li><p>2025-02-27: Translation to python</p></li>
+</ul>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p>Freudenthaler, V., et al., Depolarization ratio profiling at several wavelengths in pure Saharan dust during SAMUM 2006,  Tellus B, 61, 165-179, 2009.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.retrievals.angstroem">
+<span id="ppcpy-retrievals-angstroem"></span><h2>ppcpy.retrievals.angstroem<a class="headerlink" href="#module-ppcpy.retrievals.angstroem" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.angstroem.smooth_signal">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.angstroem.</span></span><span class="sig-name descname"><span class="pre">smooth_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/retrievals/angstroem.html#smooth_signal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.angstroem.smooth_signal" title="Link to this definition">#</a></dt>
+<dd><p>Uniformly smooth the input signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>singal</strong><span class="classifier">ndarray</span></dt><dd><p>Signal to be smooth.</p>
+</dd>
+<dt><strong>window_len</strong><span class="classifier">int</span></dt><dd><p>Width of the applied uniform filter.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>ndarray</dt><dd><p>Smoothed signal.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2026-02-04: Changed from scipy.ndimage.uniform_filter1d to ppcpy.misc.helper.uniform_filter.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.angstroem.ae_cldFreeGrps">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.angstroem.</span></span><span class="sig-name descname"><span class="pre">ae_cldFreeGrps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ret_prof_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/retrievals/angstroem.html#ae_cldFreeGrps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.angstroem.ae_cldFreeGrps" title="Link to this definition">#</a></dt>
+<dd><p>Run Angstroem retrieval for each cloud free region.</p>
+<p>Convention for now to store the AE in the channel of the lower of the two wavelengths</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+<dt><strong>ret_prof_name</strong><span class="classifier">str</span></dt><dd><p>Name of optical retrieval profile.</p>
+</dd>
+<dt><strong>collect_debug</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, collects debug information. Default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>angexp</strong><span class="classifier">array</span></dt><dd><p>Ångström exponent based on param1 and param2.</p>
+</dd>
+<dt><strong>angexpStd</strong><span class="classifier">array</span></dt><dd><p>Uncertainty of Ångström exponent.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>xxxx-xx-xx: TODO: First edition by …</p></li>
+<li><dl class="simple">
+<dt>2026-02-20: Smoothing window changes. Now determines the smoothing window based on</dt><dd><p>the higher of the two wavelengths, and discriminates between FR and NR.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.angstroem.calc_ae">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.angstroem.</span></span><span class="sig-name descname"><span class="pre">calc_ae</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param1_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param2_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smooth_window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">17</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/retrievals/angstroem.html#calc_ae"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.angstroem.calc_ae" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the Ångström exponent and its uncertainty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>param1</strong><span class="classifier">array</span></dt><dd><p>Extinction or backscatter coefficient at wavelength1.</p>
+</dd>
+<dt><strong>param1_std</strong><span class="classifier">array</span></dt><dd><p>Uncertainty of param1.</p>
+</dd>
+<dt><strong>param2</strong><span class="classifier">array</span></dt><dd><p>Extinction or backscatter coefficient at wavelength2.</p>
+</dd>
+<dt><strong>param2_std</strong><span class="classifier">array</span></dt><dd><p>Uncertainty of param2.</p>
+</dd>
+<dt><strong>wavelength1</strong><span class="classifier">float</span></dt><dd><p>The wavelength for the input parameter 1 [nm].</p>
+</dd>
+<dt><strong>wavelength2</strong><span class="classifier">float</span></dt><dd><p>The wavelength for the input parameter 2 [nm].</p>
+</dd>
+<dt><strong>smooth_window</strong><span class="classifier">int, optional</span></dt><dd><p>The width of the smoothing window. Default is 17.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>angexp</strong><span class="classifier">array</span></dt><dd><p>Ångström exponent based on param1 and param2.</p>
+</dd>
+<dt><strong>angexpStd</strong><span class="classifier">array</span></dt><dd><p>Uncertainty of Ångström exponent.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Should the ratio be smoothed or not?? If we do not smooth the ratio then why are we
+considering the smoothing window in the error calculations??</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2021-05-31: first edition by Zhenping</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<p>angexp, angexpStd = pollyAE(param1, param1_std, param2, param2_std, wavelength1, wavelength2)</p>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.retrievals.highres">
+<span id="ppcpy-retrievals-highres"></span><h2>ppcpy.retrievals.highres<a class="headerlink" href="#module-ppcpy.retrievals.highres" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.highres.attbsc_2d">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.highres.</span></span><span class="sig-name descname"><span class="pre">attbsc_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/highres.html#attbsc_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.highres.attbsc_2d" title="Link to this definition">#</a></dt>
+<dd><p>Attenuated Backscatter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+<dt><strong>nr</strong><span class="classifier">bool, optional</span></dt><dd><p>If Ture, calculate the attbsc for FR and NR channels. Default is True.</p>
+</dd>
+<dt><strong>collect_debug</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, collects debug information. Default is False.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.highres.voldepol_2d">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.highres.</span></span><span class="sig-name descname"><span class="pre">voldepol_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/highres.html#voldepol_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.highres.voldepol_2d" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the volume depolarisation ratio</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.retrievals.quasi">
+<span id="ppcpy-retrievals-quasi"></span><h2>ppcpy.retrievals.quasi<a class="headerlink" href="#module-ppcpy.retrievals.quasi" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.quasi.quasi_pdr">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.quasi.</span></span><span class="sig-name descname"><span class="pre">quasi_pdr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wvs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[532]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V1'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/quasi.html#quasi_pdr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.quasi.quasi_pdr" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.quasi.quasi_angstrom">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.quasi.</span></span><span class="sig-name descname"><span class="pre">quasi_angstrom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V1'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/quasi.html#quasi_angstrom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.quasi.quasi_angstrom" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.quasi.target_cat">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.quasi.</span></span><span class="sig-name descname"><span class="pre">target_cat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V1'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/quasi.html#target_cat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.quasi.target_cat" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.quasi.target_classify">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.quasi.</span></span><span class="sig-name descname"><span class="pre">target_classify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attBeta532</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quasiBsc1064</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quasiBsc532</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quasiPDR532</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">VDR532</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quasiAE</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/quasi.html#target_classify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.quasi.target_classify" title="Link to this definition">#</a></dt>
+<dd><p>aerosol/cloud target classification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>height (ndarray): Height array (m).</strong></dt><dd></dd>
+<dt><strong>attBeta532 (ndarray): Attenuated backscatter at 532 nm.</strong></dt><dd></dd>
+<dt><strong>quasiBsc1064 (ndarray): Quasi particle backscatter at 1064 nm. (m^{-1}sr^{-1})</strong></dt><dd></dd>
+<dt><strong>quasiBsc532 (ndarray): Quasi particle backscatter at 532 nm. (m^{-1}sr^{-1})</strong></dt><dd></dd>
+<dt><strong>quasiPDR532 (ndarray): Quasi particle depolarization ratio at 532 nm.</strong></dt><dd></dd>
+<dt><strong>VDR532 (ndarray): Volume depolarization ratio at 532 nm.</strong></dt><dd></dd>
+<dt><strong>quasiAE (ndarray): Quasi Ångström exponents.</strong></dt><dd></dd>
+<dt><strong>clearThresBsc1064 (float): Default 1e-8.</strong></dt><dd></dd>
+<dt><strong>turbidThresBsc1064 (float): Default 2e-7.</strong></dt><dd></dd>
+<dt><strong>turbidThresBsc532 (float): Default 2e-7.</strong></dt><dd></dd>
+<dt><strong>dropletThresPDR (float): Default 0.05.</strong></dt><dd></dd>
+<dt><strong>spheriodThresPDR (float): Default 0.07.</strong></dt><dd></dd>
+<dt><strong>unspheroidThresPDR (float): Default 0.2.</strong></dt><dd></dd>
+<dt><strong>iceThresVDR (float): Default 0.3.</strong></dt><dd></dd>
+<dt><strong>iceThresPDR (float): Default 0.35.</strong></dt><dd></dd>
+<dt><strong>largeThresAE (float): Default 0.75.</strong></dt><dd></dd>
+<dt><strong>smallThresAE (float): Default 0.5.</strong></dt><dd></dd>
+<dt><strong>cloudThresBsc1064 (float): Default 2e-5.</strong></dt><dd></dd>
+<dt><strong>minAttnRatioBsc1064 (float): Default 10.</strong></dt><dd></dd>
+<dt><strong>searchCloudAbove (float): Default 300.</strong></dt><dd></dd>
+<dt><strong>searchCloudBelow (float): Default 100.</strong></dt><dd></dd>
+<dt><strong>hFullOL (float): Default 600.</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>ndarray: Classification mask.</dt><dd><p>0: No signal
+1: Clean atmosphere
+2: Non-typed particles/low conc.
+3: Aerosol: small
+4: Aerosol: large, spherical
+5: Aerosol: mixture, partly non-spherical
+6: Aerosol: large, non-spherical
+7: Cloud: non-typed
+8: Cloud: water droplets
+9: Cloud: likely water droplets
+10: Cloud: ice crystals
+11: Cloud: likely ice crystal</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2021-06-05: First edition by Zhenping</p></li>
+<li><p>2025-03-25: AI based translation to python</p></li>
+</ul>
+<p class="rubric">References</p>
+<p>Baars, H. et al. 2017 doi:10.5194/amt-10-3175-2017</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.quasi.detect_liquid_bits">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.quasi.</span></span><span class="sig-name descname"><span class="pre">detect_liquid_bits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bsc1064</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloudThresBsc1064</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minAttnRatioBsc1064</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">searchCloudAbove</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">searchCloudBelow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/quasi.html#detect_liquid_bits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.quasi.detect_liquid_bits" title="Link to this definition">#</a></dt>
+<dd><p>detect liquid cloud bits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>height (ndarray): Height array (m).</strong></dt><dd></dd>
+<dt><strong>bsc1064 (ndarray): Particle backscatter at 1064 nm (height x time).</strong></dt><dd></dd>
+<dt><strong>cloudThresBsc1064 (float, optional): Threshold of cloud backscatter at 1064 nm. Default is 2e-5.</strong></dt><dd></dd>
+<dt><strong>minAttnRatioBsc1064 (float, optional): Minimum attenuation required to detect liquid cloud. Default is 10.</strong></dt><dd></dd>
+<dt><strong>searchCloudAbove (float, optional): Cloud search window above current bit (m). Default is 300.</strong></dt><dd></dd>
+<dt><strong>searchCloudBelow (float, optional): Cloud search window below current bit (m). Default is 100.</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>ndarray: Logical mask (height x time) for detected liquid cloud regions.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2021-06-05: First edition by Zhenping</p></li>
+<li><p>2025-03-25: AI based translation to python</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.retrievals.quasiV1">
+<span id="ppcpy-retrievals-quasiv1"></span><h2>ppcpy.retrievals.quasiV1<a class="headerlink" href="#module-ppcpy.retrievals.quasiV1" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.quasiV1.quasi_bsc">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.quasiV1.</span></span><span class="sig-name descname"><span class="pre">quasi_bsc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/quasiV1.html#quasi_bsc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.quasiV1.quasi_bsc" title="Link to this definition">#</a></dt>
+<dd><p>calculate the quasi backscatter for a datacube</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.quasiV1.quasi_retrieval">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.quasiV1.</span></span><span class="sig-name descname"><span class="pre">quasi_retrieval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att_beta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molExt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molBsc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LRaer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nIters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/quasiV1.html#quasi_retrieval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.quasiV1.quasi_retrieval" title="Link to this definition">#</a></dt>
+<dd><p>Retrieve aerosol optical properties using the quasi-retrieving method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>height (array):</strong></dt><dd><p>Height in meters [m].</p>
+</dd>
+<dt><strong>att_beta (ndarray):</strong></dt><dd><p>Attenuated backscatter [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>molExt (ndarray):</strong></dt><dd><p>Molecular extinction coefficient [m^{-1}].</p>
+</dd>
+<dt><strong>molBsc (ndarray):</strong></dt><dd><p>Molecular backscatter coefficient [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt><strong>LRaer (float):</strong></dt><dd><p>Aerosol lidar ratio [Sr].</p>
+</dd>
+<dt><strong>nIters (int, optional):</strong></dt><dd><p>Number of iterations (default is 2).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>quasi_par_bsc (ndarray):</dt><dd><p>Quasi particle backscatter coefficient [m^{-1}Sr^{-1}].</p>
+</dd>
+<dt>quasi_par_ext (ndarray):</dt><dd><p>Quasi particle extinction coefficient [m^{-1}].</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2018-12-25: First edition by Zhenping</p></li>
+<li><p>2019-03-31: Added the keyword ‘nIters’ to control iteration times.</p></li>
+<li><p>2025-03-21: AI based translation to python and debugging</p></li>
+</ul>
+<p class="rubric">References</p>
+<p>Baars, H. et al. 2017 doi:10.5194/amt-10-3175-2017</p>
+</dd></dl>
+
+</section>
+<section id="module-ppcpy.retrievals.quasiV2">
+<span id="ppcpy-retrievals-quasiv2"></span><h2>ppcpy.retrievals.quasiV2<a class="headerlink" href="#module-ppcpy.retrievals.quasiV2" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.quasiV2.quasi_bsc">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.quasiV2.</span></span><span class="sig-name descname"><span class="pre">quasi_bsc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/quasiV2.html#quasi_bsc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.quasiV2.quasi_bsc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.quasiV2.quasi_retrieval2">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.quasiV2.</span></span><span class="sig-name descname"><span class="pre">quasi_retrieval2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att_beta_el</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att_beta_ra</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wv_r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molExtEl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molBscEl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">molExtRa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">AE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nIters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/quasiV2.html#quasi_retrieval2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.quasiV2.quasi_retrieval2" title="Link to this definition">#</a></dt>
+<dd><p>Retrieve aerosol optical properties using quasi retrieval method (V2), improved by utilizing Raman signals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>height (ndarray): Height array [m].</strong></dt><dd></dd>
+<dt><strong>att_beta_el (ndarray): Attenuated backscatter at elastic wavelength [m^{-1}sr^{-1}].</strong></dt><dd></dd>
+<dt><strong>att_beta_ra (ndarray): Attenuated backscatter at Raman wavelength [m^{-1}sr^{-1}].</strong></dt><dd></dd>
+<dt><strong>wavelength (int): Elastic backscatter wavelength [nm].</strong></dt><dd></dd>
+<dt><strong>molExtEl (ndarray): Molecular extinction coefficient at elastic wavelength [m^{-1}].</strong></dt><dd></dd>
+<dt><strong>molBscEl (ndarray): Molecular backscatter coefficient at elastic wavelength [m^{-1}sr^{-1}].</strong></dt><dd></dd>
+<dt><strong>molExtRa (ndarray): Molecular extinction coefficient at Raman wavelength [m^{-1}].</strong></dt><dd></dd>
+<dt><strong>AE (float): Extinction-related Ångström exponent.</strong></dt><dd></dd>
+<dt><strong>LR (float): Aerosol lidar ratio [sr].</strong></dt><dd></dd>
+<dt><strong>nIters (int, optional): Number of iterations. Default is 1.</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>quasi_par_bsc (ndarray): Quasi particle backscatter coefficient [m^{-1}sr^{-1}].</dt><dd></dd>
+<dt>quasi_par_ext (ndarray): Quasi particle extinction coefficient [m^{-1}].</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2021-06-07: first edition by Zhenping</p></li>
+<li><p>2025-03-30: AI translation to python</p></li>
+</ul>
+<p class="rubric">References</p>
+<p>Baars et al., 2017 doi:10.5194/amt-10-3175-2017</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="qc.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ppcpy.qc</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.retrievals.collection">ppcpy.retrievals.collection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.collection.calc_snr"><code class="docutils literal notranslate"><span class="pre">calc_snr()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.retrievals.klettfernald">ppcpy.retrievals.klettfernald</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.klettfernald.run_cldFreeGrps"><code class="docutils literal notranslate"><span class="pre">run_cldFreeGrps()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.klettfernald.fernald"><code class="docutils literal notranslate"><span class="pre">fernald()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.retrievals.raman">ppcpy.retrievals.raman</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.raman.run_cldFreeGrps"><code class="docutils literal notranslate"><span class="pre">run_cldFreeGrps()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.raman.raman_ext"><code class="docutils literal notranslate"><span class="pre">raman_ext()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.raman.raman_bsc"><code class="docutils literal notranslate"><span class="pre">raman_bsc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.raman.calc_raman_bsc"><code class="docutils literal notranslate"><span class="pre">calc_raman_bsc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.raman.lidarratio"><code class="docutils literal notranslate"><span class="pre">lidarratio()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.retrievals.ramanhelpers">ppcpy.retrievals.ramanhelpers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.ramanhelpers.movingslope_variedWin"><code class="docutils literal notranslate"><span class="pre">movingslope_variedWin()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.ramanhelpers.moving_smooth_varied_win"><code class="docutils literal notranslate"><span class="pre">moving_smooth_varied_win()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.ramanhelpers.moving_linfit_varied_win"><code class="docutils literal notranslate"><span class="pre">moving_linfit_varied_win()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.ramanhelpers.movingslope"><code class="docutils literal notranslate"><span class="pre">movingslope()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.ramanhelpers.sigGenWithNoise"><code class="docutils literal notranslate"><span class="pre">sigGenWithNoise()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.retrievals.depolarization">ppcpy.retrievals.depolarization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.depolarization.smooth_signal"><code class="docutils literal notranslate"><span class="pre">smooth_signal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.depolarization.voldepol_cldFreeGrps"><code class="docutils literal notranslate"><span class="pre">voldepol_cldFreeGrps()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.depolarization.calc_profile_vdr"><code class="docutils literal notranslate"><span class="pre">calc_profile_vdr()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.depolarization.get_MDR"><code class="docutils literal notranslate"><span class="pre">get_MDR()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.depolarization.pardepol_cldFreeGrps"><code class="docutils literal notranslate"><span class="pre">pardepol_cldFreeGrps()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.depolarization.calc_pdr"><code class="docutils literal notranslate"><span class="pre">calc_pdr()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.retrievals.angstroem">ppcpy.retrievals.angstroem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.angstroem.smooth_signal"><code class="docutils literal notranslate"><span class="pre">smooth_signal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.angstroem.ae_cldFreeGrps"><code class="docutils literal notranslate"><span class="pre">ae_cldFreeGrps()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.angstroem.calc_ae"><code class="docutils literal notranslate"><span class="pre">calc_ae()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.retrievals.highres">ppcpy.retrievals.highres</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.highres.attbsc_2d"><code class="docutils literal notranslate"><span class="pre">attbsc_2d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.highres.voldepol_2d"><code class="docutils literal notranslate"><span class="pre">voldepol_2d()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.retrievals.quasi">ppcpy.retrievals.quasi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.quasi.quasi_pdr"><code class="docutils literal notranslate"><span class="pre">quasi_pdr()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.quasi.quasi_angstrom"><code class="docutils literal notranslate"><span class="pre">quasi_angstrom()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.quasi.target_cat"><code class="docutils literal notranslate"><span class="pre">target_cat()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.quasi.target_classify"><code class="docutils literal notranslate"><span class="pre">target_classify()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.quasi.detect_liquid_bits"><code class="docutils literal notranslate"><span class="pre">detect_liquid_bits()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.retrievals.quasiV1">ppcpy.retrievals.quasiV1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.quasiV1.quasi_bsc"><code class="docutils literal notranslate"><span class="pre">quasi_bsc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.quasiV1.quasi_retrieval"><code class="docutils literal notranslate"><span class="pre">quasi_retrieval()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.retrievals.quasiV2">ppcpy.retrievals.quasiV2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.quasiV2.quasi_bsc"><code class="docutils literal notranslate"><span class="pre">quasi_bsc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.quasiV2.quasi_retrieval2"><code class="docutils literal notranslate"><span class="pre">quasi_retrieval2()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api_doc/retrievals.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026 Andi Klamt, Martin Radenz and Håvard Buholdt.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

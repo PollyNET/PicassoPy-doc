@@ -1,0 +1,39 @@
+﻿..
+  module.rst
+
+ppcpy.io
+========
+
+.. automodule:: ppcpy.io
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    
+        .. rubric:: Modules
+
+        .. autosummary::
+            :toctree:
+            :template: autosummary/module.rst
+            :recursive:
+            
+                loadConfigs
+                readMeteo
+                readPollyRawData
+                sql_interaction
+                write2nc
+    

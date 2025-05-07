@@ -1,0 +1,25 @@
+..
+  class.rst
+
+ppcpy.io.readMeteo.MeteoNcCloudnet
+==================================
+
+.. currentmodule:: ppcpy.io.readMeteo
+
+.. autoclass:: MeteoNcCloudnet
+    :members:
+    :show-inheritance:
+    :inherited-members:
+
+    
+        
+            .. rubric:: Methods
+
+            .. autosummary::
+                :nosignatures:
+                
+                    ~MeteoNcCloudnet.__init__
+                    ~MeteoNcCloudnet.find_path_for_time
+                    ~MeteoNcCloudnet.load
+        
+    

@@ -1,0 +1,34 @@
+..
+  module.rst
+
+ppcpy.qc.qualityMask
+====================
+
+.. automodule:: ppcpy.qc.qualityMask
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    qualityMask
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    
