@@ -1,0 +1,34 @@
+..
+  module.rst
+
+ppcpy.retrievals.collection
+===========================
+
+.. automodule:: ppcpy.retrievals.collection
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    calc_snr
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

@@ -1,0 +1,36 @@
+﻿..
+  module.rst
+
+ppcpy.cloudmask
+===============
+
+.. automodule:: ppcpy.cloudmask
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    
+        .. rubric:: Modules
+
+        .. autosummary::
+            :toctree:
+            :template: autosummary/module.rst
+            :recursive:
+            
+                cloudscreen
+                profilesegment
+    

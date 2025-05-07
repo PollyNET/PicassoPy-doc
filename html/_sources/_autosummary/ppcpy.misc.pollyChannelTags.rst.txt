@@ -1,0 +1,36 @@
+..
+  module.rst
+
+ppcpy.misc.pollyChannelTags
+===========================
+
+.. automodule:: ppcpy.misc.pollyChannelTags
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    pollyChannelTags
+                    pollyChannelflags
+                    polly_config_channel_corrections
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

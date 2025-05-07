@@ -1,0 +1,42 @@
+..
+  module.rst
+
+ppcpy.calibration.polarization
+==============================
+
+.. automodule:: ppcpy.calibration.polarization
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    analyze_segments
+                    calibrateGHK
+                    calibrateMol
+                    default_to_regular
+                    depol_cali_ghk
+                    depol_cali_mol
+                    loadGHK
+                    onemx_onepx
+                    smooth_signal
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    
