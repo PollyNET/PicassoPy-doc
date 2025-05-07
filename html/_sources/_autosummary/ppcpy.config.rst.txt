@@ -1,0 +1,26 @@
+﻿..
+  module.rst
+
+ppcpy.config
+============
+
+.. automodule:: ppcpy.config
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

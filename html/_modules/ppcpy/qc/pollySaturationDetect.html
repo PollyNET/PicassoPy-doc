@@ -1,0 +1,586 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ppcpy.qc.pollySaturationDetect &#8212; PicassoPy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/sphinx_rtd_size.css?v=3b072d6b" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ppcpy/qc/pollySaturationDetect';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PicassoPy  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ppcpy.qc.pollySaturationDetect</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ppcpy.qc.pollySaturationDetect</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<div class="viewcode-block" id="pollySaturationDetect">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.qc.pollySaturationDetect.html#ppcpy.qc.pollySaturationDetect.pollySaturationDetect">[docs]</a>
+<span class="k">def</span> <span class="nf">pollySaturationDetect</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span><span class="o">**</span><span class="n">varargin</span><span class="p">):</span>
+<span class="c1">#% POLLYSATURATIONDETECT detect the bins which is fully saturated by the clouds.</span>
+<span class="c1">#%</span>
+<span class="c1">#% USAGE:</span>
+<span class="c1">#%    [flag] = pollySaturationDetect(data)</span>
+<span class="c1">#%</span>
+<span class="c1">#% INPUTS:</span>
+<span class="c1">#%    data: struct</span>
+<span class="c1">#%        More detailed information can be found in doc\pollynet_processing_program.md</span>
+<span class="c1">#%</span>
+<span class="c1">#% KEYWORDS:</span>
+<span class="c1">#%    hFullOverlap: double</span>
+<span class="c1">#%        minimum height with full overlap (m). (default: 500)</span>
+<span class="c1">#%    sigSaturateThresh: double</span>
+<span class="c1">#%        threshold of saturated signal (photon count). (default: 500)</span>
+<span class="c1">#%</span>
+<span class="c1">#% OUTPUTS:</span>
+<span class="c1">#%    flag: logical matrix</span>
+<span class="c1">#%        if it is true, it means the current range bin should be saturated</span>
+<span class="c1">#%        by clouds. Vice versa.</span>
+<span class="c1">#%</span>
+<span class="c1">#% HISTORY:</span>
+<span class="c1">#%    - 2018-12-21: First Edition by Zhenping</span>
+<span class="c1">#%    - 2019-07-08: Fix the bug of converting signal to PCR.</span>
+<span class="c1">#%</span>
+<span class="c1">#% .. Authors: - zhenping@tropos.de</span>
+<span class="c1">#</span>
+<span class="c1">#p = inputParser;</span>
+<span class="c1">#p.KeepUnmatched = true;</span>
+<span class="c1">#</span>
+<span class="c1">#addRequired(p, &#39;data&#39;, @isstruct);</span>
+<span class="c1">#addParameter(p, &#39;hFullOverlap&#39;, 500, @isnumeric);</span>
+<span class="c1">#addParameter(p, &#39;sigSaturateThresh&#39;, 500, @isnumeric);</span>
+<span class="c1">#</span>
+<span class="c1">#parse(p, data, varargin{:});</span>
+<span class="c1">#</span>
+<span class="c1">#nChannels = size(data.signal, 1);</span>
+<span class="c1">#nProfiles = size(data.signal, 3);</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Saturation detection&#39;</span><span class="p">)</span>
+    <span class="n">hFullOverlap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">varargin</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hFullOverlap&#39;</span><span class="p">,</span> <span class="p">[]))</span>
+    <span class="n">sigSaturateThresh</span> <span class="o">=</span> <span class="n">varargin</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sigSaturateThresh&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">rawdata_dict</span><span class="p">[</span><span class="s1">&#39;raw_signal&#39;</span><span class="p">][</span><span class="s1">&#39;var_data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">mShots</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">rawdata_dict</span><span class="p">[</span><span class="s1">&#39;measurement_shots&#39;</span><span class="p">][</span><span class="s1">&#39;var_data&#39;</span><span class="p">]</span>
+    <span class="n">rawSignal</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">rawdata_dict</span><span class="p">[</span><span class="s1">&#39;raw_signal&#39;</span><span class="p">][</span><span class="s1">&#39;var_data&#39;</span><span class="p">]</span>
+    <span class="n">hRes</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">rawdata_dict</span><span class="p">[</span><span class="s1">&#39;measurement_height_resolution&#39;</span><span class="p">][</span><span class="s1">&#39;var_data&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="s1">&#39;PCR_slice&#39;</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">PCR</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;PCR_slice&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;no PCR_cor key was found in data_cube object, using uncorrected PCR.&#39;</span><span class="p">)</span>
+        <span class="n">PCR</span> <span class="o">=</span> <span class="n">rawSignal</span> <span class="o">/</span> <span class="n">mShots</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="mf">150.0</span> <span class="o">/</span> <span class="n">hRes</span>
+
+    <span class="n">nChannels</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">num_of_channels</span>
+    <span class="n">nProfiles</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">num_of_profiles</span>
+    <span class="n">height</span><span class="o">=</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span>
+
+    <span class="n">flagSaturation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">PCR</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">iChannel</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nChannels</span><span class="p">):</span>
+        <span class="n">hFullOverlap_channel</span> <span class="o">=</span> <span class="n">hFullOverlap</span><span class="p">[</span><span class="n">iChannel</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">iProfile</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nProfiles</span><span class="p">):</span>
+            <span class="n">flagSaturation</span><span class="p">[</span><span class="n">iProfile</span><span class="p">,:,</span><span class="n">iChannel</span><span class="p">]</span> <span class="o">=</span> <span class="n">saturationDetect</span><span class="p">(</span><span class="n">signal</span><span class="o">=</span><span class="n">PCR</span><span class="p">[</span><span class="n">iProfile</span><span class="p">,:,</span><span class="n">iChannel</span><span class="p">],</span>
+                                              <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
+                                              <span class="n">hBase</span><span class="o">=</span><span class="n">hFullOverlap_channel</span><span class="p">,</span>
+                                              <span class="n">hTop</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+                                              <span class="n">sigThresh</span><span class="o">=</span><span class="n">sigSaturateThresh</span><span class="p">,</span>
+                                              <span class="n">cloudMaxGThickness</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">flagSaturation</span></div>
+
+
+
+
+<span class="c1">#flag = false(size(data.signal));</span>
+<span class="c1">#</span>
+<span class="c1">#if isempty(data.rawSignal)</span>
+<span class="c1">#    return;</span>
+<span class="c1">#end</span>
+<span class="c1">#</span>
+<span class="c1">#%% Convert signal from photon count to photon count rate.</span>
+<span class="c1">#signalPCR = squeeze(data.signal + data.bg) ./ ...</span>
+<span class="c1">#            repmat(reshape(data.mShots, ...</span>
+<span class="c1">#                        size(data.mShots, 1), 1, size(data.mShots, 2)), ...</span>
+<span class="c1">#                    [1, size(data.signal, 2), 1]) * 150.0 ./ data.hRes;</span>
+<span class="c1">#</span>
+<span class="c1">#for iChannel = 1:nChannels</span>
+<span class="c1">#    for iProfile = 1:nProfiles</span>
+<span class="c1">#        flagSaturation = saturationDetect(...</span>
+<span class="c1">#                            signalPCR(iChannel, :, iProfile), ...</span>
+<span class="c1">#                            data.height, ...</span>
+<span class="c1">#                            p.Results.hFullOverlap(iChannel), ...</span>
+<span class="c1">#                            10000, p.Results.sigSaturateThresh, 500);</span>
+<span class="c1">#        flag(iChannel, :, iProfile) = flagSaturation;</span>
+<span class="c1">#    end</span>
+<span class="c1">#end</span>
+<span class="c1">#</span>
+<span class="c1">#end</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<div class="viewcode-block" id="saturationDetect">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.qc.pollySaturationDetect.html#ppcpy.qc.pollySaturationDetect.saturationDetect">[docs]</a>
+<span class="k">def</span> <span class="nf">saturationDetect</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">hBase</span><span class="p">,</span> <span class="n">hTop</span><span class="p">,</span> <span class="n">sigThresh</span><span class="p">,</span> <span class="n">cloudMaxGThickness</span><span class="p">):</span>
+
+<span class="c1">#function [flag] = saturationDetect(signal, height, hBase, hTop, ...</span>
+<span class="c1">#                    sigThresh, cloudMaxGThickness)</span>
+<span class="c1">#% SATURATIONDETECT saturation bin detection. More detailed information can </span>
+<span class="c1">#% be found in doc/pollynet_processing_program.md</span>
+<span class="c1">#% USAGE:</span>
+<span class="c1">#%    [flag] = saturationDetect(signal, height, hRange, sigThresh, </span>
+<span class="c1">#%                                    cloudMaxGThickness)</span>
+<span class="c1">#% INPUTS:</span>
+<span class="c1">#%    signal: array</span>
+<span class="c1">#%        photon count rate. [MHz] </span>
+<span class="c1">#%    height: array</span>
+<span class="c1">#%        height of each range bin. [m] </span>
+<span class="c1">#%    hRange: 2-element array</span>
+<span class="c1">#%        range constrain for the detection.</span>
+<span class="c1">#%    sigThresh: float</span>
+<span class="c1">#%        the maximum signal to be trusted without strong signal satureation. </span>
+<span class="c1">#%        [MHz] </span>
+<span class="c1">#%    cloudMaxGThickness: float</span>
+<span class="c1">#%        the maximun penetration depth for strong attenuation clouds. [m]</span>
+<span class="c1">#% OUTPUTS:</span>
+<span class="c1">#%    flag: logical</span>
+<span class="c1">#%        saturation flag for each range bin.</span>
+<span class="c1">#% EXAMPLE:</span>
+<span class="c1">#% HISTORY:</span>
+<span class="c1">#%    2018-12-21: First Edition by Zhenping</span>
+<span class="c1">#%    2019-07-08: Add the criteria for the absolute values</span>
+<span class="c1">#% .. Authors: - zhenping@tropos.de</span>
+
+    <span class="n">flag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+    <span class="c1">## determine whether the signal is over the saturation threshold</span>
+    <span class="n">flag</span><span class="p">[</span><span class="n">signal</span> <span class="o">&gt;</span> <span class="n">sigThresh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1">## check Base and Top heights</span>
+    <span class="n">hBaseIndx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">height</span> <span class="o">&gt;</span> <span class="n">hBase</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> 
+    <span class="n">hTopIndx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">height</span> <span class="o">&lt;=</span> <span class="n">hTop</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1">#print(hBaseIndx)</span>
+    <span class="c1">#print(hTopIndx)</span>
+
+    <span class="k">return</span> <span class="n">flag</span></div>
+
+
+<span class="c1">#</span>
+<span class="c1">#flag = false(size(signal));</span>
+<span class="c1">#if isempty(signal) || (numel(signal) &lt; 2)</span>
+<span class="c1">#    warning(&#39;The length of signal is less than 2.&#39;);</span>
+<span class="c1">#    return;</span>
+<span class="c1">#end</span>
+<span class="c1">#</span>
+<span class="c1">#hBaseIndx = find(height &gt;= hBase, 1);</span>
+<span class="c1">#hTopIndx = find(height &lt;= hTop, 1);</span>
+<span class="c1">#cloudMaxGThicknessIndx = int32(cloudMaxGThickness / (height(2) - height(1)));</span>
+<span class="c1">#if isempty(hBaseIndx) || isempty(hTopIndx)</span>
+<span class="c1">#    error([&#39;Error in polly_saturationdetect: hBase or hTop is out of &#39; ...</span>
+<span class="c1">#           &#39;range.\nCurrent hBase is %d and hTop is %d\n&#39;], hBase, hTop);</span>
+<span class="c1">#end</span>
+<span class="c1">#</span>
+<span class="c1">#% determine whether the signal is over the saturation threshold</span>
+<span class="c1">#flag(signal &gt; sigThresh) = true;</span>
+<span class="c1">#</span>
+<span class="c1">#indxSaturate = find((signal(hBaseIndx:(hTopIndx - 1)) - sigThresh) .* ...</span>
+<span class="c1">#                    (signal((hBaseIndx + 1):hTopIndx) - sigThresh) &lt;= 0);</span>
+<span class="c1">#if isempty(indxSaturate) || (numel(indxSaturate) == 1)</span>
+<span class="c1">#    return;</span>
+<span class="c1">#else</span>
+<span class="c1">#    indxSaturate = indxSaturate + hBaseIndx - 1;</span>
+<span class="c1">#end</span>
+<span class="c1">#</span>
+<span class="c1">#indx = 1;</span>
+<span class="c1">#while indx &lt; length(indxSaturate)</span>
+<span class="c1">#    saturateBaseIndx = indxSaturate(indx);</span>
+<span class="c1">#    saturateTopIndx = indxSaturate(indx + 1);</span>
+<span class="c1">#    if (saturateTopIndx - saturateBaseIndx) &gt;= cloudMaxGThicknessIndx</span>
+<span class="c1">#        indx = indx + 2;</span>
+<span class="c1">#        flag(saturateBaseIndx:saturateTopIndx) = true;</span>
+<span class="c1">#    else</span>
+<span class="c1">#        indx = indx + 1;</span>
+<span class="c1">#        flag(saturateBaseIndx:saturateTopIndx) = true;</span>
+<span class="c1">#    end        </span>
+<span class="c1">#end</span>
+<span class="c1">#</span>
+<span class="c1">#end</span>
+
+
+<span class="c1"># %%</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025 Andi Klamt and Martin Radenz.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

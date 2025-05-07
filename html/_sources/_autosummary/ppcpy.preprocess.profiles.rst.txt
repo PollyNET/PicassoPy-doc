@@ -1,0 +1,34 @@
+..
+  module.rst
+
+ppcpy.preprocess.profiles
+=========================
+
+.. automodule:: ppcpy.preprocess.profiles
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    aggregate_clFreeGrps
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

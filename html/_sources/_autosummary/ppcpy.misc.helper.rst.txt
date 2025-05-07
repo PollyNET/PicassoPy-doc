@@ -1,0 +1,48 @@
+..
+  module.rst
+
+ppcpy.misc.helper
+=================
+
+.. automodule:: ppcpy.misc.helper
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    add_to_list
+                    channel_2_variable_mapping
+                    checking_attr
+                    checking_timestamp
+                    checking_vars
+                    concat_files
+                    detect_path_type
+                    find_matching_dimension
+                    get_input_path
+                    get_pollyxt_files
+                    get_pollyxt_logbook_files
+                    mean_stable
+                    os_name
+                    remove_whitespaces_and_replace_dash_with_underscore
+                    smooth2a
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

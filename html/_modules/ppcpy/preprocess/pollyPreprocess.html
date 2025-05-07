@@ -1,0 +1,1144 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ppcpy.preprocess.pollyPreprocess &#8212; PicassoPy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ppcpy/preprocess/pollyPreprocess';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PicassoPy  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ppcpy.preprocess.pollyPreprocess</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ppcpy.preprocess.pollyPreprocess</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">label</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span><span class="p">,</span> <span class="n">cpu_count</span>
+<span class="c1">#from ppcpy.preprocess.optimized_polyval import process_signal</span>
+<span class="c1">#from ppcpy.preprocess.compute_pcr import compute_pcr</span>
+<span class="c1">#import numpy as np</span>
+<span class="c1">#from multiprocessing import Pool, cpu_count</span>
+
+<span class="kn">from</span> <span class="nn">ppcpy.retrievals.collection</span> <span class="kn">import</span> <span class="n">calc_snr</span>
+
+<div class="viewcode-block" id="compute_channel_pcr">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.preprocess.pollyPreprocess.html#ppcpy.preprocess.pollyPreprocess.compute_channel_pcr">[docs]</a>
+<span class="k">def</span> <span class="nf">compute_channel_pcr</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes PCR for a single channel.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        args: Tuple containing (rawSignal, mShots, scale_factor, channel_index).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Computed PCR for the given channel.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rawSignal</span><span class="p">,</span> <span class="n">mShots</span><span class="p">,</span> <span class="n">scale_factor</span><span class="p">,</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">args</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">rawSignal</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">ch</span><span class="p">]</span> <span class="o">/</span> <span class="n">mShots</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">ch</span><span class="p">])</span> <span class="o">*</span> <span class="n">scale_factor</span></div>
+
+
+<div class="viewcode-block" id="compute_pcr_parallel">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.preprocess.pollyPreprocess.html#ppcpy.preprocess.pollyPreprocess.compute_pcr_parallel">[docs]</a>
+<span class="k">def</span> <span class="nf">compute_pcr_parallel</span><span class="p">(</span><span class="n">rawSignal</span><span class="p">,</span> <span class="n">mShots</span><span class="p">,</span> <span class="n">scale_factor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes PCR using multiprocessing for channel-wise parallelism.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        rawSignal: 3D input array (shape: [M, N, P]).</span>
+<span class="sd">        mShots: 2D multiplicative factors array (shape: [M, P]).</span>
+<span class="sd">        scale_factor: Scaling factor for the computation.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: 3D output array (PCR) with the same shape as rawSignal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">rawSignal</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">PCR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">P</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="c1"># Prepare arguments for each channel</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[(</span><span class="n">rawSignal</span><span class="p">,</span> <span class="n">mShots</span><span class="p">,</span> <span class="n">scale_factor</span><span class="p">,</span> <span class="n">ch</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">P</span><span class="p">)]</span>
+
+    <span class="c1"># Use a pool of workers to compute each channel in parallel</span>
+    <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">cpu_count</span><span class="p">(),</span> <span class="n">P</span><span class="p">))</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">compute_channel_pcr</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+
+    <span class="c1"># Collect the results</span>
+    <span class="k">for</span> <span class="n">ch</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">PCR</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">ch</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+
+    <span class="k">return</span> <span class="n">PCR</span></div>
+
+
+<div class="viewcode-block" id="faster_polyval">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.preprocess.pollyPreprocess.html#ppcpy.preprocess.pollyPreprocess.faster_polyval">[docs]</a>
+<span class="k">def</span> <span class="nf">faster_polyval</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;faster version than np.polyval(), using numba would provide 10% increase, but with different function&quot;&quot;&quot;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">ai</span> <span class="ow">in</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">y</span> <span class="o">*=</span> <span class="n">x</span>
+        <span class="n">y</span> <span class="o">+=</span> <span class="n">ai</span>
+    <span class="k">return</span> <span class="n">y</span></div>
+
+<span class="c1">#@jit(nopython=True)</span>
+<span class="c1">#def faster_polyval(p, x):</span>
+<span class="c1">#    y = np.zeros(x.shape, dtype=float)</span>
+<span class="c1">#    for i, v in enumerate(p):</span>
+<span class="c1">#        y *= x</span>
+<span class="c1">#        y += v</span>
+<span class="c1">#    return y</span>
+
+<span class="c1">#@profile</span>
+<div class="viewcode-block" id="pollyDTCor">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.preprocess.pollyPreprocess.html#ppcpy.preprocess.pollyPreprocess.pollyDTCor">[docs]</a>
+<span class="k">def</span> <span class="nf">pollyDTCor</span><span class="p">(</span><span class="n">rawSignal</span><span class="p">,</span><span class="n">mShots</span><span class="p">,</span><span class="n">hRes</span><span class="p">,</span> <span class="o">**</span><span class="n">varargin</span><span class="p">):</span>
+    <span class="c1">## Defining default values for param keys (key initialization), if not explictly defined when calling the function</span>
+    <span class="n">polly_device</span> <span class="o">=</span> <span class="n">varargin</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;device&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">flagDeadTimeCorrection</span> <span class="o">=</span> <span class="n">varargin</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagDeadTimeCorrection&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">DeadTimeCorrectionMode</span> <span class="o">=</span> <span class="n">varargin</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;DeadTimeCorrectionMode&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">deadtimeParams</span> <span class="o">=</span> <span class="n">varargin</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;deadtimeParams&#39;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">deadtime</span> <span class="o">=</span> <span class="n">varargin</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;deadtime&#39;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="c1">#print(&#39;mShots&#39;, np.all(mShots[:,0] == mShots[0,0]), mShots[0,0], np.min(mShots[:,0]), np.max(mShots[:,0]))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">mShots</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">mShots</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;... mShots not constant min </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">mShots</span><span class="p">)</span><span class="si">}</span><span class="s2"> max </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">mShots</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">mShots_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mShots</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,:],</span> <span class="n">mShots</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1">#print(&#39;mShots_norm&#39;, mShots_norm.shape, &#39;mShots_norm&#39;, mShots_norm[0,:])</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;... Deadtime-correction (Mode: </span><span class="si">{</span><span class="n">DeadTimeCorrectionMode</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+    <span class="n">Nchannels</span> <span class="o">=</span> <span class="n">mShots</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">scale_factor</span> <span class="o">=</span> <span class="mf">150.0</span> <span class="o">/</span> <span class="n">hRes</span>
+
+    <span class="c1">## convert photon counts to Photon-Count-Rate PCR [MHz]</span>
+<span class="c1">#    start_time_command1 = time.time()</span>
+<span class="c1">#    compute_pcr(rawSignal.astype(np.float64), mShots.astype(np.float64), scale_factor, PCR)</span>
+    <span class="c1"># Compute PCR in parallel</span>
+<span class="c1">#    end_time_command1 = time.time()</span>
+<span class="c1">#    elapsed_time_command1 = end_time_command1 - start_time_command1</span>
+<span class="c1">#    print(f&quot;Time taken: {elapsed_time_command1:.4f} seconds&quot;)</span>
+    <span class="n">PCR</span> <span class="o">=</span> <span class="n">rawSignal</span> <span class="o">*</span> <span class="p">(</span><span class="mf">150.</span><span class="o">/</span><span class="n">hRes</span><span class="p">)</span> <span class="o">/</span> <span class="n">mShots</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,:]</span>
+    <span class="c1">#PCR_Cor = np.zeros_like(PCR)</span>
+    <span class="n">signalDTCor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">PCR</span><span class="p">)</span>
+
+    <span class="c1">## Deadtime correction</span>
+    <span class="k">if</span> <span class="n">flagDeadTimeCorrection</span><span class="p">:</span>
+
+        <span class="c1">## polynomial correction with parameters saved in the level0 netcdf-file under variable &#39;deadtime_polynomial&#39;</span>
+        <span class="k">if</span> <span class="n">DeadTimeCorrectionMode</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">iCh</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nchannels</span><span class="p">):</span>
+                <span class="c1"># Extract polynomial coefficients for the channel and reverse their order</span>
+                <span class="n">coeffs</span> <span class="o">=</span> <span class="n">deadtime</span><span class="p">[:,</span> <span class="n">iCh</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="c1">#PCR_Cor[:,:,iCh] = np.polyval(deadtime[:,iCh][::-1], PCR[:,:,iCh])</span>
+                <span class="c1">#PCR_Cor[:,:,iCh] = faster_polyval(deadtime[:,iCh], PCR[:,:,iCh])</span>
+                <span class="c1">#signalDTCor[:,:,iCh] = PCR_Cor[:,:,iCh]*mShots_norm[:,np.newaxis,iCh]/(150./hRes)</span>
+                <span class="n">signalDTCor</span><span class="p">[:,:,</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="n">faster_polyval</span><span class="p">(</span><span class="n">deadtime</span><span class="p">[:,</span><span class="n">iCh</span><span class="p">],</span> <span class="n">PCR</span><span class="p">[:,:,</span><span class="n">iCh</span><span class="p">])</span><span class="o">*</span><span class="n">mShots_norm</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span><span class="n">iCh</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="mf">150.</span><span class="o">/</span><span class="n">hRes</span><span class="p">)</span>
+
+
+        <span class="c1">## nonparalyzable correction: PCR_cor = PCR / (1 - tau*PCR), with tau beeing the dead-time</span>
+        <span class="c1">## reading from polly-config file under key &#39;dT&#39; (only the first value from each channel)</span>
+        <span class="k">elif</span> <span class="n">DeadTimeCorrectionMode</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">iCh</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nchannels</span><span class="p">):</span>
+                <span class="c1">#PCR_Cor[:,:,iCh]= PCR[:, :, iCh] / (1.0 - deadtimeParams[iCh][0] * 10**(-3) * PCR[:, :, iCh])</span>
+                <span class="c1">#signalDTCor[:, :, iCh] = PCR_Cor[:,:,iCh] * mShots_norm[:, np.newaxis, iCh] / scale_factor</span>
+                <span class="n">signalDTCor</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="n">PCR</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">iCh</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">deadtimeParams</span><span class="p">[</span><span class="n">iCh</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">PCR</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">iCh</span><span class="p">])</span> <span class="o">*</span> <span class="n">mShots_norm</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">iCh</span><span class="p">]</span> <span class="o">/</span> <span class="n">scale_factor</span>
+
+
+        <span class="c1">## user defined deadtime, reading from polly-config file under key &#39;dT&#39; (the whole matrix, polynome) </span>
+        <span class="k">elif</span> <span class="n">DeadTimeCorrectionMode</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">deadtimeParams</span><span class="p">)</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="c1">#                deadtimeParams=np.array(deadtimeParams)</span>
+<span class="c1">#                signal_out = np.zeros_like(PCR)</span>
+<span class="c1">#                process_signal(PCR, mShots.astype(np.float64), deadtimeParams, Nchannels, scale_factor, signal_out)</span>
+<span class="c1">#                PCR_Cor = PCR</span>
+                <span class="c1"># Pre-extract polynomial coefficients for all channels and reverse their order</span>
+                <span class="n">coeffs_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">deadtimeParams</span><span class="p">[</span><span class="n">ch</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nchannels</span><span class="p">)])</span>
+                <span class="k">for</span> <span class="n">iCh</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nchannels</span><span class="p">):</span>
+                    <span class="c1"># Evaluate the polynomial for the current channel</span>
+                    <span class="c1">#PCR_Cor[:,:,iCh] = np.polyval(coeffs_matrix[iCh], PCR[:, :, iCh])</span>
+                    <span class="c1">#PCR_Cor[:,:,iCh] = faster_polyval(coeffs_matrix[iCh][::-1], PCR[:, :, iCh])</span>
+                    <span class="c1">#signalDTCor[:, :, iCh] = PCR_Cor[:,:,iCh] * mShots_norm[:, np.newaxis, iCh] / scale_factor</span>
+                    <span class="n">signalDTCor</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="n">faster_polyval</span><span class="p">(</span><span class="n">coeffs_matrix</span><span class="p">[</span><span class="n">iCh</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">PCR</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">iCh</span><span class="p">])</span> <span class="o">*</span> <span class="n">mShots_norm</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">iCh</span><span class="p">]</span> <span class="o">/</span> <span class="n">scale_factor</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;User defined deadtime parameters were not found in polly-config file.&#39;</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;In order to continue the current processing, deadtime correction will not be implemented.&#39;</span><span class="p">)</span>
+
+        <span class="c1">## No deadtime correction</span>
+        <span class="k">elif</span> <span class="n">DeadTimeCorrectionMode</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Deadtime correction was turned off. Be careful to check the signal strength.&#39;</span><span class="p">)</span>
+
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknow deadtime correction setting! Please go back to check the configuration.&#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;For deadtimeCorrectionMode, only 1-4 is allowed.&#39;</span><span class="p">)</span>
+
+    <span class="c1">#return PCR_Cor, signalDTCor</span>
+    <span class="k">return</span> <span class="n">signalDTCor</span></div>
+
+
+<div class="viewcode-block" id="pollyRemoveBG">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.preprocess.pollyPreprocess.html#ppcpy.preprocess.pollyPreprocess.pollyRemoveBG">[docs]</a>
+<span class="k">def</span> <span class="nf">pollyRemoveBG</span><span class="p">(</span><span class="n">rawSignal</span><span class="p">,</span><span class="o">**</span><span class="n">varargin</span><span class="p">):</span>
+    <span class="n">maxHeightBin</span> <span class="o">=</span> <span class="n">varargin</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;maxHeightBin&#39;</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+    <span class="n">firstBinIndex</span> <span class="o">=</span> <span class="n">varargin</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;firstBinIndex&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">bgCorrectionIndex</span> <span class="o">=</span> <span class="n">varargin</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bgCorrectionIndex&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;... removing background from signal&#39;</span><span class="p">)</span>
+
+    <span class="c1">#print(maxHeightBin,firstBinIndex,bgCorrectionIndex)</span>
+
+    <span class="c1">## Calculate the mean across the specified column range for each row and page</span>
+    <span class="n">mean_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rawSignal</span><span class="p">[:,</span> <span class="n">bgCorrectionIndex</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">bgCorrectionIndex</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1">#Replicate the mean matrix along the second dimension</span>
+    <span class="n">bg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">mean_matrix</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxHeightBin</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">signal_out</span> <span class="o">=</span> <span class="n">slicerange</span><span class="p">(</span><span class="n">rawSignal</span><span class="p">,</span> <span class="n">maxHeightBin</span><span class="p">,</span> <span class="n">firstBinIndex</span><span class="p">)</span> <span class="o">-</span> <span class="n">bg</span>
+    <span class="k">return</span> <span class="n">signal_out</span><span class="p">,</span> <span class="n">bg</span></div>
+
+
+
+<div class="viewcode-block" id="slicerange">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.preprocess.pollyPreprocess.html#ppcpy.preprocess.pollyPreprocess.slicerange">[docs]</a>
+<span class="k">def</span> <span class="nf">slicerange</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">maxHeightBin</span><span class="p">,</span> <span class="n">firstBinIndex</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;slice a give array from firstBinIndex to maxHeightBin + firstBinIndex&quot;&quot;&quot;</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">maxHeightBin</span><span class="p">,</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">iCh</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+        <span class="n">out</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[:,</span><span class="n">firstBinIndex</span><span class="p">[</span><span class="n">iCh</span><span class="p">]:(</span><span class="n">maxHeightBin</span><span class="o">+</span><span class="n">firstBinIndex</span><span class="p">[</span><span class="n">iCh</span><span class="p">]),</span><span class="n">iCh</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+
+
+
+<div class="viewcode-block" id="pollyPolCaliTime">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.preprocess.pollyPreprocess.html#ppcpy.preprocess.pollyPreprocess.pollyPolCaliTime">[docs]</a>
+<span class="k">def</span> <span class="nf">pollyPolCaliTime</span><span class="p">(</span><span class="n">depCalAng</span><span class="p">,</span> <span class="n">mTime</span><span class="p">,</span> <span class="n">init_depAng</span><span class="p">,</span> <span class="n">maskDepCalAng</span><span class="p">):</span>
+
+    <span class="n">depCal_P_Ang_time_start</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">depCal_P_Ang_time_end</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">depCal_N_Ang_time_start</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">depCal_N_Ang_time_end</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">maskDepCal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mTime</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">depCalAng</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1">## if depCalAng is empty, which means the polly does not support auto depol calibration</span>
+        <span class="k">return</span> <span class="n">depCal_P_Ang_time_start</span><span class="p">,</span> <span class="n">depCal_P_Ang_time_end</span><span class="p">,</span> <span class="n">depCal_N_Ang_time_start</span><span class="p">,</span> <span class="n">depCal_N_Ang_time_end</span><span class="p">,</span> <span class="n">maskDepCal</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">maskDepCalAng</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">maskDepCalAng</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">]</span>
+        <span class="c1">## the mask for postive and negative</span>
+        <span class="c1">## calibration angle. &#39;none&#39; means</span>
+        <span class="c1">## invalid profiles with different</span>
+        <span class="c1">## depol_cal_angle</span>
+
+    <span class="n">flagPDepCal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">maskDepCalAng</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flagNDepCal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">maskDepCalAng</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">iProf</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">maskDepCalAng</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">maskDepCalAng</span><span class="p">[</span><span class="n">iProf</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span>
+            <span class="n">flagPDepCal</span><span class="p">[</span><span class="n">iProf</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">maskDepCalAng</span><span class="p">[</span><span class="n">iProf</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;n&#39;</span><span class="p">:</span>
+            <span class="n">flagNDepCal</span><span class="p">[</span><span class="n">iProf</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">flagDepCal</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">depCalAng</span> <span class="o">-</span> <span class="n">init_depAng</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">)</span>
+    <span class="c1">## the profile will be treated as depol cali profile if it has different</span>
+    <span class="c1">## depol_cal_ang than the init_depAng</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">init_depAng</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">depCalAng</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">flagDepCal</span><span class="p">)</span>
+    <span class="n">maskDepCal</span> <span class="o">=</span> <span class="n">flagDepCal</span>
+
+    <span class="c1">## search the calibration periods</span>
+    <span class="n">valuesFlagDepCal</span> <span class="o">=</span> <span class="n">flagDepCal</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="c1">## label connected components in the matrix; 0 will stay 0</span>
+    <span class="c1">## connected 1s will be numbered consecutively</span>
+    <span class="n">depCalPeriods</span><span class="p">,</span> <span class="n">nDepCalPeriods</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">valuesFlagDepCal</span><span class="p">)</span>
+    <span class="c1">#print(depCalPeriods)</span>
+    
+    <span class="k">if</span> <span class="n">nDepCalPeriods</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;No Depolarization Calibration phase found.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">depCal_P_Ang_time_start</span><span class="p">,</span> <span class="n">depCal_P_Ang_time_end</span><span class="p">,</span> <span class="n">depCal_N_Ang_time_start</span><span class="p">,</span> <span class="n">depCal_N_Ang_time_end</span><span class="p">,</span> <span class="n">maskDepCal</span>
+
+    <span class="k">for</span> <span class="n">iDepCalPeriod</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nDepCalPeriods</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1">#flagIDepCal = (depCalPeriods == iDepCalPeriod) # flag for the ith calibration period.</span>
+        <span class="n">flagIDepCal</span> <span class="o">=</span> <span class="n">depCalPeriods</span><span class="p">[</span><span class="n">depCalPeriods</span> <span class="o">==</span> <span class="n">iDepCalPeriod</span><span class="p">]</span> <span class="c1"># flag for the ith calibration period.</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">depCalPeriods</span> <span class="o">==</span> <span class="n">flagIDepCal</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1">#print(flagIDepCal)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">flagIDepCal</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">maskDepCalAng</span><span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Depolarization Calibration from Timestamp &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mTime</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">mTime</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;does not match the maskDepCalAng pattern in the polly-config file.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;This calibration phase will be skipped.&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="n">tIDepCal</span> <span class="o">=</span> <span class="n">mTime</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">indices</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+       
+        <span class="n">t_all_p_depCal</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">tIDepCal</span><span class="p">,</span> <span class="n">flagPDepCal</span><span class="p">))</span>
+        <span class="n">t_all_n_depCal</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">tIDepCal</span><span class="p">,</span> <span class="n">flagNDepCal</span><span class="p">))</span>
+        <span class="n">depCal_P_Ang_time_start</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_all_p_depCal</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">depCal_P_Ang_time_end</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_all_p_depCal</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">depCal_N_Ang_time_start</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_all_n_depCal</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">depCal_N_Ang_time_end</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_all_n_depCal</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+
+    <span class="k">return</span> <span class="n">depCal_P_Ang_time_start</span><span class="p">,</span> <span class="n">depCal_P_Ang_time_end</span><span class="p">,</span> <span class="n">depCal_N_Ang_time_start</span><span class="p">,</span> <span class="n">depCal_N_Ang_time_end</span><span class="p">,</span> <span class="n">maskDepCal</span></div>
+
+
+<div class="viewcode-block" id="calculate_rcs">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.preprocess.pollyPreprocess.html#ppcpy.preprocess.pollyPreprocess.calculate_rcs">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_rcs</span><span class="p">(</span><span class="n">datasignal</span><span class="p">,</span><span class="n">ranges</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function for calculating RCS.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        datasignal: </span>
+<span class="sd">            signal to range correct</span>
+<span class="sd">        ranges: </span>
+<span class="sd">            ranges that are squared</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np.ndarray: Computed RCS array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">datasignal</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">ranges_squared</span> <span class="o">=</span> <span class="n">ranges</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">ranges2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">ranges_squared</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,:],</span> <span class="n">datasignal</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ranges2d&#39;</span><span class="p">,</span> <span class="n">ranges2d</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    
+    <span class="c1"># Perform the computation</span>
+    <span class="c1">#RCS = (</span>
+    <span class="c1">#    datasignal / mShots_broadcasted * 150 / float(hRes) * height_squared_broadcasted</span>
+    <span class="c1">#)</span>
+    <span class="n">RCS</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">datasignal</span> <span class="o">*</span> <span class="n">ranges2d</span><span class="p">[:,:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">RCS</span></div>
+
+
+
+<div class="viewcode-block" id="pollyPreprocess">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.preprocess.pollyPreprocess.html#ppcpy.preprocess.pollyPreprocess.pollyPreprocess">[docs]</a>
+<span class="k">def</span> <span class="nf">pollyPreprocess</span><span class="p">(</span><span class="n">rawdata_dict</span><span class="p">,</span> <span class="n">collect_debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">param</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    POLLYPREPROCESS Deadtime correction, background correction, first-bin shift, mask for low-SNR and mask for depolarization-calibration process.</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">     USAGE:</span>
+<span class="sd">        [data] = pollyPreprocess(data)</span>
+<span class="sd">    </span>
+<span class="sd">     INPUTS:</span>
+<span class="sd">        data: struct</span>
+<span class="sd">            rawSignal: array</span>
+<span class="sd">                signal. [Photon Count]</span>
+<span class="sd">            mShots: array</span>
+<span class="sd">                number of the laser shots for each profile.</span>
+<span class="sd">            mTime: array</span>
+<span class="sd">                datetime array for the measurement time of each profile.</span>
+<span class="sd">            depCalAng: array</span>
+<span class="sd">                angle of the polarizer in the receiving channel. (&gt;0 means </span>
+<span class="sd">                calibration process starts)</span>
+<span class="sd">            zenithAng: array</span>
+<span class="sd">                zenith angle of the laer beam.</span>
+<span class="sd">            repRate: float</span>
+<span class="sd">                laser pulse repetition rate. [s^-1]</span>
+<span class="sd">            hRes: float</span>
+<span class="sd">                spatial resolution [m]</span>
+<span class="sd">            mSite: string</span>
+<span class="sd">                measurement site.</span>
+<span class="sd">    </span>
+<span class="sd">     KEYWORDS:</span>
+<span class="sd">        deltaT: numeric</span>
+<span class="sd">            integration time (in seconds) for single profile. (default: 30)</span>
+<span class="sd">        flagForceMeasTime: logical</span>
+<span class="sd">            flag to control whether to align measurement time with file creation</span>
+<span class="sd">            time, instead of taking the measurement time in the data file.</span>
+<span class="sd">            (default: false)</span>
+<span class="sd">        maxHeightBin: numeric</span>
+<span class="sd">            number of range bins to read out from data file. (default: 3000)</span>
+<span class="sd">        firstBinIndex: numeric</span>
+<span class="sd">            index of first bin to read out. (default: 1)</span>
+<span class="sd">        pollyType: char</span>
+<span class="sd">            polly version. (default: &#39;arielle&#39;)</span>
+<span class="sd">        flagDeadTimeCorrection: logical</span>
+<span class="sd">            flag to control whether to apply deadtime correction. (default: false)</span>
+<span class="sd">        deadtimeCorrectionMode: numeric</span>
+<span class="sd">            deadtime correction mode. (default: 2)</span>
+<span class="sd">            1: polynomial correction with parameters saved in data file.</span>
+<span class="sd">            2: non-paralyzable correction</span>
+<span class="sd">            3: polynomail correction with user defined parameters</span>
+<span class="sd">            4: disable deadtime correction</span>
+<span class="sd">        deadtimeParams: numeric</span>
+<span class="sd">            deadtime parameters. (default: [])</span>
+<span class="sd">        flagSigTempCor: logical</span>
+<span class="sd">            flag to implement signal temperature correction.</span>
+<span class="sd">        tempCorFunc: cell</span>
+<span class="sd">            symbolic function for signal temperature correction.</span>
+<span class="sd">            &quot;1&quot;: no correction</span>
+<span class="sd">            &quot;exp(-0.001*T)&quot;: exponential correction function. (Unit: Kelvin)</span>
+<span class="sd">        meteorDataSource: str</span>
+<span class="sd">            meteorological data type.</span>
+<span class="sd">            e.g., &#39;gdas1&#39;(default), &#39;standard_atmosphere&#39;, &#39;websonde&#39;, &#39;radiosonde&#39;</span>
+<span class="sd">        gdas1Site: str</span>
+<span class="sd">            the GDAS1 site for the current campaign.</span>
+<span class="sd">        meteo_folder: str</span>
+<span class="sd">            the main folder of the GDAS1 profiles.</span>
+<span class="sd">        radiosondeSitenum: integer</span>
+<span class="sd">            site number, which can be found in </span>
+<span class="sd">            doc/radiosonde-station-list.txt.</span>
+<span class="sd">        radiosondeFolder: str</span>
+<span class="sd">            the folder of the sonding files.</span>
+<span class="sd">        radiosondeType: integer</span>
+<span class="sd">            file type of the radiosonde file.</span>
+<span class="sd">            - 1: radiosonde file for MOSAiC (default)</span>
+<span class="sd">            - 2: radiosonde file for MUA</span>
+<span class="sd">        bgCorrectionIndex: 2-element array</span>
+<span class="sd">            base and top index of bins for background estimation.</span>
+<span class="sd">            (defaults: [1, 2])</span>
+<span class="sd">        asl: numeric</span>
+<span class="sd">            above sea level in meters. (default: 0)</span>
+<span class="sd">        initialPolAngle: numeric</span>
+<span class="sd">            initial polarization angle of the polarizer for polarization</span>
+<span class="sd">            calibration. (default: 0)</span>
+<span class="sd">        maskPolCalAngle: cell</span>
+<span class="sd">            mask for positive and negative calibration angle of the polarizer, in</span>
+<span class="sd">            which &#39;p&#39; stands for positive angle, while &#39;n&#39; for negative angle.</span>
+<span class="sd">            (default: {})</span>
+<span class="sd">        minSNRThresh: numeric</span>
+<span class="sd">            lower bound of signal-noise ratio.</span>
+<span class="sd">        minPC_fog: numeric</span>
+<span class="sd">            minimun number of photon count after strong attenuation by fog.</span>
+<span class="sd">        flagFarRangeChannel: logical</span>
+<span class="sd">            flags of far-range channel.</span>
+<span class="sd">        flag532nmChannel: logical</span>
+<span class="sd">            flags of channels with central wavelength (CW) at 532 nm.</span>
+<span class="sd">        flagTotalChannel: logical</span>
+<span class="sd">            flags of channels receiving total elastic signal.</span>
+<span class="sd">        flag355nmChannel: logical</span>
+<span class="sd">            flags of channels with CW at 355 nm.</span>
+<span class="sd">        flag607nmChannel: logical</span>
+<span class="sd">            flags of channels with CW at 607 nm.</span>
+<span class="sd">        flag387nmChannel: logical</span>
+<span class="sd">            flags of channels with CW at 387 nm.</span>
+<span class="sd">        flag407nmChannel: logical</span>
+<span class="sd">            flags of channels with CW at 407 nm.</span>
+<span class="sd">        flag532nmRotRaman: logical</span>
+<span class="sd">            flags of rotational Raman channels with CW at 532 nm.</span>
+<span class="sd">        flag1064nmRotRaman: logical</span>
+<span class="sd">            flags of rotational Raman channels with CW at 1064 nm.</span>
+<span class="sd">    </span>
+<span class="sd">     OUTPUTS:</span>
+<span class="sd">        data: struct</span>
+<span class="sd">            rawSignal: array</span>
+<span class="sd">                signal. [Photon Count]</span>
+<span class="sd">            mShots: array</span>
+<span class="sd">                number of the laser shots for each profile.</span>
+<span class="sd">            mTime: array</span>
+<span class="sd">                datetime array for the measurement time of each profile.</span>
+<span class="sd">            depCalAng: array</span>
+<span class="sd">                angle of the polarizer in the receiving channel. (&gt;0 means </span>
+<span class="sd">                calibration process starts)</span>
+<span class="sd">            zenithAng: array</span>
+<span class="sd">                zenith angle of the laer beam.</span>
+<span class="sd">            repRate: float</span>
+<span class="sd">                laser pulse repetition rate. [s^-1]</span>
+<span class="sd">            hRes: float</span>
+<span class="sd">                spatial resolution [m]</span>
+<span class="sd">            mSite: string</span>
+<span class="sd">                measurement site.</span>
+<span class="sd">            deadtime: matrix (channel x polynomial_orders)</span>
+<span class="sd">                deadtime correction parameters.</span>
+<span class="sd">            signal: array</span>
+<span class="sd">                Background removed signal</span>
+<span class="sd">            bg: array</span>
+<span class="sd">                background</span>
+<span class="sd">            height: array</span>
+<span class="sd">                height. [m]</span>
+<span class="sd">            lowSNRMask: logical</span>
+<span class="sd">                If SNR less SNRmin, mask is set true. Otherwise, false</span>
+<span class="sd">            depCalMask: logical</span>
+<span class="sd">                If polly was doing polarization calibration, depCalMask is set</span>
+<span class="sd">                true. Otherwise, false.</span>
+<span class="sd">            fogMask: logical</span>
+<span class="sd">                If it is foggy which means the signal will be very weak, </span>
+<span class="sd">                fogMask will be set true. Otherwise, false</span>
+<span class="sd">            mask607Off: logical</span>
+<span class="sd">                mask of PMT on/off status at 607 nm channel.</span>
+<span class="sd">            mask387Off: logical</span>
+<span class="sd">                mask of PMT on/off status at 387 nm channel.</span>
+<span class="sd">            mask407Off: logical</span>
+<span class="sd">                mask of PMT on/off status at 407 nm channel.</span>
+<span class="sd">            mask355RROff: logical</span>
+<span class="sd">                mask of PMT on/off status at 355 nm rotational Raman channel.</span>
+<span class="sd">            mask532RROff: logical</span>
+<span class="sd">                mask of PMT on/off status at 532 nm rotational Raman channel.</span>
+<span class="sd">            mask1064RROff: logical</span>
+<span class="sd">                mask of PMT on/off status at 1064 nm rotational Raman channel.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;starting data preprocessing...&#39;</span><span class="p">)</span>
+    <span class="n">rawSignal</span> <span class="o">=</span> <span class="n">rawdata_dict</span><span class="p">[</span><span class="s1">&#39;raw_signal&#39;</span><span class="p">][</span><span class="s1">&#39;var_data&#39;</span><span class="p">]</span>
+    <span class="n">mShots</span> <span class="o">=</span> <span class="n">rawdata_dict</span><span class="p">[</span><span class="s1">&#39;measurement_shots&#39;</span><span class="p">][</span><span class="s1">&#39;var_data&#39;</span><span class="p">]</span>
+    <span class="n">mTime</span> <span class="o">=</span> <span class="n">rawdata_dict</span><span class="p">[</span><span class="s1">&#39;measurement_time&#39;</span><span class="p">][</span><span class="s1">&#39;var_data&#39;</span><span class="p">]</span>
+    <span class="n">depCalAng</span> <span class="o">=</span> <span class="n">rawdata_dict</span><span class="p">[</span><span class="s1">&#39;depol_cal_angle&#39;</span><span class="p">][</span><span class="s1">&#39;var_data&#39;</span><span class="p">]</span>
+    <span class="n">zenithAng</span> <span class="o">=</span> <span class="n">rawdata_dict</span><span class="p">[</span><span class="s1">&#39;zenithangle&#39;</span><span class="p">][</span><span class="s1">&#39;var_data&#39;</span><span class="p">]</span>
+    <span class="n">repRate</span> <span class="o">=</span> <span class="n">rawdata_dict</span><span class="p">[</span><span class="s1">&#39;laser_rep_rate&#39;</span><span class="p">][</span><span class="s1">&#39;var_data&#39;</span><span class="p">]</span>
+    <span class="n">hRes</span> <span class="o">=</span> <span class="n">rawdata_dict</span><span class="p">[</span><span class="s1">&#39;measurement_height_resolution&#39;</span><span class="p">][</span><span class="s1">&#39;var_data&#39;</span><span class="p">]</span>
+    <span class="n">mSite</span> <span class="o">=</span> <span class="n">rawdata_dict</span><span class="p">[</span><span class="s1">&#39;global_attributes&#39;</span><span class="p">][</span><span class="s1">&#39;location&#39;</span><span class="p">]</span>
+
+    <span class="n">data_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="c1">## print all of the large arrays to screen, not only starts and ends of an array</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+
+    <span class="c1">## converting raw-mTime format from [YYYYMMDD seconds-of-day] to unixtimestamp-format</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;... time conversion&#39;</span><span class="p">)</span>
+    <span class="n">date_string</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">mTime</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">seconds_of_day</span> <span class="o">=</span> <span class="n">mTime</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">YYYY</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">date_string</span><span class="p">[:</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">MM</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">date_string</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>
+    <span class="n">DD</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">date_string</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>
+    <span class="n">datetime_obj</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">YYYY</span><span class="p">,</span><span class="n">MM</span><span class="p">,</span><span class="n">DD</span><span class="p">)</span>
+    <span class="n">mTime_obj</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime_obj</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seconds_of_day</span><span class="p">]</span>
+    <span class="n">mTime_str</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">mTime_obj</span><span class="p">]</span>
+    <span class="c1"># Convert to Unix timestamp</span>
+    <span class="n">mTime_unixtimestamp</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">mktime</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">timetuple</span><span class="p">()))</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">mTime_obj</span><span class="p">]</span>
+
+
+    <span class="c1">## Defining default values for param keys (key initialization), if not explictly defined when calling the function</span>
+    <span class="n">deltaT</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;deltaT&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+    <span class="n">flagForceMeasTime</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagForceMeasTime&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">maxHeightBin</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;maxHeightBin&#39;</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+    <span class="n">firstBinIndex</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;firstBinIndex&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">firstBinHeight</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;firstBinHeight&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">pollyType</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pollyType&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">flagDeadTimeCorrection</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagDeadTimeCorrection&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">deadtimeCorrectionMode</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;deadtimeCorrectionMode&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">deadtimeParams</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;deadtimeParams&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">flagSigTempCor</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagSigTempCor&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">tempCorFunc</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tempCorFunc&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">meteorDataSource</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;meteorDataSource&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">gdas1Site</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;gdas1Site&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">gdas1_folder</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;gdas1_folder&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">radiosondeSitenum</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;radiosondeSitenum&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">radiosondeFolder</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;radiosondeFolder&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">radiosondeType</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;radiosondeType&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">bgCorrectionIndex</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bgCorrectionIndex&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">asl</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;asl&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">initialPolAngle</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;initialPolAngle&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">maskPolCalAngle</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;maskPolCalAngle&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">minSNRThresh</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;minSNRThresh&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">minPC_fog</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;minPC_fog&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">flagFarRangeChannel</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagFarRangeChannel&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">flag532nmChannel</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag532nmChannel&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">flagTotalChannel</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagTotalChannel&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">flag355nmChannel</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag355nmChannel&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">flag607nmChannel</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag607nmChannel&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">flag387nmChannel</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag387nmChannel&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">flag407nmChannel</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag407nmChannel&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">flag355nmRotRaman</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag355nmRotRaman&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">flag532nmRotRaman</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag532nmRotRaman&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">flag1064nmRotRaman</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag1064nmRotRaman&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">isUseLatestGDAS</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;isUseLatestGDAS&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+
+   <span class="c1"># print(flagFarRangeChannel)</span>
+   <span class="c1"># print(flag1064nmRotRaman)</span>
+
+
+<span class="c1">#%% Determine whether number of range bins is out of range</span>
+<span class="c1">#if (max(config.maxHeightBin + config.firstBinIndex - 1) &gt; size(data.rawSignal, 2))</span>
+<span class="c1">#    warning(&#39;maxHeightBin or firstBinIndex is out of range.\nTotal number of range bin is %d.\nmaxHeightBin is</span>
+<span class="c1">#     %d\nfirstBinIndex is %d\n&#39;, size(data.rawSignal, 2), config.maxHeightBin, config.firstBinIndex);</span>
+<span class="c1">#    fprintf(&#39;Set maxHeightBin and firstBinIndex to default values.\n&#39;);</span>
+<span class="c1">#    config.maxHeightBin = ones(1, size(data.rawSignal, 1));</span>
+<span class="c1">#    config.firstBinIndex = 251;</span>
+<span class="c1">#end</span>
+<span class="c1">#    logging.info(f&#39;Total number of range bin is: {len(rawSignal[0])}\nmaxHeightBin is: {maxHeightBin}\nfirstBinIndex is {firstBinIndex}.&#39;)</span>
+    <span class="c1">#if (maxHeightBin + np.max(firstBinIndex) -1) &gt; len(rawSignal[0]):</span>
+    <span class="c1">#    logging.warning(f&#39;maxHeightBin or firstBinIndex is out of range. Total number of range bin is: {len(rawSignal[0])}\nmaxHeightBin is: {maxHeightBin}\nfirstBinIndex is {firstBinIndex}.&#39;)</span>
+    <span class="c1">#    logging.info(f&#39;Set maxHeightBin and firstBinIndex to default values.&#39;)</span>
+    <span class="c1">#    maxHeightBin = np.ones(rawSignal.shape[2]) </span>
+    <span class="c1">#    logging.info(f&#39;maxHeightBin: {maxHeightBin}&#39;)</span>
+    <span class="c1">#    firstBinIndex = 251</span>
+
+    <span class="n">mShotsPerPrf</span> <span class="o">=</span> <span class="n">deltaT</span> <span class="o">*</span> <span class="n">repRate</span>
+<span class="c1">#    print(mShotsPerPrf)</span>
+<span class="c1">#    print(mShots)</span>
+<span class="c1">#    print(mTime)</span>
+<span class="c1">#    print(deltaT)</span>
+<span class="c1">#    print(np.nanmean(np.diff(np.array(mTime[:,1]))))</span>
+<span class="c1">#    print(np.array(mTime[:,1]))</span>
+<span class="c1">#    print(len(mTime))</span>
+<span class="c1">#    print(np.diff(mTime))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mTime</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1">#nInt = np.round(deltaT / (np.nanmean(np.diff(np.array(mTime[:,1]))) * 24 * 3600)) ## number of profiles to be integrated. Usually, 600 shots per 30 s</span>
+        <span class="n">nInt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">deltaT</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mTime</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])))))</span> <span class="c1">## number of profiles to be integrated. Usually, 600 shots per 30 s</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">nInt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">mShotsPerPrf</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mShots</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])))</span>
+
+
+    <span class="c1">## Deadtime correction</span>
+    <span class="c1">#PCR_Cor, preproSignal = pollyDTCor(rawSignal = rawSignal,</span>
+    <span class="n">preproSignal</span> <span class="o">=</span> <span class="n">pollyDTCor</span><span class="p">(</span><span class="n">rawSignal</span> <span class="o">=</span> <span class="n">rawSignal</span><span class="p">,</span>
+            <span class="n">mShots</span> <span class="o">=</span> <span class="n">mShots</span><span class="p">,</span>
+            <span class="n">hRes</span> <span class="o">=</span> <span class="n">hRes</span><span class="p">,</span> 
+            <span class="n">polly_device</span> <span class="o">=</span> <span class="n">pollyType</span><span class="p">,</span>
+            <span class="n">flagDeadTimeCorrection</span> <span class="o">=</span> <span class="n">flagDeadTimeCorrection</span><span class="p">,</span> 
+            <span class="n">DeadTimeCorrectionMode</span> <span class="o">=</span> <span class="n">deadtimeCorrectionMode</span><span class="p">,</span>
+            <span class="n">deadtimeParams</span> <span class="o">=</span> <span class="n">deadtimeParams</span><span class="p">,</span>
+            <span class="n">deadtime</span> <span class="o">=</span> <span class="n">rawdata_dict</span><span class="p">[</span><span class="s1">&#39;deadtime_polynomial&#39;</span><span class="p">][</span><span class="s1">&#39;var_data&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="c1"># most likely the preprocesssed deadtime corrected signal can be omitted</span>
+    <span class="k">if</span> <span class="n">collect_debug</span><span class="p">:</span>
+        <span class="c1">#data_dict[&#39;PCR_cor&#39;] = PCR_Cor</span>
+        <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;preproSignal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">preproSignal</span> 
+    <span class="c1">#data_dict[&#39;PCR_slice&#39;] = slicerange(PCR_Cor, maxHeightBin, firstBinIndex)</span>
+
+    <span class="c1">## Background Substraction</span>
+    <span class="n">sigBGCor</span><span class="p">,</span> <span class="n">bg</span> <span class="o">=</span>  <span class="n">pollyRemoveBG</span><span class="p">(</span><span class="n">rawSignal</span> <span class="o">=</span> <span class="n">preproSignal</span><span class="p">,</span>
+                       <span class="n">bgCorrectionIndex</span> <span class="o">=</span> <span class="n">bgCorrectionIndex</span><span class="p">,</span>
+                       <span class="n">maxHeightBin</span> <span class="o">=</span> <span class="n">maxHeightBin</span><span class="p">,</span>
+                       <span class="n">firstBinIndex</span> <span class="o">=</span> <span class="n">firstBinIndex</span>
+    <span class="p">)</span>
+    <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;BG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bg</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="c1">## reshaping the3-dim. BG-matrix to 2-dim matrix</span>
+    <span class="c1"># Store the background corrected signal</span>
+    <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;sigBGCor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sigBGCor</span> 
+
+    <span class="c1">## Height and first bin height correction</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;... height bin calculations&#39;</span><span class="p">)</span>
+    <span class="c1"># TODO first bin hight might change for different telescopes...</span>
+    <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigBGCor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">hRes</span> <span class="o">+</span> <span class="n">firstBinHeight</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">zenithAng</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">)</span>
+
+    <span class="n">correction_firstBinHight</span> <span class="o">=</span> <span class="p">((</span>
+        <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigBGCor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">hRes</span><span class="p">)[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">+</span> <span class="n">firstBinHeight</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="o">/</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">][:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;correction_firstBinHeight.shape &quot;</span><span class="p">,</span> <span class="n">correction_firstBinHight</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;correction_firstBinHeight &quot;</span><span class="p">,</span> <span class="n">correction_firstBinHight</span><span class="p">[:</span><span class="mi">10</span><span class="p">,:])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;sigBGCor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;sigBGCor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;sigBGCor&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">correction_firstBinHight</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,:,:]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;sigBGCor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;alt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">asl</span><span class="p">)</span> <span class="c1">## geopotential height</span>
+    <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mTime_unixtimestamp</span>
+    <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;time64&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">mTime_obj</span><span class="p">])</span>
+
+
+    <span class="c1">## Mask for bins with low SNR</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;... mask bins with low SNR&#39;</span><span class="p">)</span>
+    <span class="n">SNR</span> <span class="o">=</span> <span class="n">calc_snr</span><span class="p">(</span><span class="n">sigBGCor</span><span class="p">,</span> <span class="n">bg</span><span class="p">)</span>
+    <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;SNR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">SNR</span>
+    <span class="c1">#print(SNR)</span>
+    <span class="c1">## create mask and mask every entry, where SNR &lt; minSNRThresh</span>
+    <span class="c1">#data_dict[&#39;lowSNRMask&#39;] = np.ma.array(np.zeros(sigBGCor.shape, dtype=bool), mask=np.ones(sigBGCor.shape, dtype=bool))</span>
+    <span class="c1"># a plain bool mask should be faster. Let&#39;s give it a try</span>
+    <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;lowSNRMask&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">sigBGCor</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="c1">#print(data_dict[&#39;lowSNRMask&#39;])</span>
+    <span class="k">for</span> <span class="n">iCh</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigBGCor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+        <span class="c1">#data_dict[&#39;lowSNRMask&#39;][:,:,iCh].mask = SNR[:,:,iCh].data &lt; minSNRThresh[iCh]</span>
+        <span class="c1">#data_dict[&#39;lowSNRMask&#39;][:,:,iCh] = np.ma.masked_where(SNR[:,:,iCh].data &lt; minSNRThresh[iCh], SNR[:,:,iCh])</span>
+        <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;lowSNRMask&#39;</span><span class="p">][:,:,</span><span class="n">iCh</span><span class="p">][</span><span class="n">SNR</span><span class="p">[:,:,</span><span class="n">iCh</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">minSNRThresh</span><span class="p">[</span><span class="n">iCh</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+    <span class="c1">#print(data_dict[&#39;lowSNRMask&#39;])</span>
+
+
+    <span class="c1">## Mask for polarization calibration</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;... mask for polarization calibration&#39;</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;depol_cal_ang_p_time_start&#39;</span><span class="p">],</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;depol_cal_ang_p_time_end&#39;</span><span class="p">],</span> 
+     <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;depol_cal_ang_n_time_start&#39;</span><span class="p">],</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;depol_cal_ang_n_time_end&#39;</span><span class="p">],</span> 
+     <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;depCalMask&#39;</span><span class="p">])</span> <span class="o">=</span> <span class="n">pollyPolCaliTime</span><span class="p">(</span>
+         <span class="n">depCalAng</span><span class="o">=</span><span class="n">depCalAng</span><span class="p">,</span> <span class="n">mTime</span><span class="o">=</span><span class="n">mTime_unixtimestamp</span><span class="p">,</span> 
+         <span class="n">init_depAng</span><span class="o">=</span><span class="n">initialPolAngle</span><span class="p">,</span> <span class="n">maskDepCalAng</span><span class="o">=</span><span class="n">maskPolCalAngle</span><span class="p">)</span>
+
+<span class="c1">#    print(data_dict[&#39;depol_cal_ang_p_time_start&#39;])</span>
+<span class="c1">#    print(data_dict[&#39;depol_cal_ang_p_time_end&#39;])</span>
+<span class="c1">#    print(data_dict[&#39;depol_cal_ang_n_time_start&#39;])</span>
+<span class="c1">#    print(data_dict[&#39;depol_cal_ang_n_time_end&#39;])</span>
+<span class="c1">#    print(data_dict[&#39;depCalMask&#39;])</span>
+
+<span class="c1">#%% Mask for polarization calibration</span>
+<span class="c1">#[data.depol_cal_ang_p_time_start, data.depol_cal_ang_p_time_end, ...</span>
+<span class="c1"># data.depol_cal_ang_n_time_start, data.depol_cal_ang_n_time_end, ...</span>
+<span class="c1"># depCalMask] = pollyPolCaliTime(data.depCalAng, data.mTime, ...</span>
+<span class="c1">#                                config.initialPolAngle, config.maskPolCalAngle);</span>
+<span class="c1">#data.depCalMask = transpose(depCalMask);</span>
+
+    <span class="c1">## Range-corrected Signal calculation</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;... calculate range-corrected Signal&#39;</span><span class="p">)</span>
+    <span class="c1">#mask = data_dict[&#39;lowSNRMask&#39;].mask</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;lowSNRMask&#39;</span><span class="p">]</span>
+    <span class="c1"># masked arry might be slow</span>
+    <span class="c1">#RCS_masked = np.ma.masked_array(sigBGCor+bg,mask=mask)</span>
+<span class="c1">#    data_dict[&#39;RCS&#39;] = calculate_rcs(datasignal=preproSignal,data_dict=data_dict,mShots=mShots,hRes=hRes)</span>
+    <span class="n">mShots_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mShots</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,:],</span> <span class="n">mShots</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;PCR_slice&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;sigBGCor&#39;</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">150</span><span class="o">/</span><span class="n">hRes</span><span class="p">)</span><span class="o">/</span><span class="n">mShots_norm</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,:]</span>
+    <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;RCS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calculate_rcs</span><span class="p">(</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;PCR_slice&#39;</span><span class="p">],</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">])</span>
+
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;finished data preprocessing.&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data_dict</span></div>
+
+
+
+<span class="c1">#</span>
+<span class="c1">#%% Temperature effect correction (for Raman signal)</span>
+<span class="c1">#if config.flagSigTempCor</span>
+<span class="c1">#    temperature = loadMeteor(mean(data.mTime), data.alt, ...</span>
+<span class="c1">#        &#39;meteorDataSource&#39;, config.meteorDataSource, ...</span>
+<span class="c1">#        &#39;gdas1Site&#39;, config.gdas1Site, ...</span>
+<span class="c1">#        &#39;meteo_folder&#39;, config.meteo_folder, ...</span>
+<span class="c1">#        &#39;radiosondeSitenum&#39;, config.radiosondeSitenum, ...</span>
+<span class="c1">#        &#39;radiosondeFolder&#39;, config.radiosondeFolder, ...</span>
+<span class="c1">#        &#39;radiosondeType&#39;, config.radiosondeType, ...</span>
+<span class="c1">#        &#39;method&#39;, &#39;linear&#39;, ...</span>
+<span class="c1">#        &#39;isUseLatestGDAS&#39;, config.flagUseLatestGDAS);</span>
+<span class="c1">#    absTemp = temperature + 273.17;</span>
+<span class="c1">#</span>
+<span class="c1">#    for iCh = 1:size(data.signal, 1)</span>
+<span class="c1">#        leadingChar = config.tempCorFunc{iCh}(1);</span>
+<span class="c1">#        if (leadingChar == &#39;@&#39;)</span>
+<span class="c1">#            % valid matlab anonymous function</span>
+<span class="c1">#            tempCorFunc = config.tempCorFunc{iCh};</span>
+<span class="c1">#        else</span>
+<span class="c1">#            tempCorFunc = vectorize([&#39;@(T) &#39;, &#39;(&#39;, config.tempCorFunc{iCh}, &#39;) .* ones(size(T))&#39;]);</span>
+<span class="c1">#            % fprintf(&#39;%s is not a valid matlab anonymous function. Redefine it as %s\n&#39;, config.tempCorFunc{iCh}, tempCorFunc);</span>
+<span class="c1">#        end</span>
+<span class="c1">#</span>
+<span class="c1">#        corFunc = str2func(tempCorFunc);</span>
+<span class="c1">#        corFac = corFunc(absTemp);</span>
+<span class="c1">#        data.signal(iCh, :, :) = data.signal(iCh, :, :) ./ repmat(reshape(corFac, 1, [], 1), 1, 1, size(data.signal, 3));</span>
+<span class="c1">#    end</span>
+<span class="c1">#end</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#%% Mask for polarization calibration</span>
+<span class="c1">#[data.depol_cal_ang_p_time_start, data.depol_cal_ang_p_time_end, ...</span>
+<span class="c1"># data.depol_cal_ang_n_time_start, data.depol_cal_ang_n_time_end, ...</span>
+<span class="c1"># depCalMask] = pollyPolCaliTime(data.depCalAng, data.mTime, ...</span>
+<span class="c1">#                                config.initialPolAngle, config.maskPolCalAngle);</span>
+<span class="c1">#data.depCalMask = transpose(depCalMask);</span>
+<span class="c1">#</span>
+<span class="c1">#%% Mask for laser shutter</span>
+<span class="c1">#flagChannel532FR = config.flagFarRangeChannel &amp; config.flag532nmChannel &amp; config.flagTotalChannel;</span>
+<span class="c1">#flagChannel355FR = config.flagFarRangeChannel &amp; config.flag355nmChannel &amp; config.flagTotalChannel;</span>
+<span class="c1">#if any(flagChannel532FR)</span>
+<span class="c1">#    data.shutterOnMask = pollyIsLaserShutterOn(...</span>
+<span class="c1">#        squeeze(data.signal(flagChannel532FR, :, :)));</span>
+<span class="c1">#elseif any(flagChannel355FR)</span>
+<span class="c1">#    data.shutterOnMask = pollyIsLaserShutterOn(...</span>
+<span class="c1">#        squeeze(data.signal(flagChannel355FR, :, :)));</span>
+<span class="c1">#else</span>
+<span class="c1">#    warning(&#39;No suitable channel to determine the shutter status&#39;);</span>
+<span class="c1">#    data.shutterOnMask = false(size(data.mTime));</span>
+<span class="c1">#end</span>
+<span class="c1">#</span>
+<span class="c1">#%% Mask for fog</span>
+<span class="c1">#data.fogMask = false(1, size(data.signal, 3));</span>
+<span class="c1">#is_channel_532_FR_Tot = config.flagFarRangeChannel &amp; config.flag532nmChannel &amp; config.flagTotalChannel;</span>
+<span class="c1">#data.fogMask(transpose(squeeze(sum(data.signal(is_channel_532_FR_Tot, 40:120, :), 2)) &lt;= config.minPC_fog) &amp; (~ data.shutterOnMask)) = true;</span>
+<span class="c1">#</span>
+<span class="c1">#%% Mask for PMT on/off status of 607 nm channel</span>
+<span class="c1">#flagChannel607 = config.flagFarRangeChannel &amp; config.flag607nmChannel;</span>
+<span class="c1">#data.mask607Off = pollyIs607Off(squeeze(data.signal(flagChannel607, :, :)));</span>
+<span class="c1">#</span>
+<span class="c1">#%% Mask for PMT of 387 nm channel</span>
+<span class="c1">#flagChannel387 = config.flagFarRangeChannel &amp; config.flag387nmChannel;</span>
+<span class="c1">#data.mask387Off = pollyIs387Off(squeeze(data.signal(flagChannel387, :, :)));</span>
+<span class="c1">#</span>
+<span class="c1">#%% Mask for PMT of 407 nm channel</span>
+<span class="c1">#flagChannel407 = config.flagFarRangeChannel &amp; config.flag407nmChannel;</span>
+<span class="c1">#data.mask407Off = pollyIs407Off(squeeze(data.signal(flagChannel407, :, :)));</span>
+<span class="c1">#</span>
+<span class="c1">#%% Mask for PMT of 355 nm rotation Raman channel</span>
+<span class="c1">#flagChannel355RR = config.flagFarRangeChannel &amp; config.flag355nmRotRaman;</span>
+<span class="c1">#data.mask355RROff = pollyIs607Off(squeeze(data.signal(flagChannel355RR, :, :)));</span>
+<span class="c1">#</span>
+<span class="c1">#%% Mask for PMT of 532 nm rotation Raman channel</span>
+<span class="c1">#flagChannel532RR = config.flagFarRangeChannel &amp; config.flag532nmRotRaman;</span>
+<span class="c1">#data.mask532RROff = pollyIs607Off(squeeze(data.signal(flagChannel532RR, :, :)));</span>
+<span class="c1">#</span>
+<span class="c1">#%% Mask for 1064 nm rotation Raman channel</span>
+<span class="c1">#flagChannel1064RR = config.flag1064nmRotRaman;</span>
+<span class="c1">#data.mask1064RROff = pollyIs607Off(squeeze(data.signal(flagChannel1064RR, :, :)));</span>
+<span class="c1">#</span>
+<span class="c1">#end</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025 Andi Klamt and Martin Radenz.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

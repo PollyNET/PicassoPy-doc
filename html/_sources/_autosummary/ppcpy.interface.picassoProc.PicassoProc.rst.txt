@@ -1,0 +1,55 @@
+..
+  class.rst
+
+ppcpy.interface.picassoProc.PicassoProc
+=======================================
+
+.. currentmodule:: ppcpy.interface.picassoProc
+
+.. autoclass:: PicassoProc
+    :members:
+    :show-inheritance:
+    :inherited-members:
+
+    
+        
+            .. rubric:: Methods
+
+            .. autosummary::
+                :nosignatures:
+                
+                    ~PicassoProc.Angstroem
+                    ~PicassoProc.LidarCalibration
+                    ~PicassoProc.SaturationDetect
+                    ~PicassoProc.__init__
+                    ~PicassoProc.aggregate_profiles
+                    ~PicassoProc.attBsc_volDepol
+                    ~PicassoProc.calcDepol
+                    ~PicassoProc.calcMolecular
+                    ~PicassoProc.check_for_correct_mshots
+                    ~PicassoProc.cloudFreeSeg
+                    ~PicassoProc.cloudScreen
+                    ~PicassoProc.filter_or_correct_false_mshots
+                    ~PicassoProc.gf
+                    ~PicassoProc.loadAOD
+                    ~PicassoProc.loadMeteo
+                    ~PicassoProc.mdate_consistency
+                    ~PicassoProc.mdate_filename
+                    ~PicassoProc.mdate_infile
+                    ~PicassoProc.molecularHighres
+                    ~PicassoProc.overlapCalc
+                    ~PicassoProc.overlapCor
+                    ~PicassoProc.overlapFixLowestBins
+                    ~PicassoProc.polarizationCaliD90
+                    ~PicassoProc.polarizationCaliMol
+                    ~PicassoProc.preprocessing
+                    ~PicassoProc.quasiV1
+                    ~PicassoProc.quasiV2
+                    ~PicassoProc.rayleighFit
+                    ~PicassoProc.reset_date_infile
+                    ~PicassoProc.retrievalKlett
+                    ~PicassoProc.retrievalRaman
+                    ~PicassoProc.setChannelTags
+                    ~PicassoProc.transCor
+        
+    

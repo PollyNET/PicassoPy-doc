@@ -1,0 +1,38 @@
+﻿..
+  module.rst
+
+ppcpy.qc
+========
+
+.. automodule:: ppcpy.qc
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    
+        .. rubric:: Modules
+
+        .. autosummary::
+            :toctree:
+            :template: autosummary/module.rst
+            :recursive:
+            
+                overlapCor
+                overlapEst
+                pollySaturationDetect
+                transCor
+    

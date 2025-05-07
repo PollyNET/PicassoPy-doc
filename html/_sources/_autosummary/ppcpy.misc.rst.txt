@@ -1,0 +1,42 @@
+﻿..
+  module.rst
+
+ppcpy.misc
+==========
+
+.. automodule:: ppcpy.misc
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    
+        .. rubric:: Modules
+
+        .. autosummary::
+            :toctree:
+            :template: autosummary/module.rst
+            :recursive:
+            
+                helper
+                json2nc_mapping
+                molecular
+                molecular_none
+                molecular_second_try
+                plot
+                pollyChannelTags
+                startscreen
+    

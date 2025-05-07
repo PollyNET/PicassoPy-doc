@@ -1,0 +1,34 @@
+..
+  module.rst
+
+ppcpy.io.readPollyRawData
+=========================
+
+.. automodule:: ppcpy.io.readPollyRawData
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    readPollyRawData
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

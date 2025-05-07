@@ -1,0 +1,42 @@
+..
+  module.rst
+
+ppcpy.preprocess.pollyPreprocess
+================================
+
+.. automodule:: ppcpy.preprocess.pollyPreprocess
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    calculate_rcs
+                    compute_channel_pcr
+                    compute_pcr_parallel
+                    faster_polyval
+                    pollyDTCor
+                    pollyPolCaliTime
+                    pollyPreprocess
+                    pollyRemoveBG
+                    slicerange
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

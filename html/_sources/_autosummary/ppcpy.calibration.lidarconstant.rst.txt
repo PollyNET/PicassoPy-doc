@@ -1,0 +1,35 @@
+..
+  module.rst
+
+ppcpy.calibration.lidarconstant
+===============================
+
+.. automodule:: ppcpy.calibration.lidarconstant
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    get_best_LC
+                    lc_for_cldFreeGrps
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

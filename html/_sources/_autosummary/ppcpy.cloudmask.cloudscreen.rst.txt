@@ -1,0 +1,37 @@
+..
+  module.rst
+
+ppcpy.cloudmask.cloudscreen
+===========================
+
+.. automodule:: ppcpy.cloudmask.cloudscreen
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    cloudScreen_MSG
+                    cloudScreen_Zhao
+                    cloudscreen
+                    smooth_signal
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

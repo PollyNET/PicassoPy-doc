@@ -1,0 +1,36 @@
+..
+  module.rst
+
+ppcpy.misc.molecular\_none
+==========================
+
+.. automodule:: ppcpy.misc.molecular_none
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    beta_pi_cabannes
+                    rayleigh_scattering
+                    sigma_pi_cabannes
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

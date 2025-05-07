@@ -1,0 +1,740 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ppcpy.qc.overlapEst &#8212; PicassoPy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/sphinx_rtd_size.css?v=3b072d6b" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ppcpy/qc/overlapEst';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PicassoPy  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ppcpy.qc.overlapEst</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ppcpy.qc.overlapEst</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">uniform_filter1d</span>
+
+<span class="kn">from</span> <span class="nn">ppcpy.retrievals.collection</span> <span class="kn">import</span> <span class="n">calc_snr</span>
+<span class="kn">from</span> <span class="nn">ppcpy.misc.helper</span> <span class="kn">import</span> <span class="n">mean_stable</span>
+
+
+
+<div class="viewcode-block" id="run_frnr_cldFreeGrps">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.qc.overlapEst.html#ppcpy.qc.overlapEst.run_frnr_cldFreeGrps">[docs]</a>
+<span class="k">def</span> <span class="nf">run_frnr_cldFreeGrps</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">collect_debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">height</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;rayleighfit seems to use range in matlab, but the met data should be in height &gt;&gt; RECHECK!&#39;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;at 10km height this is a difference of about 4 indices&#39;</span><span class="p">)</span>
+    <span class="n">config_dict</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span>
+
+    <span class="n">overlap</span> <span class="o">=</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">clFreeGrps</span><span class="p">))]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting Overlap retrieval&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cldFree</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">clFreeGrps</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cldFree &#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">cldFree</span><span class="p">)</span>
+        <span class="n">cldFree</span> <span class="o">=</span> <span class="n">cldFree</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cldFree</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cldFree mod&#39;</span><span class="p">,</span> <span class="n">cldFree</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">wv</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">355</span><span class="p">,</span> <span class="mi">387</span><span class="p">,</span> <span class="mi">532</span><span class="p">,</span> <span class="mi">607</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">))</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;NR&#39;</span><span class="p">)):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;both telescopes available&#39;</span><span class="p">)</span>
+                <span class="n">sigFR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;sigTCor&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,:,</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">)])</span>
+                <span class="n">bgFR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;BGTCor&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">)])</span>
+                <span class="n">sigNR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;sigTCor&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,:,</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;NR&#39;</span><span class="p">)])</span>
+                <span class="n">bgNR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;BGTCor&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;NR&#39;</span><span class="p">)])</span>
+                <span class="n">hFullOverlap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;heightFullOverlap&#39;</span><span class="p">])[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">ol</span> <span class="o">=</span> <span class="n">overlapCalc</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">sigFR</span><span class="p">,</span> <span class="n">bgFR</span><span class="p">,</span> <span class="n">sigNR</span><span class="p">,</span> <span class="n">bgNR</span><span class="p">,</span> <span class="n">hFullOverlap</span><span class="o">=</span><span class="n">hFullOverlap</span><span class="p">)</span>
+                <span class="n">overlap</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">_total_FR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ol</span>
+    
+    <span class="k">return</span> <span class="n">overlap</span></div>
+
+
+
+
+<div class="viewcode-block" id="overlapCalc">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.qc.overlapEst.html#ppcpy.qc.overlapEst.overlapCalc">[docs]</a>
+<span class="k">def</span> <span class="nf">overlapCalc</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">sigFR</span><span class="p">,</span> <span class="n">bgFR</span><span class="p">,</span> <span class="n">sigNR</span><span class="p">,</span> <span class="n">bgNR</span><span class="p">,</span> <span class="n">hFullOverlap</span><span class="o">=</span><span class="mi">600</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate overlap function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    height : ndarray</span>
+<span class="sd">        Height above ground (m).</span>
+<span class="sd">    sigFR : ndarray</span>
+<span class="sd">        Far-field signal (photon count).</span>
+<span class="sd">    bgFR : ndarray</span>
+<span class="sd">        Background of far-field signal (photon count).</span>
+<span class="sd">    sigNR : ndarray</span>
+<span class="sd">        Near-field signal (photon count).</span>
+<span class="sd">    bgNR : ndarray</span>
+<span class="sd">        Background of near-field signal (photon count).</span>
+
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    hFullOverlap : float, optional</span>
+<span class="sd">        Minimum height with full overlap for far-range signal (default: 600 m).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    overlap : ndarray</span>
+<span class="sd">        Overlap function.</span>
+<span class="sd">    overlapStd : ndarray</span>
+<span class="sd">        Standard deviation of overlap function.</span>
+<span class="sd">    sigRatio : float</span>
+<span class="sd">        Signal ratio between near-range and far-range signals.</span>
+<span class="sd">    normRange : list</span>
+<span class="sd">        Height index of the signal normalization range.</span>
+
+<span class="sd">    History</span>
+<span class="sd">    -------</span>
+<span class="sd">    - 2021-05-18: First edition by Zhenping</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">sigNR</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">sigFR</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Find the height index with full overlap</span>
+        <span class="n">full_overlap_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">height</span> <span class="o">&gt;=</span> <span class="n">hFullOverlap</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">full_overlap_index</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The index with full overlap cannot be found.&quot;</span><span class="p">)</span>
+        <span class="n">full_overlap_index</span> <span class="o">=</span> <span class="n">full_overlap_index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Calculate the channel ratio of near and far range total signals</span>
+        <span class="n">sigRatio</span><span class="p">,</span> <span class="n">normRange</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">mean_stable</span><span class="p">(</span><span class="n">sigNR</span> <span class="o">/</span> <span class="n">sigFR</span> <span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">full_overlap_index</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sigNR</span><span class="p">),</span> <span class="mf">0.1</span><span class="p">)</span>
+
+        <span class="c1">#print(&#39;is normRange index or slice?&#39;, normRange) # -&gt; is list of indices</span>
+        <span class="c1"># Calculate the overlap of the far-range channel</span>
+        <span class="k">if</span> <span class="n">normRange</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">SNRnormRangeFR</span> <span class="o">=</span> <span class="n">calc_snr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sigFR</span><span class="p">[</span><span class="n">normRange</span><span class="p">],</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">bgFR</span><span class="o">*</span><span class="n">normRange</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">SNRnormRangeNR</span> <span class="o">=</span> <span class="n">calc_snr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sigNR</span><span class="p">[</span><span class="n">normRange</span><span class="p">],</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">bgNR</span><span class="o">*</span><span class="n">normRange</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">sigRatioStd</span> <span class="o">=</span> <span class="n">sigRatio</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">SNRnormRangeFR</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">SNRnormRangeNR</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+            <span class="n">overlap</span> <span class="o">=</span> <span class="p">(</span><span class="n">sigFR</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigNR</span> <span class="o">+</span> <span class="mf">1e-6</span><span class="p">))</span> <span class="o">*</span> <span class="n">sigRatio</span>
+            <span class="n">overlapStd</span> <span class="o">=</span> <span class="n">overlap</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">sigRatioStd</span> <span class="o">/</span> <span class="n">sigRatio</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigFR</span> <span class="o">+</span> <span class="mf">1e-6</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigNR</span> <span class="o">+</span> <span class="mf">1e-6</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;olFunc&#39;</span><span class="p">:</span> <span class="n">overlap</span><span class="p">,</span> <span class="s1">&#39;olFuncStd&#39;</span><span class="p">:</span> <span class="n">overlapStd</span><span class="p">,</span> 
+           <span class="s1">&#39;sigRatio&#39;</span><span class="p">:</span> <span class="n">sigRatio</span><span class="p">,</span> <span class="s1">&#39;normRange&#39;</span><span class="p">:</span> <span class="n">normRange</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">ret</span></div>
+
+
+
+
+<div class="viewcode-block" id="run_raman_cldFreeGrps">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.qc.overlapEst.html#ppcpy.qc.overlapEst.run_raman_cldFreeGrps">[docs]</a>
+<span class="k">def</span> <span class="nf">run_raman_cldFreeGrps</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">collect_debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">height</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span>
+    <span class="n">hres</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">rawdata_dict</span><span class="p">[</span><span class="s1">&#39;measurement_height_resolution&#39;</span><span class="p">][</span><span class="s1">&#39;var_data&#39;</span><span class="p">]</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;rayleighfit seems to use range in matlab, but the met data should be in height &gt;&gt; RECHECK!&#39;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;at 10km height this is a difference of about 4 indices&#39;</span><span class="p">)</span>
+    <span class="n">config_dict</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span>
+
+    <span class="n">overlap</span> <span class="o">=</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">clFreeGrps</span><span class="p">))]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting Raman Overlap retrieval&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cldFree</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">clFreeGrps</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cldFree &#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">cldFree</span><span class="p">)</span>
+        <span class="n">cldFree</span> <span class="o">=</span> <span class="n">cldFree</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cldFree</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cldFree mod&#39;</span><span class="p">,</span> <span class="n">cldFree</span><span class="p">)</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="p">[((</span><span class="mi">532</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">607</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">)),((</span><span class="mi">355</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">387</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">))]</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">),</span> <span class="p">(</span><span class="n">wv_r</span><span class="p">,</span> <span class="n">t_r</span><span class="p">,</span> <span class="n">tel_r</span><span class="p">)</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">))</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv_r</span><span class="p">,</span> <span class="n">t_r</span><span class="p">,</span> <span class="n">tel_r</span><span class="p">)):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">wv_r</span><span class="p">,</span> <span class="s1">&#39;both wavelengths available&#39;</span><span class="p">)</span>
+                <span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;sigTCor&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,:,</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)])</span>
+                <span class="c1">#bg = np.nansum(np.squeeze(</span>
+                <span class="c1">#    data_cube.retrievals_highres[&#39;BGTCor&#39;][slice(*cldFree),data_cube.gf(wv, t, tel)]), axis=0)</span>
+                <span class="n">molBsc</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_profiles</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mBsc_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,:]</span>
+                <span class="n">molExt</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_profiles</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mExt_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,:]</span>
+
+                <span class="n">aerBsc</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;raman&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="s1">&#39;aerBsc&#39;</span><span class="p">]</span>
+
+                <span class="n">sig_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;sigTCor&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,:,</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv_r</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)])</span>
+                <span class="c1">#bg_r = np.nansum(np.squeeze(</span>
+                <span class="c1">#    data_cube.retrievals_highres[&#39;BGTCor&#39;][slice(*cldFree),data_cube.gf(wv_r, t, tel)]), axis=0)</span>
+                <span class="n">molBsc_r</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_profiles</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mBsc_</span><span class="si">{</span><span class="n">wv_r</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,:]</span>
+                <span class="n">molExt_r</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_profiles</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mExt_</span><span class="si">{</span><span class="n">wv_r</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,:]</span>
+                <span class="n">hFullOverlap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;heightFullOverlap&#39;</span><span class="p">])[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">ol</span> <span class="o">=</span> <span class="n">overlapCalcRaman</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">wv_r</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">sig_r</span><span class="p">,</span>
+                                 <span class="n">molExt</span><span class="p">,</span> <span class="n">molBsc_r</span><span class="p">,</span> <span class="n">molExt_r</span><span class="p">,</span> <span class="n">aerBsc</span><span class="p">,</span>
+                                 <span class="n">hFullOverlap</span><span class="o">=</span><span class="n">hFullOverlap</span><span class="p">,</span> <span class="n">smoothbins</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;overlapSmoothBins&#39;</span><span class="p">]</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span>
+                                 <span class="n">AE</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;angstrexp&#39;</span><span class="p">],</span> <span class="n">hres</span><span class="o">=</span><span class="n">hres</span><span class="p">)</span>
+
+                <span class="n">overlap</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ol</span>
+    
+    <span class="k">return</span> <span class="n">overlap</span></div>
+
+
+
+<div class="viewcode-block" id="overlapCalcRaman_v2">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.qc.overlapEst.html#ppcpy.qc.overlapEst.overlapCalcRaman_v2">[docs]</a>
+<span class="k">def</span> <span class="nf">overlapCalcRaman_v2</span><span class="p">(</span><span class="n">Lambda_el</span><span class="p">,</span> <span class="n">Lambda_Ra</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">sigFRel</span><span class="p">,</span> <span class="n">sigFRRa</span><span class="p">,</span> 
+                     <span class="n">molExt</span><span class="p">,</span> <span class="n">molBsc_r</span><span class="p">,</span> <span class="n">molExt_r</span><span class="p">,</span>
+                     <span class="n">aerBsc</span><span class="p">,</span> 
+                     <span class="n">fullOLHmin</span><span class="o">=</span><span class="mi">6000</span><span class="p">,</span> <span class="n">fullOLHmax</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+                     <span class="n">hFullOverlap</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">LR</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">AE</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hres</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">fullOverlapIndx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">hFullOverlap</span><span class="p">)</span>
+    <span class="n">fullOLIndxmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">fullOLHmin</span><span class="p">)</span>
+    <span class="n">fullOLIndxmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">fullOLHmax</span><span class="p">)</span>
+
+    <span class="n">transRa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">((</span><span class="n">molExt_r</span> <span class="o">+</span> <span class="n">LR</span> <span class="o">*</span> <span class="n">aerBsc</span> <span class="o">*</span> <span class="p">(</span><span class="n">Lambda_el</span> <span class="o">/</span> <span class="n">Lambda_Ra</span><span class="p">)</span> <span class="o">**</span> <span class="n">AE</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="n">height</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">height</span><span class="p">)))))</span>
+    <span class="n">transel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">((</span><span class="n">molExt</span> <span class="o">+</span> <span class="n">LR</span> <span class="o">*</span> <span class="n">aerBsc</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="n">height</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">height</span><span class="p">)))))</span>
+
+    <span class="n">olFunc</span> <span class="o">=</span> <span class="n">sigFRRa</span> <span class="o">*</span> <span class="n">height</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">molBsc_r</span> <span class="o">/</span> <span class="n">transel</span> <span class="o">/</span> <span class="n">transRa</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hres &#39;</span><span class="p">,</span> <span class="n">hres</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">olFunc</span><span class="p">[</span><span class="n">fullOLIndxmin</span><span class="p">:</span><span class="n">fullOLIndxmax</span><span class="p">])):</span>
+
+        <span class="n">ovl_norm</span><span class="p">,</span> <span class="n">normRange</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">mean_stable</span><span class="p">(</span><span class="n">olFunc</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="n">fullOLIndxmin</span><span class="p">,</span> <span class="n">fullOLIndxmax</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">normRange</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;normRange &#39;</span><span class="p">,</span> <span class="n">normRange</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">normRange</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">height</span><span class="p">[</span><span class="n">normRange</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">height</span><span class="p">[</span><span class="n">normRange</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">ovl_norm</span><span class="p">)</span>
+            <span class="n">olFunc</span> <span class="o">/=</span> <span class="n">ovl_norm</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;olFunc&#39;</span><span class="p">:</span> <span class="n">olFunc</span><span class="p">,</span> <span class="s1">&#39;olFunc_raw&#39;</span><span class="p">:</span> <span class="n">olFunc</span><span class="p">,</span> <span class="s1">&#39;LR&#39;</span><span class="p">:</span> <span class="n">LR</span><span class="p">,</span> <span class="s1">&#39;normRange&#39;</span><span class="p">:</span> <span class="n">normRange</span><span class="p">,</span>
+           <span class="s1">&#39;trans&#39;</span><span class="p">:</span> <span class="n">transel</span><span class="p">,</span> <span class="s1">&#39;trans_r&#39;</span><span class="p">:</span> <span class="n">transRa</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">ret</span></div>
+
+
+
+
+<div class="viewcode-block" id="overlapCalcRaman">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.qc.overlapEst.html#ppcpy.qc.overlapEst.overlapCalcRaman">[docs]</a>
+<span class="k">def</span> <span class="nf">overlapCalcRaman</span><span class="p">(</span><span class="n">Lambda_el</span><span class="p">,</span> <span class="n">Lambda_Ra</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">sigFRel</span><span class="p">,</span> <span class="n">sigFRRa</span><span class="p">,</span> 
+                     <span class="n">molExt</span><span class="p">,</span> <span class="n">molBsc_r</span><span class="p">,</span> <span class="n">molExt_r</span><span class="p">,</span>
+                     <span class="n">aerBsc</span><span class="p">,</span> <span class="n">hFullOverlap</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">smoothbins</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">AE</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hres</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate overlap function from Polly measurements</span>
+<span class="sd">    based on Wandinger and Ansmann 2002 https://doi.org/10.1364/AO.41.000511</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Lambda_el : float</span>
+<span class="sd">        Elastic wavelength.</span>
+<span class="sd">    Lambda_Ra : float</span>
+<span class="sd">        Raman wavelength.</span>
+<span class="sd">    height : ndarray</span>
+<span class="sd">        Height above ground (m).</span>
+<span class="sd">    sigFRel : ndarray</span>
+<span class="sd">        Far-field elastic signal.</span>
+<span class="sd">    sigFRRa : ndarray</span>
+<span class="sd">        Far-field Raman signal.</span>
+<span class="sd">    bgFRel : ndarray</span>
+<span class="sd">        Far-field elastic signal background.</span>
+<span class="sd">    bgFRRa : ndarray</span>
+<span class="sd">        Far-field Raman signal background.</span>
+<span class="sd">    kwargs : dict</span>
+<span class="sd">        Additional parameters:</span>
+<span class="sd">        - hFullOverlap : float, optional</span>
+<span class="sd">            Minimum height with complete overlap (default: 600).</span>
+<span class="sd">        - aerBsc : ndarray, optional</span>
+<span class="sd">            Particle backscattering derived with the Raman method (m^-1).</span>
+<span class="sd">        - AE : float, optional</span>
+<span class="sd">            Angström exponent.</span>
+<span class="sd">        - smoothbins : int, optional</span>
+<span class="sd">            Number of bins for smoothing (default: 1).</span>
+<span class="sd">        - hres : float, optional</span>
+<span class="sd">            Instrument height resolution.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    olFunc : ndarray</span>
+<span class="sd">        Overlap function.</span>
+<span class="sd">    olStd : float</span>
+<span class="sd">        Standard deviation of overlap function.</span>
+<span class="sd">    olFunc0 : ndarray</span>
+<span class="sd">        Overlap function with no smoothing.</span>
+
+<span class="sd">    History</span>
+<span class="sd">    -------</span>
+<span class="sd">    - 2023-06-06: First edition by Cristofer</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">aerBsc</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+        <span class="n">sigFRRa0</span> <span class="o">=</span> <span class="n">sigFRRa</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="n">sigFRRa</span> <span class="o">=</span> <span class="n">uniform_filter1d</span><span class="p">(</span><span class="n">sigFRRa</span><span class="p">,</span> <span class="n">smoothbins</span><span class="p">)</span>
+            <span class="n">sigFRel</span> <span class="o">=</span> <span class="n">uniform_filter1d</span><span class="p">(</span><span class="n">sigFRel</span><span class="p">,</span> <span class="n">smoothbins</span><span class="p">)</span>
+
+        <span class="n">aerBsc</span> <span class="o">=</span> <span class="n">aerBsc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">aerBsc</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">aerBsc</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">aerBsc</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">aerBsc</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">aerBsc0</span> <span class="o">=</span> <span class="n">aerBsc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">aerBsc</span> <span class="o">=</span> <span class="n">uniform_filter1d</span><span class="p">(</span><span class="n">aerBsc</span><span class="p">,</span> <span class="n">smoothbins</span><span class="p">)</span>
+
+        <span class="n">LR0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># LR array to search best LR.</span>
+
+        <span class="n">diff_norm</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">LR0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">ii</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">LR0</span><span class="p">):</span>
+                <span class="n">indx_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">diff_norm</span><span class="p">)</span>
+                <span class="n">LR</span> <span class="o">=</span> <span class="n">LR0</span><span class="p">[</span><span class="n">indx_min</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">LR</span> <span class="o">=</span> <span class="n">LR0</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
+
+            <span class="c1"># Overlap calculation (direct version)</span>
+            <span class="n">transRa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">((</span><span class="n">molExt_r</span> <span class="o">+</span> <span class="n">LR</span> <span class="o">*</span> <span class="n">aerBsc</span> <span class="o">*</span> <span class="p">(</span><span class="n">Lambda_el</span> <span class="o">/</span> <span class="n">Lambda_Ra</span><span class="p">)</span> <span class="o">**</span> <span class="n">AE</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="n">height</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">height</span><span class="p">)))))</span>
+            <span class="n">transel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">((</span><span class="n">molExt</span> <span class="o">+</span> <span class="n">LR</span> <span class="o">*</span> <span class="n">aerBsc</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="n">height</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">height</span><span class="p">)))))</span>
+            <span class="n">transRa0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">((</span><span class="n">molExt_r</span> <span class="o">+</span> <span class="n">LR</span> <span class="o">*</span> <span class="n">aerBsc0</span> <span class="o">*</span> <span class="p">(</span><span class="n">Lambda_el</span> <span class="o">/</span> <span class="n">Lambda_Ra</span><span class="p">)</span> <span class="o">**</span> <span class="n">AE</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="n">height</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">height</span><span class="p">)))))</span>
+            <span class="n">transel0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">((</span><span class="n">molExt</span> <span class="o">+</span> <span class="n">LR</span> <span class="o">*</span> <span class="n">aerBsc0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="n">height</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">height</span><span class="p">)))))</span>
+
+            <span class="k">if</span> <span class="n">sigFRRa</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">sigFRel</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">fullOverlapIndx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">hFullOverlap</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">fullOverlapIndx</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;The index with full overlap cannot be found.&#39;</span><span class="p">)</span>
+
+            <span class="n">olFunc</span> <span class="o">=</span> <span class="n">sigFRRa</span> <span class="o">*</span> <span class="n">height</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">molBsc_r</span> <span class="o">/</span> <span class="n">transel</span> <span class="o">/</span> <span class="n">transRa</span>
+            <span class="n">olFunc0</span> <span class="o">=</span> <span class="n">sigFRRa0</span> <span class="o">*</span> <span class="n">height</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">molBsc_r</span> <span class="o">/</span> <span class="n">transel0</span> <span class="o">/</span> <span class="n">transRa0</span>
+
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+                <span class="n">olFunc</span> <span class="o">=</span> <span class="n">uniform_filter1d</span><span class="p">(</span><span class="n">olFunc</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+            <span class="n">ovl_norm</span><span class="p">,</span> <span class="n">normRange</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">mean_stable</span><span class="p">(</span><span class="n">olFunc</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">fullOverlapIndx</span> <span class="o">-</span> <span class="nb">round</span><span class="p">(</span><span class="mf">37.5</span> <span class="o">/</span> <span class="n">hres</span><span class="p">),</span> <span class="n">fullOverlapIndx</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="mi">2250</span> <span class="o">/</span> <span class="n">hres</span><span class="p">),</span> <span class="mf">0.1</span><span class="p">)</span>
+            <span class="n">ovl_norm0</span><span class="p">,</span> <span class="n">normRange0</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">mean_stable</span><span class="p">(</span><span class="n">olFunc0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">fullOverlapIndx</span> <span class="o">-</span> <span class="nb">round</span><span class="p">(</span><span class="mf">37.5</span> <span class="o">/</span> <span class="n">hres</span><span class="p">),</span> <span class="n">fullOverlapIndx</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="mi">2250</span> <span class="o">/</span> <span class="n">hres</span><span class="p">),</span> <span class="mf">0.1</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">ovl_norm</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">olFunc</span> <span class="o">/=</span> <span class="n">ovl_norm</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">olFunc</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">olFunc</span><span class="p">[</span><span class="n">fullOverlapIndx</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="mi">150</span> <span class="o">/</span> <span class="n">hres</span><span class="p">):</span><span class="n">fullOverlapIndx</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1500</span> <span class="o">/</span> <span class="n">hres</span><span class="p">)])</span>
+
+            <span class="k">if</span> <span class="n">ovl_norm0</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">olFunc0</span> <span class="o">/=</span> <span class="n">ovl_norm0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">olFunc0</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">olFunc0</span><span class="p">[</span><span class="n">fullOverlapIndx</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="mi">150</span> <span class="o">/</span> <span class="n">hres</span><span class="p">):</span><span class="n">fullOverlapIndx</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1500</span> <span class="o">/</span> <span class="n">hres</span><span class="p">)])</span>
+
+            <span class="c1"># first bin to start searching full overlap height. % Please replace the 180 by a paramter in future.</span>
+            <span class="n">bin_ini</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mi">180</span> <span class="o">/</span> <span class="n">hres</span><span class="p">))</span>
+
+            <span class="n">full_ovl_indx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">olFunc</span><span class="p">[</span><span class="n">bin_ini</span><span class="p">:])</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">bin_ini</span>
+
+            <span class="k">if</span> <span class="n">full_ovl_indx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">full_ovl_indx</span> <span class="o">=</span> <span class="n">fullOverlapIndx</span>
+
+            <span class="n">diff_norm</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nansum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">olFunc</span><span class="p">[</span><span class="n">full_ovl_indx</span><span class="p">:</span><span class="n">full_ovl_indx</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="mi">1500</span> <span class="o">/</span> <span class="n">hres</span><span class="p">)])))</span>
+
+            <span class="n">olFunc</span><span class="p">[</span><span class="n">full_ovl_indx</span><span class="p">:]</span> <span class="o">=</span> <span class="n">olFunc</span><span class="p">[</span><span class="n">full_ovl_indx</span><span class="p">]</span>
+            <span class="n">olFunc</span> <span class="o">/=</span> <span class="n">olFunc</span><span class="p">[</span><span class="n">full_ovl_indx</span><span class="p">]</span> <span class="c1"># renormalization</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">full_ovl_indx</span> <span class="o">-</span> <span class="n">bin_ini</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">full_ovl_indx</span> <span class="o">=</span> <span class="n">bin_ini</span> <span class="o">+</span> <span class="mi">1</span>
+
+            <span class="n">norm_index0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">olFunc</span><span class="p">[</span><span class="n">full_ovl_indx</span> <span class="o">-</span> <span class="n">bin_ini</span><span class="p">:</span><span class="n">full_ovl_indx</span> <span class="o">+</span> <span class="n">bin_ini</span> <span class="o">*</span> <span class="mi">3</span><span class="p">])</span>
+            <span class="n">norm_index</span> <span class="o">=</span> <span class="n">norm_index0</span> <span class="o">+</span> <span class="n">full_ovl_indx</span> <span class="o">-</span> <span class="n">bin_ini</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">olFunc</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">olFunc</span><span class="p">[</span><span class="n">norm_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span><span class="n">norm_index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">])</span>
+
+            <span class="n">half_ovl_indx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">olFunc</span> <span class="o">&gt;=</span> <span class="mf">0.95</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">half_ovl_indx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">half_ovl_indx</span> <span class="o">=</span> <span class="n">full_ovl_indx</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mi">180</span> <span class="o">/</span> <span class="n">hres</span><span class="p">))</span>
+            <span class="c1"># smoothing before full overlap to avoid oscilations on that part.</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+                <span class="c1"># smoothing before full overlap to avoid S-shape near to the</span>
+                <span class="c1"># full overlap.</span>
+                <span class="n">olFunc</span><span class="p">[</span><span class="n">half_ovl_indx</span><span class="p">:</span><span class="n">norm_index</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="n">bin_ini</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">=</span> <span class="n">uniform_filter1d</span><span class="p">(</span><span class="n">olFunc</span><span class="p">[</span><span class="n">half_ovl_indx</span><span class="p">:</span><span class="n">norm_index</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="n">bin_ini</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)],</span> <span class="mi">5</span><span class="p">)</span>
+
+        <span class="n">olFunc</span><span class="p">[</span><span class="n">olFunc</span> <span class="o">&lt;</span> <span class="mf">1e-5</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-5</span>
+
+    <span class="c1">#olFunc = olFunc.T</span>
+    <span class="c1">#olFunc0 = olFunc0.T</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;olFunc&#39;</span><span class="p">:</span> <span class="n">olFunc</span><span class="p">,</span> <span class="s1">&#39;olFunc_raw&#39;</span><span class="p">:</span> <span class="n">olFunc0</span><span class="p">,</span> <span class="s1">&#39;LR&#39;</span><span class="p">:</span> <span class="n">LR</span><span class="p">,</span> <span class="s1">&#39;normRange&#39;</span><span class="p">:</span> <span class="n">normRange</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">ret</span></div>
+
+
+
+
+<div class="viewcode-block" id="load">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.qc.overlapEst.html#ppcpy.qc.overlapEst.load">[docs]</a>
+<span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">data_cube</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    read the overlap function from files</span>
+<span class="sd">    into a structure similar to the others    </span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025 Andi Klamt and Martin Radenz.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1202 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ppcpy.misc.helper &#8212; PicassoPy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/sphinx_rtd_size.css?v=3b072d6b" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ppcpy/misc/helper';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PicassoPy  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ppcpy.misc.helper</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ppcpy.misc.helper</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+<span class="kn">import</span> <span class="nn">xarray</span>
+<span class="kn">from</span> <span class="nn">zipfile</span> <span class="kn">import</span> <span class="n">ZipFile</span><span class="p">,</span> <span class="n">ZIP_DEFLATED</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">uniform_filter1d</span>
+
+<div class="viewcode-block" id="detect_path_type">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.detect_path_type">[docs]</a>
+<span class="k">def</span> <span class="nf">detect_path_type</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Detect the type of path (Windows or Linux) based on the input.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">is_windows_path</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">is_linux_path</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;/&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        
+    <span class="k">if</span> <span class="n">is_windows_path</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
+        <span class="c1"># Parse the drive letter and path</span>
+        <span class="n">drive_letter</span><span class="p">,</span> <span class="n">path_part</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Remove leading backslash from path_part</span>
+        <span class="n">path_part</span> <span class="o">=</span> <span class="n">path_part</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">path_object</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">drive_letter</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">path_part</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">path_object</span>
+    <span class="k">elif</span> <span class="n">is_linux_path</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
+        <span class="n">path_object</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">path_object</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># that happens if no folders are given</span>
+        <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="os_name">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.os_name">[docs]</a>
+<span class="k">def</span> <span class="nf">os_name</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="get_input_path">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.get_input_path">[docs]</a>
+<span class="k">def</span> <span class="nf">get_input_path</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="n">raw_folder</span><span class="p">):</span>
+    <span class="n">YYYY</span><span class="o">=</span><span class="n">timestamp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">MM</span><span class="o">=</span><span class="n">timestamp</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+    <span class="n">DD</span><span class="o">=</span><span class="n">timestamp</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
+    <span class="n">input_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">raw_folder</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="s2">&quot;data_zip&quot;</span><span class="p">,</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">YYYY</span><span class="si">}{</span><span class="n">MM</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;checking data availability for </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s1"> at </span><span class="si">{</span><span class="n">YYYY</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">MM</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">DD</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">input_path</span></div>
+
+
+
+<div class="viewcode-block" id="get_pollyxt_files">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.get_pollyxt_files">[docs]</a>
+<span class="k">def</span> <span class="nf">get_pollyxt_files</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="n">raw_folder</span><span class="p">,</span><span class="n">output_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This function locates multiple pollyxt level0 nc-zip files from one day measurements,</span>
+<span class="sd">        unzipps the files to output_path</span>
+<span class="sd">        and returns a list of files to be merged</span>
+<span class="sd">        and the title of the new merged nc-file</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">input_path</span> <span class="o">=</span> <span class="n">get_input_path</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="n">raw_folder</span><span class="p">)</span>
+    <span class="n">path_exist</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">input_path</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">path_exist</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+
+        <span class="c1">## set the searchpattern for the zipped-nc-files:</span>
+        <span class="n">YYYY</span><span class="o">=</span><span class="n">timestamp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">MM</span><span class="o">=</span><span class="n">timestamp</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+        <span class="n">DD</span><span class="o">=</span><span class="n">timestamp</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
+
+        <span class="n">zip_searchpattern</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">YYYY</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">MM</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">DD</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;*_*[0-9].nc.zip&#39;</span>
+
+        <span class="n">polly_files</span>       <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_path</span><span class="p">))</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zip_searchpattern</span><span class="p">))</span>
+        <span class="n">polly_zip_files_list0</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">polly_files</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">is_file</span><span class="p">()]</span>
+
+
+        <span class="c1">## convert type path to type string</span>
+        <span class="n">polly_zip_files_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">polly_zip_files_list0</span><span class="p">:</span>
+            <span class="n">polly_zip_files_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">polly_zip_files_list</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no files found!&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="c1"># Ensure the destination directory exists</span>
+        <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">polly_files_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">to_unzip_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">zip_file</span> <span class="ow">in</span> <span class="n">polly_zip_files_list</span><span class="p">:</span>
+            <span class="c1">## check for size of zip-files to ensure to exclude bad measurement files with wrong timestamp e.g. 19700101</span>
+            <span class="n">f_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">f_size</span> <span class="o">&gt;</span> <span class="mi">500000</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">f_size</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;filesize passes&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">f_size</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;filesize too small, file will be skipped!&quot;</span><span class="p">)</span>
+                <span class="k">continue</span> <span class="c1">## go to next file</span>
+
+            <span class="n">unzipped_nc</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">unzipped_nc</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">unzipped_nc</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span>
+            <span class="n">unzipped_nc</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span><span class="n">unzipped_nc</span><span class="p">)</span>
+            <span class="n">polly_files_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unzipped_nc</span><span class="p">)</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">unzipped_nc</span><span class="p">)</span>
+
+            <span class="c1">## check if unzipped files already exists in outputfolder</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="n">to_unzip_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">unzipped_nc</span><span class="p">)</span>
+                <span class="n">to_unzip_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span>
+
+        <span class="c1">## unzipping</span>
+        <span class="n">date_pattern</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">YYYY</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">MM</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">DD</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">to_unzip_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1">## if working remotly on windows, copy zipped files first, than unzip</span>
+            <span class="k">if</span> <span class="n">os_name</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;windows&#39;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Copy zipped files to local drive...&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">zip_file</span> <span class="ow">in</span> <span class="n">to_unzip_list</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span>
+                    <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">zip_file</span><span class="p">),</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span> <span class="o">/</span> <span class="n">Path</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Unzipping...&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">zip_file</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">zip_file</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="ow">and</span> <span class="n">date_pattern</span> <span class="ow">in</span> <span class="n">zip_file</span><span class="o">.</span><span class="n">stem</span> <span class="ow">and</span> <span class="n">zip_file</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s1">&#39;.zip&#39;</span><span class="p">:</span>
+                        <span class="k">with</span> <span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;unzipping &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">zip_file</span><span class="p">))</span>
+                            <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Removing .zip file...&quot;</span><span class="p">)</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Unzipping...&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">zip_file</span> <span class="ow">in</span> <span class="n">to_unzip_list</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;unzipping &quot;</span><span class="o">+</span><span class="n">zip_file</span><span class="p">)</span>
+                        <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+
+
+        <span class="c1">## sort lists</span>
+        <span class="n">polly_files_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">polly_files_list</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot; files found:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">polly_files_list</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">No data was found in </span><span class="si">{}</span><span class="s2">. Correct path?</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_path</span><span class="p">))</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">polly_files_list</span></div>
+
+
+
+<div class="viewcode-block" id="get_pollyxt_logbook_files">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.get_pollyxt_logbook_files">[docs]</a>
+<span class="k">def</span> <span class="nf">get_pollyxt_logbook_files</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="n">raw_folder</span><span class="p">,</span><span class="n">output_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This function locates multiple pollyxt logbook-zip files from one day measurements,</span>
+<span class="sd">        unzipps the files to output_path</span>
+<span class="sd">        and  merge them to one file</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">input_path</span> <span class="o">=</span> <span class="n">get_input_path</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="n">raw_folder</span><span class="p">)</span>
+    <span class="n">path_exist</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">input_path</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">path_exist</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+
+        <span class="c1">## set the searchpattern for the zipped-nc-files:</span>
+        <span class="n">YYYY</span><span class="o">=</span><span class="n">timestamp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">MM</span><span class="o">=</span><span class="n">timestamp</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+        <span class="n">DD</span><span class="o">=</span><span class="n">timestamp</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
+
+        <span class="n">zip_searchpattern</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">YYYY</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">MM</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">DD</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;*_*laserlogbook*.zip&#39;</span>
+
+        <span class="n">polly_laserlog_files</span>       <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_path</span><span class="p">))</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zip_searchpattern</span><span class="p">))</span>
+        <span class="n">polly_laserlog_zip_files_list0</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">polly_laserlog_files</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">is_file</span><span class="p">()]</span>
+
+
+        <span class="c1">## convert type path to type string</span>
+        <span class="n">polly_laserlog_zip_files_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">polly_laserlog_zip_files_list0</span><span class="p">:</span>
+            <span class="n">polly_laserlog_zip_files_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">polly_laserlog_zip_files_list</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no laserlogbook-files found!&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="n">polly_laserlog_files_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">to_unzip_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">zip_file</span> <span class="ow">in</span> <span class="n">polly_laserlog_zip_files_list</span><span class="p">:</span>
+            <span class="n">unzipped_logtxt</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">unzipped_logtxt</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">unzipped_logtxt</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span>
+            <span class="n">unzipped_logtxt</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span><span class="n">unzipped_logtxt</span><span class="p">)</span>
+            <span class="n">polly_laserlog_files_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unzipped_logtxt</span><span class="p">)</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">unzipped_logtxt</span><span class="p">)</span>
+
+            <span class="n">to_unzip_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span>
+
+
+        <span class="c1">## unzipping</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">to_unzip_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">zip_file</span> <span class="ow">in</span> <span class="n">to_unzip_list</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;unzipping &quot;</span><span class="o">+</span><span class="n">zip_file</span><span class="p">)</span>
+                    <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+
+        <span class="c1">## sort lists</span>
+        <span class="n">polly_laserlog_files_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">polly_laserlog_files_list</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot; laserlogfiles found:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">polly_laserlog_files_list</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1">## concat the txt files</span>
+        <span class="n">result_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span><span class="s2">&quot;result.txt&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">result_file</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">logf</span> <span class="ow">in</span> <span class="n">polly_laserlog_files_list</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">logf</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+                    <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">infile</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+                <span class="c1">## delete every single logbook-file from unzipped-folder</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">logf</span><span class="p">)</span>
+
+        <span class="n">laserlog_filename</span> <span class="o">=</span> <span class="n">polly_laserlog_files_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">laserlog_filename</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">laserlog_filename</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">laserlog_filename_left</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;_[0-9][0-9]_[0-9][0-9]_[0-9][0-9]\.nc&#39;</span><span class="p">,</span><span class="n">laserlog_filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">laserlog_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">laserlog_filename_left</span><span class="si">}</span><span class="s1">_00_00_01.nc.laserlogbook.txt&#39;</span>
+        <span class="n">destination_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span><span class="n">laserlog_filename</span><span class="p">)</span>
+
+        <span class="c1"># Open the source file in binary mode and read its content</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">result_file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">source</span><span class="p">:</span>
+            <span class="c1"># Open the destination file in binary mode and write the content</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">destination_file</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">destination</span><span class="p">:</span>
+                <span class="n">destination</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">result_file</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">No laserlogbook was found in </span><span class="si">{}</span><span class="s2">. Correct path?</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_path</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="add_to_list">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.add_to_list">[docs]</a>
+<span class="k">def</span> <span class="nf">add_to_list</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">from_list</span><span class="p">,</span> <span class="n">to_list</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">from_list</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="ow">in</span> <span class="n">to_list</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">to_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">from_list</span><span class="p">[</span><span class="n">element</span><span class="p">])</span></div>
+
+
+
+
+<div class="viewcode-block" id="checking_vars">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.checking_vars">[docs]</a>
+<span class="k">def</span> <span class="nf">checking_vars</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="n">raw_folder</span><span class="p">,</span><span class="n">output_path</span><span class="p">):</span>
+    <span class="c1">## select only those nc-files where the values of some specific variables haven&#39;t changed</span>
+    <span class="n">vars_of_interest</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="s1">&#39;measurement_height_resolution&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;laser_rep_rate&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;laser_power&#39;</span><span class="p">,</span>
+<span class="c1">#                        &#39;laser_flashlamp&#39;,</span>
+                        <span class="s1">&#39;location_height&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;neutral_density_filter&#39;</span><span class="p">,</span>
+<span class="c1">#                        &#39;location_coordinates&#39;,</span>
+                        <span class="s1">&#39;pm_voltage&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;pinhole&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;polstate&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;telescope&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;deadtime_polynomial&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;discr_level&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;if_center&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;if_fwhm&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;zenithangle&#39;</span>
+                        <span class="p">]</span>
+
+    <span class="n">polly_files_list</span> <span class="o">=</span> <span class="n">get_pollyxt_files</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="n">raw_folder</span><span class="p">,</span><span class="n">output_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">polly_files_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">polly_files_list</span>
+
+    <span class="n">polly_file_ds_ls</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">polly_files_list</span><span class="p">:</span>
+        <span class="n">polly_file_ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">files</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+        <span class="n">polly_file_ds_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">polly_file_ds</span><span class="p">)</span>
+
+    <span class="n">selected_var_nc_ls</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">diff_var</span><span class="o">=</span><span class="mi">0</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;checking differences in selected variables ...&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">polly_file_ds_ls</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+<span class="c1">#        print(&#39;\n&#39;)</span>
+<span class="c1">#        print(polly_files_list[ds] + &#39;   vs.   &#39; + polly_files_list[ds+1])</span>
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">vars_of_interest</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">## check if var is available within the polly-datastructure (depending on polly-system)</span>
+                <span class="n">var_value_1</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">][:])</span>
+                <span class="n">var_value_2</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">][:])</span>
+    <span class="c1">#            print(var + &quot;: &quot; + var_value_1)</span>
+    <span class="c1">#            print(var + &quot;: &quot; + var_value_2)</span>
+                <span class="k">if</span> <span class="n">var_value_1</span> <span class="o">==</span> <span class="n">var_value_2</span> <span class="ow">and</span> <span class="n">diff_var</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="c1"># print(&#39;no difference found ...&#39;)</span>
+                    <span class="n">add_to_list</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">polly_files_list</span><span class="p">,</span><span class="n">selected_var_nc_ls</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">var_value_1</span> <span class="o">!=</span> <span class="n">var_value_2</span> <span class="ow">and</span> <span class="n">diff_var</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;difference found in var:&#39;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+                    <span class="c1">#print(var + &quot;: &quot; + var_value_1)</span>
+                    <span class="c1">#print(var + &quot;: &quot; + var_value_2)</span>
+                    <span class="n">diff_var</span><span class="o">=</span><span class="mi">1</span>
+                    <span class="n">add_to_list</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">polly_files_list</span><span class="p">,</span><span class="n">selected_var_nc_ls</span><span class="p">)</span> <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="kc">None</span>
+                <span class="k">elif</span> <span class="n">var_value_1</span> <span class="o">==</span> <span class="n">var_value_2</span> <span class="ow">and</span> <span class="n">diff_var</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="n">add_to_list</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">polly_files_list</span><span class="p">,</span><span class="n">selected_var_nc_ls</span><span class="p">)</span> <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="kc">None</span>
+                <span class="k">elif</span> <span class="n">var_value_1</span> <span class="o">!=</span> <span class="n">var_value_2</span> <span class="ow">and</span> <span class="n">diff_var</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="n">diff_var</span><span class="o">=</span><span class="n">diff_var</span><span class="o">+</span><span class="mi">1</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;difference found!&#39;</span><span class="p">)</span>
+                    <span class="n">add_to_list</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">polly_files_list</span><span class="p">,</span><span class="n">selected_var_nc_ls</span><span class="p">)</span> <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="p">]</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">diff_var</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">add_to_list</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">polly_files_list</span><span class="p">,</span><span class="n">selected_var_nc_ls</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">no differences found in selected variables!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">diff_var</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+<span class="c1">#        add_to_list(-1,polly_files_list,selected_var_nc_ls) if force == True else None</span>
+        <span class="c1">## if force==true, merge, but if force==false: the whole day will not be in list anymore</span>
+        <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">add_to_list</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">polly_files_list</span><span class="p">,</span><span class="n">selected_var_nc_ls</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">differences found in selected variables! But will be force-merged.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">differences found in selected variables! Selected Date will be skipped.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">polly_files_list</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">selected_var_nc_ls</span></div>
+
+
+
+<div class="viewcode-block" id="checking_attr">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.checking_attr">[docs]</a>
+<span class="k">def</span> <span class="nf">checking_attr</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="n">raw_folder</span><span class="p">,</span><span class="n">output_path</span><span class="p">):</span>
+    <span class="c1">## select only those nc-files where the global attributes and the var-attributes haven&#39;t changed</span>
+    <span class="n">selected_var_nc_ls</span> <span class="o">=</span> <span class="n">checking_vars</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="n">raw_folder</span><span class="p">,</span><span class="n">output_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_var_nc_ls</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">selected_var_nc_ls</span>
+
+    <span class="n">polly_file_ds_ls</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">selected_var_nc_ls</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
+        <span class="n">polly_file_ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">files</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+        <span class="n">polly_file_ds_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">polly_file_ds</span><span class="p">)</span>
+
+    <span class="n">selected_att_nc_ls</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">diff_att</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">diff_var_att</span><span class="o">=</span><span class="mi">0</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;checking differences in attributes ...&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">polly_file_ds_ls</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1">## get global attributes as a list of strings</span>
+<span class="c1">#        print(selected_var_nc_ls[ds] + &#39;   vs.   &#39; + selected_var_nc_ls[ds+1])</span>
+<span class="c1">#        print(&#39;\nglobal attributes:&#39;)</span>
+        <span class="k">for</span> <span class="n">nc_attr</span> <span class="ow">in</span> <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ncattrs</span><span class="p">():</span>
+            <span class="c1"># att_value=repr(input_nc_file.getncattr(nc_attr))</span>
+            <span class="n">att_value_1</span><span class="o">=</span><span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="p">]</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">nc_attr</span><span class="p">)</span>
+            <span class="n">att_value_2</span><span class="o">=</span><span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">nc_attr</span><span class="p">)</span>
+<span class="c1">#            print(nc_attr)</span>
+<span class="c1">#            print(&quot;   &quot; + att_value_1)</span>
+<span class="c1">#            print(&quot;   &quot; + att_value_2)</span>
+            <span class="k">if</span> <span class="n">att_value_1</span> <span class="o">==</span> <span class="n">att_value_2</span> <span class="ow">and</span> <span class="n">diff_att</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">add_to_list</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">selected_var_nc_ls</span><span class="p">,</span><span class="n">selected_att_nc_ls</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">att_value_1</span> <span class="o">!=</span> <span class="n">att_value_2</span> <span class="ow">and</span> <span class="n">diff_att</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;difference found!&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">nc_attr</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   &quot;</span> <span class="o">+</span> <span class="n">att_value_1</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   &quot;</span> <span class="o">+</span> <span class="n">att_value_2</span><span class="p">)</span>
+                <span class="n">diff_att</span><span class="o">=</span><span class="mi">1</span>
+                <span class="n">add_to_list</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">selected_var_nc_ls</span><span class="p">,</span><span class="n">selected_att_nc_ls</span><span class="p">)</span> <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="k">elif</span> <span class="n">att_value_1</span> <span class="o">==</span> <span class="n">att_value_2</span> <span class="ow">and</span> <span class="n">diff_att</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">add_to_list</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">selected_var_nc_ls</span><span class="p">,</span><span class="n">selected_att_nc_ls</span><span class="p">)</span> <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="k">elif</span> <span class="n">att_value_1</span> <span class="o">!=</span> <span class="n">att_value_2</span> <span class="ow">and</span> <span class="n">diff_att</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;difference found!&#39;</span><span class="p">)</span>
+                <span class="n">add_to_list</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">selected_var_nc_ls</span><span class="p">,</span><span class="n">selected_att_nc_ls</span><span class="p">)</span> <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="c1">#        print(&quot;\nvariable attributes:&quot;)</span>
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="c1">#            print(var)</span>
+            <span class="k">for</span> <span class="n">var_att</span> <span class="ow">in</span> <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">ncattrs</span><span class="p">():</span>
+                <span class="n">var_att_value_1</span> <span class="o">=</span> <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">var_att</span><span class="p">)</span>
+                <span class="n">var_att_value_2</span> <span class="o">=</span> <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">var_att</span><span class="p">)</span>
+<span class="c1">#                print(&quot;   &quot; + var_att)</span>
+<span class="c1">#                print(&quot;      &quot; + var_att_value_1)</span>
+<span class="c1">#                print(&quot;      &quot; + var_att_value_2)</span>
+                <span class="k">if</span> <span class="n">var_att_value_1</span> <span class="o">==</span> <span class="n">var_att_value_2</span> <span class="ow">and</span> <span class="n">diff_var_att</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">elif</span> <span class="n">var_att_value_1</span> <span class="o">!=</span> <span class="n">var_att_value_2</span> <span class="ow">and</span> <span class="n">diff_var_att</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;difference found!&#39;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   &quot;</span> <span class="o">+</span> <span class="n">var_att</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;      &quot;</span> <span class="o">+</span> <span class="n">var_att_value_1</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;      &quot;</span> <span class="o">+</span> <span class="n">var_att_value_2</span><span class="p">)</span>
+                    <span class="n">diff_var_att</span><span class="o">=</span><span class="mi">1</span>
+                <span class="k">elif</span> <span class="n">var_att_value_1</span> <span class="o">==</span> <span class="n">var_att_value_2</span> <span class="ow">and</span> <span class="n">diff_var_att</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">elif</span> <span class="n">var_att_value_1</span> <span class="o">!=</span> <span class="n">var_att_value_2</span> <span class="ow">and</span> <span class="n">diff_var_att</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;difference found!&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">polly_file_ds_ls</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="p">]</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+    <span class="k">if</span> <span class="n">diff_att</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">add_to_list</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">selected_var_nc_ls</span><span class="p">,</span><span class="n">selected_att_nc_ls</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">no differences found in global attributes!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">diff_att</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+<span class="c1">#        add_to_list(-1,selected_var_nc_ls,selected_att_nc_ls) if force == True else None</span>
+
+        <span class="c1">## if force==true, merge, but if force==false: the whole day will not be in list anymore</span>
+        <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">add_to_list</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">selected_var_nc_ls</span><span class="p">,</span><span class="n">selected_att_nc_ls</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">differences found in global attributes! But will be force-merged.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">differences found in global attributes! Selected Date will be skipped.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">polly_files_list</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">diff_var_att</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">no differences found in variable attributes!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="c1">#   elif diff_var_att != 0:</span>
+<span class="c1">#        ## if force==true, merge, but if force==false: the whole day will not be in list anymore</span>
+<span class="c1">#        if force == True:</span>
+<span class="c1">#            add_to_list(-1,selected_var_nc_ls,selected_att_nc_ls)</span>
+<span class="c1">#           print(&#39;\ndifferences found in variable attributes! But will be force-merged.\n&#39;)</span>
+<span class="c1">#        else:</span>
+<span class="c1">#           print(&#39;\ndifferences found in variable attributes! Selected Date will be skipped.\n&#39;)</span>
+<span class="c1">#           sys.exit()</span>
+
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">selected_att_nc_ls</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">selected_att_nc_ls</span></div>
+
+
+
+<div class="viewcode-block" id="checking_timestamp">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.checking_timestamp">[docs]</a>
+<span class="k">def</span> <span class="nf">checking_timestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="n">raw_folder</span><span class="p">,</span><span class="n">output_path</span><span class="p">):</span>
+    <span class="n">selected_timestamp_nc_ls</span> <span class="o">=</span> <span class="n">checking_attr</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="n">raw_folder</span><span class="p">,</span><span class="n">output_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_timestamp_nc_ls</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">selected_timestamp_nc_ls</span>
+    <span class="n">selected_cor_timestamp_nc_ls</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">polly_file_ds_ls</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;checking for correct timestamps...&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">selected_timestamp_nc_ls</span><span class="p">:</span>
+        <span class="n">polly_file_ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">files</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+        <span class="n">polly_file_ds_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">polly_file_ds</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">elementNR</span><span class="p">,</span><span class="n">ds</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">polly_file_ds_ls</span><span class="p">):</span>
+    <span class="c1">#    print(selected_timestamp_nc_ls[elementNR])</span>
+        <span class="n">timestamp_ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;measurement_time&#39;</span><span class="p">][:]</span>
+        <span class="k">if</span> <span class="mi">19700101</span> <span class="ow">in</span> <span class="n">timestamp_ds</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The file: </span><span class="si">{</span><span class="n">selected_timestamp_nc_ls</span><span class="p">[</span><span class="n">elementNR</span><span class="p">]</span><span class="si">}</span><span class="s1"> contains incorrect timestamps!&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Trying to correct timestamps...&#39;</span><span class="p">)</span>
+            <span class="c1">## get correct timestamp_ds from filename</span>
+            <span class="n">timestamp_filename</span> <span class="o">=</span> <span class="n">selected_timestamp_nc_ls</span><span class="p">[</span><span class="n">elementNR</span><span class="p">]</span>
+            <span class="n">timestamp_filename</span> <span class="o">=</span> <span class="n">timestamp_filename</span><span class="o">.</span><span class="n">stem</span>
+            <span class="n">timestamp_filename</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">timestamp_filename</span><span class="p">))[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span>
+            <span class="c1">## del. nc-file</span>
+            <span class="c1">#os.remove(selected_timestamp_nc_ls[elementNR]) ### remove unzipped nc-file with incorrect timestamps</span>
+            <span class="c1">## calc. the deltaT between measurementdatapoints</span>
+            <span class="n">laser_rep_rate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;laser_rep_rate&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">measurement_shots</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;measurement_shots&#39;</span><span class="p">][:]</span>
+            <span class="n">measurement_shots_nonzero</span> <span class="o">=</span> <span class="p">[</span><span class="n">elem</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">measurement_shots</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">row</span> <span class="k">if</span> <span class="n">elem</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="n">exit</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">measurement_shots_nonzero</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;length of measurement_shots_nonzero equals 0. file will be removed from merging list.&#39;</span><span class="p">)</span>
+                <span class="n">ds</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">measurement_shots_average</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">measurement_shots_nonzero</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">measurement_shots_nonzero</span><span class="p">)</span>
+                <span class="n">deltaT</span> <span class="o">=</span> <span class="n">measurement_shots_average</span> <span class="o">/</span> <span class="n">laser_rep_rate</span>
+                <span class="n">deltaT</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">deltaT</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="c1">## unit in seconds</span>
+                <span class="c1">## calc. the correct seconds of day for this dataset</span>
+                <span class="n">start_seconds</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">timestamp_filename</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="mi">3600</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">timestamp_filename</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mi">60</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">timestamp_filename</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                <span class="c1">## length of measurement_list</span>
+                <span class="n">len_measurement_list</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">timestamp_ds</span><span class="p">)</span>
+                <span class="c1">## create new measurement_time list</span>
+                <span class="n">seconds_ls</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">start_seconds</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">len_measurement_list</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">seconds_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+                    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">deltaT</span>
+                <span class="c1">## check if seconds_ls does not contain seonds of day larger than 86400 ## TODO</span>
+                <span class="c1">## if so, remove file from list and del. file ## TODO</span>
+                <span class="n">t_check</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">86400</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">seconds_ls</span><span class="p">)</span>
+                <span class="c1">#t_check = False ## do not skip files which are longer than 24h, seconds_ls &gt; 86400</span>
+                <span class="k">if</span> <span class="n">t_check</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;seconds of day exceeds 86400. file will be removed from merging list.&#39;</span><span class="p">)</span>
+                    <span class="n">ds</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="k">continue</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">seconds_iter</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">seconds_ls</span><span class="p">)</span>
+                    <span class="n">new_measurement_time_list</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">int</span><span class="p">(</span><span class="n">timestamp</span><span class="p">),</span> <span class="nb">next</span><span class="p">(</span><span class="n">seconds_iter</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">len_measurement_list</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+
+                    <span class="c1">## create a new netCDF4 file to write the dataset</span>
+                    <span class="n">new_dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">selected_timestamp_nc_ls</span><span class="p">[</span><span class="n">elementNR</span><span class="p">]</span><span class="si">}</span><span class="s1">_dummy&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">selected_timestamp_nc_ls</span><span class="p">[</span><span class="n">elementNR</span><span class="p">]</span><span class="si">}</span><span class="s1">_dummy&#39;</span><span class="p">)</span>
+
+                    <span class="c1">## copy the entire dataset to the new file</span>
+                    <span class="n">new_dataset</span><span class="o">.</span><span class="n">setncatts</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">dimensions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="n">new_dataset</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">dim</span><span class="o">.</span><span class="n">isunlimited</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
+
+                    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="n">new_var</span> <span class="o">=</span> <span class="n">new_dataset</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">dimensions</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;measurement_time&#39;</span><span class="p">:</span>
+                            <span class="n">new_var</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">new_measurement_time_list</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">new_var</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">var</span><span class="p">[:]</span>
+
+
+                    <span class="n">ds</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="n">new_dataset</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">selected_timestamp_nc_ls</span><span class="p">[</span><span class="n">elementNR</span><span class="p">])</span> <span class="c1">### remove unzipped nc-file with incorrect timestamps</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">selected_timestamp_nc_ls</span><span class="p">[</span><span class="n">elementNR</span><span class="p">]</span><span class="si">}</span><span class="s1">_dummy&#39;</span><span class="p">,</span><span class="n">selected_timestamp_nc_ls</span><span class="p">[</span><span class="n">elementNR</span><span class="p">])</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;timestamps corrected.&#39;</span><span class="p">)</span>
+                    <span class="n">selected_cor_timestamp_nc_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">selected_timestamp_nc_ls</span><span class="p">[</span><span class="n">elementNR</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The file: </span><span class="si">{</span><span class="n">selected_timestamp_nc_ls</span><span class="p">[</span><span class="n">elementNR</span><span class="p">]</span><span class="si">}</span><span class="s1"> passes timestamp check.&#39;</span><span class="p">)</span>
+            <span class="n">selected_cor_timestamp_nc_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">selected_timestamp_nc_ls</span><span class="p">[</span><span class="n">elementNR</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">ds</span><span class="o">.</span><span class="n">isopen</span><span class="p">():</span>
+            <span class="n">ds</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">the following &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_cor_timestamp_nc_ls</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39; files can be merged:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">selected_cor_timestamp_nc_ls</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">selected_cor_timestamp_nc_ls</span></div>
+
+
+
+<div class="viewcode-block" id="concat_files">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.concat_files">[docs]</a>
+<span class="k">def</span> <span class="nf">concat_files</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="n">raw_folder</span><span class="p">,</span><span class="n">output_path</span><span class="p">):</span>
+    <span class="c1">## merge selected files</span>
+
+<span class="c1">#    concat=&#39;concat&#39;</span>
+
+    <span class="n">sel_polly_files_list</span> <span class="o">=</span> <span class="n">checking_timestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span><span class="n">device</span><span class="p">,</span><span class="n">raw_folder</span><span class="p">,</span><span class="n">output_path</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sel_polly_files_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no files found for this day. no merging.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">()</span>
+    <span class="n">polly_files_no_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">sel_polly_files_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">filestring_left</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;_[0-9][0-9]_[0-9][0-9]_[0-9][0-9]&#39;</span><span class="p">,</span> <span class="n">polly_files_no_path</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">filestring_dummy</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">filestring_left</span><span class="si">}</span><span class="s2">_00_00_01_dummy.nc&quot;</span>
+    <span class="n">filestring</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">filestring_left</span><span class="si">}</span><span class="s2">_00_00_01.nc&quot;</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sel_polly_files_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Only one file found. Nothing to merge!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">sel_polly_files_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span><span class="n">filestring</span><span class="p">))</span>
+        <span class="k">return</span> <span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+<span class="c1">#        sel_polly_files_list = [ str(el) for el in sel_polly_files_list]</span>
+        <span class="c1">## parameters for controlling the merging process</span>
+        <span class="n">compat</span><span class="o">=</span><span class="s1">&#39;override&#39;</span> <span class="c1">## Values of variable &quot;laser_flashlamp&quot; often changes, but those files will be merged anyway. This option picks the value from first dataset.</span>
+        <span class="n">coords</span><span class="o">=</span><span class="s1">&#39;minimal&#39;</span>
+
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">xarray</span><span class="o">.</span><span class="n">open_mfdataset</span><span class="p">(</span><span class="n">sel_polly_files_list</span><span class="p">,</span><span class="n">combine</span> <span class="o">=</span> <span class="s1">&#39;nested&#39;</span><span class="p">,</span> <span class="n">data_vars</span><span class="o">=</span><span class="s2">&quot;minimal&quot;</span><span class="p">,</span> <span class="n">concat_dim</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">compat</span><span class="o">=</span><span class="n">compat</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="n">coords</span><span class="p">)</span>
+        <span class="c1">## save to a single nc-file</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">merged nc-file &#39;</span><span class="si">{</span><span class="n">filestring</span><span class="si">}</span><span class="s2">&#39; will be stored to &#39;</span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">writing merged file ...&quot;</span><span class="p">)</span>
+
+        <span class="c1">## adding compression-level encoding</span>
+        <span class="k">def</span> <span class="nf">write_netcdf</span><span class="p">(</span><span class="n">ds</span><span class="p">:</span> <span class="n">xarray</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">out_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">enc</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ds</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="n">enc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;zlib&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="s2">&quot;complevel&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="c1">#                    &quot;fletcher32&quot;: True,</span>
+<span class="c1">#                    &quot;chunksizes&quot;: tuple(map(lambda x: x//2, ds[k].shape))</span>
+                <span class="p">}</span>
+
+            <span class="n">ds</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">out_file</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;NETCDF4&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;netcdf4&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">enc</span><span class="p">)</span>
+
+        <span class="n">write_netcdf</span><span class="p">(</span><span class="n">ds</span><span class="o">=</span><span class="n">ds</span><span class="p">,</span><span class="n">out_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span><span class="n">filestring_dummy</span><span class="p">))</span>
+
+        <span class="n">ds</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">deleting individual .nc files ...&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">sel_polly_files_list</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+    <span class="n">destination_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span><span class="n">filestring</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">destination_file</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">destination_file</span><span class="p">)</span>  <span class="c1"># Remove the existing destination file</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span><span class="n">filestring_dummy</span><span class="p">),</span><span class="n">destination_file</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;done!&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">destination_file</span></div>
+
+
+<div class="viewcode-block" id="remove_whitespaces_and_replace_dash_with_underscore">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.remove_whitespaces_and_replace_dash_with_underscore">[docs]</a>
+<span class="k">def</span> <span class="nf">remove_whitespaces_and_replace_dash_with_underscore</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="n">new_string</span>  <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_string</span></div>
+
+
+<div class="viewcode-block" id="find_matching_dimension">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.find_matching_dimension">[docs]</a>
+<span class="k">def</span> <span class="nf">find_matching_dimension</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">reference_list</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the dimension of a 3D array that matches the length of the reference list.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        array (np.ndarray): The 3D NumPy array to check.</span>
+<span class="sd">        reference_list (list): The list to compare the dimension lengths with. This can also be a dict.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: The index of the matching dimension, or -1 if no match is found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">list_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">reference_list</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">dim_index</span><span class="p">,</span> <span class="n">dim_size</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">dim_size</span> <span class="o">==</span> <span class="n">list_length</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">dim_index</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># No matching dimension found</span></div>
+
+
+<div class="viewcode-block" id="channel_2_variable_mapping">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.channel_2_variable_mapping">[docs]</a>
+<span class="k">def</span> <span class="nf">channel_2_variable_mapping</span><span class="p">(</span><span class="n">data_retrievals</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">channeltags_dict</span><span class="p">):</span>
+    <span class="c1">## check length of channeltags_dict vs. length of data_retrievals[var].shape</span>
+    <span class="n">channel_dim</span> <span class="o">=</span> <span class="n">find_matching_dimension</span><span class="p">(</span><span class="n">array</span><span class="o">=</span><span class="n">data_retrievals</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">reference_list</span><span class="o">=</span><span class="n">channeltags_dict</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">channeltags_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">ch_mod</span> <span class="o">=</span><span class="n">remove_whitespaces_and_replace_dash_with_underscore</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="n">channeltags_dict</span><span class="p">[</span><span class="n">ch</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_retrievals</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">channel_dim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">data_retrievals</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">ch_mod</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">data_retrievals</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="n">ch</span><span class="p">,:,:]</span>
+            <span class="k">elif</span> <span class="n">channel_dim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">data_retrievals</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">ch_mod</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">data_retrievals</span><span class="p">[</span><span class="n">var</span><span class="p">][:,</span><span class="n">ch</span><span class="p">,:]</span>
+            <span class="k">elif</span> <span class="n">channel_dim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">data_retrievals</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">ch_mod</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">data_retrievals</span><span class="p">[</span><span class="n">var</span><span class="p">][:,:,</span><span class="n">ch</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_retrievals</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">channel_dim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">data_retrievals</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">ch_mod</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">data_retrievals</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="n">ch</span><span class="p">,:]</span>
+            <span class="k">elif</span> <span class="n">channel_dim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">data_retrievals</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">ch_mod</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">data_retrievals</span><span class="p">[</span><span class="n">var</span><span class="p">][:,</span><span class="n">ch</span><span class="p">]</span></div>
+
+
+
+
+
+<div class="viewcode-block" id="mean_stable">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.mean_stable">[docs]</a>
+<span class="k">def</span> <span class="nf">mean_stable</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">win</span><span class="p">,</span> <span class="n">minBin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">maxBin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">minRelStd</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the mean value of x based on the least fluctuated </span>
+<span class="sd">    segment of x. The searching is based on the std inside each window of x.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : ndarray</span>
+<span class="sd">        Signal array.</span>
+<span class="sd">    win : int</span>
+<span class="sd">        Window width for calculating the relative standard deviation.</span>
+<span class="sd">    minBin : int, optional</span>
+<span class="sd">        The start index for the mean calculation (default: 1).</span>
+<span class="sd">    maxBin : int, optional</span>
+<span class="sd">        The end index for the mean calculation (default: length of x).</span>
+<span class="sd">    minRelStd : float, optional</span>
+<span class="sd">        Minimum relative standard deviation threshold.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    xStable : float</span>
+<span class="sd">        Stable mean value.</span>
+<span class="sd">    xIndx : ndarray</span>
+<span class="sd">        Index of the elements used to calculate the mean value.</span>
+<span class="sd">    xRelStd : float</span>
+<span class="sd">        Relative uncertainty of the sequences used to calculate the mean values.</span>
+
+<span class="sd">    History</span>
+<span class="sd">    -------</span>
+<span class="sd">    - 2021-05-30: First edition by Zhenping</span>
+
+<span class="sd">    .. Authors: - zhenping@tropos.de</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Default values for minBin and maxBin</span>
+    <span class="k">if</span> <span class="n">minBin</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">minBin</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">maxBin</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">maxBin</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="c1"># Handle NaN values and smooth the array</span>
+    <span class="n">flagNaN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x_smoothed</span> <span class="o">=</span> <span class="n">uniform_filter1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">win</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+    <span class="n">x_smoothed</span><span class="p">[</span><span class="n">flagNaN</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="c1"># If the range between maxBin and minBin is less than or equal to the window size</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">maxBin</span> <span class="o">-</span> <span class="n">minBin</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">win</span><span class="p">:</span>
+        <span class="n">xIndx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">minBin</span><span class="p">,</span> <span class="n">maxBin</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">xStable</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">x_smoothed</span><span class="p">[</span><span class="n">minBin</span><span class="p">:</span><span class="n">maxBin</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">xRelStd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanstd</span><span class="p">(</span><span class="n">x_smoothed</span><span class="p">[</span><span class="n">minBin</span><span class="p">:</span><span class="n">maxBin</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">xStable</span>
+        <span class="k">return</span> <span class="n">xStable</span><span class="p">,</span> <span class="n">xIndx</span><span class="p">,</span> <span class="n">xRelStd</span>
+
+    <span class="c1"># Calculate relative standard deviation for each window</span>
+    <span class="n">relStd</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">iX</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">minBin</span><span class="p">,</span> <span class="n">maxBin</span> <span class="o">-</span> <span class="n">win</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">window</span> <span class="o">=</span> <span class="n">x_smoothed</span><span class="p">[</span><span class="n">iX</span><span class="p">:</span><span class="n">iX</span> <span class="o">+</span> <span class="n">win</span><span class="p">]</span>
+        <span class="n">thisStd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanstd</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+        <span class="n">thisMean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">window</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">win</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">0.2</span><span class="p">:</span>
+            <span class="n">relStd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisStd</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">thisMean</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">relStd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+    <span class="n">relStd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">relStd</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">relStd</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="c1"># Determine index with minimum relative standard deviation</span>
+    <span class="k">if</span> <span class="n">minRelStd</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">indxTmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanargmin</span><span class="p">(</span><span class="n">relStd</span><span class="p">)</span>
+        <span class="n">indx</span> <span class="o">=</span> <span class="n">indxTmp</span> <span class="o">+</span> <span class="n">minBin</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">thisRelStd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">relStd</span><span class="p">)</span>
+        <span class="n">indxTmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanargmin</span><span class="p">(</span><span class="n">relStd</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">thisRelStd</span> <span class="o">&gt;</span> <span class="n">minRelStd</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="n">indx</span> <span class="o">=</span> <span class="n">indxTmp</span> <span class="o">+</span> <span class="n">minBin</span>
+
+    <span class="c1"># Calculate the stable mean value and its relative standard deviation</span>
+    <span class="n">xStable</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">x_smoothed</span><span class="p">[</span><span class="n">indx</span><span class="p">:</span><span class="n">indx</span> <span class="o">+</span> <span class="n">win</span><span class="p">])</span>
+    <span class="n">xIndx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">indx</span><span class="p">,</span> <span class="n">indx</span> <span class="o">+</span> <span class="n">win</span><span class="p">)</span>
+    <span class="n">xRelStd</span> <span class="o">=</span> <span class="n">relStd</span><span class="p">[</span><span class="n">indxTmp</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">xStable</span><span class="p">,</span> <span class="n">xIndx</span><span class="p">,</span> <span class="n">xRelStd</span></div>
+
+
+
+<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">diags</span>
+
+<div class="viewcode-block" id="smooth2a">
+<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.helper.html#ppcpy.misc.helper.smooth2a">[docs]</a>
+<span class="k">def</span> <span class="nf">smooth2a</span><span class="p">(</span><span class="n">matrix_in</span><span class="p">,</span> <span class="n">Nr</span><span class="p">,</span> <span class="n">Nc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Smooths 2D array data while ignoring NaNs.</span>
+
+<span class="sd">    This function smooths the data in `matrix_in` using a mean filter over a</span>
+<span class="sd">    rectangle of size (2*Nr+1)-by-(2*Nc+1). Each element is replaced by the mean</span>
+<span class="sd">    of the surrounding rectangle, ignoring NaN elements. If an element is NaN,</span>
+<span class="sd">    it remains NaN in the output. At the edges, as much of the rectangle as fits</span>
+<span class="sd">    is used.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        matrix_in (ndarray): Original matrix to be smoothed.</span>
+<span class="sd">        Nr (int): Number of points used to smooth rows.</span>
+<span class="sd">        Nc (int, optional): Number of points used to smooth columns.</span>
+<span class="sd">                            If not specified, Nc = Nr.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ndarray: Smoothed version of the input matrix.</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        - Written by Greg Reeves, March 2009, Division of Biology, Caltech.</span>
+<span class="sd">        - Inspired by &quot;smooth2&quot; by Kelly Hilands, October 2004, Applied Research Laboratory, Penn State University.</span>
+<span class="sd">        - Developed from code by Olof Liungman, 1997, Dept. of Oceanography, Earth Sciences Centre, Göteborg University.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">Nc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">Nc</span> <span class="o">=</span> <span class="n">Nr</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Nr</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">))</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Nc</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Nr and Nc must be scalars!&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Matrix dimensions</span>
+    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">matrix_in</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># Create smoothing matrices</span>
+    <span class="n">eL</span> <span class="o">=</span> <span class="n">diags</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Nr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">rows</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">Nr</span><span class="p">,</span> <span class="n">Nr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">rows</span><span class="p">))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+    <span class="n">eR</span> <span class="o">=</span> <span class="n">diags</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Nc</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">Nc</span><span class="p">,</span> <span class="n">Nc</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+
+    <span class="c1"># Replace NaNs with 0 for summation</span>
+    <span class="n">mask_nan</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">matrix_in</span><span class="p">)</span>
+    <span class="n">matrix_in_filled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask_nan</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">matrix_in</span><span class="p">)</span>
+
+    <span class="c1"># Compute normalizing matrix to count non-NaN elements</span>
+    <span class="n">normalize</span> <span class="o">=</span> <span class="n">eL</span> <span class="o">@</span> <span class="p">(</span><span class="o">~</span><span class="n">mask_nan</span><span class="p">)</span> <span class="o">@</span> <span class="n">eR</span>
+    <span class="n">normalize</span><span class="p">[</span><span class="n">mask_nan</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>  <span class="c1"># Retain NaNs in the final output</span>
+
+    <span class="c1"># Compute smoothed matrix</span>
+    <span class="n">matrix_out</span> <span class="o">=</span> <span class="p">(</span><span class="n">eL</span> <span class="o">@</span> <span class="n">matrix_in_filled</span> <span class="o">@</span> <span class="n">eR</span><span class="p">)</span> <span class="o">/</span> <span class="n">normalize</span>
+
+    <span class="k">return</span> <span class="n">matrix_out</span></div>
+
+
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025 Andi Klamt and Martin Radenz.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

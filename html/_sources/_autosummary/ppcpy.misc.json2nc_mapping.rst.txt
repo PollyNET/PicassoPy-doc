@@ -1,0 +1,38 @@
+..
+  module.rst
+
+ppcpy.misc.json2nc\_mapping
+===========================
+
+.. automodule:: ppcpy.misc.json2nc_mapping
+
+    
+        
+    
+
+    
+        
+            .. rubric:: Functions
+
+            .. autosummary::
+                :nosignatures:
+                :template: autosummary/base.rst
+                
+                    add_variable_2_json_dict_mapper
+                    create_netcdf_from_dict
+                    read_json_to_dict
+                    remove_variable_from_json_dict_mapper
+                    update_variable_attribute_of_json_dict_mapper
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+    

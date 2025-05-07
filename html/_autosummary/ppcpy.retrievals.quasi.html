@@ -1,0 +1,659 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ppcpy.retrievals.quasi &#8212; PicassoPy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/ppcpy.retrievals.quasi';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ppcpy.retrievals.quasiV1" href="ppcpy.retrievals.quasiV1.html" />
+    <link rel="prev" title="ppcpy.retrievals.klettfernald" href="ppcpy.retrievals.klettfernald.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PicassoPy  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.interface.html">ppcpy.interface</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ppcpy.interface.picassoProc.html">ppcpy.interface.picassoProc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="ppcpy.interface.picassoProc.PicassoProc.html">ppcpy.interface.picassoProc.PicassoProc</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.calibration.html">ppcpy.calibration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.calibration.lidarconstant.html">ppcpy.calibration.lidarconstant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.calibration.polarization.html">ppcpy.calibration.polarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.calibration.rayleighfit.html">ppcpy.calibration.rayleighfit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.cloudmask.html">ppcpy.cloudmask</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.cloudmask.cloudscreen.html">ppcpy.cloudmask.cloudscreen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.cloudmask.profilesegment.html">ppcpy.cloudmask.profilesegment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="ppcpy.config.html">ppcpy.config</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.io.html">ppcpy.io</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.io.loadConfigs.html">ppcpy.io.loadConfigs</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ppcpy.io.readMeteo.html">ppcpy.io.readMeteo</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="ppcpy.io.readMeteo.Meteo.html">ppcpy.io.readMeteo.Meteo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppcpy.io.readMeteo.MeteoNcCloudnet.html">ppcpy.io.readMeteo.MeteoNcCloudnet</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.io.readPollyRawData.html">ppcpy.io.readPollyRawData</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.misc.html">ppcpy.misc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.helper.html">ppcpy.misc.helper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.json2nc_mapping.html">ppcpy.misc.json2nc_mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.molecular.html">ppcpy.misc.molecular</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.molecular_none.html">ppcpy.misc.molecular_none</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.molecular_second_try.html">ppcpy.misc.molecular_second_try</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.plot.html">ppcpy.misc.plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.pollyChannelTags.html">ppcpy.misc.pollyChannelTags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.startscreen.html">ppcpy.misc.startscreen</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.preprocess.html">ppcpy.preprocess</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.preprocess.pollyPreprocess.html">ppcpy.preprocess.pollyPreprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.preprocess.profiles.html">ppcpy.preprocess.profiles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.qc.html">ppcpy.qc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.qc.overlapCor.html">ppcpy.qc.overlapCor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.qc.overlapEst.html">ppcpy.qc.overlapEst</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.qc.pollySaturationDetect.html">ppcpy.qc.pollySaturationDetect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.qc.transCor.html">ppcpy.qc.transCor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="ppcpy.retrievals.html">ppcpy.retrievals</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.angstroem.html">ppcpy.retrievals.angstroem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.collection.html">ppcpy.retrievals.collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.depolarization.html">ppcpy.retrievals.depolarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.highres.html">ppcpy.retrievals.highres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.klettfernald.html">ppcpy.retrievals.klettfernald</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">ppcpy.retrievals.quasi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.quasiV1.html">ppcpy.retrievals.quasiV1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.quasiV2.html">ppcpy.retrievals.quasiV2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.raman.html">ppcpy.retrievals.raman</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.ramanhelpers.html">ppcpy.retrievals.ramanhelpers</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api_doc.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="ppcpy.retrievals.html" class="nav-link">ppcpy.retrievals</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ppcpy.retrievals.quasi</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-ppcpy.retrievals.quasi">
+<span id="ppcpy-retrievals-quasi"></span><h1>ppcpy.retrievals.quasi<a class="headerlink" href="#module-ppcpy.retrievals.quasi" title="Link to this heading">#</a></h1>
+<p class="rubric">Functions</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ppcpy.retrievals.quasi.detect_liquid_bits" title="ppcpy.retrievals.quasi.detect_liquid_bits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detect_liquid_bits</span></code></a></p></td>
+<td><p>detect liquid cloud bits.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ppcpy.retrievals.quasi.quasi_angstrom" title="ppcpy.retrievals.quasi.quasi_angstrom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quasi_angstrom</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ppcpy.retrievals.quasi.quasi_pdr" title="ppcpy.retrievals.quasi.quasi_pdr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quasi_pdr</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ppcpy.retrievals.quasi.target_cat" title="ppcpy.retrievals.quasi.target_cat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">target_cat</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ppcpy.retrievals.quasi.target_classify" title="ppcpy.retrievals.quasi.target_classify"><code class="xref py py-obj docutils literal notranslate"><span class="pre">target_classify</span></code></a></p></td>
+<td><p>aerosol/cloud target classification.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.quasi.quasi_pdr">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.quasi.</span></span><span class="sig-name descname"><span class="pre">quasi_pdr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wvs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[532]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V1'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/quasi.html#quasi_pdr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.quasi.quasi_pdr" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.quasi.quasi_angstrom">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.quasi.</span></span><span class="sig-name descname"><span class="pre">quasi_angstrom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V1'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/quasi.html#quasi_angstrom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.quasi.quasi_angstrom" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.quasi.target_cat">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.quasi.</span></span><span class="sig-name descname"><span class="pre">target_cat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V1'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/quasi.html#target_cat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.quasi.target_cat" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.quasi.target_classify">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.quasi.</span></span><span class="sig-name descname"><span class="pre">target_classify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attBeta532</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quasiBsc1064</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quasiBsc532</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quasiPDR532</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">VDR532</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quasiAE</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/quasi.html#target_classify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.quasi.target_classify" title="Link to this definition">#</a></dt>
+<dd><p>aerosol/cloud target classification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>height</strong> (<em>ndarray</em>) – Height array (m).</p></li>
+<li><p><strong>attBeta532</strong> (<em>ndarray</em>) – Attenuated backscatter at 532 nm.</p></li>
+<li><p><strong>quasiBsc1064</strong> (<em>ndarray</em>) – Quasi particle backscatter at 1064 nm. (m^{-1}sr^{-1})</p></li>
+<li><p><strong>quasiBsc532</strong> (<em>ndarray</em>) – Quasi particle backscatter at 532 nm. (m^{-1}sr^{-1})</p></li>
+<li><p><strong>quasiPDR532</strong> (<em>ndarray</em>) – Quasi particle depolarization ratio at 532 nm.</p></li>
+<li><p><strong>VDR532</strong> (<em>ndarray</em>) – Volume depolarization ratio at 532 nm.</p></li>
+<li><p><strong>quasiAE</strong> (<em>ndarray</em>) – Quasi Ångström exponents.</p></li>
+<li><p><strong>**kwargs</strong> – Optional parameters to control thresholds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>clearThresBsc1064</strong> (<em>float</em>) – Default 1e-8.</p></li>
+<li><p><strong>turbidThresBsc1064</strong> (<em>float</em>) – Default 2e-7.</p></li>
+<li><p><strong>turbidThresBsc532</strong> (<em>float</em>) – Default 2e-7.</p></li>
+<li><p><strong>dropletThresPDR</strong> (<em>float</em>) – Default 0.05.</p></li>
+<li><p><strong>spheriodThresPDR</strong> (<em>float</em>) – Default 0.07.</p></li>
+<li><p><strong>unspheroidThresPDR</strong> (<em>float</em>) – Default 0.2.</p></li>
+<li><p><strong>iceThresVDR</strong> (<em>float</em>) – Default 0.3.</p></li>
+<li><p><strong>iceThresPDR</strong> (<em>float</em>) – Default 0.35.</p></li>
+<li><p><strong>largeThresAE</strong> (<em>float</em>) – Default 0.75.</p></li>
+<li><p><strong>smallThresAE</strong> (<em>float</em>) – Default 0.5.</p></li>
+<li><p><strong>cloudThresBsc1064</strong> (<em>float</em>) – Default 2e-5.</p></li>
+<li><p><strong>minAttnRatioBsc1064</strong> (<em>float</em>) – Default 10.</p></li>
+<li><p><strong>searchCloudAbove</strong> (<em>float</em>) – Default 300.</p></li>
+<li><p><strong>searchCloudBelow</strong> (<em>float</em>) – Default 100.</p></li>
+<li><p><strong>hFullOL</strong> (<em>float</em>) – Default 600.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>Classification mask.</dt><dd><p>0: No signal
+1: Clean atmosphere
+2: Non-typed particles/low conc.
+3: Aerosol: small
+4: Aerosol: large, spherical
+5: Aerosol: mixture, partly non-spherical
+6: Aerosol: large, non-spherical
+7: Cloud: non-typed
+8: Cloud: water droplets
+9: Cloud: likely water droplets
+10: Cloud: ice crystals
+11: Cloud: likely ice crystal</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>Baars, H., Seifert, P., Engelmann, R. &amp; Wandinger, U.
+Target categorization of aerosol and clouds by continuous multiwavelength-polarization lidar measurements.
+Atmospheric Measurement Techniques 10, 3175-3201, doi:10.5194/amt-10-3175-2017 (2017).</p>
+<dl class="simple">
+<dt>History:</dt><dd><ul class="simple">
+<li><p>2021-06-05: First edition by Zhenping</p></li>
+<li><p>2025-03-25: AI based translation to python</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.quasi.detect_liquid_bits">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.quasi.</span></span><span class="sig-name descname"><span class="pre">detect_liquid_bits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bsc1064</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cloudThresBsc1064</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minAttnRatioBsc1064</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">searchCloudAbove</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">searchCloudBelow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/quasi.html#detect_liquid_bits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.quasi.detect_liquid_bits" title="Link to this definition">#</a></dt>
+<dd><p>detect liquid cloud bits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>height</strong> (<em>ndarray</em>) – Height array (m).</p></li>
+<li><p><strong>bsc1064</strong> (<em>ndarray</em>) – Particle backscatter at 1064 nm (height x time).</p></li>
+<li><p><strong>cloudThresBsc1064</strong> (<em>float</em><em>, </em><em>optional</em>) – Threshold of cloud backscatter at 1064 nm. Default is 2e-5.</p></li>
+<li><p><strong>minAttnRatioBsc1064</strong> (<em>float</em><em>, </em><em>optional</em>) – Minimum attenuation required to detect liquid cloud. Default is 10.</p></li>
+<li><p><strong>searchCloudAbove</strong> (<em>float</em><em>, </em><em>optional</em>) – Cloud search window above current bit (m). Default is 300.</p></li>
+<li><p><strong>searchCloudBelow</strong> (<em>float</em><em>, </em><em>optional</em>) – Cloud search window below current bit (m). Default is 100.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Logical mask (height x time) for detected liquid cloud regions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>History:</dt><dd><ul class="simple">
+<li><p>2021-06-05: First edition by Zhenping</p></li>
+<li><p>2025-03-25: AI based translation to python</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ppcpy.retrievals.klettfernald.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ppcpy.retrievals.klettfernald</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ppcpy.retrievals.quasiV1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ppcpy.retrievals.quasiV1</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.quasi.quasi_pdr"><code class="docutils literal notranslate"><span class="pre">quasi_pdr()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.quasi.quasi_angstrom"><code class="docutils literal notranslate"><span class="pre">quasi_angstrom()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.quasi.target_cat"><code class="docutils literal notranslate"><span class="pre">target_cat()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.quasi.target_classify"><code class="docutils literal notranslate"><span class="pre">target_classify()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.quasi.detect_liquid_bits"><code class="docutils literal notranslate"><span class="pre">detect_liquid_bits()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/ppcpy.retrievals.quasi.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025 Andi Klamt and Martin Radenz.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

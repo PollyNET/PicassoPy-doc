@@ -1,0 +1,736 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ppcpy.retrievals.raman &#8212; PicassoPy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/ppcpy.retrievals.raman';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ppcpy.retrievals.ramanhelpers" href="ppcpy.retrievals.ramanhelpers.html" />
+    <link rel="prev" title="ppcpy.retrievals.quasiV2" href="ppcpy.retrievals.quasiV2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PicassoPy  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.interface.html">ppcpy.interface</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ppcpy.interface.picassoProc.html">ppcpy.interface.picassoProc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="ppcpy.interface.picassoProc.PicassoProc.html">ppcpy.interface.picassoProc.PicassoProc</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.calibration.html">ppcpy.calibration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.calibration.lidarconstant.html">ppcpy.calibration.lidarconstant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.calibration.polarization.html">ppcpy.calibration.polarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.calibration.rayleighfit.html">ppcpy.calibration.rayleighfit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.cloudmask.html">ppcpy.cloudmask</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.cloudmask.cloudscreen.html">ppcpy.cloudmask.cloudscreen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.cloudmask.profilesegment.html">ppcpy.cloudmask.profilesegment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="ppcpy.config.html">ppcpy.config</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.io.html">ppcpy.io</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.io.loadConfigs.html">ppcpy.io.loadConfigs</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ppcpy.io.readMeteo.html">ppcpy.io.readMeteo</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="ppcpy.io.readMeteo.Meteo.html">ppcpy.io.readMeteo.Meteo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppcpy.io.readMeteo.MeteoNcCloudnet.html">ppcpy.io.readMeteo.MeteoNcCloudnet</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.io.readPollyRawData.html">ppcpy.io.readPollyRawData</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.misc.html">ppcpy.misc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.helper.html">ppcpy.misc.helper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.json2nc_mapping.html">ppcpy.misc.json2nc_mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.molecular.html">ppcpy.misc.molecular</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.molecular_none.html">ppcpy.misc.molecular_none</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.molecular_second_try.html">ppcpy.misc.molecular_second_try</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.plot.html">ppcpy.misc.plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.pollyChannelTags.html">ppcpy.misc.pollyChannelTags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.startscreen.html">ppcpy.misc.startscreen</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.preprocess.html">ppcpy.preprocess</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.preprocess.pollyPreprocess.html">ppcpy.preprocess.pollyPreprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.preprocess.profiles.html">ppcpy.preprocess.profiles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.qc.html">ppcpy.qc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.qc.overlapCor.html">ppcpy.qc.overlapCor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.qc.overlapEst.html">ppcpy.qc.overlapEst</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.qc.pollySaturationDetect.html">ppcpy.qc.pollySaturationDetect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.qc.transCor.html">ppcpy.qc.transCor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="ppcpy.retrievals.html">ppcpy.retrievals</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.angstroem.html">ppcpy.retrievals.angstroem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.collection.html">ppcpy.retrievals.collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.depolarization.html">ppcpy.retrievals.depolarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.highres.html">ppcpy.retrievals.highres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.klettfernald.html">ppcpy.retrievals.klettfernald</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.quasi.html">ppcpy.retrievals.quasi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.quasiV1.html">ppcpy.retrievals.quasiV1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.quasiV2.html">ppcpy.retrievals.quasiV2</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">ppcpy.retrievals.raman</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.ramanhelpers.html">ppcpy.retrievals.ramanhelpers</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api_doc.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="ppcpy.retrievals.html" class="nav-link">ppcpy.retrievals</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ppcpy.retrievals.raman</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-ppcpy.retrievals.raman">
+<span id="ppcpy-retrievals-raman"></span><h1>ppcpy.retrievals.raman<a class="headerlink" href="#module-ppcpy.retrievals.raman" title="Link to this heading">#</a></h1>
+<p class="rubric">Functions</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ppcpy.retrievals.raman.calc_raman_bsc" title="ppcpy.retrievals.raman.calc_raman_bsc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_raman_bsc</span></code></a></p></td>
+<td><p>Calculate the aerosol backscatter coefficient with the Raman method.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ppcpy.retrievals.raman.lidarratio" title="ppcpy.retrievals.raman.lidarratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lidarratio</span></code></a></p></td>
+<td><p>Calculate aerosol lidar ratio.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ppcpy.retrievals.raman.raman_bsc" title="ppcpy.retrievals.raman.raman_bsc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">raman_bsc</span></code></a></p></td>
+<td><p>Calculate uncertainty of aerosol backscatter coefficient with Monte-Carlo simulation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ppcpy.retrievals.raman.raman_ext" title="ppcpy.retrievals.raman.raman_ext"><code class="xref py py-obj docutils literal notranslate"><span class="pre">raman_ext</span></code></a></p></td>
+<td><p>Retrieve the aerosol extinction coefficient with the Raman method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ppcpy.retrievals.raman.run_cldFreeGrps" title="ppcpy.retrievals.raman.run_cldFreeGrps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_cldFreeGrps</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ppcpy.retrievals.raman.smoothWin" title="ppcpy.retrievals.raman.smoothWin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smoothWin</span></code></a></p></td>
+<td><p>Smooth signal with a height-dependent window.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.raman.run_cldFreeGrps">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.raman.</span></span><span class="sig-name descname"><span class="pre">run_cldFreeGrps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TCor'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heightFullOverlap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/raman.html#run_cldFreeGrps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.raman.run_cldFreeGrps" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.raman.raman_ext">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.raman.</span></span><span class="sig-name descname"><span class="pre">raman_ext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_emit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_Raman</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha_molecular_elastic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha_molecular_Raman</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angstrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'movingslope'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MC_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/raman.html#raman_ext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.raman.raman_ext" title="Link to this definition">#</a></dt>
+<dd><p>Retrieve the aerosol extinction coefficient with the Raman method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>height</strong> (<em>array_like</em>) – Height [m].</p></li>
+<li><p><strong>sig</strong> (<em>array_like</em>) – Measured Raman signal. Unit: Photon Count.</p></li>
+<li><p><strong>lambda_emit</strong> (<em>float</em>) – Wavelength of the emitted laser beam [nm].</p></li>
+<li><p><strong>lambda_Raman</strong> (<em>float</em>) – Wavelength of Raman signal [nm].</p></li>
+<li><p><strong>alpha_molecular_elastic</strong> (<em>array_like</em>) – Molecular scattering coefficient at emitted wavelength in m^-1 sr^-1.</p></li>
+<li><p><strong>alpha_molecular_Raman</strong> (<em>array_like</em>) – Molecular scattering coefficient at Raman wavelength in m^-1 sr^-1.</p></li>
+<li><p><strong>number_density</strong> (<em>array_like</em>) – Molecular number density.</p></li>
+<li><p><strong>angstrom</strong> (<em>float</em>) – Angstrom exponent for aerosol extinction coefficient.</p></li>
+<li><p><strong>window_size</strong> (<em>int</em>) – Window size for smoothing the signal using Savitzky-Golay filter.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – Method to calculate the slope of the signal. Choices: ‘movingslope’, ‘smoothing’, ‘chi2’. Default is ‘movingslope’.</p></li>
+<li><p><strong>MC_count</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of Monte Carlo iterations. Default is 1.</p></li>
+<li><p><strong>bg</strong> (<em>float</em><em>, </em><em>optional</em>) – Background signal (Photon Count). Default is 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>ext_aer</strong> (<em>ndarray</em>) – Aerosol extinction coefficient [m^-1].</p></li>
+<li><p><strong>ext_error</strong> (<em>ndarray</em>) – Error in aerosol extinction coefficient [m^-1] (only calculated for MC_count &gt; 1).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>Ansmann, A. et al. Independent measurement of extinction and backscatter profiles
+in cirrus clouds by using a combined Raman elastic-backscatter lidar.
+Applied Optics Vol. 31, Issue 33, pp. 7113-7131 (1992).</p>
+<section id="history">
+<h2>History<a class="headerlink" href="#history" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>2021-05-31: First edition by Zhenping</p></li>
+<li><p>2025-01-05: AI supported translation</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.raman.raman_bsc">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.raman.</span></span><span class="sig-name descname"><span class="pre">raman_bsc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigElastic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigVRN2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_aer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angstroem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_mol_raman</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_mol_inela</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HRef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betaRef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flagSmoothBefore</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">el_lambda</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inel_lambda</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgElastic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgVRN2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_ext_aer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_angstroem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MC_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'monte-carlo'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/raman.html#raman_bsc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.raman.raman_bsc" title="Link to this definition">#</a></dt>
+<dd><p>Calculate uncertainty of aerosol backscatter coefficient with Monte-Carlo simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>height</strong> (<em>np.ndarray</em>) – Heights in meters.</p></li>
+<li><p><strong>sigElastic</strong> (<em>np.ndarray</em>) – Elastic photon count signal.</p></li>
+<li><p><strong>sigVRN2</strong> (<em>np.ndarray</em>) – N2 vibration rotational Raman photon count signal.</p></li>
+<li><p><strong>ext_aer</strong> (<em>np.ndarray</em>) – Aerosol extinction coefficient (m^{-1}).</p></li>
+<li><p><strong>angstroem</strong> (<em>np.ndarray</em>) – Aerosol Angstrom exponent.</p></li>
+<li><p><strong>ext_mol</strong> (<em>np.ndarray</em>) – Molecular extinction coefficient (m^{-1}).</p></li>
+<li><p><strong>beta_mol</strong> (<em>np.ndarray</em>) – Molecular backscatter coefficient (m^{-1}Sr^{-1}).</p></li>
+<li><p><strong>ext_mol_raman</strong> (<em>np.ndarray</em>) – Molecular extinction coefficient for Raman wavelength.</p></li>
+<li><p><strong>beta_mol_inela</strong> (<em>np.ndarray</em>) – Molecular backscatter coefficient for inelastic wavelength.</p></li>
+<li><p><strong>HRef</strong> (<em>list</em><em> or </em><em>tuple</em>) – Reference region [m].</p></li>
+<li><p><strong>betaRef</strong> (<em>float</em>) – Aerosol backscatter coefficient at the reference region.</p></li>
+<li><p><strong>window_size</strong> (<em>int</em>) – Number of bins for the sliding window for signal smoothing. Default is 40.</p></li>
+<li><p><strong>flagSmoothBefore</strong> (<em>bool</em>) – Flag to control the smoothing order. Default is True.</p></li>
+<li><p><strong>el_lambda</strong> (<em>int</em>) – Elastic wavelength in nm.</p></li>
+<li><p><strong>inel_lambda</strong> (<em>int</em>) – Inelastic wavelength in nm.</p></li>
+<li><p><strong>bgElastic</strong> (<em>np.ndarray</em>) – Background of elastic signal.</p></li>
+<li><p><strong>bgVRN2</strong> (<em>np.ndarray</em>) – Background of N2 vibration rotational signal.</p></li>
+<li><p><strong>sigma_ext_aer</strong> (<em>np.ndarray</em>) – Uncertainty of aerosol extinction coefficient (m^{-1}).</p></li>
+<li><p><strong>sigma_angstroem</strong> (<em>np.ndarray</em>) – Uncertainty of Angstrom exponent.</p></li>
+<li><p><strong>MC_count</strong> (<em>int</em><em> or </em><em>list</em>) – Samples for each error source. Default is 3.</p></li>
+<li><p><strong>method</strong> (<em>str</em>) – Computational method (‘monte-carlo’ or ‘analytical’). Default is ‘monte-carlo’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Aerosol backscatter coefficient (m^{-1}Sr^{-1}).
+aerBscStd (np.ndarray): Uncertainty of aerosol backscatter coefficient (m^{-1}Sr^{-1}).
+LR (np.ndarray): Aerosol Lidar ratio.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>beta_aer (np.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.raman.calc_raman_bsc">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.raman.</span></span><span class="sig-name descname"><span class="pre">calc_raman_bsc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigElastic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigVRN2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_aer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angstroem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext_mol_raman</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_mol_inela</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HRef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betaRef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flagSmoothBefore</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">el_lambda</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inel_lambda</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/raman.html#calc_raman_bsc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.raman.calc_raman_bsc" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the aerosol backscatter coefficient with the Raman method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>height</strong> (<em>array</em>) – Height in meters.</p></li>
+<li><p><strong>sigElastic</strong> (<em>array</em>) – Elastic photon count signal.</p></li>
+<li><p><strong>sigVRN2</strong> (<em>array</em>) – N2 vibration rotational Raman photon count signal.</p></li>
+<li><p><strong>ext_aer</strong> (<em>array</em>) – Aerosol extinction coefficient in m^{-1}.</p></li>
+<li><p><strong>angstroem</strong> (<em>array</em>) – Aerosol Angstrom exponent.</p></li>
+<li><p><strong>ext_mol</strong> (<em>array</em>) – Molecular extinction coefficient in m^{-1}.</p></li>
+<li><p><strong>beta_mol</strong> (<em>array</em>) – Molecular backscatter coefficient in m^{-1}Sr^{-1}.</p></li>
+<li><p><strong>ext_mol_raman</strong> (<em>array</em>) – Molecular extinction coefficient for Raman wavelength in m^{-1}.</p></li>
+<li><p><strong>beta_mol_inela</strong> (<em>array</em>) – Molecular inelastic backscatter coefficient in m^{-1}Sr^{-1}.</p></li>
+<li><p><strong>HRef</strong> (<em>list</em>) – Reference region in meters [start, end].</p></li>
+<li><p><strong>wavelength</strong> (<em>int</em>) – Wavelength of the elastic signal in nm.</p></li>
+<li><p><strong>betaRef</strong> (<em>float</em>) – Aerosol backscatter coefficient at the reference region in m^{-1}Sr^{-1}.</p></li>
+<li><p><strong>window_size</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of bins for the sliding window for signal smoothing. Default is 40.</p></li>
+<li><p><strong>flagSmoothBefore</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to smooth the signal before or after calculating the signal ratio. Default is True.</p></li>
+<li><p><strong>el_lambda</strong> (<em>int</em><em>, </em><em>optional</em>) – Elastic wavelength in nm.</p></li>
+<li><p><strong>inel_lambda</strong> (<em>int</em><em>, </em><em>optional</em>) – Inelastic wavelength in nm.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>beta_aer</strong> (<em>array</em>) – Aerosol backscatter coefficient in m^{-1}Sr^{-1}.</p></li>
+<li><p><strong>LR</strong> (<em>array</em>) – Aerosol lidar ratio.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>Ansmann, A., et al. (1992). “Independent measurement of extinction and backscatter profiles in cirrus clouds by using a combined Raman elastic-backscatter lidar.” Applied optics 31(33): 7113-7131.</p>
+<section id="id1">
+<h2>History<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>2018-01-02: First edition by Zhenping.</p></li>
+<li><p>2018-07-24: Added ext_mol_factor and ext_aer_factor for wavelength of 1064nm.</p></li>
+<li><p>2018-09-04: Changed smoothing order for signal ridge stability.</p></li>
+<li><p>2024-11-12: Modified by HB for consistency in 2024.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.raman.smoothWin">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.raman.</span></span><span class="sig-name descname"><span class="pre">smoothWin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'moving'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/raman.html#smoothWin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.raman.smoothWin" title="Link to this definition">#</a></dt>
+<dd><p>Smooth signal with a height-dependent window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>array</em>) – Input signal array.</p></li>
+<li><p><strong>win</strong> (<em>int</em><em> or </em><em>array</em>) – Window size. Can be a fixed scalar or a variable-length array.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – Smoothing method. Default is ‘moving’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>signalSM</strong> – Smoothed signal.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.retrievals.raman.lidarratio">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.retrievals.raman.</span></span><span class="sig-name descname"><span class="pre">lidarratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aerExt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aerBsc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hRes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aerExtStd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aerBscStd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothWinExt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothWinBsc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/retrievals/raman.html#lidarratio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.retrievals.raman.lidarratio" title="Link to this definition">#</a></dt>
+<dd><p>Calculate aerosol lidar ratio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aerExt</strong> (<em>ndarray</em>) – Aerosol extinction coefficient. (m^-1)</p></li>
+<li><p><strong>aerBsc</strong> (<em>ndarray</em>) – Aerosol backscatter coefficient. (m^-1sr^-1)</p></li>
+<li><p><strong>hRes</strong> (<em>float</em><em>, </em><em>optional</em>) – Vertical resolution of each height bin. (m). Default is 7.5.</p></li>
+<li><p><strong>aerExtStd</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Uncertainty of aerosol extinction coefficient. (m^-1)</p></li>
+<li><p><strong>aerBscStd</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Uncertainty of aerosol backscatter coefficient. (m^-1sr^-1)</p></li>
+<li><p><strong>smoothWinExt</strong> (<em>int</em><em>, </em><em>optional</em>) – Applied smooth window length for calculating aerosol extinction coefficient. Default is 1.</p></li>
+<li><p><strong>smoothWinBsc</strong> (<em>int</em><em>, </em><em>optional</em>) – Applied smooth window length for calculating aerosol backscatter coefficient. Default is 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>aerLR</strong> (<em>ndarray</em>) – Aerosol lidar ratio. (sr)</p></li>
+<li><p><strong>effRes</strong> (<em>float</em>) – Effective resolution of lidar ratio. (m)</p></li>
+<li><p><strong>aerLRStd</strong> (<em>ndarray</em>) – Uncertainty of aerosol lidar ratio. (sr)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>Mattis, I., D’Amico, G., Baars, H., Amodeo, A., Madonna, F., and Iarlori, M.:
+EARLINET Single Calculus Chain–technical–Part 2: Calculation of optical products,
+Atmospheric Measurement Techniques, 9, 3009-3029, 2016.</p>
+<section id="id2">
+<h2>History<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>2021-07-20: First edition by Zhenping (translated to Python)</p>
+</section>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ppcpy.retrievals.quasiV2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ppcpy.retrievals.quasiV2</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ppcpy.retrievals.ramanhelpers.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ppcpy.retrievals.ramanhelpers</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.raman.run_cldFreeGrps"><code class="docutils literal notranslate"><span class="pre">run_cldFreeGrps()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.raman.raman_ext"><code class="docutils literal notranslate"><span class="pre">raman_ext()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.raman.raman_bsc"><code class="docutils literal notranslate"><span class="pre">raman_bsc()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.raman.calc_raman_bsc"><code class="docutils literal notranslate"><span class="pre">calc_raman_bsc()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.raman.smoothWin"><code class="docutils literal notranslate"><span class="pre">smoothWin()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.retrievals.raman.lidarratio"><code class="docutils literal notranslate"><span class="pre">lidarratio()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/ppcpy.retrievals.raman.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025 Andi Klamt and Martin Radenz.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

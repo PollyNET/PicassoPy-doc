@@ -1,0 +1,730 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ppcpy.calibration.polarization &#8212; PicassoPy  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/ppcpy.calibration.polarization';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ppcpy.calibration.rayleighfit" href="ppcpy.calibration.rayleighfit.html" />
+    <link rel="prev" title="ppcpy.calibration.lidarconstant" href="ppcpy.calibration.lidarconstant.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PicassoPy  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../userguide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api_doc.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://polly.tropos.de/">
+    PollyNET
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.interface.html">ppcpy.interface</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ppcpy.interface.picassoProc.html">ppcpy.interface.picassoProc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="ppcpy.interface.picassoProc.PicassoProc.html">ppcpy.interface.picassoProc.PicassoProc</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="ppcpy.calibration.html">ppcpy.calibration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.calibration.lidarconstant.html">ppcpy.calibration.lidarconstant</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">ppcpy.calibration.polarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.calibration.rayleighfit.html">ppcpy.calibration.rayleighfit</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.cloudmask.html">ppcpy.cloudmask</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.cloudmask.cloudscreen.html">ppcpy.cloudmask.cloudscreen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.cloudmask.profilesegment.html">ppcpy.cloudmask.profilesegment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="ppcpy.config.html">ppcpy.config</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.io.html">ppcpy.io</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.io.loadConfigs.html">ppcpy.io.loadConfigs</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ppcpy.io.readMeteo.html">ppcpy.io.readMeteo</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="ppcpy.io.readMeteo.Meteo.html">ppcpy.io.readMeteo.Meteo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppcpy.io.readMeteo.MeteoNcCloudnet.html">ppcpy.io.readMeteo.MeteoNcCloudnet</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.io.readPollyRawData.html">ppcpy.io.readPollyRawData</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.misc.html">ppcpy.misc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.helper.html">ppcpy.misc.helper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.json2nc_mapping.html">ppcpy.misc.json2nc_mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.molecular.html">ppcpy.misc.molecular</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.molecular_none.html">ppcpy.misc.molecular_none</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.molecular_second_try.html">ppcpy.misc.molecular_second_try</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.plot.html">ppcpy.misc.plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.pollyChannelTags.html">ppcpy.misc.pollyChannelTags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.misc.startscreen.html">ppcpy.misc.startscreen</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.preprocess.html">ppcpy.preprocess</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.preprocess.pollyPreprocess.html">ppcpy.preprocess.pollyPreprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.preprocess.profiles.html">ppcpy.preprocess.profiles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.qc.html">ppcpy.qc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.qc.overlapCor.html">ppcpy.qc.overlapCor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.qc.overlapEst.html">ppcpy.qc.overlapEst</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.qc.pollySaturationDetect.html">ppcpy.qc.pollySaturationDetect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.qc.transCor.html">ppcpy.qc.transCor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ppcpy.retrievals.html">ppcpy.retrievals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.angstroem.html">ppcpy.retrievals.angstroem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.collection.html">ppcpy.retrievals.collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.depolarization.html">ppcpy.retrievals.depolarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.highres.html">ppcpy.retrievals.highres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.klettfernald.html">ppcpy.retrievals.klettfernald</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.quasi.html">ppcpy.retrievals.quasi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.quasiV1.html">ppcpy.retrievals.quasiV1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.quasiV2.html">ppcpy.retrievals.quasiV2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.raman.html">ppcpy.retrievals.raman</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ppcpy.retrievals.ramanhelpers.html">ppcpy.retrievals.ramanhelpers</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api_doc.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="ppcpy.calibration.html" class="nav-link">ppcpy.calibration</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ppcpy.calibration.polarization</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-ppcpy.calibration.polarization">
+<span id="ppcpy-calibration-polarization"></span><h1>ppcpy.calibration.polarization<a class="headerlink" href="#module-ppcpy.calibration.polarization" title="Link to this heading">#</a></h1>
+<p class="rubric">Functions</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ppcpy.calibration.polarization.analyze_segments" title="ppcpy.calibration.polarization.analyze_segments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">analyze_segments</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ppcpy.calibration.polarization.calibrateGHK" title="ppcpy.calibration.polarization.calibrateGHK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calibrateGHK</span></code></a></p></td>
+<td><p>Returns:
+
+pol_cali
+
+dict
+
+polarization factors from delta 90 for each wavelength containing
+sub-dicts with 'eta', 'eta_std', 'time_start', 'time_end', 'status'</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ppcpy.calibration.polarization.calibrateMol" title="ppcpy.calibration.polarization.calibrateMol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calibrateMol</span></code></a></p></td>
+<td><p>calibrate the polarization with the molecular signal</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ppcpy.calibration.polarization.default_to_regular" title="ppcpy.calibration.polarization.default_to_regular"><code class="xref py py-obj docutils literal notranslate"><span class="pre">default_to_regular</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ppcpy.calibration.polarization.depol_cali_ghk" title="ppcpy.calibration.polarization.depol_cali_ghk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">depol_cali_ghk</span></code></a></p></td>
+<td><p>Polarization calibration for PollyXT lidar system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ppcpy.calibration.polarization.depol_cali_mol" title="ppcpy.calibration.polarization.depol_cali_mol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">depol_cali_mol</span></code></a></p></td>
+<td><p>Molecular polarization calibration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ppcpy.calibration.polarization.loadGHK" title="ppcpy.calibration.polarization.loadGHK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">loadGHK</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ppcpy.calibration.polarization.onemx_onepx" title="ppcpy.calibration.polarization.onemx_onepx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">onemx_onepx</span></code></a></p></td>
+<td><p>calculate the fraction of (1-x)/(1+x)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ppcpy.calibration.polarization.smooth_signal" title="ppcpy.calibration.polarization.smooth_signal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_signal</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.onemx_onepx">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">onemx_onepx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#onemx_onepx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.onemx_onepx" title="Link to this definition">#</a></dt>
+<dd><p>calculate the fraction of (1-x)/(1+x)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.smooth_signal">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">smooth_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_len</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#smooth_signal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.smooth_signal" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.loadGHK">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">loadGHK</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#loadGHK"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.loadGHK" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.calibrateGHK">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">calibrateGHK</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#calibrateGHK"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.calibrateGHK" title="Link to this definition">#</a></dt>
+<dd><section id="returns">
+<h2>Returns:<a class="headerlink" href="#returns" title="Link to this heading">#</a></h2>
+<dl class="simple">
+<dt>pol_cali<span class="classifier">dict</span></dt><dd><p>polarization factors from delta 90 for each wavelength containing
+sub-dicts with ‘eta’, ‘eta_std’, ‘time_start’, ‘time_end’, ‘status’</p>
+</dd>
+</dl>
+</section>
+<section id="history">
+<h2>History:<a class="headerlink" href="#history" title="Link to this heading">#</a></h2>
+<p>Function is called here <a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/5f5e4d0fd3dcebe7f87220cf802fcd6f414fe235/lib/interface/picassoProcV3.m#L548">PollyNET/Pollynet_Processing_Chain</a>
+The two most relevant functions here are <a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/dev/lib/calibration/pollyPolCaliGHK.m">PollyNET/Pollynet_Processing_Chain</a>
+which also calls <a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/dev/lib/calibration/depolCaliGHK.m">PollyNET/Pollynet_Processing_Chain</a></p>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.depol_cali_ghk">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">depol_cali_ghk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_pang_start_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_pang_stop_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_nang_start_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_nang_stop_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cali_h_indx_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SNRmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dplus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dminus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_len</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smooth_win</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#depol_cali_ghk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.depol_cali_ghk" title="Link to this definition">#</a></dt>
+<dd><p>Polarization calibration for PollyXT lidar system.</p>
+<section id="parameters">
+<h2>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h2>
+<dl class="simple">
+<dt>signal_t<span class="classifier">ndarray</span></dt><dd><p>Background-removed photon count signal at the total channel.
+Shape: (n_bins, n_profiles)</p>
+</dd>
+<dt>bg_t<span class="classifier">ndarray</span></dt><dd><p>Background at the total channel. Shape: (n_bins, n_profiles)</p>
+</dd>
+<dt>signal_x<span class="classifier">ndarray</span></dt><dd><p>Background-removed photon count signal at the cross channel.
+Shape: (n_bins, n_profiles)</p>
+</dd>
+<dt>bg_x<span class="classifier">ndarray</span></dt><dd><p>Background at the cross channel. Shape: (n_bins, n_profiles)</p>
+</dd>
+<dt>time<span class="classifier">ndarray</span></dt><dd><p>Datetime array representing the measurement time of each profile.</p>
+</dd>
+<dt>pol_cali_pang_start_time, pol_cali_pang_stop_time<span class="classifier">ndarray</span></dt><dd><p>Start and stop times when the polarizer rotates to the positive angle.</p>
+</dd>
+<dt>pol_cali_nang_start_time, pol_cali_nang_stop_time<span class="classifier">ndarray</span></dt><dd><p>Start and stop times when the polarizer rotates to the negative angle.</p>
+</dd>
+<dt>K<span class="classifier">float</span></dt><dd><p>Parameter from GHK to correct the calibration.</p>
+</dd>
+<dt>cali_h_indx_range<span class="classifier">list or tuple</span></dt><dd><p>Range of height indexes to use for polarization calibration.</p>
+</dd>
+<dt>SNRmin<span class="classifier">list</span></dt><dd><p>Minimum SNR for calibration. Length: 4</p>
+</dd>
+<dt>sig_max<span class="classifier">list</span></dt><dd><p>Maximum signal allowed for calibration to prevent pulse pileup.</p>
+</dd>
+<dt>rel_std_dplus, rel_std_dminus<span class="classifier">float</span></dt><dd><p>Maximum relative uncertainty of dplus and dminus allowed.</p>
+</dd>
+<dt>segment_len<span class="classifier">int</span></dt><dd><p>Segment length for testing the variability of calibration results.</p>
+</dd>
+<dt>smooth_win<span class="classifier">int</span></dt><dd><p>Width of the sliding window for smoothing the signal.</p>
+</dd>
+<dt>collect_debug<span class="classifier">bool, default=False</span></dt><dd><p>store and return the intermediate results</p>
+</dd>
+</dl>
+</section>
+<section id="id1">
+<h2>Returns:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<dl class="simple">
+<dt>pol_cali_eta<span class="classifier">list</span></dt><dd><p>Eta values from polarization calibration.</p>
+</dd>
+<dt>pol_cali_eta_std<span class="classifier">list</span></dt><dd><p>Uncertainty of eta values from calibration.</p>
+</dd>
+<dt>pol_cali_start_time, pol_cali_stop_time<span class="classifier">list</span></dt><dd><p>Start and stop times for successful calibration.</p>
+</dd>
+<dt>cali_status<span class="classifier">int</span></dt><dd><p>1 if calibration is successful, 0 otherwise.</p>
+</dd>
+<dt>global_attri<span class="classifier">dict, optional</span></dt><dd><p>Information about the depolarization calibration.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.analyze_segments">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">analyze_segments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dplus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dminus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_len</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dplus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dminus</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#analyze_segments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.analyze_segments" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.default_to_regular">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">default_to_regular</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#default_to_regular"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.default_to_regular" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.calibrateMol">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">calibrateMol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#calibrateMol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.calibrateMol" title="Link to this definition">#</a></dt>
+<dd><p>calibrate the polarization with the molecular signal</p>
+<p>Converted from the matlab code to the best knowledge, but not cross-validated yet</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.depol_cali_mol">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">depol_cali_mol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_t_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_c_std</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minSNR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdrStd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#depol_cali_mol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.depol_cali_mol" title="Link to this definition">#</a></dt>
+<dd><p>Molecular polarization calibration.</p>
+<dl class="simple">
+<dt>INPUTS:</dt><dd><dl class="simple">
+<dt>signal_t: numeric</dt><dd><p>Total signal (photon count).</p>
+</dd>
+<dt>background_t: numeric</dt><dd><p>Background at total channel (photon count).</p>
+</dd>
+<dt>signal_c: numeric</dt><dd><p>Cross signal (photon count).</p>
+</dd>
+<dt>background_c: numeric</dt><dd><p>Background at cross channel (photon count).</p>
+</dd>
+<dt>TR_t: scalar</dt><dd><p>Transmission ratio at total channel.</p>
+</dd>
+<dt>TR_t_std: scalar</dt><dd><p>Uncertainty of the transmission ratio at total channel.</p>
+</dd>
+<dt>TR_c: scalar</dt><dd><p>Transmission ratio at cross channel.</p>
+</dd>
+<dt>TR_c_std: scalar</dt><dd><p>Uncertainty of the transmission ratio at cross channel.</p>
+</dd>
+<dt>minSNR: float</dt><dd><p>The SNR constraint for the signal strength at reference height.</p>
+</dd>
+<dt>mdr: float</dt><dd><p>Default molecular depolarization ratio.</p>
+</dd>
+<dt>mdrStd: float</dt><dd><p>Default standard deviation of molecular depolarization ratio.</p>
+</dd>
+</dl>
+</dd>
+<dt>OUTPUTS:</dt><dd><dl class="simple">
+<dt>polCaliEta: array</dt><dd><p>Polarization calibration eta.</p>
+</dd>
+<dt>polCaliEtaStd: array</dt><dd><p>Uncertainty of polarization calibration eta.</p>
+</dd>
+<dt>polCaliFac: array</dt><dd><p>Polarization calibration factor.</p>
+</dd>
+<dt>polCaliFacStd: array</dt><dd><p>Uncertainty of polarization calibration factor.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>Baars, H., et al., Aerosol profiling with lidar in the Amazon Basin during the wet and dry season,
+J Geophys Res-Atmos, 117, 10.1029/2012jd018338, 2012.</p>
+<dl class="simple">
+<dt>HISTORY:</dt><dd><ul class="simple">
+<li><p>2021-07-06: First edition by Zhenping</p></li>
+<li><p>2024-12-23:</p></li>
+</ul>
+</dd>
+</dl>
+<p>Authors: - <a class="reference external" href="mailto:zhenping&#37;&#52;&#48;tropos&#46;de">zhenping<span>&#64;</span>tropos<span>&#46;</span>de</a></p>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ppcpy.calibration.lidarconstant.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ppcpy.calibration.lidarconstant</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ppcpy.calibration.rayleighfit.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ppcpy.calibration.rayleighfit</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.onemx_onepx"><code class="docutils literal notranslate"><span class="pre">onemx_onepx()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.smooth_signal"><code class="docutils literal notranslate"><span class="pre">smooth_signal()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.loadGHK"><code class="docutils literal notranslate"><span class="pre">loadGHK()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.calibrateGHK"><code class="docutils literal notranslate"><span class="pre">calibrateGHK()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.depol_cali_ghk"><code class="docutils literal notranslate"><span class="pre">depol_cali_ghk()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.analyze_segments"><code class="docutils literal notranslate"><span class="pre">analyze_segments()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.default_to_regular"><code class="docutils literal notranslate"><span class="pre">default_to_regular()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.calibrateMol"><code class="docutils literal notranslate"><span class="pre">calibrateMol()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.depol_cali_mol"><code class="docutils literal notranslate"><span class="pre">depol_cali_mol()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/ppcpy.calibration.polarization.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025 Andi Klamt and Martin Radenz.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
