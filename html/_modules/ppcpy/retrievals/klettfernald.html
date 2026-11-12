@@ -352,33 +352,33 @@
 <span class="sd">    retrieval : str</span>
 <span class="sd">        Name of retrieval type, eg. &#39;klett&#39;.</span>
 <span class="sd">    signal : str</span>
-<span class="sd">        Name of the signal used for the retrievals, eg. &#39;TCor&#39;.</span>
+<span class="sd">        Name of the signal used for the retrieval, eg. &#39;TCor&#39;.</span>
+<span class="sd">    refBeta : float</span>
+<span class="sd">        Reference value used for the retrieval [m^{-1}Sr^{-1}].</span>
 <span class="sd">    </span>
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
+<span class="sd">    .. TODO:: Should sigBGCor, sigTCor or RCS be used for the Klett retrievals?</span>
 
 <span class="sd">    **History**</span>
 
 <span class="sd">    - xxxx-xx-xx: TODO: First edition by ...</span>
 <span class="sd">    - 2026-02-09: Modified and cleaned by Buholdt</span>
-<span class="sd">    </span>
-<span class="sd">    .. TODO:: Should sigBGCor, sigTCor or RCS be used for the Klett retrievals?</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">height</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span>
-    <span class="n">config_dict</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">config_dict</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
     <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;rayleighfit seems to use range in matlab, but the met data should be in height &gt;&gt; RECHECK!&#39;</span><span class="p">)</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;at 10km height this is a difference of about 4 indices&#39;</span><span class="p">)</span>
 
     <span class="n">opt_profiles</span> <span class="o">=</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">clFreeGrps</span><span class="p">))]</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting Klett retrieval&#39;</span><span class="p">)</span>
+    <span class="c1"># print(&#39;Starting Klett retrieval&#39;)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cldFree</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">clFreeGrps</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cldFree &#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">cldFree</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cloud free segment </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">, Time: </span><span class="si">{</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;time64&#39;</span><span class="p">][</span><span class="n">cldFree</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;time64&#39;</span><span class="p">][</span><span class="n">cldFree</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
         <span class="n">cldFree</span> <span class="o">=</span> <span class="n">cldFree</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cldFree</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cldFree mod&#39;</span><span class="p">,</span> <span class="n">cldFree</span><span class="p">)</span>
 
         <span class="c1"># Define channels to run the retrieval for</span>
         <span class="n">channels</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">532</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">355</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">1064</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">)]</span>
@@ -387,7 +387,7 @@
 
         <span class="k">for</span> <span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)):</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;== </span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1"> klett =================================&#39;</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Channel: </span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2"> klett.&quot;</span><span class="p">)</span>
 
                 <span class="c1"># Telescope type dependent configurations</span>
                 <span class="k">if</span> <span class="n">tel</span> <span class="o">==</span> <span class="s1">&#39;NR&#39;</span><span class="p">:</span>
@@ -395,8 +395,6 @@
                     <span class="n">keyminSNR</span> <span class="o">=</span> <span class="s1">&#39;minRefSNR_NR_&#39;</span>
                     <span class="n">key_LR</span> <span class="o">=</span> <span class="s1">&#39;LR_NR_&#39;</span>
                     <span class="n">refBeta</span> <span class="o">=</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;refBeta_NR_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="sa">f</span><span class="s2">&quot;refBeta_NR_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">config_dict</span> <span class="k">else</span> <span class="kc">None</span>
-                    <span class="c1"># TODO seperate klett and raman refBeta in config file?</span>
-                    <span class="c1"># refBeta = config_dict[f&quot;refBeta_NR_klett_{wv}&quot;] if f&quot;refBeta_NR_klett_{wv}&quot; in config_dict else None</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">key_smooth</span> <span class="o">=</span> <span class="s1">&#39;smoothWin_klett_&#39;</span>
                     <span class="n">keyminSNR</span> <span class="o">=</span> <span class="s1">&#39;minRefSNR&#39;</span>
@@ -404,18 +402,18 @@
                     <span class="n">refBeta</span> <span class="o">=</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;refBeta</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
 
                 <span class="c1"># Elastic signals</span>
-                <span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;sig</span><span class="si">{</span><span class="n">signal</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)])</span>
-                <span class="n">bg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;BG</span><span class="si">{</span><span class="n">signal</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)])</span>
-                <span class="n">molBsc</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_profiles</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mBsc_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
+                <span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;sig</span><span class="si">{</span><span class="n">signal</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">bg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;BG</span><span class="si">{</span><span class="n">signal</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">molBsc</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_profiles</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mBsc_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
                     <span class="c1"># Current temporary version of fernald() does not support NaN values in the signal.</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;NaN-values detected in signal </span><span class="si">{</span><span class="n">signal</span><span class="si">}</span><span class="s1">, skipping Klett retrieval for this channel.&#39;</span><span class="p">)</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NaN-values detected in signal </span><span class="si">{</span><span class="n">signal</span><span class="si">}</span><span class="s2">, skipping Klett retrieval for this channel.&quot;</span><span class="p">)</span>
                     <span class="k">continue</span>
 
                 <span class="c1"># Reference height</span>
                 <span class="n">refHInd</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;refH&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;refInd&#39;</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">refHInd</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No valid refHInd found, skipping Klett retrieval for this channel.&#39;</span><span class="p">)</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No valid refHInd found, skipping Klett retrieval for this channel.&quot;</span><span class="p">)</span>
                     <span class="k">continue</span>
 
                 <span class="c1"># Calculate SNR in the reference height</span>
@@ -426,7 +424,7 @@
 
                 <span class="c1"># Checking SNR treshold</span>
                 <span class="k">if</span> <span class="n">SNRRef</span> <span class="o">&lt;</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">keyminSNR</span><span class="si">}{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Signal is too noisy at the reference height, skipping Klett retrival for this channel.&#39;</span><span class="p">,</span> <span class="n">SNRRef</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">keyminSNR</span><span class="si">}{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">])</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Signal is too noisy at the reference height, skipping Klett retrival for this channel.&quot;</span><span class="p">)</span>
                     <span class="k">continue</span>
 
                 <span class="k">if</span> <span class="n">refBeta</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">tel</span> <span class="o">==</span> <span class="s1">&#39;NR&#39;</span><span class="p">:</span>
@@ -435,10 +433,10 @@
                         <span class="k">if</span> <span class="s1">&#39;aerBsc&#39;</span> <span class="ow">in</span> <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">_FR&#39;</span><span class="p">]:</span>
                             <span class="n">refBeta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">_FR&#39;</span><span class="p">][</span><span class="s1">&#39;aerBsc&#39;</span><span class="p">][</span><span class="n">refHInd</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">refHInd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
                         <span class="k">else</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No valid refBeta found, skipping Klett retrieval for this channel&#39;</span><span class="p">)</span>
+                            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No valid refBeta found, skipping Klett retrieval for this channel.&quot;</span><span class="p">)</span>
                             <span class="k">continue</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No valid refBeta found, skipping Klett retrieval for this channel&#39;</span><span class="p">)</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No valid refBeta found, skipping Klett retrieval for this channel.&quot;</span><span class="p">)</span>
                         <span class="k">continue</span>
                 
                 <span class="c1"># Print debug info</span>
@@ -544,13 +542,14 @@
 <span class="sd">                  propagating NaN-values in the backward and farward retrievals.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="c1"># Convert units</span>
     <span class="n">height</span> <span class="o">=</span> <span class="n">height</span> <span class="o">/</span> <span class="mf">1e3</span>  <span class="c1"># Convert to km</span>
     <span class="n">molBsc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">molBsc</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e3</span>  <span class="c1"># Convert to km^-1 sr^-1</span>
     <span class="n">refBeta</span> <span class="o">=</span> <span class="n">refBeta</span> <span class="o">*</span> <span class="mf">1e3</span>  <span class="c1"># Convert to km^-1 sr^-1</span>
 
     <span class="c1"># Signal noise and initialization</span>
-    <span class="n">totSig</span> <span class="o">=</span> <span class="n">signal</span> <span class="o">+</span> <span class="n">bg</span>
+    <span class="n">totSig</span> <span class="o">=</span> <span class="n">signal</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">bg</span>
     <span class="n">totSig</span><span class="p">[</span><span class="n">totSig</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">totSig</span><span class="p">)</span>
 

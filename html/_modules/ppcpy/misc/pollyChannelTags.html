@@ -313,387 +313,457 @@
 <span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+
 <div class="viewcode-block" id="pollyChannelTags">
-<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.pollyChannelTags.html#ppcpy.misc.pollyChannelTags.pollyChannelTags">[docs]</a>
-<span class="k">def</span> <span class="nf">pollyChannelTags</span><span class="p">(</span><span class="n">chTagsIn</span><span class="p">:</span><span class="nb">list</span><span class="p">,</span> <span class="o">**</span><span class="n">Channels</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-    <span class="n">chTags</span> <span class="o">=</span> <span class="p">{}</span>
+<a class="viewcode-back" href="../../../api_doc/misc.html#ppcpy.misc.pollyChannelTags.pollyChannelTags">[docs]</a>
+<span class="k">def</span> <span class="nf">pollyChannelTags</span><span class="p">(</span><span class="n">chTagsIn</span><span class="p">:</span><span class="nb">list</span><span class="p">,</span> <span class="o">**</span><span class="n">channel_attributes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assign channel tags.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    chTagsIn : list</span>
+<span class="sd">        Original channel tags.</span>
+<span class="sd">    </span>
+<span class="sd">    Keyword arguments</span>
+<span class="sd">    ------------------</span>
+<span class="sd">    flagFR : list of bools</span>
+<span class="sd">        Whether the channels has a far-range telescope.</span>
+<span class="sd">    flagNR : list of bools</span>
+<span class="sd">        Whether the channels has a near-range telescope.</span>
+<span class="sd">    flagRR : list of bools</span>
+<span class="sd">        Whether the channel is intended for Rotational Raman.</span>
+<span class="sd">    flagTot : list</span>
+<span class="sd">        Whether it is a total (cross- and co-polarized) channel.</span>
+<span class="sd">    flagCross : list</span>
+<span class="sd">        Whether it is a Cross-polarized channel.</span>
+<span class="sd">    flagParallel : list</span>
+<span class="sd">        Whether it is a Co-polarized channel.</span>
+<span class="sd">    flag355nm : list</span>
+<span class="sd">        Whether the channel has a wavelength of 355 nm.</span>
+<span class="sd">    flag387nm : list</span>
+<span class="sd">        Whether the channel has a wavelength of 387 nm.</span>
+<span class="sd">    flag407nm : list</span>
+<span class="sd">        Whether the channel has a wavelength of 407 nm.</span>
+<span class="sd">    flag532nm : list</span>
+<span class="sd">        Whether the channel has a wavelength of 532 nm.</span>
+<span class="sd">    flag607nm : list</span>
+<span class="sd">        Whether the channel has a wavelength of 607 nm.</span>
+<span class="sd">    flag1064nm : list</span>
+<span class="sd">        Whether the channel has a wavelength of 1064 nm.</span>
+<span class="sd">    flagDFOV : list</span>
+<span class="sd">        Whether the channel is intended for Dual Field Of View.</span>
+<span class="sd">    flag460nm : list of bools</span>
+<span class="sd">        Whether the channel has a wavelength of 460 nm.</span>
+<span class="sd">    flag353nm : list of bools</span>
+<span class="sd">        Whether the channel has a wavelength of 353 nm.</span>
+<span class="sd">    flag530nm : list of bools</span>
+<span class="sd">        Whether the channel has a wavelength of 530 nm.</span>
+<span class="sd">    flag1058nm : list of bools</span>
+<span class="sd">        Whether the channel has a wavelength of 1058 nm.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    chTagsOut_ls : list</span>
+<span class="sd">        Channel tags.</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - The key-word parameter `flagRotRaman` is a bit redundant</span>
+<span class="sd">      after the change to the naming of rotational raman channels</span>
+<span class="sd">      and may therefore be removed in the future.</span>
+
+<span class="sd">    ** History **</span>
+
+<span class="sd">    - 2021-04-23: first edition by Zhenping</span>
+<span class="sd">    - xxxx-xx-xx: translated to python</span>
+<span class="sd">    - 2026-07-30: Changed to naming rotational Raman channel by</span>
+<span class="sd">                  there wavelength and added channels FR-460 nm,</span>
+<span class="sd">                  FR-total-353 nm and FR-parallel-1064 nm.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">chTagsOut_ls</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">chLabels</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">nChs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Channels</span><span class="p">[</span><span class="s1">&#39;flagFarRangeChannel&#39;</span><span class="p">])</span>
+    <span class="n">nChs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">channel_attributes</span><span class="p">[</span><span class="s1">&#39;flagFarRange&#39;</span><span class="p">])</span>
+    <span class="n">defaultEncoding</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nChs</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chTagsIn</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="c1">## Extract key-word parameters</span>
+    <span class="n">encodings</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagFarRange&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagNearRange&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagRotRaman&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagTotal&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagCross&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagParallel&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag355nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag387nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag407nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag532nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag607nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag1064nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagDFOV&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag460nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag353nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag530nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag1058nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">encodings</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chTagsIn</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1">## Use original channel tags</span>
         <span class="n">chTagsOut_ls</span> <span class="o">=</span> <span class="n">chTagsIn</span>
-<span class="c1">#        if &#39;none&#39; in chTagsOut_ls:</span>
-<span class="c1">#            chTagsOut_ls.remove(&quot;none&quot;)</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ChannelLabels: </span><span class="si">{</span><span class="n">chTagsOut_ls</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">chTagsOut_ls</span>
 
-    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">chTagsIn</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1">## Assign tag based on a bitmask encodings</span>
         <span class="k">for</span> <span class="n">iCh</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nChs</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">([</span><span class="n">c</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">Channels</span><span class="p">])</span>
-            <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">i</span> <span class="o">*</span> <span class="n">b</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">Channels</span><span class="p">]))</span>
-            <span class="k">if</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">73</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range total 355 nm&#39;</span>
+            <span class="n">chCode</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="o">*</span> <span class="n">b</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">encodings</span><span class="p">[:,</span> <span class="n">iCh</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="n">chCode</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">69</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">16389</span><span class="p">,</span> <span class="mi">16393</span><span class="p">,</span> <span class="mi">16397</span><span class="p">]:</span>
+                <span class="c1">#ch_label = &#39;far-range total 353 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;353_total_FR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">74</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;near-range 355 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">73</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;far-range total 355 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;355_total_FR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">81</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range cross 355 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">74</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;near-range 355 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;355_total_NR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">129</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range 387 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">81</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;far-range cross 355 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;355_cross_FR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">130</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;near-range 387 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">129</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;far-range 387 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;387_total_FR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">257</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range 407 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">130</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;near-range 387 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;387_total_NR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">517</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range rotational Raman 532 nm&#39;</span>
+            <span class="c1">#elif chCode == 257:</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">265</span><span class="p">:</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;407_total_FR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">521</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range total 532 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">517</span><span class="p">,</span> <span class="mi">525</span><span class="p">,</span> <span class="mi">32773</span><span class="p">,</span> <span class="mi">32777</span><span class="p">,</span> <span class="mi">32781</span><span class="p">]:</span>
+                <span class="c1">#ch_label = &#39;far-range total 530 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;530_total_FR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">522</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;near-range total 532 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">521</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;far-range total 532 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;532_total_FR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">529</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range cross 532 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">522</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;near-range total 532 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;532_total_NR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4624</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;near-range cross 532 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">529</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;far-range cross 532 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;532_cros_FR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">545</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range parallel 532 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">4624</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;near-range cross 532 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;532_cross_NR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1025</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range 607 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">545</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;far-range parallel 532 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;532_parallel_FR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1026</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;near-range 607 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">1025</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;far-range 607 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;607_total_FR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2053</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range rotational Raman 1064 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">1026</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;near-range 607 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;607_total_NR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2057</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range total 1064 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2053</span><span class="p">,</span> <span class="mi">2061</span><span class="p">,</span> <span class="mi">65541</span><span class="p">,</span> <span class="mi">65545</span><span class="p">,</span> <span class="mi">65549</span><span class="p">]:</span>
+                <span class="c1">#ch_label = &#39;far-range total 1058 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;1058_total_FR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2065</span><span class="p">:</span>
-                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range cross 1064 nm&#39;</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">2057</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;far-range total 1064 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;1064_total_FR&#39;</span>
+                <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">2058</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;near-range cross 1064 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;1064_cross_NR&#39;</span>
+                <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">2065</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;far-range cross 1064 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;1064_cross_FR&#39;</span>
+                <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">2081</span><span class="p">:</span>
+                <span class="c1">#ch_label = &#39;far-range parallel 1064 nm&#39;</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;1064_parallel_FR&#39;</span>
+                <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">8193</span><span class="p">:</span>
+                <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;460_total_FR&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span>
                 <span class="n">chTagsOut_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_label</span><span class="p">)</span>
 
-<span class="c1">#        if &#39;none&#39; in chTagsOut_ls:</span>
-<span class="c1">#            chTagsOut_ls.remove(&quot;none&quot;)</span>
-        <span class="c1">#logging.info(f&#39;ChannelTags: {chTagsOut}&#39;)</span>
-        <span class="c1">#logging.info(f&#39;ChannelLabels: {chLabels}&#39;)</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ChannelLabels: </span><span class="si">{</span><span class="n">chTagsOut_ls</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">chTagsOut_ls</span></div>
+    <span class="k">return</span> <span class="n">chTagsOut_ls</span></div>
+
 
 
 <div class="viewcode-block" id="polly_config_channel_corrections">
-<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.pollyChannelTags.html#ppcpy.misc.pollyChannelTags.polly_config_channel_corrections">[docs]</a>
-<span class="k">def</span> <span class="nf">polly_config_channel_corrections</span><span class="p">(</span><span class="n">chTagsOut_ls</span><span class="p">,</span><span class="n">polly_config_dict</span><span class="p">):</span>
+<a class="viewcode-back" href="../../../api_doc/misc.html#ppcpy.misc.pollyChannelTags.polly_config_channel_corrections">[docs]</a>
+<span class="k">def</span> <span class="nf">polly_config_channel_corrections</span><span class="p">(</span><span class="n">chTagsOut_ls</span><span class="p">:</span><span class="nb">list</span><span class="p">,</span> <span class="n">polly_config_dict</span><span class="p">:</span><span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove channel with tags &#39;none&#39; as well as the respective config variables</span>
+<span class="sd">    for these channels.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    chTagsOut_ls : list</span>
+<span class="sd">        List of channel tags.</span>
+<span class="sd">    polly_config_dict : dict</span>
+<span class="sd">        Dictionary of polly config variables.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    chTagsOut_ls : list</span>
+<span class="sd">        List of channel tags without &#39;none&#39; - channels.</span>
+<span class="sd">    polly_config_dict : dict</span>
+<span class="sd">        Dictionary of polly config variables without the config variables of &#39;none&#39; - channels.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">nChs_orig</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">chTagsOut_ls</span><span class="p">)</span>
-    <span class="c1"># Find indices where &quot;none&quot; is in the list</span>
+
+    <span class="c1">## Find indices where &quot;none&quot; is in the list</span>
     <span class="n">none_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chTagsOut_ls</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">none_indices</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;removed none tag from channel list </span><span class="si">{</span><span class="n">none_indices</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removed &#39;none&#39; tag from channel list. Indices removed: </span><span class="si">{</span><span class="n">none_indices</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="c1"># Remove all occurrences of &quot;none&quot;</span>
+    <span class="c1">## Remove all occurrences of &quot;none&quot;</span>
     <span class="n">chTagsOut_ls</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">chTagsOut_ls</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s2">&quot;none&quot;</span><span class="p">]</span>
-    <span class="c1"># remove entries from polly-config of  &#39;none&#39; - channel</span>
+
+    <span class="c1">## remove entries from polly-config of  &#39;none&#39; - channel</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">polly_config_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">==</span> <span class="n">nChs_orig</span><span class="p">:</span>
             <span class="n">polly_config_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">none_indices</span><span class="p">]</span>
+
     <span class="k">return</span> <span class="n">chTagsOut_ls</span><span class="p">,</span> <span class="n">polly_config_dict</span></div>
 
 
-<div class="viewcode-block" id="pollyChannelflags">
-<a class="viewcode-back" href="../../../_autosummary/ppcpy.misc.pollyChannelTags.html#ppcpy.misc.pollyChannelTags.pollyChannelflags">[docs]</a>
-<span class="k">def</span> <span class="nf">pollyChannelflags</span><span class="p">(</span><span class="n">channel_dict_length</span><span class="p">,</span><span class="o">**</span><span class="n">Channels</span><span class="p">):</span>
-    <span class="n">flags</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="c1">#    nChs = len(Channels[&#39;flagFarRangeChannel&#39;])</span>
+
+<div class="viewcode-block" id="pollyChannelFlags">
+<a class="viewcode-back" href="../../../api_doc/misc.html#ppcpy.misc.pollyChannelTags.pollyChannelFlags">[docs]</a>
+<span class="k">def</span> <span class="nf">pollyChannelFlags</span><span class="p">(</span><span class="n">channel_dict_length</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="o">**</span><span class="n">channel_attributes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assign channel flags.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    channel_dict_length : int</span>
+<span class="sd">        Number of channels.</span>
+
+<span class="sd">    Keyword arguments</span>
+<span class="sd">    ------------------</span>
+<span class="sd">    flagFarRange : list of bools</span>
+<span class="sd">        Whether the channels has a far-range telescope.</span>
+<span class="sd">    flagNearRange : list of bools</span>
+<span class="sd">        Whether the channels has a near-range telescope.</span>
+<span class="sd">    flagRotRaman : list of bools</span>
+<span class="sd">        Whether the channel is intended for Rotational Raman.</span>
+<span class="sd">    flagTotal : list of bools</span>
+<span class="sd">        Whether it is a total (cross- and co-polarized) channel.</span>
+<span class="sd">    flagCross : list of bools</span>
+<span class="sd">        Whether it is a Cross-polarized channel.</span>
+<span class="sd">    flagParallel : list of bools</span>
+<span class="sd">        Whether it is a Co-polarized channel.</span>
+<span class="sd">    flag355nm : list of bools</span>
+<span class="sd">        Whether the channel has a wavelength of 355 nm.</span>
+<span class="sd">    flag387nm : list of bools</span>
+<span class="sd">        Whether the channel has a wavelength of 387 nm.</span>
+<span class="sd">    flag407nm : list of bools</span>
+<span class="sd">        Whether the channel has a wavelength of 407 nm.</span>
+<span class="sd">    flag532nm : list of bools</span>
+<span class="sd">        Whether the channel has a wavelength of 532 nm.</span>
+<span class="sd">    flag607nm : list of bools</span>
+<span class="sd">        Whether the channel has a wavelength of 607 nm.</span>
+<span class="sd">    flag1064nm : list of bools</span>
+<span class="sd">        Whether the channel has a wavelength of 1064 nm.</span>
+<span class="sd">    flagDFOV : list of bools</span>
+<span class="sd">        Whether the channel is intended for Dual Field Of View.</span>
+<span class="sd">    flag460nm : list of bools</span>
+<span class="sd">        Whether the channel has a wavelength of 460 nm.</span>
+<span class="sd">    flag353nm : list of bools</span>
+<span class="sd">        Whether the channel has a wavelength of 353 nm.</span>
+<span class="sd">    flag530nm : list of bools</span>
+<span class="sd">        Whether the channel has a wavelength of 530 nm.</span>
+<span class="sd">    flag1058nm : list of bools</span>
+<span class="sd">        Whether the channel has a wavelength of 1058 nm.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    flags : list</span>
+<span class="sd">        Nested list with boolean flag for each channel.</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - The key-word parameter `flagRotRaman` is a bit redundant</span>
+<span class="sd">      after the change to the naming of rotational raman channels</span>
+<span class="sd">      and may therefore be removed in the future. </span>
+<span class="sd">    </span>
+<span class="sd">    ** History **</span>
+
+<span class="sd">    - 2021-04-23: first edition by Zhenping</span>
+<span class="sd">    - xxxx-xx-xx: translated to python</span>
+<span class="sd">    - 2026-07-30: Changed to naming rotational Raman channel by</span>
+<span class="sd">                  there wavelength and added channels FR-460 nm,</span>
+<span class="sd">                  FR-total-353 nm and FR-parallel-1064 nm.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">nChs</span> <span class="o">=</span> <span class="n">channel_dict_length</span>
+    <span class="n">defaultEncoding</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nChs</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
-    <span class="c1">## flag initialization</span>
-    <span class="n">flag_355_total_FR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span> 
-    <span class="n">flag_355_cross_FR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_355_parallel_FR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_355_total_NR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_387_total_FR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_387_total_NR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_407_total_FR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_407_total_NR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_532_total_FR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_532_cross_FR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_532_parallel_FR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_532_total_NR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_532_cross_DFOV</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_532_total_RR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_607_total_FR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_607_total_NR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_1058_total_FR</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_1064_total_FR</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_1064_cross_FR</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">flag_1064_total_NR</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="c1">## Extract key-word parameters</span>
+    <span class="n">encodings</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagFarRange&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagNearRange&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagRotRaman&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagTotal&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagCross&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagParallel&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag355nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag387nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag407nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag532nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag607nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag1064nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flagDFOV&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag460nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag353nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag530nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flag1058nm&#39;</span><span class="p">,</span> <span class="n">defaultEncoding</span><span class="p">))</span>
+    <span class="n">encodings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">encodings</span><span class="p">)</span>
 
+    <span class="c1">## Flag initialization</span>
+    <span class="n">flag_353_total_FR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_355_total_FR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span> 
+    <span class="n">flag_355_cross_FR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_355_parallel_FR</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_355_total_NR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_387_total_FR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_387_total_NR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_407_total_FR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_407_total_NR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_460_total_FR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_530_total_FR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_532_total_FR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_532_cross_FR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_532_parallel_FR</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_532_total_NR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_532_cross_DFOV</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_607_total_FR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_607_total_NR</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_1058_total_FR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_1064_total_FR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_1064_cross_FR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_1064_parallel_FR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_1064_total_NR</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">flag_unknown</span>          <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nChs</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
 
-    <span class="n">chTags</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1">## Assign flags based on a bitmask encodings</span>
     <span class="k">for</span> <span class="n">iCh</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nChs</span><span class="p">):</span>
-        <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">i</span> <span class="o">*</span> <span class="n">b</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">Channels</span><span class="o">.</span><span class="n">values</span><span class="p">()]))</span>
-        <span class="k">if</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">73</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range total 355 nm&#39;</span>
+        <span class="n">chCode</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="o">*</span> <span class="n">b</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">encodings</span><span class="p">[:,</span> <span class="n">iCh</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">chCode</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">69</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">16389</span><span class="p">,</span> <span class="mi">16393</span><span class="p">,</span> <span class="mi">16397</span><span class="p">]:</span>
+            <span class="c1">## far-range total 353 nm (rotational Raman)</span>
+            <span class="n">flag_353_total_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">73</span><span class="p">:</span>
+            <span class="c1">## far-range total 355 nm</span>
             <span class="n">flag_355_total_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">74</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;near-range 355 nm&#39;</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">74</span><span class="p">:</span>
+            <span class="c1">## near-range 355 nm</span>
             <span class="n">flag_355_total_NR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">81</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range cross 355 nm&#39;</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">81</span><span class="p">:</span>
+            <span class="c1">## far-range cross 355 nm</span>
             <span class="n">flag_355_cross_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">129</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range 387 nm&#39;</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">129</span><span class="p">:</span>
+            <span class="c1">## far-range 387 nm</span>
             <span class="n">flag_387_total_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">130</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;near-range 387 nm&#39;</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">130</span><span class="p">:</span>
+            <span class="c1">## near-range 387 nm</span>
             <span class="n">flag_387_total_NR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">257</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range 407 nm&#39;</span>
+        <span class="c1">#elif chCode == 257:</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">265</span><span class="p">:</span>
+            <span class="c1">## far-range 407 nm</span>
             <span class="n">flag_407_total_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">517</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range rotational Raman 532 nm&#39;</span>
-            <span class="n">flag_532_total_RR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">521</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range total 532 nm&#39;</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">517</span><span class="p">,</span> <span class="mi">525</span><span class="p">,</span> <span class="mi">32773</span><span class="p">,</span> <span class="mi">32777</span><span class="p">,</span> <span class="mi">32781</span><span class="p">]:</span>
+            <span class="c1">## far-range total 530 nm (rotational Raman)</span>
+            <span class="n">flag_530_total_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">521</span><span class="p">:</span>
+            <span class="c1">## far-range total 532 nm</span>
             <span class="n">flag_532_total_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">522</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;near-range total 532 nm&#39;</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">522</span><span class="p">:</span>
+            <span class="c1">## near-range total 532 nm</span>
             <span class="n">flag_532_total_NR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">529</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range cross 532 nm&#39;</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">529</span><span class="p">:</span>
+            <span class="c1">## far-range cross 532 nm</span>
             <span class="n">flag_532_cross_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4624</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;near-range cross 532 nm&#39;</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">4624</span><span class="p">:</span>
+            <span class="c1">## near-range cross 532 nm</span>
             <span class="n">flag_532_cross_DFOV</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">545</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range parallel 532 nm&#39;</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">545</span><span class="p">:</span>
+            <span class="c1">## far-range parallel 532 nm</span>
             <span class="n">flag_532_parallel_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1025</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range 607 nm&#39;</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">1025</span><span class="p">:</span>
+            <span class="c1">## far-range 607 nm</span>
             <span class="n">flag_607_total_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1026</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;near-range 607 nm&#39;</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">1026</span><span class="p">:</span>
+            <span class="c1">## near-range 607 nm</span>
             <span class="n">flag_607_total_NR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2053</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range rotational Raman 1064 nm&#39;</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2053</span><span class="p">,</span> <span class="mi">2061</span><span class="p">,</span> <span class="mi">65541</span><span class="p">,</span> <span class="mi">65545</span><span class="p">,</span> <span class="mi">65549</span><span class="p">]:</span>
+            <span class="c1">## far-range total 1058 nm (rotational Raman)</span>
             <span class="n">flag_1058_total_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2057</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range total 1064 nm&#39;</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">2057</span><span class="p">:</span>
+            <span class="c1">## far-range total 1064 nm</span>
             <span class="n">flag_1064_total_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">chTags</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2065</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;far-range cross 1064 nm&#39;</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">2058</span><span class="p">:</span>
+            <span class="c1">## near-range total 1064 nm</span>
+            <span class="n">flag_1064_total_NR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">2065</span><span class="p">:</span>
+            <span class="c1">## far-range cross 1064 nm</span>
             <span class="n">flag_1064_cross_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">2081</span><span class="p">:</span>
+            <span class="c1">## far-range parallel 1064 nm</span>
+            <span class="n">flag_1064_parallel_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">chCode</span> <span class="o">==</span> <span class="mi">8193</span><span class="p">:</span>
+            <span class="c1">## far-range 460 nm (Fluorescence)</span>
+            <span class="n">flag_460_total_FR</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">ch_label</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span>
+            <span class="c1">## unknown</span>
+            <span class="n">flag_unknown</span><span class="p">[</span><span class="n">iCh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="n">flags</span> <span class="o">=</span> <span class="p">[</span><span class="n">flag_355_total_FR</span><span class="p">,</span>
-             <span class="n">flag_355_cross_FR</span><span class="p">,</span>
-             <span class="n">flag_355_parallel_FR</span><span class="p">,</span>
-             <span class="n">flag_355_total_NR</span><span class="p">,</span>
-             <span class="n">flag_387_total_FR</span><span class="p">,</span>
-             <span class="n">flag_387_total_NR</span><span class="p">,</span>
-             <span class="n">flag_407_total_FR</span><span class="p">,</span>
-             <span class="n">flag_407_total_NR</span><span class="p">,</span>
-             <span class="n">flag_532_total_FR</span><span class="p">,</span>
-             <span class="n">flag_532_cross_FR</span><span class="p">,</span>
-             <span class="n">flag_532_parallel_FR</span><span class="p">,</span>
-             <span class="n">flag_532_total_NR</span><span class="p">,</span>
-             <span class="n">flag_532_cross_DFOV</span><span class="p">,</span>
-             <span class="n">flag_532_total_RR</span><span class="p">,</span>
-             <span class="n">flag_607_total_FR</span><span class="p">,</span>
-             <span class="n">flag_607_total_NR</span><span class="p">,</span>
-             <span class="n">flag_1058_total_FR</span><span class="p">,</span>
-             <span class="n">flag_1064_total_FR</span><span class="p">,</span>
-             <span class="n">flag_1064_cross_FR</span><span class="p">,</span>
-             <span class="n">flag_1064_total_NR</span>
-             <span class="p">]</span>
+    <span class="n">flags</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;far-range total 353 nm&quot;</span>      <span class="p">:</span> <span class="n">flag_353_total_FR</span><span class="p">,</span>
+        <span class="s2">&quot;far-range total 355 nm&quot;</span>      <span class="p">:</span> <span class="n">flag_355_total_FR</span><span class="p">,</span>
+        <span class="s2">&quot;far-range cross 355 nm&quot;</span>      <span class="p">:</span> <span class="n">flag_355_cross_FR</span><span class="p">,</span>
+        <span class="s2">&quot;far-range parallel 355 nm&quot;</span>   <span class="p">:</span> <span class="n">flag_355_parallel_FR</span><span class="p">,</span>
+        <span class="s2">&quot;near-range total 355 nm&quot;</span>     <span class="p">:</span> <span class="n">flag_355_total_NR</span><span class="p">,</span>
+        <span class="s2">&quot;far-range 387 nm&quot;</span>            <span class="p">:</span> <span class="n">flag_387_total_FR</span><span class="p">,</span>
+        <span class="s2">&quot;near-range 387 nm&quot;</span>           <span class="p">:</span> <span class="n">flag_387_total_NR</span><span class="p">,</span>
+        <span class="s2">&quot;far-range 407 nm&quot;</span>            <span class="p">:</span> <span class="n">flag_407_total_FR</span><span class="p">,</span>
+        <span class="s2">&quot;near-range 407 nm&quot;</span>           <span class="p">:</span> <span class="n">flag_407_total_NR</span><span class="p">,</span>
+        <span class="s2">&quot;far-range 460 nm&quot;</span>            <span class="p">:</span> <span class="n">flag_460_total_FR</span><span class="p">,</span>
+        <span class="s2">&quot;far-range total 530 nm&quot;</span>      <span class="p">:</span> <span class="n">flag_530_total_FR</span><span class="p">,</span>
+        <span class="s2">&quot;far-range total 532 nm&quot;</span>      <span class="p">:</span> <span class="n">flag_532_total_FR</span><span class="p">,</span>
+        <span class="s2">&quot;far-range cross 532 nm&quot;</span>      <span class="p">:</span> <span class="n">flag_532_cross_FR</span><span class="p">,</span>
+        <span class="s2">&quot;far-range parallel 532 nm&quot;</span>   <span class="p">:</span> <span class="n">flag_532_parallel_FR</span><span class="p">,</span>
+        <span class="s2">&quot;near-range total 532 nm&quot;</span>     <span class="p">:</span> <span class="n">flag_532_total_NR</span><span class="p">,</span>
+        <span class="s2">&quot;near-range cross 532 nm&quot;</span>     <span class="p">:</span> <span class="n">flag_532_cross_DFOV</span><span class="p">,</span>
+        <span class="s2">&quot;far-range 607 nm&quot;</span>            <span class="p">:</span> <span class="n">flag_607_total_FR</span><span class="p">,</span>
+        <span class="s2">&quot;near-range 607 nm&quot;</span>           <span class="p">:</span> <span class="n">flag_607_total_NR</span><span class="p">,</span>
+        <span class="s2">&quot;far-range total 1058 nm&quot;</span>     <span class="p">:</span> <span class="n">flag_1058_total_FR</span><span class="p">,</span>
+        <span class="s2">&quot;far-range total 1064 nm&quot;</span>     <span class="p">:</span> <span class="n">flag_1064_total_FR</span><span class="p">,</span>
+        <span class="s2">&quot;far-range cross 1064 nm&quot;</span>     <span class="p">:</span> <span class="n">flag_1064_cross_FR</span><span class="p">,</span>
+        <span class="s2">&quot;far-range parallel 1064 nm&quot;</span>  <span class="p">:</span> <span class="n">flag_1064_parallel_FR</span><span class="p">,</span>
+        <span class="s2">&quot;near-range total 1064 nm&quot;</span>    <span class="p">:</span> <span class="n">flag_1064_total_NR</span><span class="p">,</span>
+        <span class="s2">&quot;unknown&quot;</span>                     <span class="p">:</span> <span class="n">flag_unknown</span>
+    <span class="p">}</span>
 
     <span class="k">return</span> <span class="n">flags</span></div>
 
-
-<span class="c1">#function [chTagsO, chLabels, flagFarRangeChannelO, flagNearRangeChannelO, flagRotRamanChannelO, flagTotalChannelO, flagCrossChannelO, flagParallelChannelO, flag355nmChannelO, flag387nmChannelO, flag407nmChannelO, flag532nmChannelO, flag607nmChannelO, flag1064nmChannelO] = pollyChannelTags(chTagsI, varargin)</span>
-<span class="c1">#% POLLYCHANNELTAGS specify channel tags and labels according to logical settings.</span>
-<span class="c1">#%</span>
-<span class="c1">#% USAGE:</span>
-<span class="c1">#%    [chTagsO, chLabels, flagFarRangeChannelO, flagNearRangeChannelO, flagRotRamanChannelO, flagTotalChannelO, flagCrossChannelO, flagParallelChannelO, flag355nmChannelO, flag387nmChannelO, flag407nmChannelO, flag532nmChannelO, flag607nmChannelO, flag1064nmChannelO] = pollyChannelTags(chTagsI)</span>
-<span class="c1">#%</span>
-<span class="c1">#% INPUTS:</span>
-<span class="c1">#%    chTagsI: numeric array</span>
-<span class="c1">#%        manual specified channel tag for each channel. (default: [])</span>
-<span class="c1">#%        73: far-range total 355 nm</span>
-<span class="c1">#%        74: near-range 355 nm</span>
-<span class="c1">#%        81: far-range cross 355 nm</span>
-<span class="c1">#%        129: far-range 387 nm</span>
-<span class="c1">#%        130: near-range 387 nm</span>
-<span class="c1">#%        257: far-range 407 nm</span>
-<span class="c1">#%        517: far-range rotational Raman 532 nm</span>
-<span class="c1">#%        521: far-range total 532 nm</span>
-<span class="c1">#%        522: near-range 532 nm</span>
-<span class="c1">#%        529: far-range cross 532 nm</span>
-<span class="c1">#%        545: far-range parallel 532 nm</span>
-<span class="c1">#%        1025: far-range 607 nm</span>
-<span class="c1">#%        2057: far-range total 1064 nm</span>
-<span class="c1">#%        1026: near-range 607 nm</span>
-<span class="c1">#%        1026: near-range 607 nm</span>
-<span class="c1">#%        2053: far-range rotational Raman 1064 nm</span>
-<span class="c1">#%</span>
-<span class="c1">#% KEYWORDS:</span>
-<span class="c1">#%    flagFarRangeChannel: logical</span>
-<span class="c1">#%    flagNearRangeChannel: logical</span>
-<span class="c1">#%    flag532nmChannel: logical</span>
-<span class="c1">#%    flagRotRamanChannel: logical</span>
-<span class="c1">#%    flag355nmChannel: logical</span>
-<span class="c1">#%    flag1064nmChannel: logical</span>
-<span class="c1">#%    flagTotalChannel: logical</span>
-<span class="c1">#%    flagCrossChannel: logical</span>
-<span class="c1">#%    flagParallelChannel: logical</span>
-<span class="c1">#%    flag387nmChannel: logical</span>
-<span class="c1">#%    flag407nmChannel: logical</span>
-<span class="c1">#%    flag607nmChannel: logical</span>
-<span class="c1">#%</span>
-<span class="c1">#% OUTPUTS:</span>
-<span class="c1">#%    chTagsO: numeric array</span>
-<span class="c1">#%        channel tag.</span>
-<span class="c1">#%    chLabels: cell</span>
-<span class="c1">#%        channel label.</span>
-<span class="c1">#%    flagFarRangeChannelO: logical</span>
-<span class="c1">#%    flagNearRangeChannelO: logical</span>
-<span class="c1">#%    flag532nmChannelO: logical</span>
-<span class="c1">#%    flagRotRamanChannelO: logical</span>
-<span class="c1">#%    flag355nmChannelO: logical</span>
-<span class="c1">#%    flag1064nmChannelO: logical</span>
-<span class="c1">#%    flagTotalChannelO: logical</span>
-<span class="c1">#%    flagCrossChannelO: logical</span>
-<span class="c1">#%    flagParallelChannelO: logical</span>
-<span class="c1">#%    flag387nmChannelO: logical</span>
-<span class="c1">#%    flag407nmChannelO: logical</span>
-<span class="c1">#%    flag607nmChannelO: logical</span>
-<span class="c1">#%</span>
-<span class="c1">#% HISTORY:</span>
-<span class="c1">#%    - 2021-04-23: first edition by Zhenping</span>
-<span class="c1">#%</span>
-<span class="c1">#% .. Authors: - zhenping@tropos.de</span>
-<span class="c1">#</span>
-<span class="c1">#p = inputParser;</span>
-<span class="c1">#p.KeepUnmatched = true;</span>
-<span class="c1">#</span>
-<span class="c1">#addRequired(p, &#39;chTagsI&#39;);</span>
-<span class="c1">#addParameter(p, &#39;flagFarRangeChannel&#39;, false, @islogical);</span>
-<span class="c1">#addParameter(p, &#39;flagNearRangeChannel&#39;, false, @islogical);</span>
-<span class="c1">#addParameter(p, &#39;flagRotRamanChannel&#39;, false, @islogical);</span>
-<span class="c1">#addParameter(p, &#39;flagTotalChannel&#39;, false, @islogical);</span>
-<span class="c1">#addParameter(p, &#39;flagCrossChannel&#39;, false, @islogical);</span>
-<span class="c1">#addParameter(p, &#39;flagParallelChannel&#39;, false, @islogical);</span>
-<span class="c1">#addParameter(p, &#39;flag355nmChannel&#39;, false, @islogical);</span>
-<span class="c1">#addParameter(p, &#39;flag387nmChannel&#39;, false, @islogical);</span>
-<span class="c1">#addParameter(p, &#39;flag407nmChannel&#39;, false, @islogical);</span>
-<span class="c1">#addParameter(p, &#39;flag532nmChannel&#39;, false, @islogical);</span>
-<span class="c1">#addParameter(p, &#39;flag607nmChannel&#39;, false, @islogical);</span>
-<span class="c1">#addParameter(p, &#39;flag1064nmChannel&#39;, false, @islogical);</span>
-<span class="c1">#</span>
-<span class="c1">#parse(p, chTagsI, varargin{:});</span>
-<span class="c1">#</span>
-<span class="c1">#nChs = length(p.Results.flagFarRangeChannel);   % number of channels</span>
-<span class="c1">#chTagsO = NaN(1, nChs);</span>
-<span class="c1">#chLabels = cell(1, nChs);</span>
-<span class="c1">#</span>
-<span class="c1">#for iCh = 1:nChs</span>
-<span class="c1">#</span>
-<span class="c1">#    if (~ isempty(chTagsI))</span>
-<span class="c1">#        % channel tag from keyword of &#39;chTags&#39;</span>
-<span class="c1">#        chTagsO(iCh) = chTagsI(iCh);</span>
-<span class="c1">#    elseif isempty(chTagsI) &amp;&amp; (any(p.Results.flagFarRangeChannel | ...</span>
-<span class="c1">#                                      p.Results.flagNearRangeChannel | ...</span>
-<span class="c1">#                                      p.Results.flagRotRamanChannel | ...</span>
-<span class="c1">#                                      p.Results.flagTotalChannel | ...</span>
-<span class="c1">#                                      p.Results.flagCrossChannel | ...</span>
-<span class="c1">#                                      p.Results.flagParallelChannel | ...</span>
-<span class="c1">#                                      p.Results.flag355nmChannel | ...</span>
-<span class="c1">#                                      p.Results.flag387nmChannel | ...</span>
-<span class="c1">#                                      p.Results.flag407nmChannel | ...</span>
-<span class="c1">#                                      p.Results.flag532nmChannel | ...</span>
-<span class="c1">#                                      p.Results.flag607nmChannel | ...</span>
-<span class="c1">#                                      p.Results.flag1064nmChannel))</span>
-<span class="c1">#        % channel tag from logical variables</span>
-<span class="c1">#        chTagsO(iCh) = sum(2.^(0:(12 - 1)) .* [p.Results.flagFarRangeChannel(iCh), ...</span>
-<span class="c1">#        p.Results.flagNearRangeChannel(iCh), p.Results.flagRotRamanChannel(iCh), ...</span>
-<span class="c1">#        p.Results.flagTotalChannel(iCh), p.Results.flagCrossChannel(iCh), ...</span>
-<span class="c1">#        p.Results.flagParallelChannel(iCh), p.Results.flag355nmChannel(iCh), ...</span>
-<span class="c1">#        p.Results.flag387nmChannel(iCh), p.Results.flag407nmChannel(iCh), ...</span>
-<span class="c1">#        p.Results.flag532nmChannel(iCh), p.Results.flag607nmChannel(iCh), p.Results.flag1064nmChannel(iCh)]);</span>
-<span class="c1">#    else</span>
-<span class="c1">#        error(&#39;PICASSO:InvalidInput&#39;, &#39;Incompatile channels in chTags.&#39;);</span>
-<span class="c1">#    end</span>
-<span class="c1">#</span>
-<span class="c1">#    switch floor(chTagsO(iCh))</span>
-<span class="c1">#    case 73   % far-range total 355 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;far-range total 355 nm&#39;;</span>
-<span class="c1">#    case 521   % far-range total 532 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;far-range total 532 nm&#39;;</span>
-<span class="c1">#    case 2057   % far-range total 1064 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;far-range total 1064 nm&#39;;</span>
-<span class="c1">#    case 129   % far-range 387 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;far-range 387 nm&#39;;</span>
-<span class="c1">#    case 257   % far-range 407 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;far-range 407 nm&#39;;</span>
-<span class="c1">#    case 1025   % far-range 607 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;far-range 607 nm&#39;;</span>
-<span class="c1">#    case 81   % far-range cross 355 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;far-range cross 355 nm&#39;;</span>
-<span class="c1">#    case 529   % far-range cross 532 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;far-range cross 532 nm&#39;;</span>
-<span class="c1">#    case 74   % near-range 355 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;near-range 355 nm&#39;;</span>
-<span class="c1">#    case 522   % near-range 532 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;near-range 532 nm&#39;;</span>
-<span class="c1">#    case 130   % near-range 387 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;near-range 387 nm&#39;;</span>
-<span class="c1">#    case 1026   % near-range 607 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;near-range 607 nm&#39;;</span>
-<span class="c1">#    case 517   % far-range rotational Raman 532 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;far-range rot. Raman 532 nm&#39;;</span>
-<span class="c1">#    case 2053   % far-range rotational Raman 1064 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;far-range rot. Raman 1064 nm&#39;;</span>
-<span class="c1">#    case 545   % far-range parallel 532 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;far-range parallel 532 nm&#39;;</span>
-<span class="c1">#    case 2065   % far-range cross 1064 nm</span>
-<span class="c1">#        chLabels{iCh} = &#39;far-range cross 1064 nm&#39;;</span>
-<span class="c1">#    otherwise</span>
-<span class="c1">#        warning(&#39;PICASSO:InvalidInput&#39;, &#39;Unknown channel tags (%d) at channel %d&#39;, chTagsO(iCh), iCh);</span>
-<span class="c1">#        chLabels{iCh} = &#39;Unknown&#39;;</span>
-<span class="c1">#    end</span>
-<span class="c1">#end</span>
-<span class="c1">#</span>
-<span class="c1">#%% Extract logical variables for all channels</span>
-<span class="c1">#flagFarRangeChannelO = logical(mod(chTagsO, 2));</span>
-<span class="c1">#flagNearRangeChannelO = logical(mod(floor(chTagsO / 2), 2));</span>
-<span class="c1">#flagRotRamanChannelO = logical(mod(floor(chTagsO / 2^2), 2));</span>
-<span class="c1">#flagTotalChannelO = logical(mod(floor(chTagsO / 2^3), 2));</span>
-<span class="c1">#flagCrossChannelO = logical(mod(floor(chTagsO / 2^4), 2));</span>
-<span class="c1">#flagParallelChannelO = logical(mod(floor(chTagsO / 2^5), 2));</span>
-<span class="c1">#flag355nmChannelO = logical(mod(floor(chTagsO / 2^6), 2));</span>
-<span class="c1">#flag387nmChannelO = logical(mod(floor(chTagsO / 2^7), 2));</span>
-<span class="c1">#flag407nmChannelO = logical(mod(floor(chTagsO / 2^8), 2));</span>
-<span class="c1">#flag532nmChannelO = logical(mod(floor(chTagsO / 2^9), 2));</span>
-<span class="c1">#flag607nmChannelO = logical(mod(floor(chTagsO / 2^10), 2));</span>
-<span class="c1">#flag1064nmChannelO = logical(mod(floor(chTagsO / 2^11), 2));</span>
-<span class="c1">#</span>
-<span class="c1">#end</span>
 </pre></div>
 
                 </article>
@@ -735,7 +805,7 @@
 
   <p class="copyright">
     
-      © Copyright 2025 Andi Klamt, Martin Radenz and Håvard Buholdt.
+      © Copyright 2026 Andi Klamt, Martin Radenz and Håvard Buholdt.
       <br/>
     
   </p>

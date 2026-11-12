@@ -335,33 +335,49 @@
 <span class="sd">    </span>
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
+<span class="sd">    .. TODO:: Check which smoothing shoule be used here!</span>
+
 <span class="sd">    **History**</span>
-<span class="sd">    </span>
+
 <span class="sd">    - 2026-02-04: Changed from scipy.ndimage.uniform_filter1d to ppcpy.misc.helper.uniform_filter</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">return</span> <span class="n">uniform_filter</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">window_len</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="voldepol_cldFreeGrps">
 <a class="viewcode-back" href="../../../api_doc/retrievals.html#ppcpy.retrievals.depolarization.voldepol_cldFreeGrps">[docs]</a>
-<span class="k">def</span> <span class="nf">voldepol_cldFreeGrps</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">ret_prof_name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">voldepol_cldFreeGrps</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">ret_prof_name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;...</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ret_prof_name : str</span>
+<span class="sd">        ...</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    opt_profiles : dict</span>
+<span class="sd">        ...</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    .. TODO:: Finish the docstring.</span>
 <span class="sd">    .. TODO:: Should the GHK-Transmission corrected (TCor) or the Background corrected (BGCor)</span>
 <span class="sd">        signal be used for calculating the volume depolarisation ratio?</span>
-
-
-<span class="sd">    With the GHK formula the BGCor signal has to be used (in the current implementation, the voldepol is even </span>
-<span class="sd">    needed to perform the polarization-transmission-correction</span>
+<span class="sd">            - With the GHK formula the BGCor signal has to be used (in the current implementation, </span>
+<span class="sd">              the voldepol is even needed to perform the polarization-transmission-correction.</span>
+<span class="sd">    .. TODO:: Is the return in this function actually needed??</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">config_dict</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span>
-    <span class="n">opt_profiles</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="n">ret_prof_name</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no_profiles &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">opt_profiles</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">opt_profiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">config_dict</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">opt_profiles</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="n">ret_prof_name</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;no_profiles: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">opt_profiles</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">opt_profiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="n">signal</span> <span class="o">=</span> <span class="s1">&#39;TCor&#39;</span>
+    <span class="c1"># signal = &#39;TCor&#39;</span>
     <span class="n">signal</span> <span class="o">=</span> <span class="s1">&#39;BGCor&#39;</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cldFree</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">clFreeGrps</span><span class="p">):</span>
@@ -370,52 +386,61 @@
             <span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
             <span class="n">flagt</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="n">tel</span><span class="p">)</span>
             <span class="n">flagc</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;cross&#39;</span><span class="p">,</span> <span class="n">tel</span><span class="p">)</span>
-            <span class="c1">#indxt = np.where(flagt)[0]</span>
+            <span class="c1"># indxt = np.where(flagt)[0]</span>
             <span class="n">retrieval</span> <span class="o">=</span> <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;retrieval&#39;</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">flagt</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">flagc</span><span class="p">):</span>
                 <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;voldepol at channel </span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1"> cldFree </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">cldFree</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-                <span class="n">sigt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;sig</span><span class="si">{</span><span class="n">signal</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,:,</span><span class="n">flagt</span><span class="p">])</span>
-                <span class="c1">#bgt = np.nansum(np.squeeze(</span>
-                <span class="c1">#    data_cube.retrievals_highres[f&#39;BG{signal}&#39;][slice(*cldFree),data_cube.gf(wv, &#39;total&#39;, tel)]), axis=0)</span>
-                <span class="n">sigc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;sig</span><span class="si">{</span><span class="n">signal</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,:,</span><span class="n">flagc</span><span class="p">])</span>
+                <span class="n">sigt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;sig</span><span class="si">{</span><span class="n">signal</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="n">flagt</span><span class="p">])</span>
+                <span class="c1"># bgt = np.nansum(np.squeeze(</span>
+                <span class="c1">#     data_cube.retrievals_highres[f&#39;BG{signal}&#39;][slice(*cldFree),data_cube.gf(wv, &#39;total&#39;, tel)]), axis=0)</span>
+                <span class="n">sigc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;sig</span><span class="si">{</span><span class="n">signal</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="n">flagc</span><span class="p">])</span>
 
-                <span class="nb">print</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">etaused</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">])</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">data_cube</span><span class="o">.</span><span class="n">etaused</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
                 <span class="n">vdr</span><span class="p">,</span> <span class="n">vdrStd</span> <span class="o">=</span> <span class="n">calc_profile_vdr</span><span class="p">(</span>
-                    <span class="n">sigt</span><span class="p">,</span> <span class="n">sigc</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">][</span><span class="n">flagt</span><span class="p">],</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">][</span><span class="n">flagc</span><span class="p">],</span>
-                    <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">][</span><span class="n">flagt</span><span class="p">],</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">][</span><span class="n">flagc</span><span class="p">],</span>
-                    <span class="n">data_cube</span><span class="o">.</span><span class="n">etaused</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">],</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;voldepol_error_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">],</span>
+                    <span class="n">sigt</span><span class="o">=</span><span class="n">sigt</span><span class="p">,</span> <span class="n">sigc</span><span class="o">=</span><span class="n">sigc</span><span class="p">,</span> 
+                    <span class="n">Gt</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">][</span><span class="n">flagt</span><span class="p">],</span> <span class="n">Gr</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">][</span><span class="n">flagc</span><span class="p">],</span>
+                    <span class="n">Ht</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">][</span><span class="n">flagt</span><span class="p">],</span> <span class="n">Hr</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">][</span><span class="n">flagc</span><span class="p">],</span>
+                    <span class="n">eta</span><span class="o">=</span><span class="n">data_cube</span><span class="o">.</span><span class="n">etaused</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;eta&#39;</span><span class="p">],</span> 
+                    <span class="n">voldepol_error</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;voldepol_error_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">],</span>
                     <span class="n">window</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;smoothWin_</span><span class="si">{</span><span class="n">retrieval</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
-                    <span class="p">)</span>
+                <span class="p">)</span>
                 <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;vdr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vdr</span>
                 <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;vdrStd&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vdrStd</span>
 
                 <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;refH&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="s1">&#39;refInd&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No valid refHInd found, skipping retrieval for this channel.&quot;</span><span class="p">)</span>
                     <span class="k">continue</span>
+
                 <span class="n">mdr</span><span class="p">,</span> <span class="n">mdrStd</span><span class="p">,</span> <span class="n">flgaDeftMdr</span> <span class="o">=</span> <span class="n">get_MDR</span><span class="p">(</span>
-                    <span class="n">vdr</span><span class="p">,</span> <span class="n">vdrStd</span><span class="p">,</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;refH&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="s1">&#39;refInd&#39;</span><span class="p">],</span>
+                    <span class="n">vdr</span><span class="o">=</span><span class="n">vdr</span><span class="p">,</span> <span class="n">vdrStd</span><span class="o">=</span><span class="n">vdrStd</span><span class="p">,</span> 
+                    <span class="n">refHInd</span><span class="o">=</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;refH&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="s1">&#39;refInd&#39;</span><span class="p">]</span>
                 <span class="p">)</span>
                 <span class="k">if</span> <span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;flagUseTheoreticalMDR&quot;</span><span class="p">]:</span>
-                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;use the theoretical MDR value&quot;</span><span class="p">)</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Use the theoretical MDR value.&quot;</span><span class="p">)</span>
                     <span class="n">mdr</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;molDepol</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;est. mdr </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">mdr</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">mdrStd</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;est. mdr </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">mdr</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">mdrStd</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;mdr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdr</span>
                 <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;mdrStd&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdrStd</span>
                 
                 <span class="c1"># experimental code to calculate the mdr without smoothing(?)</span>
                 <span class="n">vdr</span><span class="p">,</span> <span class="n">vdrStd</span> <span class="o">=</span> <span class="n">calc_profile_vdr</span><span class="p">(</span>
-                    <span class="n">sigt</span><span class="p">,</span> <span class="n">sigc</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">][</span><span class="n">flagt</span><span class="p">],</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">][</span><span class="n">flagc</span><span class="p">],</span>
-                    <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">][</span><span class="n">flagt</span><span class="p">],</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">][</span><span class="n">flagc</span><span class="p">],</span>
-                    <span class="n">data_cube</span><span class="o">.</span><span class="n">etaused</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">],</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;voldepol_error_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">],</span>
+                    <span class="n">sigt</span><span class="o">=</span><span class="n">sigt</span><span class="p">,</span> <span class="n">sigc</span><span class="o">=</span><span class="n">sigc</span><span class="p">,</span> 
+                    <span class="n">Gt</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">][</span><span class="n">flagt</span><span class="p">],</span> <span class="n">Gr</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">][</span><span class="n">flagc</span><span class="p">],</span>
+                    <span class="n">Ht</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">][</span><span class="n">flagt</span><span class="p">],</span> <span class="n">Hr</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">][</span><span class="n">flagc</span><span class="p">],</span>
+                    <span class="n">eta</span><span class="o">=</span><span class="n">data_cube</span><span class="o">.</span><span class="n">etaused</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;eta&#39;</span><span class="p">],</span> 
+                    <span class="n">voldepol_error</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;voldepol_error_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">],</span>
                     <span class="n">window</span><span class="o">=</span><span class="mi">1</span>
-                    <span class="p">)</span>
-                <span class="n">mdr</span><span class="p">,</span> <span class="n">mdrStd</span><span class="p">,</span> <span class="n">flgaDeftMdr</span> <span class="o">=</span> <span class="n">get_MDR</span><span class="p">(</span>
-                    <span class="n">vdr</span><span class="p">,</span> <span class="n">vdrStd</span><span class="p">,</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;refH&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="s1">&#39;refInd&#39;</span><span class="p">],</span>
                 <span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;est. mdr </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">mdr</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">mdrStd</span><span class="si">}</span><span class="s2">  (smooth1)&quot;</span><span class="p">)</span>
+                <span class="n">mdr</span><span class="p">,</span> <span class="n">mdrStd</span><span class="p">,</span> <span class="n">flgaDeftMdr</span> <span class="o">=</span> <span class="n">get_MDR</span><span class="p">(</span>
+                    <span class="n">vdr</span><span class="o">=</span><span class="n">vdr</span><span class="p">,</span> <span class="n">vdrStd</span><span class="o">=</span><span class="n">vdrStd</span><span class="p">,</span> 
+                    <span class="n">refHInd</span><span class="o">=</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;refH&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="s1">&#39;refInd&#39;</span><span class="p">]</span>
+                <span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;est. mdr </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">mdr</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">mdrStd</span><span class="si">}</span><span class="s2">  (smooth1)&quot;</span><span class="p">)</span>
 
-                <span class="nb">print</span><span class="p">(</span><span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">opt_profiles</span></div>
 
@@ -423,11 +448,8 @@
 
 <div class="viewcode-block" id="calc_profile_vdr">
 <a class="viewcode-back" href="../../../api_doc/retrievals.html#ppcpy.retrievals.depolarization.calc_profile_vdr">[docs]</a>
-<span class="k">def</span> <span class="nf">calc_profile_vdr</span><span class="p">(</span><span class="n">sigt</span><span class="p">,</span> <span class="n">sigc</span><span class="p">,</span> <span class="n">Gt</span><span class="p">,</span> <span class="n">Gr</span><span class="p">,</span> <span class="n">Ht</span><span class="p">,</span> <span class="n">Hr</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> 
-                     <span class="n">voldepol_error</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">flag_smooth_before</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="c1">#def polly_vdr_ghk(sig_tot, sig_cross, GT, GR, HT, HR, eta, </span>
-<span class="c1">#                  voldepol_error_a0, voldepol_error_a1, voldepol_error_a2, </span>
-<span class="c1">#                  smooth_window=1, flag_smooth_before=True):</span>
+<span class="k">def</span> <span class="nf">calc_profile_vdr</span><span class="p">(</span><span class="n">sigt</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">sigc</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Gt</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">Gr</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">Ht</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">Hr</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">eta</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> 
+                     <span class="n">voldepol_error</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">flag_smooth_before</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate volume depolarization ratio using GHK parameters.</span>
 
 <span class="sd">    Parameters</span>
@@ -438,11 +460,11 @@
 <span class="sd">        Signal strength of the cross channel [photon count].</span>
 <span class="sd">    Gt : float</span>
 <span class="sd">        G parameter in the total channel.</span>
-<span class="sd">    Gc : float</span>
+<span class="sd">    Gr : float</span>
 <span class="sd">        G parameter in the cross channel.</span>
 <span class="sd">    Ht : float</span>
 <span class="sd">        H parameter in the total channel.</span>
-<span class="sd">    Hc : float</span>
+<span class="sd">    Hr : float</span>
 <span class="sd">        H parameter in the cross channel.</span>
 <span class="sd">    eta : float</span>
 <span class="sd">        Depolarization calibration constant.</span>
@@ -471,9 +493,14 @@
 <span class="sd">    - Freudenthaler, V. About the effects of polarising optics on lidar signals and the Delta90 calibration. </span>
 <span class="sd">      Atmos. Meas. Tech., 9, 4181–4255 (2016).</span>
 
+<span class="sd">    </span>
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-
+<span class="sd">    - Be awere: `sigT = 0` will cause `vol_depol` and `vol_depol_std` to be NaN!</span>
+<span class="sd">    .. TODO:: Should consider implementing something to avoid NaN values in this function,</span>
+<span class="sd">              as these will also harm the qulity of the retrievals that depend on the </span>
+<span class="sd">              transmission corrected signal (ei. introduce more NaN&#39;s).</span>
+<span class="sd">    </span>
 <span class="sd">    **History**</span>
 
 <span class="sd">    - 2018-09-02: First edition by Zhenping</span>
@@ -483,7 +510,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;G </span><span class="si">{</span><span class="n">Gt</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">Gr</span><span class="si">}</span><span class="s2"> H </span><span class="si">{</span><span class="n">Ht</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">Hr</span><span class="si">}</span><span class="s2"> Eta </span><span class="si">{</span><span class="n">eta</span><span class="si">}</span><span class="s2"> error </span><span class="si">{</span><span class="n">voldepol_error</span><span class="si">}</span><span class="s2"> Window </span><span class="si">{</span><span class="n">window</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;G </span><span class="si">{</span><span class="n">Gt</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">Gr</span><span class="si">}</span><span class="s2"> H </span><span class="si">{</span><span class="n">Ht</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">Hr</span><span class="si">}</span><span class="s2"> Eta </span><span class="si">{</span><span class="n">eta</span><span class="si">}</span><span class="s2"> error </span><span class="si">{</span><span class="n">voldepol_error</span><span class="si">}</span><span class="s2"> Window </span><span class="si">{</span><span class="n">window</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
     <span class="c1"># Smooth signals before or after ratio calculation</span>
     <span class="n">sig_ratio</span> <span class="o">=</span> <span class="n">sigc</span> <span class="o">/</span> <span class="n">sigt</span>
     <span class="k">if</span> <span class="n">window</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># smoothing with a window size of 1 equals no smoothing</span>
@@ -505,19 +532,41 @@
     <span class="k">return</span> <span class="n">vol_depol</span><span class="p">,</span> <span class="n">vol_depol_std</span></div>
 
 
+
 <div class="viewcode-block" id="get_MDR">
 <a class="viewcode-back" href="../../../api_doc/retrievals.html#ppcpy.retrievals.depolarization.get_MDR">[docs]</a>
-<span class="k">def</span> <span class="nf">get_MDR</span><span class="p">(</span><span class="n">vdr</span><span class="p">,</span> <span class="n">vdrStd</span><span class="p">,</span> <span class="n">refHInd</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;get the vdr at reference height</span>
+<span class="k">def</span> <span class="nf">get_MDR</span><span class="p">(</span><span class="n">vdr</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">vdrStd</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">refHInd</span><span class="p">:</span><span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the vdr at reference height.</span>
 
-<span class="sd">    in the matlab pollynet processing chain this is done by recalculating vdr for the</span>
-<span class="sd">    reference height chunk </span>
-<span class="sd">    (Pollynet_Processing_Chain/lib/calibration/pollyMDRGHK.m)</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    vdr : ndarray</span>
+<span class="sd">        Volume depolarization ratio.</span>
+<span class="sd">    vdrStd : ndarray</span>
+<span class="sd">        Uncertainty of the volume depolarization ratio.</span>
+<span class="sd">    refHInd : list</span>
+<span class="sd">        Reference height indcies [bottum, top].</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    mdr : ndarray</span>
+<span class="sd">        Mean volume depolarization ratio at reference height.</span>
+<span class="sd">    mdrStd : ndarray</span>
+<span class="sd">        Mean uncertainty of the volume depolarization ratio at reference height.</span>
+<span class="sd">    bool</span>
+<span class="sd">        False.</span>
 
-<span class="sd">    Assuming that it is more efficient to use the precalculated vdr</span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - in the matlab pollynet processing chain this is done by recalculating vdr for the</span>
+<span class="sd">      reference height chunk (Pollynet_Processing_Chain/lib/calibration/pollyMDRGHK.m)</span>
+<span class="sd">    - Assuming that it is more efficient to use the precalculated vdr</span>
+<span class="sd">    - The snr criterion is missing for this very first version.</span>
 
-<span class="sd">    The snr criterion is missing for this very first version</span>
+<span class="sd">    ** History **</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">mdr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vdr</span><span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">refHInd</span><span class="p">)])</span>
     <span class="n">mdrStd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vdrStd</span><span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">refHInd</span><span class="p">)])</span>
 
@@ -527,38 +576,60 @@
 
 <div class="viewcode-block" id="pardepol_cldFreeGrps">
 <a class="viewcode-back" href="../../../api_doc/retrievals.html#ppcpy.retrievals.depolarization.pardepol_cldFreeGrps">[docs]</a>
-<span class="k">def</span> <span class="nf">pardepol_cldFreeGrps</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">ret_prof_name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">pardepol_cldFreeGrps</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">ret_prof_name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;...</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_cube : object</span>
+<span class="sd">        Main PicassoProc object.</span>
+<span class="sd">    ret_prof_name : str</span>
+<span class="sd">        ...</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    opt_porfiles : dict</span>
+<span class="sd">        ...</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    .. TODO::</span>
+<span class="sd">        - Finish docsting.</span>
+<span class="sd">        - Is the return here necessary?</span>
+<span class="sd">        - Cleare unused variables.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">config_dict</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span>
-    <span class="n">opt_profiles</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="n">ret_prof_name</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no_profiles &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">opt_profiles</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">opt_profiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-    <span class="n">signal</span> <span class="o">=</span> <span class="s1">&#39;BGCor&#39;</span>
+    <span class="c1"># config_dict = data_cube.polly_config_dict # &lt;-- Not used!</span>
+    <span class="n">opt_profiles</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="n">ret_prof_name</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;no_profiles </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">opt_profiles</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">opt_profiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># signal = &#39;BGCor&#39; # &lt;-- Not used!</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cldFree</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">clFreeGrps</span><span class="p">):</span>
         <span class="n">cldFree</span> <span class="o">=</span> <span class="n">cldFree</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cldFree</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
             <span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;=== </span><span class="si">{</span><span class="n">channel</span><span class="w"> </span><span class="si">}</span><span class="s2"> ==============================================================&quot;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Channel: </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
             <span class="n">flagt</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="n">tel</span><span class="p">)</span>
             <span class="n">flagc</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;cross&#39;</span><span class="p">,</span> <span class="n">tel</span><span class="p">)</span>
-            <span class="c1">#indxt = np.where(flagt)[0]</span>
-            <span class="n">retrieval</span> <span class="o">=</span> <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;retrieval&#39;</span><span class="p">]</span>
+            <span class="c1"># indxt = np.where(flagt)[0] # &lt;-- Not used!</span>
+            <span class="c1"># retrieval = opt_profiles[i][channel][&#39;retrieval&#39;] # &lt;-- Not used!</span>
             <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">flagt</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">flagc</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;aerBsc&#39;</span> <span class="ow">in</span> <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">]:</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;pardepol at channel </span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1"> cldFree </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">cldFree</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pardepol at channel </span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2"> cldFree </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">cldFree</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
                 <span class="n">pdr</span><span class="p">,</span> <span class="n">pdrStd</span> <span class="o">=</span> <span class="n">calc_pdr</span><span class="p">(</span>
-                    <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;vdr&#39;</span><span class="p">],</span> <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;vdrStd&#39;</span><span class="p">],</span>
-                    <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;aerBsc&#39;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;aerBscStd&#39;</span><span class="p">])</span><span class="o">*</span><span class="mf">1e-7</span><span class="p">,</span>
-                    <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_profiles</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mBsc_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,:],</span> <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;mdr&#39;</span><span class="p">],</span>
-                    <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;mdrStd&#39;</span><span class="p">],</span>
+                    <span class="n">vol_depol</span><span class="o">=</span><span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;vdr&#39;</span><span class="p">],</span> 
+                    <span class="n">vol_depol_std</span><span class="o">=</span><span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;vdrStd&#39;</span><span class="p">],</span>
+                    <span class="n">aer_bsc</span><span class="o">=</span><span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;aerBsc&#39;</span><span class="p">],</span>
+                    <span class="n">aer_bsc_std</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;aerBscStd&#39;</span><span class="p">])</span><span class="o">*</span><span class="mf">1e-7</span><span class="p">,</span> <span class="c1"># TODO: Hard coded!</span>
+                    <span class="n">mol_bsc</span><span class="o">=</span><span class="n">data_cube</span><span class="o">.</span><span class="n">mol_profiles</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mBsc_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span>
+                    <span class="n">mol_depol</span><span class="o">=</span><span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;mdr&#39;</span><span class="p">],</span>
+                    <span class="n">mol_depol_std</span><span class="o">=</span><span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;mdrStd&#39;</span><span class="p">]</span>
                 <span class="p">)</span>
 
                 <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;pdr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pdr</span>
                 <span class="n">opt_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;pdrStd&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pdrStd</span>
-                <span class="c1">#print(&#39;after &#39;, opt_profiles[i][channel].keys())</span>
+                <span class="c1"># print(&#39;after &#39;, opt_profiles[i][channel].keys())</span>
 
     <span class="k">return</span> <span class="n">opt_profiles</span></div>
 
@@ -566,7 +637,8 @@
 
 <div class="viewcode-block" id="calc_pdr">
 <a class="viewcode-back" href="../../../api_doc/retrievals.html#ppcpy.retrievals.depolarization.calc_pdr">[docs]</a>
-<span class="k">def</span> <span class="nf">calc_pdr</span><span class="p">(</span><span class="n">vol_depol</span><span class="p">,</span> <span class="n">vol_depol_std</span><span class="p">,</span> <span class="n">aer_bsc</span><span class="p">,</span> <span class="n">aer_bsc_std</span><span class="p">,</span> <span class="n">mol_bsc</span><span class="p">,</span> <span class="n">mol_depol</span><span class="p">,</span> <span class="n">mol_depol_std</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">calc_pdr</span><span class="p">(</span><span class="n">vol_depol</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">vol_depol_std</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">aer_bsc</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">aer_bsc_std</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+             <span class="n">mol_bsc</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">mol_depol</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">mol_depol_std</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the particle depolarization ratio and estimate its standard deviation.</span>
 
 <span class="sd">    Parameters</span>
@@ -595,7 +667,8 @@
 
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
-<span class="sd">    - Freudenthaler, V., et al., Depolarization ratio profiling at several wavelengths in pure Saharan dust during SAMUM 2006,  Tellus B, 61, 165-179, 2009.</span>
+<span class="sd">    - Freudenthaler, V., et al., Depolarization ratio profiling at several wavelengths in pure Saharan dust during SAMUM 2006,</span>
+<span class="sd">      Tellus B, 61, 165-179, 2009.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>

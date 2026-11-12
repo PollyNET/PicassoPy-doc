@@ -339,20 +339,21 @@
 <span id="ppcpy-io-loadconfigs"></span><h2>ppcpy.io.loadConfigs<a class="headerlink" href="#module-ppcpy.io.loadConfigs" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.io.loadConfigs.loadPicassoConfig">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">loadPicassoConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">picasso_config_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">picasso_default_config_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#loadPicassoConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.loadPicassoConfig" title="Link to this definition">#</a></dt>
-<dd><p>load the general Picasso config file</p>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">loadPicassoConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">picasso_config_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">picasso_default_config_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#loadPicassoConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.loadPicassoConfig" title="Link to this definition">#</a></dt>
+<dd><p>Load the general Picasso config file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>picasso_config_file</strong><span class="classifier">str or path</span></dt><dd><p>the specific config file</p>
+<dt><strong>picasso_config_file</strong><span class="classifier">str or path</span></dt><dd><p>The specific config file.</p>
 </dd>
-<dt><strong>picasso_default_config_fil</strong><span class="classifier">str or path</span></dt><dd><p>the default (template) file</p>
+<dt><strong>picasso_default_config_fil</strong><span class="classifier">str or path</span></dt><dd><p>The default (template) file.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>picasso_config_dict</dt><dd></dd>
+<dt><strong>picasso_config_dict</strong><span class="classifier">dict</span></dt><dd><p>Mereged config file containing all config variables.</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -360,31 +361,68 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.io.loadConfigs.readPollyNetConfigLinkTable">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">readPollyNetConfigLinkTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polly_config_table_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#readPollyNetConfigLinkTable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.readPollyNetConfigLinkTable" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.io.loadConfigs.fix_indexing">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">fix_indexing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['first_range_gate_indx',</span> <span class="pre">'bgCorRangeIndx',</span> <span class="pre">'bgCorRangeIndxLow',</span> <span class="pre">'bgCorRangeIndxHigh',</span> <span class="pre">'LCMeanMinIndx',</span> <span class="pre">'LCMeanMaxIndx']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#fix_indexing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.fix_indexing" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.io.loadConfigs.getPollyConfigfromArray">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">getPollyConfigfromArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polly_config_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">picasso_config_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#getPollyConfigfromArray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.getPollyConfigfromArray" title="Link to this definition">#</a></dt>
-<dd><p>function to load the config for the time identified</p>
-<p>aim is to declutter the runscript</p>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">readPollyNetConfigLinkTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polly_config_table_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#readPollyNetConfigLinkTable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.readPollyNetConfigLinkTable" title="Link to this definition">#</a></dt>
+<dd><p>Read PollyNet processing chain config link table.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>polly_config_array</strong><span class="classifier">pandas dataframe</span></dt><dd><p>selected line form the links.xlsx</p>
+<dt><strong>polly_config_table_file</strong><span class="classifier">str</span></dt><dd><p>Path to the link tabele file.</p>
 </dd>
-<dt><strong>picasso_config_dict</strong><span class="classifier">dict</span></dt><dd><p>general picasso config</p>
+<dt><strong>timestamp</strong><span class="classifier">str</span></dt><dd><p>Date of measurement.</p>
+</dd>
+<dt><strong>device</strong><span class="classifier">str</span></dt><dd><p>Name of polly device.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>polly_config_dict</strong><span class="classifier">dict</span></dt><dd></dd>
+<dt><strong>config_array</strong><span class="classifier">pd.DataFrame</span></dt><dd><p>Row of intrest in the PollyNet processing chain config link table.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.loadConfigs.fix_indexing">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">fix_indexing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">['first_range_gate_indx',</span> <span class="pre">'bgCorRangeIndx',</span> <span class="pre">'bgCorRangeIndxLow',</span> <span class="pre">'bgCorRangeIndxHigh',</span> <span class="pre">'LCMeanMinIndx',</span> <span class="pre">'LCMeanMaxIndx',</span> <span class="pre">'depol_cal_minbin_355',</span> <span class="pre">'depol_cal_minbin_532',</span> <span class="pre">'depol_cal_minbin_1064']</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#fix_indexing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.fix_indexing" title="Link to this definition">#</a></dt>
+<dd><p>Fix indexing convention of config variables to 0based.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>config_dict</strong><span class="classifier">dict</span></dt><dd><p>A dictionary containing all config variables.</p>
+</dd>
+<dt><strong>keys</strong><span class="classifier">list</span></dt><dd><p>Key(s) of <cite>config_dict</cite> variables to fix indexing convention.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>config_dict</strong><span class="classifier">dict</span></dt><dd><p><cite>config_dict</cite> with 0based indexing.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.loadConfigs.getPollyConfigfromArray">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">getPollyConfigfromArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polly_config_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">picasso_config_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#getPollyConfigfromArray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.getPollyConfigfromArray" title="Link to this definition">#</a></dt>
+<dd><p>Function to load the config for the time identified.</p>
+<p>Aim is to declutter the runscript</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>polly_config_array</strong><span class="classifier">pandas dataframe</span></dt><dd><p>Selected line form the links.xlsx.</p>
+</dd>
+<dt><strong>picasso_config_dict</strong><span class="classifier">dict</span></dt><dd><p>General picasso config.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>polly_config_dict</strong><span class="classifier">dict</span></dt><dd><p>A dictionary with the polly config / default parameters.</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -392,17 +430,52 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.io.loadConfigs.loadPollyConfig">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">loadPollyConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polly_config_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polly_default_config_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#loadPollyConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.loadPollyConfig" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">loadPollyConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polly_config_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polly_default_config_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#loadPollyConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.loadPollyConfig" title="Link to this definition">#</a></dt>
+<dd><p>Load the spesific and default config files and combine them into one dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>polly_config_file</strong><span class="classifier">str</span></dt><dd><p>Path to polly config file.</p>
+</dd>
+<dt><strong>polly_default_config_file</strong><span class="classifier">str</span></dt><dd><p>path to polly default file.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>A dictionary with the polly config / default parameters.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Maybe change <cite>polly_default_config_file</cite> to <cite>polly_global_config_file</cite>
+as the defualt one is no longer used.</p></li>
+</ul>
+</div>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.io.loadConfigs.checkPollyConfigDict">
 <span class="sig-prename descclassname"><span class="pre">ppcpy.io.loadConfigs.</span></span><span class="sig-name descname"><span class="pre">checkPollyConfigDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">polly_config_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/loadConfigs.html#checkPollyConfigDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.loadConfigs.checkPollyConfigDict" title="Link to this definition">#</a></dt>
-<dd><p>Check and potentially modify polly config dict</p>
-<p>Parameters:
-- polly_config_dict (dict): polly config dict to be checked
-Output:
-- new_polly_config_dict (dict): checked (and modified) polly config dict</p>
+<dd><p>Check and potentially modify polly config dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>polly_config_dict</strong><span class="classifier">dict</span></dt><dd><p>Polly config dict to be checked.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>new_polly_config_dict</strong><span class="classifier">dict</span></dt><dd><p>Checked (and modified) polly config dict.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -425,7 +498,7 @@ Output:
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p><strong>History</strong>
+<p>** History **
 - 2021-05-22: First edition by Zhenping.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.io.readMeteo.Meteo.load">
@@ -486,7 +559,7 @@ define preferred model</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p><strong>History</strong>
+<p>** History **
 - xxxx-xx-xx: First edition by …</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ppcpy.io.readMeteo.MeteoNcCloudnet.radiusEarth">
@@ -551,15 +624,15 @@ define preferred model</p>
 </ul>
 </dd>
 </dl>
-<div class="admonition-todo admonition" id="id1">
+<div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <p>clarify the above ground above sea level issues.</p>
 </div>
-<div class="admonition-todo admonition" id="id2">
+<div class="admonition-todo admonition" id="id3">
 <p class="admonition-title">Todo</p>
 <p>Check how the interpolation handles negative grid points</p>
 </div>
-<div class="admonition-todo admonition" id="id3">
+<div class="admonition-todo admonition" id="id4">
 <p class="admonition-title">Todo</p>
 <p>Check if we can interpolate several variables at once</p>
 </div>
@@ -573,19 +646,64 @@ define preferred model</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.io.readPollyRawData.readPollyRawData">
 <span class="sig-prename descclassname"><span class="pre">ppcpy.io.readPollyRawData.</span></span><span class="sig-name descname"><span class="pre">readPollyRawData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/readPollyRawData.html#readPollyRawData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.readPollyRawData.readPollyRawData" title="Link to this definition">#</a></dt>
-<dd><p>read the Polly raw file</p>
+<dd><p>Read Polly raw data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>filename</strong><span class="classifier">str</span></dt><dd></dd>
+<dt><strong>filename</strong><span class="classifier">str</span></dt><dd><p>Absolute path of the polly data.</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>data_dict</strong><span class="classifier">dict</span></dt><dd></dd>
+<dt><strong>data_dict</strong><span class="classifier">dict</span></dt><dd><dl class="simple">
+<dt>rawSignal<span class="classifier">ndarray (channel x height x time)</span></dt><dd><p>backscatter signal [Photon Count].</p>
+</dd>
+<dt>mShots<span class="classifier">ndarray</span></dt><dd><p>number of the laser shots for each profile.</p>
+</dd>
+<dt>flagValidProfile<span class="classifier">ndarray</span></dt><dd><p>flag to represent the validity of each signal profile.</p>
+</dd>
+<dt>mTime<span class="classifier">ndarray</span></dt><dd><p>datetime array for the measurement time of each profile.</p>
+</dd>
+<dt>depCalAng<span class="classifier">ndarray</span></dt><dd><p>angle of the polarizer in the receiving channel. (&gt;0 means 
+calibration process starts) [degree].</p>
+</dd>
+<dt>zenithAng<span class="classifier">numeric???</span></dt><dd><p>zenith angle of the laser beam [degree].</p>
+</dd>
+<dt>repRate<span class="classifier">float</span></dt><dd><p>laser pulse repetition rate [s^-1].</p>
+</dd>
+<dt>hRes<span class="classifier">float</span></dt><dd><p>spatial resolution [m].</p>
+</dd>
+<dt>mSite<span class="classifier">str</span></dt><dd><p>measurement site.</p>
+</dd>
+<dt>deadtime<span class="classifier">ndarray (channel x polynomial_orders)</span></dt><dd><p>deadtime correction parameters.</p>
+</dd>
+<dt>lat<span class="classifier">float</span></dt><dd><p>latitude of measurement site [degree].</p>
+</dd>
+<dt>lon<span class="classifier">float</span></dt><dd><p>longitude of measurement site [degree].</p>
+</dd>
+<dt>alt<span class="classifier">float</span></dt><dd><p>altitude of measurement site [degree].</p>
+</dd>
+<dt>filenameStartTime<span class="classifier">datenum??????</span></dt><dd><p>start time extracted from filename.</p>
+</dd>
 </dl>
 </dd>
 </dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id5">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Go over the Returns section in the docsting. Are these variables actuly returned by the function?</p></li>
+<li><p>Deleat the matlab code underneath.S</p></li>
+</ul>
+</div>
+<p>** HISTORY **</p>
+<ul class="simple">
+<li><p>2024-03-21: First edition by Andi Klamt.</p></li>
+<li><p>xxxx-xx-xx: Translated to python.</p></li>
+</ul>
 </dd></dl>
 
 </section>
@@ -593,49 +711,49 @@ define preferred model</p>
 <span id="ppcpy-io-write2nc"></span><h2>ppcpy.io.write2nc<a class="headerlink" href="#module-ppcpy.io.write2nc" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.io.write2nc.get_git_info">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">get_git_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#get_git_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.get_git_info" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.io.write2nc.date_splitting">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">date_splitting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#date_splitting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.date_splitting" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.io.write2nc.adding_fixed_vars">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">adding_fixed_vars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_nc_mapping_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#adding_fixed_vars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.adding_fixed_vars" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.io.write2nc.adding_global_attr">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">adding_global_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_nc_mapping_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#adding_global_attr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.adding_global_attr" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.io.write2nc.write_channelwise_2_nc_file">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">write_channelwise_2_nc_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PosixPath('/mnt/c/Users/radenz/dev/PicassoPy/PicassoPy')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prod_ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#write_channelwise_2_nc_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.write_channelwise_2_nc_file" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.io.write2nc.write2nc_file">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">write2nc_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PosixPath('/mnt/c/Users/radenz/dev/PicassoPy/PicassoPy')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prod_ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#write2nc_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.write2nc_file" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.io.write2nc.write_profile2nc_file">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">write_profile2nc_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PosixPath('/mnt/c/Users/radenz/dev/PicassoPy/PicassoPy')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prod_ls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#write_profile2nc_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.write_profile2nc_file" title="Link to this definition">#</a></dt>
-<dd><p>Saving profile data to NetCDF4 files</p>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">get_git_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#get_git_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.get_git_info" title="Link to this definition">#</a></dt>
+<dd><p>…</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object</p>
+<dt><strong>path</strong><span class="classifier">str</span></dt><dd><p>Path to …</p>
 </dd>
-<dt><strong>root_dir</strong><span class="classifier">str</span></dt><dd></dd>
-<dt><strong>prod_ls</strong><span class="classifier">list</span></dt><dd><p>List of product names</p>
+</dl>
 </dd>
-<dt><strong>.. TODO::</strong></dt><dd><p>Missing comment in variable attributes.
-Not all retrievals / information needed for the profiles are in data_cube.retrivals_highres…
-write docstring</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>branch</strong><span class="classifier">… or None</span></dt><dd><p>…</p>
+</dd>
+<dt><strong>commit</strong><span class="classifier">… or None</span></dt><dd><p>…</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id6">
+<p class="admonition-title">Todo</p>
+<p>Finish docstring!</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.write2nc.date_splitting">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">date_splitting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#date_splitting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.date_splitting" title="Link to this definition">#</a></dt>
+<dd><p>Split date into YYYY, MM, DD.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>timestamp</strong><span class="classifier">str</span></dt><dd><p>Date in format ‘YYYYMMDD’.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>YYYY</strong><span class="classifier">str</span></dt><dd><p>Year.</p>
+</dd>
+<dt><strong>MM</strong><span class="classifier">str</span></dt><dd><p>Month.</p>
+</dd>
+<dt><strong>DD</strong><span class="classifier">str</span></dt><dd><p>Day.</p>
 </dd>
 </dl>
 </dd>
@@ -643,9 +761,141 @@ write docstring</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.write2nc.adding_fixed_vars">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">adding_fixed_vars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_nc_mapping_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#adding_fixed_vars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.adding_fixed_vars" title="Link to this definition">#</a></dt>
+<dd><p>Add fixed variables to mapping dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+<dt><strong>json_nc_mapping_dict</strong><span class="classifier">dict</span></dt><dd><p>…</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id7">
+<p class="admonition-title">Todo</p>
+<p>Finish docstring!</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.write2nc.adding_global_attr">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">adding_global_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_nc_mapping_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#adding_global_attr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.adding_global_attr" title="Link to this definition">#</a></dt>
+<dd><p>Add global attributes to mapping dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+<dt><strong>json_nc_mapping_dict</strong><span class="classifier">dict</span></dt><dd><p>…</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id8">
+<p class="admonition-title">Todo</p>
+<p>Finish docstring!</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.write2nc.write_channelwise_2_nc_file">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">write_channelwise_2_nc_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PosixPath('/mnt/c/Users/radenz/dev/PicassoPy/PicassoPy')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prod_ls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#write_channelwise_2_nc_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.write_channelwise_2_nc_file" title="Link to this definition">#</a></dt>
+<dd><p>…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+<dt><strong>root_dir</strong><span class="classifier">str</span></dt><dd><p>Path to root directory.</p>
+</dd>
+<dt><strong>prod_ls</strong><span class="classifier">list of str</span></dt><dd><p>List of product names.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id9">
+<p class="admonition-title">Todo</p>
+<p>Finish docstring!</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.write2nc.write2nc_file">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">write2nc_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PosixPath('/mnt/c/Users/radenz/dev/PicassoPy/PicassoPy')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prod_ls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#write2nc_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.write2nc_file" title="Link to this definition">#</a></dt>
+<dd><p>…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+<dt><strong>root_dir</strong><span class="classifier">str</span></dt><dd><p>Path to root directory.</p>
+</dd>
+<dt><strong>prod_ls</strong><span class="classifier">list of str</span></dt><dd><p>List of product names.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id10">
+<p class="admonition-title">Todo</p>
+<p>Finish docstring!</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.io.write2nc.write_profile2nc_file">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">write_profile2nc_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PosixPath('/mnt/c/Users/radenz/dev/PicassoPy/PicassoPy')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prod_ls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#write_profile2nc_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.write_profile2nc_file" title="Link to this definition">#</a></dt>
+<dd><p>Saving profile data to NetCDF4 files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+<dt><strong>root_dir</strong><span class="classifier">str</span></dt><dd><p>Path to root directory.</p>
+</dd>
+<dt><strong>prod_ls</strong><span class="classifier">list</span></dt><dd><p>List of product names.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id11">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Missing comment in variable attributes.</p></li>
+<li><p>Not all retrievals / information needed for the profiles are in data_cube.retrivals_highres…</p></li>
+<li><p>write docstring</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.io.write2nc.adding_mol_profiles">
 <span class="sig-prename descclassname"><span class="pre">ppcpy.io.write2nc.</span></span><span class="sig-name descname"><span class="pre">adding_mol_profiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_nc_mapping_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cldFreeGrp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/write2nc.html#adding_mol_profiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.write2nc.adding_mol_profiles" title="Link to this definition">#</a></dt>
-<dd><p>Temporarily quick fix for adding molecular profiles as variables to the NetCDF profile outputs</p>
+<dd><p>Temporarily quick fix for adding molecular profiles as variables to the NetCDF profile outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+<dt><strong>json_nc_mapping_dict</strong><span class="classifier">dict</span></dt><dd><p>…</p>
+</dd>
+<dt><strong>cldFreeGrp</strong><span class="classifier">int</span></dt><dd><p>Index of floud free segment.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id12">
+<p class="admonition-title">Todo</p>
+<p>Finish docstring.</p>
+</div>
 </dd></dl>
 
 </section>
@@ -654,21 +904,21 @@ write docstring</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.io.sql_interaction.string_to_ts">
 <span class="sig-prename descclassname"><span class="pre">ppcpy.io.sql_interaction.</span></span><span class="sig-name descname"><span class="pre">string_to_ts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/io/sql_interaction.html#string_to_ts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.sql_interaction.string_to_ts" title="Link to this definition">#</a></dt>
-<dd><p>string of format %Y-%m-%d %H:%M:%S to timestamp (timezone-aware)</p>
+<dd><p>String of format %Y-%m-%d %H:%M:%S to timestamp (timezone-aware)</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.io.sql_interaction.get_from_sql_db">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.io.sql_interaction.</span></span><span class="sig-name descname"><span class="pre">get_from_sql_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/sql_interaction.html#get_from_sql_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.sql_interaction.get_from_sql_db" title="Link to this definition">#</a></dt>
-<dd><p>read lidar calibration constant or depol calibration from database</p>
-<dl class="field-list simple">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.io.sql_interaction.</span></span><span class="sig-name descname"><span class="pre">get_from_sql_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">24</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/io/sql_interaction.html#get_from_sql_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.sql_interaction.get_from_sql_db" title="Link to this definition">#</a></dt>
+<dd><p>Read lidar calibration constant or depol calibration from database.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>db_path</strong><span class="classifier">str</span></dt><dd><p>name of the specific sqlite db file.</p>
+<dt><strong>db_path</strong><span class="classifier">str</span></dt><dd><p>Name of the specific sqlite db file.</p>
 </dd>
-<dt><strong>table_name</strong><span class="classifier">str</span></dt><dd><p>default ‘lidar_calibration_constant’</p>
+<dt><strong>table_name</strong><span class="classifier">str</span></dt><dd><p>Default ‘lidar_calibration_constant’.</p>
 </dd>
-<dt><strong>ts_interval</strong><span class="classifier">str</span></dt><dd><p>the date or timestamp to look for</p>
+<dt><strong>ts_interval</strong><span class="classifier">str</span></dt><dd><p>The date or timestamp to look for.</p>
 </dd>
 </dl>
 </dd>
@@ -676,7 +926,22 @@ write docstring</p>
 <dd class="field-even"><dl class="simple">
 <dt>dict</dt><dd><p>in calibration storage format</p>
 </dd>
+<dt><strong>History</strong></dt><dd></dd>
 </dl>
+<ul class="simple">
+<li><dl class="simple">
+<dt>2026-03-28: First edition by Radenz.</dt><dd></dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>2026-05-08: Added check for table existence. Added retrieval methods.</dt><dd></dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>2026-11-01: Gently tried to make it more pythonic</dt><dd></dd>
+</dl>
+</li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -684,21 +949,40 @@ write docstring</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.io.sql_interaction.prepare_for_sql_db_writing">
 <span class="sig-prename descclassname"><span class="pre">ppcpy.io.sql_interaction.</span></span><span class="sig-name descname"><span class="pre">prepare_for_sql_db_writing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ppcpy/io/sql_interaction.html#prepare_for_sql_db_writing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.io.sql_interaction.prepare_for_sql_db_writing" title="Link to this definition">#</a></dt>
-<dd><p>Collect all necessary variable and save it to a list of tuples for inserting into a SQLite table.</p>
-<dl class="field-list simple">
+<dd><p>Collect all necessary variable and save it to a list of 
+tuples for inserting into a SQLite table.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd></dd>
-<dt><strong>parameter :str</strong></dt><dd><p>LC or DC</p>
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object</p>
 </dd>
-<dt><strong>method</strong><span class="classifier">str</span></dt><dd><p>klett or raman</p>
+<dt><strong>parameter :str</strong></dt><dd><p>Name of parameter to stoere eg. ‘LC’ or ‘DC’.</p>
+</dd>
+<dt><strong>method</strong><span class="classifier">str</span></dt><dd><p>Name of retrieval method used to retrieve the parameter (see <cite>METHOD_DB_NAMES</cite>)
+eg. ‘klett’ or ‘raman’.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>rows_to_insert</strong><span class="classifier">list of tuples</span></dt><dd></dd>
+<dt><strong>rows_to_insert</strong><span class="classifier">list of tuples</span></dt><dd><p>Rows to insert in the database.</p>
+</dd>
+<dt>** History **</dt><dd></dd>
 </dl>
+<ul class="simple">
+<li><dl class="simple">
+<dt>xxxx-xx-xx: First edition by</dt><dd></dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>xxxx-xx-xx: Translated to python.</dt><dd></dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>2026-11-01: Gently tried to make it more pythonic</dt><dd></dd>
+</dl>
+</li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -742,9 +1026,11 @@ write docstring</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>The IGNORE syntax somehow did not work.
+<ul class="simple">
+<li><p>The IGNORE syntax somehow did not work.
 With the UNIQUE colums defined and INSERT OR REPLACE at least the new values are updated.
-Though they are given a new ID.</p>
+Though they are given a new ID.</p></li>
+</ul>
 </dd></dl>
 
 </section>

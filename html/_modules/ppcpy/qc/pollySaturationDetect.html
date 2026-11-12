@@ -315,29 +315,32 @@
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+
 <div class="viewcode-block" id="pollySaturationDetect">
-<a class="viewcode-back" href="../../../_autosummary/ppcpy.qc.pollySaturationDetect.html#ppcpy.qc.pollySaturationDetect.pollySaturationDetect">[docs]</a>
-<span class="k">def</span> <span class="nf">pollySaturationDetect</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">rfill</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">sigSaturateThresh</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;detect the bins which are fully saturated by the clouds.</span>
+<a class="viewcode-back" href="../../../api_doc/qc.html#ppcpy.qc.pollySaturationDetect.pollySaturationDetect">[docs]</a>
+<span class="k">def</span> <span class="nf">pollySaturationDetect</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">rfill</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">sigSaturateThresh</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect the bins which are fully saturated by the clouds.</span>
 
-<span class="sd">    INPUTS:</span>
-<span class="sd">        data: dict</span>
-<span class="sd">            Data dictionary. See documentation for format.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_cube : object</span>
+<span class="sd">        Main PicassoProc object.</span>
+<span class="sd">    rfill : float, optional</span>
+<span class="sd">        Minimum range gap to fill [m]. Default is 250.</span>
+<span class="sd">    sigSaturateThresh : float, optional</span>
+<span class="sd">        Threshold of saturated signal [photon count]. Default is 500.</span>
 
-<span class="sd">    KEYWORDS:</span>
-<span class="sd">        hfill: float </span>
-<span class="sd">            Minimum range gap to fill (m). Default: 250</span>
-<span class="sd">        sigSaturateThresh: float</span>
-<span class="sd">            Threshold of saturated signal (photon count). Default: 500</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    flagSaturation : boolean ndarray</span>
+<span class="sd">        True indicates current range bin is saturated by clouds.</span>
 
-<span class="sd">    OUTPUTS:</span>
-<span class="sd">        flag: boolean ndarray</span>
-<span class="sd">            True indicates current range bin is saturated by clouds.</span>
+<span class="sd">    ** History **</span>
 
-<span class="sd">    HISTORY:</span>
-<span class="sd">        - 2018-12-21: First Edition by Zhenping</span>
-<span class="sd">        - 2019-07-08: Fix the bug of converting signal to PCR.</span>
-<span class="sd">        - 2025-05-14: translated and changed the algorithm to use scipy.ndimage</span>
+<span class="sd">    - 2018-12-21: First Edition by Zhenping</span>
+<span class="sd">    - 2019-07-08: Fix the bug of converting signal to PCR.</span>
+<span class="sd">    - 2025-05-14: translated and changed the algorithm to use scipy.ndimage</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Saturation detection&#39;</span><span class="p">)</span>
     
@@ -351,11 +354,11 @@
 
     <span class="n">flagSaturation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">PCR</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">iChannel</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nChannels</span><span class="p">):</span>
-        <span class="n">flag</span> <span class="o">=</span> <span class="n">PCR</span><span class="p">[:,:,</span><span class="n">iChannel</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">sigSaturateThresh</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="n">PCR</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">iChannel</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">sigSaturateThresh</span>
         <span class="c1"># manually unmask the first 3 range gates as they might only be affected by straylight</span>
-        <span class="n">flag</span><span class="p">[:,:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span> 
-        <span class="n">flag</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">binary_closing</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span> <span class="n">structure</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="n">hfill_bins</span><span class="p">)))</span>
-        <span class="n">flagSaturation</span><span class="p">[:,:,</span><span class="n">iChannel</span><span class="p">]</span> <span class="o">=</span> <span class="n">flag</span>
+        <span class="n">flag</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span> 
+        <span class="n">flag</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">binary_closing</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span> <span class="n">structure</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="n">hfill_bins</span><span class="p">)))</span>
+        <span class="n">flagSaturation</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">iChannel</span><span class="p">]</span> <span class="o">=</span> <span class="n">flag</span>
 
     <span class="k">return</span> <span class="n">flagSaturation</span></div>
 
@@ -400,7 +403,7 @@
 
   <p class="copyright">
     
-      © Copyright 2025 Andi Klamt and Martin Radenz.
+      © Copyright 2026 Andi Klamt, Martin Radenz and Håvard Buholdt.
       <br/>
     
   </p>

@@ -340,40 +340,103 @@
 <p>Testtext for documentation</p>
 <p>contains <code class="xref py py-func docutils literal notranslate"><span class="pre">get_best_LC()</span></code></p>
 <dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.lidarconstant.loadDefaults">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.lidarconstant.</span></span><span class="sig-name descname"><span class="pre">loadDefaults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">defaults</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/lidarconstant.html#loadDefaults"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.lidarconstant.loadDefaults" title="Link to this definition">#</a></dt>
+<dd><p>Prepare default Lidar calibration values.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+<dt><strong>LC</strong><span class="classifier">list, optional</span></dt><dd><p>Default Lidar constant value per channel.</p>
+</dd>
+<dt><strong>LCStd</strong><span class="classifier">list, optional</span></dt><dd><p>Default Lidar constant error per channel.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>defaultDict</strong><span class="classifier">dict</span></dt><dd><p>Default Lidar calibration result per channel.</p>
+<p>Each channel contains a list with one single sub-dict with entries:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">LC</span></code><span class="classifier">float</span></dt><dd><p>Default Lidar calibration constant.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">LCStd</span></code><span class="classifier">float</span></dt><dd><p>Default uncertainty of lidar calibration constant.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">method</span></code><span class="classifier">str</span></dt><dd><p>Name of retrieval method.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Default values are by standard taken from their config variable but can be
+overwritten if passed as an input to this function. 
+The order of <code class="docutils literal notranslate"><span class="pre">LC</span></code> and <code class="docutils literal notranslate"><span class="pre">LCStd</span></code> must match the channel order in
+<code class="docutils literal notranslate"><span class="pre">data_cube.retrievals_highres['channel']</span></code>.</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Consider allowing default values for a single channel to passed as input.</p>
+</div>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2026-08-07: First edition by Buholdt</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.calibration.lidarconstant.lc_for_cldFreeGrps">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.lidarconstant.</span></span><span class="sig-name descname"><span class="pre">lc_for_cldFreeGrps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retrieval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/lidarconstant.html#lc_for_cldFreeGrps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.lidarconstant.lc_for_cldFreeGrps" title="Link to this definition">#</a></dt>
-<dd><p>Estimate the lidar constant from the optical profiles.</p>
-<dl class="field-list simple">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.lidarconstant.</span></span><span class="sig-name descname"><span class="pre">lc_for_cldFreeGrps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retrieval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/lidarconstant.html#lc_for_cldFreeGrps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.lidarconstant.lc_for_cldFreeGrps" title="Link to this definition">#</a></dt>
+<dd><p>Estimate lidar calibration constant from the optical profiles.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
 </dd>
 <dt><strong>retrieval</strong><span class="classifier">str</span></dt><dd><p>Retrieval type. ‘klett’ or ‘raman’.</p>
 </dd>
-<dt><strong>collect_debug</strong><span class="classifier">bool</span></dt><dd><p>If true, collects debug information.</p>
+<dt><strong>collect_debug</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, collects debug information. Default is False</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>LCs</strong><span class="classifier">list</span></dt><dd><p>Lidar constant for retrieval type per channel per cloud free period.</p>
+<dd class="field-even"><dl>
+<dt><strong>LCs</strong><span class="classifier">dict</span></dt><dd><p>Lidar calibration results for <code class="docutils literal notranslate"><span class="pre">retrieval</span></code> retrieved optical profiles per channel.</p>
+<p>Each channel contains a list of sub-dicts with entries:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">LC</span></code><span class="classifier">float</span></dt><dd><p>Lidar calibration constant.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">LCStd</span></code><span class="classifier">float</span></dt><dd><p>Uncertainty of lidar calibration constant.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">time_start</span></code>, <code class="docutils literal notranslate"><span class="pre">time_end</span></code><span class="classifier">int</span></dt><dd><p>Start and stop times for successful calibration.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">method</span></code><span class="classifier">str</span></dt><dd><p>Name of retrieval method.</p>
+</dd>
+</dl>
+<p>The number of elements in each list depends on the number of successful retrievals.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
+<p>For NR channels, the LC is calculated directly form the optical profiles, whereas in the matlab version,
+it is estimated by multiplying the respective FR LC with <code class="docutils literal notranslate"><span class="pre">olAttri387.sigRatio</span></code>.</p>
+<p>The function uses the following configuration flags:</p>
 <ul class="simple">
-<li><p>For NR, done directly form the optical profiles, whereas in the matlab version, the <code class="docutils literal notranslate"><span class="pre">LC*olAttri387.sigRatio</span></code> is taken.</p></li>
-<li><p>Through the config variable ‘flagUseRetrievedExt4LCCalc’, the extinction used to calculate the LCs can be specified.
-if ‘flagUseRetrievedExt4LCCalc’ is True the retrieved extinction will be used otherwise the extinction approximated by
-the backscatter times the assumed lidar constant will be used.</p></li>
-<li><p>Missing Rotational Raman and Aeronet LC retrieval.</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">flagUseRetrievedExt4LCCalc</span></code>: If enabled the retrieved extinction when calculating the LCs.</dt><dd><p>If disabled the extinction will be estimated by the retrieved 
+backscatter times the assumed LR.</p>
+</dd>
+</dl>
+</li>
 </ul>
-<div class="admonition-todo admonition" id="id1">
+<p>The options for Rotational Raman and Aeronet LC retrievals are currently missing.</p>
+<div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <p>Check if LC’s are normalized with respect to the mean of the profiles.</p>
 </div>
-<div class="admonition-todo admonition" id="id2">
+<div class="admonition-todo admonition" id="id3">
 <p class="admonition-title">Todo</p>
 <p>Add option for Aeronet and rotational Raman retrieved LC.</p>
 </div>
@@ -419,6 +482,54 @@ the backscatter times the assumed lidar constant will be used.</p></li>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.loadDefaults">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">loadDefaults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">defaults</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#loadDefaults"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.loadDefaults" title="Link to this definition">#</a></dt>
+<dd><p>Prepare default Depol calibration values.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+<dt><strong>polCaliEta355</strong><span class="classifier">float, optional</span></dt><dd><p>Default Depol calibration constant at 355 nm.</p>
+</dd>
+<dt><strong>polCaliEtaStd355</strong><span class="classifier">float, optional</span></dt><dd><p>Default Depol calibration constant error at 355 nm.</p>
+</dd>
+<dt><strong>polCaliEta532</strong><span class="classifier">float, optional</span></dt><dd><p>Default Depol calibration constant at 532 nm.</p>
+</dd>
+<dt><strong>polCaliEtaStd532</strong><span class="classifier">float, optional</span></dt><dd><p>Default Depol calibration constant error at 532 nm.</p>
+</dd>
+<dt><strong>polCaliEta1064</strong><span class="classifier">float, optional</span></dt><dd><p>Default Depol calibration constant at 1064 nm.</p>
+</dd>
+<dt><strong>polCaliEtaStd1064</strong><span class="classifier">float, optional</span></dt><dd><p>Default Depol calibration constant error at 1064 nm.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>defaultDict</strong><span class="classifier">dict</span></dt><dd><p>Default polarization calibration result per wavelength.</p>
+<p>Each wavelength contains a list with one single sub-dict with entries:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">eta</span></code><span class="classifier">float</span></dt><dd><p>Default Depol calibration constant.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">eta_std</span></code><span class="classifier">float</span></dt><dd><p>Defaults uncertainty of Depol calibration constant.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">method</span></code><span class="classifier">str</span></dt><dd><p>Name of retrieval method.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Default values are by standard taken from their config variable but can be
+overwritten if passed as an input to this function.</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2026-08-07: First edition by Buholdt</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.calibration.polarization.loadGHK">
 <span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">loadGHK</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#loadGHK"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.loadGHK" title="Link to this definition">#</a></dt>
 <dd><p>Prepare the GHK parameters, especially if given in TR convert them into GHK.</p>
@@ -429,58 +540,96 @@ the backscatter times the assumed lidar constant will be used.</p></li>
 </dd>
 </dl>
 </dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.calibration.polarization.calibrateGHK">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">calibrateGHK</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#calibrateGHK"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.calibrateGHK" title="Link to this definition">#</a></dt>
-<dd><p>Estimate the polarization calibration from the delta 90 Method <a class="reference internal" href="#rfb58d11321b6-1" id="id3">[1]</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data_cube</strong></dt><dd><p>the input data cube</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>pol_cali</strong><span class="classifier">dict</span></dt><dd><p>polarization factors from delta 90 for each wavelength containing 
-sub-dicts with ‘eta’, ‘eta_std’, ‘time_start’, ‘time_end’, ‘status’</p>
+<dt><strong>data_cube.polly_config_dict</strong><span class="classifier">dict</span></dt><dd><dl class="simple">
+<dt>Updated to parameters:</dt><dd><p>TR  –&gt;  Removed
+G   –&gt;  filled and converted to array
+H   –&gt;  filled and converted to array
+K   –&gt;  filled and converted to array
+voldepol_error_355  –&gt;  converted to array
+voldepol_error_532  –&gt;  converted to array
+voldepol_error_1064 –&gt;  converted to array</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p><strong>History</strong></p>
+<div class="admonition-todo admonition" id="id4">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Write a proper docstring.</p></li>
+</ul>
+</div>
+<p>** History **</p>
+<ul class="simple">
+<li><p>xx-xx-xxxx: First edition by …</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.calibrateGHK">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">calibrateGHK</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#calibrateGHK"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.calibrateGHK" title="Link to this definition">#</a></dt>
+<dd><p>Estimate the polarization calibration from the Delta-90° method <a class="reference internal" href="#rfb58d11321b6-1" id="id5">[1]</a>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>pol_cali</strong><span class="classifier">dict</span></dt><dd><p>polarization calibration results from Delta-90° method for each wavelength.</p>
+<p>Each wavelength contains a list of sub-dicts. One per 
+successful retrieval period, with entries:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">eta</span></code><span class="classifier">float</span></dt><dd><p>Depol calibration constant.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">eta_std</span></code><span class="classifier">float</span></dt><dd><p>Uncertainty of Depol calibration constant.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">time_start</span></code>, <code class="docutils literal notranslate"><span class="pre">time_end</span></code><span class="classifier">int</span></dt><dd><p>Start and stop times for successful calibration.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">method</span></code><span class="classifier">str</span></dt><dd><p>Name of retrieval method.</p>
+</dd>
+</dl>
+<p>The number of element in each list depends on the number of successful retrievals.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
 <p>Function is called here <a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/5f5e4d0fd3dcebe7f87220cf802fcd6f414fe235/lib/interface/picassoProcV3.m#L548">PollyNET/Pollynet_Processing_Chain</a>
 The two most relevant functions here are <a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/dev/lib/calibration/pollyPolCaliGHK.m">PollyNET/Pollynet_Processing_Chain</a>
 which also calls <a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/dev/lib/calibration/depolCaliGHK.m">PollyNET/Pollynet_Processing_Chain</a></p>
 <p class="rubric">References</p>
 <div role="list" class="citation-list">
 <div class="citation" id="rfb58d11321b6-1" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">1</a><span class="fn-bracket">]</span></span>
-<p>Freudenthaler 2016</p>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">1</a><span class="fn-bracket">]</span></span>
+<p>Freudenthaler, V. About the effects of polarising optics on lidar signals and the Delta90 calibration. 
+Atmos. Meas. Tech., 9, 4181–4255 (2016).</p>
 </div>
 </div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.calibration.polarization.depol_cali_ghk">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">depol_cali_ghk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg_t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_pang_start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_pang_stop_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_nang_start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_nang_stop_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cali_h_indx_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SNRmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dplus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dminus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smooth_win</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#depol_cali_ghk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.depol_cali_ghk" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">depol_cali_ghk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg_t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_pang_start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_pang_stop_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_nang_start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pol_cali_nang_stop_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cali_h_indx_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SNRmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dplus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dminus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smooth_win</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flagPicassoComparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#depol_cali_ghk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.depol_cali_ghk" title="Link to this definition">#</a></dt>
 <dd><p>Polarization calibration for PollyXT lidar system.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>signal_t</strong><span class="classifier">ndarray</span></dt><dd><p>Background-removed photon count signal at the total channel.
-Shape: (n_bins, n_profiles)</p>
+Shape: (n_profiles, n_bins)</p>
 </dd>
-<dt><strong>bg_t</strong><span class="classifier">ndarray</span></dt><dd><p>Background at the total channel. Shape: (n_bins, n_profiles)</p>
+<dt><strong>bg_t</strong><span class="classifier">ndarray</span></dt><dd><p>Background at the total channel. Shape: (n_profiles)</p>
 </dd>
 <dt><strong>signal_x</strong><span class="classifier">ndarray</span></dt><dd><p>Background-removed photon count signal at the cross channel.
-Shape: (n_bins, n_profiles)</p>
+Shape: (n_profiles, n_bins)</p>
 </dd>
-<dt><strong>bg_x</strong><span class="classifier">ndarray</span></dt><dd><p>Background at the cross channel. Shape: (n_bins, n_profiles)</p>
+<dt><strong>bg_x</strong><span class="classifier">ndarray</span></dt><dd><p>Background at the cross channel. Shape: (n_profiles)</p>
 </dd>
 <dt><strong>time</strong><span class="classifier">ndarray</span></dt><dd><p>Datetime array representing the measurement time of each profile.</p>
 </dd>
@@ -502,56 +651,77 @@ Shape: (n_bins, n_profiles)</p>
 </dd>
 <dt><strong>smooth_win</strong><span class="classifier">int</span></dt><dd><p>Width of the sliding window for smoothing the signal.</p>
 </dd>
-<dt><strong>collect_debug</strong><span class="classifier">bool, default=False</span></dt><dd><p>store and return the intermediate results</p>
+<dt><strong>collect_debug</strong><span class="classifier">bool, optional</span></dt><dd><p>Store and return the intermediate results. Default is False.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>pol_cali_eta</strong><span class="classifier">list</span></dt><dd><p>Eta values from polarization calibration.</p>
+<dd class="field-even"><dl>
+<dt><strong>results</strong><span class="classifier">list of dicts</span></dt><dd><p>Containing successful retrieved depol calibration constant and retrieval information.</p>
+<p>Each dict contains the following entries:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">eta</span></code><span class="classifier">float</span></dt><dd><p>Eta values from polarization calibration.</p>
 </dd>
-<dt><strong>pol_cali_eta_std</strong><span class="classifier">list</span></dt><dd><p>Uncertainty of eta values from calibration.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">eta_std</span></code><span class="classifier">float</span></dt><dd><p>Uncertainty of eta values from calibration.</p>
 </dd>
-<dt><strong>pol_cali_start_time, pol_cali_stop_time</strong><span class="classifier">list</span></dt><dd><p>Start and stop times for successful calibration.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">time_start</span></code>, <code class="docutils literal notranslate"><span class="pre">time_end</span></code><span class="classifier">int</span></dt><dd><p>Start and stop times for successful calibration.</p>
 </dd>
-<dt><strong>cali_status</strong><span class="classifier">int</span></dt><dd><p>1 if calibration is successful, 0 otherwise.</p>
-</dd>
-<dt><strong>global_attri</strong><span class="classifier">dict, optional</span></dt><dd><p>Information about the depolarization calibration.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.calibration.polarization.analyze_segments">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">analyze_segments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dplus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dminus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dplus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dminus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#analyze_segments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.analyze_segments" title="Link to this definition">#</a></dt>
-<dd><p>…</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>dplus</strong><span class="classifier">ndarray</span></dt><dd><p>…</p>
-</dd>
-<dt><strong>dminus</strong><span class="classifier">ndarray</span></dt><dd><p>…</p>
-</dd>
-<dt><strong>segment_len</strong><span class="classifier">int</span></dt><dd><p>Segment length for testing the variability of calibration results.</p>
-</dd>
-<dt><strong>rel_std_dplus, rel_std_dminus</strong><span class="classifier">float</span></dt><dd><p>Maximum relative uncertainty of dplus and dminus allowed.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">method</span></code><span class="classifier">str</span></dt><dd><p>Name of retrieval method.</p>
 </dd>
 </dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>ndarray</dt><dd><p>…</p>
+<p>The number of element in the list depends on the number of successful retrievals.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<div class="admonition-todo admonition" id="id5">
+<div class="admonition-todo admonition" id="id7">
 <p class="admonition-title">Todo</p>
-<p>Finish docstring.</p>
+<p>Why is <code class="docutils literal notranslate"><span class="pre">pol_cali_nang_start_time</span></code> returned as <code class="docutils literal notranslate"><span class="pre">time_start</span></code> of the calibration
+period instead of <code class="docutils literal notranslate"><span class="pre">pol_cali_start_time</span></code>???</p>
 </div>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>xxxx-xx-xx: First edition by …</p></li>
+<li><dl class="simple">
+<dt>2026-07-30: Made output datatype consistent and changed from <cite>nanmean</cite> to</dt><dd><p><cite>nansum</cite> in signal aggregation to be consistent with SNR requirement.</p>
+</dd>
+</dl>
+</li>
+<li><p>2026-08-06: Overhalled function structure and input output consistency.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.calibration.polarization.analyze_segments">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">analyze_segments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dplus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dminus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dplus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_std_dminus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#analyze_segments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.analyze_segments" title="Link to this definition">#</a></dt>
+<dd><p>Analyze calibration segment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dplus</strong><span class="classifier">ndarray</span></dt><dd><p>Plus 45° calibration…</p>
+</dd>
+<dt><strong>dminus</strong><span class="classifier">ndarray</span></dt><dd><p>Minus 45° calibration…</p>
+</dd>
+<dt><strong>segment_len</strong><span class="classifier">int</span></dt><dd><p>Segment length for testing the variability of calibration results.</p>
+</dd>
+<dt><strong>rel_std_dplus, rel_std_dminus</strong><span class="classifier">float</span></dt><dd><p>Maximum relative uncertainty of <cite>dplus</cite> and <cite>dminus</cite> allowed.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>mean_dpluses</strong><span class="classifier">ndarray</span></dt><dd><p>Mean plus 45° calibration per segment.</p>
+</dd>
+<dt><strong>std_dpluses</strong><span class="classifier">ndarray</span></dt><dd><p>Standard deviation of plus 45° calibration per segment.</p>
+</dd>
+<dt><strong>mean_dminuses</strong><span class="classifier">ndarray</span></dt><dd><p>Mean minus 45° calibration per segment.</p>
+</dd>
+<dt><strong>std_dminuses</strong><span class="classifier">ndarray</span></dt><dd><p>Standard deviation of minus 45° calibration per segment.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -567,70 +737,102 @@ Shape: (n_bins, n_profiles)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>…</p>
+<dt><strong>eta</strong><span class="classifier">ndarray</span></dt><dd><p>Polarization calibration eta.</p>
+</dd>
+<dt><strong>etaStd</strong><span class="classifier">ndarray</span></dt><dd><p>Uncertainty of polarization calibration eta.</p>
+</dd>
+<dt><strong>fac</strong><span class="classifier">array</span></dt><dd><p>Polarization calibration factor.</p>
+</dd>
+<dt><strong>facStd</strong><span class="classifier">ndarray</span></dt><dd><p>Uncertainty of polarization calibration factor.</p>
+</dd>
+<dt><strong>status</strong><span class="classifier">int</span></dt><dd><dl class="simple">
+<dt>Retrieval status</dt><dd><p>0 : Bad
+1 : Good</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>time_start</strong><span class="classifier">int</span></dt><dd><p>Start time of the cloud free segment for the retrieval in unixtime.</p>
+</dd>
+<dt><strong>end_time</strong><span class="classifier">int</span></dt><dd><p>End time of the cloud free segment for the retrieval in unixtime.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
 <ul class="simple">
-<li><p>Converted from the matlab code to the best knowledge, but not cross-validated yet</p></li>
+<li><p>Converted from the matlab code to the best knowledge, but not cross-validated yet.</p></li>
 </ul>
-<div class="admonition-todo admonition" id="id6">
+<div class="admonition-todo admonition" id="id8">
 <p class="admonition-title">Todo</p>
-<p>had to calculate TR_t, TR_c again when calling depol_cali_mol()</p>
+<ul class="simple">
+<li><p>had to calculate TR_t, TR_c again when calling depol_cali_mol().</p></li>
+<li><p>Finish docstring.</p></li>
+</ul>
 </div>
-<div class="admonition-todo admonition" id="id7">
-<p class="admonition-title">Todo</p>
-<p>Finish docstring.</p>
-</div>
+<p>** History **</p>
+<ul class="simple">
+<li><p>xx-xx-xxxx: First edition by …</p></li>
+<li><p>xx-xx-xxxx: Translated to python</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.calibration.polarization.depol_cali_mol">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">depol_cali_mol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_c</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_c</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_t_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_c</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_c_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minSNR</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdrStd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#depol_cali_mol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.depol_cali_mol" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.polarization.</span></span><span class="sig-name descname"><span class="pre">depol_cali_mol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_c</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_c</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_t_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_c</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TR_c_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minSNR</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mdrStd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flagPicassoComparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/polarization.html#depol_cali_mol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.polarization.depol_cali_mol" title="Link to this definition">#</a></dt>
 <dd><p>Molecular polarization calibration.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>signal_t: numeric</strong></dt><dd><p>Total signal (photon count).</p>
+<dt><strong>signal_t</strong><span class="classifier">ndarray</span></dt><dd><p>Total signal [photon count].</p>
 </dd>
-<dt><strong>background_t: numeric</strong></dt><dd><p>Background at total channel (photon count).</p>
+<dt><strong>background_t</strong><span class="classifier">ndarray</span></dt><dd><p>Background at total channel [photon count].</p>
 </dd>
-<dt><strong>signal_c: numeric</strong></dt><dd><p>Cross signal (photon count).</p>
+<dt><strong>signal_c</strong><span class="classifier">ndarray</span></dt><dd><p>Cross signal [photon count].</p>
 </dd>
-<dt><strong>background_c: numeric</strong></dt><dd><p>Background at cross channel (photon count).</p>
+<dt><strong>background_c</strong><span class="classifier">ndarray</span></dt><dd><p>Background at cross channel [photon count].</p>
 </dd>
-<dt><strong>TR_t: scalar</strong></dt><dd><p>Transmission ratio at total channel.</p>
+<dt><strong>TR_t</strong><span class="classifier">float</span></dt><dd><p>Transmission ratio at total channel.</p>
 </dd>
-<dt><strong>TR_t_std: scalar</strong></dt><dd><p>Uncertainty of the transmission ratio at total channel.</p>
+<dt><strong>TR_t_std</strong><span class="classifier">float</span></dt><dd><p>Uncertainty of the transmission ratio at total channel.</p>
 </dd>
-<dt><strong>TR_c: scalar</strong></dt><dd><p>Transmission ratio at cross channel.</p>
+<dt><strong>TR_c</strong><span class="classifier">float</span></dt><dd><p>Transmission ratio at cross channel.</p>
 </dd>
-<dt><strong>TR_c_std: scalar</strong></dt><dd><p>Uncertainty of the transmission ratio at cross channel.</p>
+<dt><strong>TR_c_std</strong><span class="classifier">float</span></dt><dd><p>Uncertainty of the transmission ratio at cross channel.</p>
 </dd>
-<dt><strong>minSNR: float</strong></dt><dd><p>The SNR constraint for the signal strength at reference height.</p>
+<dt><strong>minSNR</strong><span class="classifier">float</span></dt><dd><p>The SNR constraint for the signal strength at reference height.</p>
 </dd>
-<dt><strong>mdr: float</strong></dt><dd><p>Default molecular depolarization ratio.</p>
+<dt><strong>mdr</strong><span class="classifier">float</span></dt><dd><p>Default molecular depolarization ratio.</p>
 </dd>
-<dt><strong>mdrStd: float</strong></dt><dd><p>Default standard deviation of molecular depolarization ratio.</p>
+<dt><strong>mdrStd</strong><span class="classifier">float</span></dt><dd><p>Default standard deviation of molecular depolarization ratio.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>polCaliEta: array</dt><dd><p>Polarization calibration eta.</p>
+<dt><strong>eta</strong><span class="classifier">ndarray</span></dt><dd><p>Polarization calibration eta.</p>
 </dd>
-<dt>polCaliEtaStd: array</dt><dd><p>Uncertainty of polarization calibration eta.</p>
+<dt><strong>etaStd</strong><span class="classifier">ndarray</span></dt><dd><p>Uncertainty of polarization calibration eta.</p>
 </dd>
-<dt>polCaliFac: array</dt><dd><p>Polarization calibration factor.</p>
+<dt><strong>fac</strong><span class="classifier">array</span></dt><dd><p>Polarization calibration factor.</p>
 </dd>
-<dt>polCaliFacStd: array</dt><dd><p>Uncertainty of polarization calibration factor.</p>
+<dt><strong>facStd</strong><span class="classifier">ndarray</span></dt><dd><p>Uncertainty of polarization calibration factor.</p>
+</dd>
+<dt><strong>status</strong><span class="classifier">int</span></dt><dd><dl class="simple">
+<dt>Retrieval status</dt><dd><p>0 : Bad
+1 : Good</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id9">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>The inputs TR_t_std &amp; TR_c_std are currnetly not used in the function!</p></li>
+</ul>
+</div>
 <p><strong>History</strong></p>
 <ul class="simple">
 <li><p>2021-07-06: First edition by Zhenping</p></li>
@@ -749,7 +951,7 @@ taken from the config files.</p></li>
 </dd>
 <dt><strong>window_size</strong><span class="classifier">int</span></dt><dd><p>Size of the average smooth window. Default is 1.</p>
 </dd>
-<dt><strong>showDetails</strong><span class="classifier">bool</span></dt><dd><p>If true, print debug information. Default is False.</p>
+<dt><strong>showDetails</strong><span class="classifier">bool</span></dt><dd><p>If true, collect debug information. Default is False.</p>
 </dd>
 </dl>
 </dd>
@@ -926,10 +1128,10 @@ Picasso.</p></li>
 <span id="ppcpy-calibration-select"></span><h2>ppcpy.calibration.select<a class="headerlink" href="#module-ppcpy.calibration.select" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.calibration.select.single_best">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.select.</span></span><span class="sig-name descname"><span class="pre">single_best</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/select.html#single_best"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.select.single_best" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.select.</span></span><span class="sig-name descname"><span class="pre">single_best</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/calibration/select.html#single_best"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.select.single_best" title="Link to this definition">#</a></dt>
 <dd><p>Select the best calibration constant</p>
-<p>generalization of lidarconstant.get_best_LC</p>
-<dl class="field-list simple">
+<p>Generalization of lidarconstant.get_best_LC</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>d</strong><span class="classifier">dict</span></dt><dd><p>dict per channel of list of calibration constants</p>
@@ -946,31 +1148,49 @@ Picasso.</p></li>
 <dd class="field-even"><dl class="simple">
 <dt><strong>best</strong><span class="classifier">dict</span></dt><dd><p>Lidar constants/Etas with lowest standard deviation per channel.</p>
 </dd>
+<dt><strong>History</strong></dt><dd></dd>
 </dl>
+<ul class="simple">
+<li><dl class="simple">
+<dt>2026-02-16: Added additional checks to hinder negative LCs to be chosen.</dt><dd></dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>2026-03-27: generalized to also hold for depolarization calibration.</dt><dd></dd>
+</dl>
+</li>
+</ul>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
-<p>Since <code class="docutils literal notranslate"><span class="pre">LC</span> <span class="pre">=</span> <span class="pre">LC_stable</span></code> and <code class="docutils literal notranslate"><span class="pre">LCStd</span> <span class="pre">=</span> <span class="pre">LC_stable</span> <span class="pre">*</span> <span class="pre">LC_Std</span></code> so will any negative LC also have
-a negative LCStd, and thus be chosen as the best LC.</p>
-<p><strong>History</strong></p>
-<ul class="simple">
-<li><p>2026-02-16: Added additional checks to hinder negative LCs to be chosen.</p></li>
-<li><p>2026-03-27: generalized to also hold for depolarization calibration</p></li>
-</ul>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.calibration.select.plot_cals">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.select.</span></span><span class="sig-name descname"><span class="pre">plot_cals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">used</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/select.html#plot_cals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.select.plot_cals" title="Link to this definition">#</a></dt>
-<dd><p>plot the calibration constants</p>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.calibration.select.</span></span><span class="sig-name descname"><span class="pre">plot_cals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">used</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/calibration/select.html#plot_cals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.calibration.select.plot_cals" title="Link to this definition">#</a></dt>
+<dd><p>Plot the calibration constants.</p>
+<p>Produces a scatter plot of the stored calibration constants (CC).
+CCs retrieved form the measurement are marked as filled circles,
+while those loaded from the database are marked as hollow circles.
+The chosen optimal CC and its default value are marked by horizontal
+gray dotted and dashed lines respectively.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>d</strong><span class="classifier">dict</span></dt><dd><p>the dict as in data_cube</p>
+<dt><strong>d</strong><span class="classifier">dict</span></dt><dd><p>Dict storing all CCs. <code class="docutils literal notranslate"><span class="pre">pol_cali</span></code> or <code class="docutils literal notranslate"><span class="pre">LC</span></code>.</p>
 </dd>
-<dt><strong>param</strong><span class="classifier">str</span></dt><dd><p>the parameter to extract</p>
+<dt><strong>param</strong><span class="classifier">str</span></dt><dd><p>Name of the parameter to extract.</p>
 </dd>
-<dt><strong>used</strong><span class="classifier">dict</span></dt><dd><p>the LCused or etaused (will produce a dashed line in the plot)</p>
+<dt><strong>used</strong><span class="classifier">dict, optional</span></dt><dd><p>Dict storing the used CCs. LCused or etaused.
+Will produce a horizontal dashed line in the plot if added.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>fig</strong><span class="classifier">figure</span></dt><dd><p>Matplotlib figure object.</p>
+</dd>
+<dt><strong>ax</strong><span class="classifier">axis</span></dt><dd><p>Matplotlib axis object.</p>
 </dd>
 </dl>
 </dd>
@@ -1033,12 +1253,14 @@ a negative LCStd, and thus be chosen as the best LC.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.calibration.lidarconstant">ppcpy.calibration.lidarconstant</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.lidarconstant.loadDefaults"><code class="docutils literal notranslate"><span class="pre">loadDefaults()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.lidarconstant.lc_for_cldFreeGrps"><code class="docutils literal notranslate"><span class="pre">lc_for_cldFreeGrps()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.calibration.polarization">ppcpy.calibration.polarization</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.onemx_onepx"><code class="docutils literal notranslate"><span class="pre">onemx_onepx()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.smooth_signal"><code class="docutils literal notranslate"><span class="pre">smooth_signal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.loadDefaults"><code class="docutils literal notranslate"><span class="pre">loadDefaults()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.loadGHK"><code class="docutils literal notranslate"><span class="pre">loadGHK()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.calibrateGHK"><code class="docutils literal notranslate"><span class="pre">calibrateGHK()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.calibration.polarization.depol_cali_ghk"><code class="docutils literal notranslate"><span class="pre">depol_cali_ghk()</span></code></a></li>

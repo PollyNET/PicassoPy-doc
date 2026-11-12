@@ -319,81 +319,108 @@
 
 
 <div class="viewcode-block" id="spread">
-<a class="viewcode-back" href="../../../_autosummary/ppcpy.qc.overlapCor.html#ppcpy.qc.overlapCor.spread">[docs]</a>
+<a class="viewcode-back" href="../../../api_doc/qc.html#ppcpy.qc.overlapCor.spread">[docs]</a>
 <span class="k">def</span> <span class="nf">spread</span><span class="p">(</span><span class="n">data_cube</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;select the correct overlap method, spread the profiles to 2d for each wavelength</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Select the correct overlap method, spread the profiles to 2d for each wavelength.</span>
 <span class="sd">    </span>
 <span class="sd">    design decision for now:</span>
 <span class="sd">    drop the signal glue option (overlapCorMode == 3) </span>
 
-<span class="sd">    in the matlab version any olFunc is additionally smoothed with</span>
-<span class="sd">    `olSm = smooth(olFuncDeft, p.Results.overlapSmWin, &#39;sgolay&#39;, 2);`</span>
-<span class="sd">    (e.g. here https://github.com/PollyNET/Pollynet_Processing_Chain/blob/e413f9254094ff2c0a18fcdac4e9bebb5385d526/lib/qc/pollyOLCor.m#L106)</span>
-<span class="sd">    This should probably be done more explicitly</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_cube : object</span>
+<span class="sd">        Main PicassoProc object.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        2d overlap function per channel.</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - in the matlab version any olFunc is additionally smoothed with</span>
+<span class="sd">      `olSm = smooth(olFuncDeft, p.Results.overlapSmWin, &#39;sgolay&#39;, 2);`</span>
+<span class="sd">      (e.g. here https://github.com/PollyNET/Pollynet_Processing_Chain/blob/e413f9254094ff2c0a18fcdac4e9bebb5385d526/lib/qc/pollyOLCor.m#L106)</span>
+<span class="sd">      This should probably be done more explicitly.</span>
+<span class="sd">    - Also the &#39;glueing&#39; in function [sigCor] = olCor(sigFR, overlap, height, normRange)</span>
+<span class="sd">      seems wired (https://github.com/PollyNET/Pollynet_Processing_Chain/blob/e413f9254094ff2c0a18fcdac4e9bebb5385d526/lib/qc/olCor.m#L34).</span>
+<span class="sd">    </span>
+<span class="sd">    .. TODO:: Using different overlap function at different periods of the signal introduces harsh transitions as long as the overlap functions</span>
+<span class="sd">              are not stable. Look into options for smoothing the overlap function in the time dimension to ease the transition from</span>
+<span class="sd">              one period to another.</span>
+<span class="sd">    </span>
+<span class="sd">    ** History **</span>
 
-<span class="sd">    Also the &#39;glueing&#39; in function [sigCor] = olCor(sigFR, overlap, height, normRange)</span>
-<span class="sd">    seems wired</span>
-<span class="sd">    (https://github.com/PollyNET/Pollynet_Processing_Chain/blob/e413f9254094ff2c0a18fcdac4e9bebb5385d526/lib/qc/olCor.m#L34)</span>
+<span class="sd">    - xxxx-xx-xx: First edition by ...</span>
+<span class="sd">    - xxxx-xx-xx: Translated to python.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Computing 2d overlap function.&quot;</span><span class="p">)</span>
     <span class="n">config_dict</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span>
     <span class="n">height</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span>
     <span class="n">time</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;time64&#39;</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;overlapCorMode &#39;</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;overlapCorMode&#39;</span><span class="p">],</span> 
-          <span class="s1">&#39; overlapCalMode &#39;</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;overlapCalMode&#39;</span><span class="p">])</span>
-
     <span class="n">overlap</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_profile</span><span class="p">[</span><span class="s1">&#39;overlap&#39;</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">overlap</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="c1">## Get overlap mode</span>
     <span class="k">if</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;overlapCorMode&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="s1">&#39;file&#39;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;overlapCorMode = 1 --&gt; using overlap function form file.&quot;</span><span class="p">)</span>
+        <span class="n">olMode</span> <span class="o">=</span> <span class="s1">&#39;file&#39;</span>
     <span class="k">elif</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;overlapCorMode&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;overlapCalMode&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="s1">&#39;frnr&#39;</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: The frnr overlap calulations are very unstable.&quot;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;overlapCorMode = 2, overlapCalMode = 1 --&gt; using overlap function calculated thorugh the FRNR-method.&quot;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;FRNR calculated overlap functions may be unstable.&quot;</span><span class="p">)</span>
+            <span class="n">olMode</span> <span class="o">=</span> <span class="s1">&#39;frnr&#39;</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;The frnr overlap calulations are very unstable.&quot;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;overlapCalMode&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="s1">&#39;raman&#39;</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;overlapCorMode = 2, overlapCalMode = 2 --&gt; using overlap function calculated thorugh the Raman-method.&quot;</span><span class="p">)</span>
+            <span class="n">olMode</span> <span class="o">=</span> <span class="s1">&#39;raman&#39;</span>
     <span class="k">elif</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;overlapCorMode&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;overlapCorMode 3 not implemented, see docstring for further information&#39;</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;overlapCorMode 3 not implemented, see docstring for further information&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;overlap correction source&#39;</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
-    <span class="n">ol_profiles</span> <span class="o">=</span> <span class="n">overlap</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-    <span class="c1"># TODO: add code to select only one profile</span>
-    <span class="c1">#ol_profiles = [overlap[k][0]]</span>
+
+    <span class="n">ol_profiles</span> <span class="o">=</span> <span class="n">overlap</span><span class="p">[</span><span class="n">olMode</span><span class="p">]</span>
+    <span class="c1"># .. TODO:: Add code to select only one profile.</span>
+    <span class="c1"># ol_profiles = [overlap[olMode][0]]</span>
     
-    <span class="c1"># get the channel information for all the cloud free profiles</span>
-    <span class="c1"># and convert into a plain list</span>
+    <span class="c1">## get the channel information for all the cloud free profiles and convert into a plain list</span>
     <span class="n">channel_per_profile</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ol_profiles</span><span class="p">]))</span>
 
     <span class="n">clFreeGrps</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">clFreeGrps</span>
     <span class="n">time_slices</span> <span class="o">=</span> <span class="p">[</span><span class="n">time</span><span class="p">[</span><span class="n">grp</span><span class="p">]</span> <span class="k">for</span> <span class="n">grp</span> <span class="ow">in</span> <span class="n">clFreeGrps</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">time_slices</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">time_slices</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">clFreeGrps</span><span class="p">)</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">channel_per_profile</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;channel: </span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">olFuncs</span> <span class="o">=</span> <span class="p">[</span><span class="n">o</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">ol_profiles</span> <span class="k">if</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">o</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
-        <span class="n">time_slices_this_channel</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">time_slices</span><span class="p">)</span> <span class="k">if</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">ol_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="s1">&#39;len(olFuncs)&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">olFuncs</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_slices</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_slices_this_channel</span><span class="p">))</span>
+        <span class="n">time_slices_this_channel</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">time_slices</span><span class="p">)</span> <span class="k">if</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">ol_profiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# of olFuncs: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">olFuncs</span><span class="p">)</span><span class="si">}</span><span class="s2">, # of time slices: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">time_slices</span><span class="p">)</span><span class="si">}</span><span class="s2">, # of time slices for this channel: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">time_slices_this_channel</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;time slices for this channel: </span><span class="si">{</span><span class="n">time_slices_this_channel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">olFuncs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;overlap function set to time varying&#39;</span><span class="p">)</span>
+            <span class="c1">## Use different overlap function for different times, centered around theire cloud free period.</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using time-varying ovrlap function for channel for channel: </span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
             <span class="n">olFunc_2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">olFuncs</span><span class="p">),</span> <span class="n">height</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">olFunc_2d</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-            <span class="c1"># set the estimated overlap profiles to the beginning and</span>
-            <span class="c1"># end of the profile</span>
+
+            <span class="c1">## Set the estimated overlap profiles to the beginning and end of the profile</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">olFuncs</span><span class="p">):</span>
-                <span class="n">olFunc_2d</span><span class="p">[[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],:]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;olFunc&#39;</span><span class="p">]</span>
-                <span class="c1">#print(f.keys(), f[&#39;normRange&#39;])</span>
+                <span class="n">olFunc_2d</span><span class="p">[[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;olFunc&#39;</span><span class="p">]</span>
+
             <span class="n">finterp</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
-                <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">time_slices_this_channel</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span> 
-                <span class="n">olFunc_2d</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
-                <span class="n">fill_value</span><span class="o">=</span><span class="s1">&#39;extrapolate&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">time_slices_this_channel</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span> 
+                <span class="n">y</span><span class="o">=</span><span class="n">olFunc_2d</span><span class="p">,</span>
+                <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+                <span class="n">fill_value</span><span class="o">=</span><span class="s1">&#39;extrapolate&#39;</span><span class="p">,</span>
+                <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span>
+            <span class="p">)</span>
             <span class="n">olFunc_2d</span> <span class="o">=</span> <span class="n">finterp</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">olFunc_2d</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
         <span class="k">else</span><span class="p">:</span>
-            <span class="c1">#print(&#39;only one overlap function&#39;)</span>
-            <span class="c1"># then just use that function for the whole time period</span>
+            <span class="c1">## Use same olFunc function for all timestamps.</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using time-constant overlap function for channel: </span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
             <span class="n">ol</span> <span class="o">=</span> <span class="n">olFuncs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;olFunc&#39;</span><span class="p">]</span>
             <span class="n">olFunc_2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">ol</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:],</span> <span class="n">time</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">olFunc_2d</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
         <span class="n">ret</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="n">olFunc_2d</span>
 
     <span class="k">return</span> <span class="n">ret</span></div>
@@ -401,19 +428,56 @@
 
 
 <div class="viewcode-block" id="apply_cube">
-<a class="viewcode-back" href="../../../_autosummary/ppcpy.qc.overlapCor.html#ppcpy.qc.overlapCor.apply_cube">[docs]</a>
+<a class="viewcode-back" href="../../../api_doc/qc.html#ppcpy.qc.overlapCor.apply_cube">[docs]</a>
 <span class="k">def</span> <span class="nf">apply_cube</span><span class="p">(</span><span class="n">data_cube</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply overlap function to 2d (time, height) signal.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_cube : object</span>
+<span class="sd">        Main PicassoProc object.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    sigOLCor : ndarray</span>
+<span class="sd">        Overlap corrected signal (time, height).</span>
+<span class="sd">    BGOLCor : ndarray</span>
+<span class="sd">        Overlap corrected background (time, ).</span>
+<span class="sd">    heightFullOverlapCor : ndarray</span>
+<span class="sd">        Height of full overlap [m?].</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - Shoud we apply the overlap correction on the GHK-Transmission corrected signal or the Background Corrrected signal??</span>
+<span class="sd">        Currentlly we are using a wired mix here. sigOLCor is inintialized with the sigTCor but the correction is applied </span>
+<span class="sd">        based on the sigBGCor. The correction to the BG is alwaysed based on the BGTCor.</span>
+<span class="sd">    - Also, in highres the GHK-Transmission correction is again applied on sigOLCor before the OC_attBsc is calculated.</span>
+
+<span class="sd">    .. TODO:: At times the retrieved overlap function is outside the range [0, 1], the values of the function should </span>
+<span class="sd">              be checked and corrected before applying. Currnetly only values less then 0.07 are corrected (set to NaN).</span>
+
+<span class="sd">    .. TODO:: This function could be easaly vectorized by cunstructing all the 2d overlap function into a 3d Matrix / Tensor</span>
+<span class="sd">              Channels that do not have overlap function can be replaced by ones. This alongside the use of alternative overlap</span>
+<span class="sd">              functions (using 355 insted of 386 etc.) can be handled in the construction of the 3d Matrix / Tensor. </span>
+<span class="sd">              Then the correction itself can be applied like this: sigOLCor = sigTCor / olFunc_3d</span>
+
+<span class="sd">    ** History **</span>
+
+<span class="sd">    - xxxx-xx-xx: First edition by ...</span>
+<span class="sd">    - xxxx-xx-xx: Translated to python.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="n">height</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span>
     <span class="n">config_dict</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span>
-    <span class="n">BGOLCor</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;BGTCor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> 
-    <span class="n">heightFullOverlapCor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;heightFullOverlap&#39;</span><span class="p">])[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:],</span>
-        <span class="n">BGOLCor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># .. TODO:: why are we using sigTCor as the basis when we update it with the sigBGCor is used to apply the correction??</span>
     <span class="n">sigOLCor</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;sigTCor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> 
+    <span class="n">BGOLCor</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;BGTCor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> 
     <span class="n">overlap2d</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;overlap2d&#39;</span><span class="p">]</span>
+
+    <span class="n">heightFullOverlapCor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;heightFullOverlap&#39;</span><span class="p">])[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:],</span>
+            <span class="n">BGOLCor</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="n">alt_wv</span> <span class="o">=</span> <span class="p">{</span><span class="mi">607</span><span class="p">:</span> <span class="mi">532</span><span class="p">,</span> <span class="mi">387</span><span class="p">:</span> <span class="mi">355</span><span class="p">,</span> <span class="mi">1064</span><span class="p">:</span> <span class="mi">532</span><span class="p">}</span>
      
@@ -421,32 +485,36 @@
         <span class="n">flag</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">)</span>
         <span class="n">indxt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">flag</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="c1"># TODO fix that error, that is for now required for debugging</span>
-        <span class="c1">#sigBGCor_total = np.squeeze(data_cube.retrievals_highres[&#39;sigTCor&#39;][:, :, flag])</span>
+        <span class="c1"># .. TODO:: fix that error, that is for now required for debugging</span>
+        <span class="c1"># .. TODO:: should the we use sigBGCor or sigTCor here???</span>
+        <span class="c1"># sigBGCor_total = np.squeeze(data_cube.retrievals_highres[&#39;sigTCor&#39;][:, :, flag])</span>
         <span class="n">sigBGCor_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;sigBGCor&#39;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="n">flag</span><span class="p">])</span>
-        <span class="n">bg_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;BGTCor&#39;</span><span class="p">][:,</span> <span class="n">flag</span><span class="p">])</span>
+        <span class="n">bg_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;BGTCor&#39;</span><span class="p">][:,</span> <span class="n">flag</span><span class="p">])</span> <span class="c1"># TODO: This is still the GHK-transmission corrected background...</span>
 
         <span class="k">if</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;overlapCorMode&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;correct overlap&#39;</span><span class="p">,</span> <span class="n">wv</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Applying overlap correction for channel: </span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1"> total FR.&#39;</span><span class="p">)</span>
+
+            <span class="c1">## Extract overlap function</span>
             <span class="k">if</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">_total_FR&quot;</span> <span class="ow">in</span> <span class="n">overlap2d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="n">olFunc</span> <span class="o">=</span> <span class="n">overlap2d</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">_total_FR&quot;</span><span class="p">]</span>
-            <span class="k">elif</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">alt_wv</span><span class="p">[</span><span class="n">wv</span><span class="p">]</span><span class="si">}</span><span class="s2">_total_FR&quot;</span> <span class="ow">in</span> <span class="n">overlap2d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;using </span><span class="si">{</span><span class="n">alt_wv</span><span class="p">[</span><span class="n">wv</span><span class="p">]</span><span class="si">}</span><span class="s1"> instead of </span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">wv</span> <span class="ow">in</span> <span class="n">alt_wv</span> <span class="ow">and</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">alt_wv</span><span class="p">[</span><span class="n">wv</span><span class="p">]</span><span class="si">}</span><span class="s2">_total_FR&quot;</span> <span class="ow">in</span> <span class="n">overlap2d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Using overlap function for channel </span><span class="si">{</span><span class="n">alt_wv</span><span class="p">[</span><span class="n">wv</span><span class="p">]</span><span class="si">}</span><span class="s1"> total FR.&#39;</span><span class="p">)</span>
                 <span class="n">olFunc</span> <span class="o">=</span> <span class="n">overlap2d</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">alt_wv</span><span class="p">[</span><span class="n">wv</span><span class="p">]</span><span class="si">}</span><span class="s2">_total_FR&quot;</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;no overlap correction function for </span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No overlap function found for channel </span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2"> total FR. Using O(R) = 1.&quot;</span><span class="p">)</span>
                 <span class="n">olFunc</span> <span class="o">=</span> <span class="mi">1</span>
 
+            <span class="c1">## Check and correct low / negative values</span>
             <span class="n">idxOL</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">olFunc</span> <span class="o">&gt;</span> <span class="mf">0.07</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">olFunc</span><span class="p">[</span><span class="n">olFunc</span> <span class="o">&lt;</span> <span class="mf">0.07</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-            <span class="n">sigOLCor</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">indxt</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span>
-                <span class="n">sigBGCor_total</span> <span class="o">/</span> <span class="n">olFunc</span><span class="p">,</span>  <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1">## Aplly overlap correction</span>
+            <span class="n">sigOLCor</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">indxt</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">sigBGCor_total</span> <span class="o">/</span> <span class="n">olFunc</span><span class="p">,</span>  <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">BGOLCor</span><span class="p">[:,</span> <span class="n">indxt</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">bg_total</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-            <span class="c1">#print(np.ravel(heightFullOverlapCor[:, indxt])[:5])</span>
             <span class="n">heightFullOverlapCor</span><span class="p">[:,</span> <span class="n">indxt</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">idxOL</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-            <span class="c1">#print(np.ravel(heightFullOverlapCor[:, indxt])[:5])</span>
 
         <span class="k">elif</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;overlapCorMode&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;overlapCorMode 3 not implemented, see docstring for further information.&#39;</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;overlapCorMode 3 not implemented, see docstring for further information&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">sigOLCor</span><span class="p">,</span> <span class="n">BGOLCor</span><span class="p">,</span> <span class="n">heightFullOverlapCor</span> </div>
@@ -454,15 +522,24 @@
 
 
 <div class="viewcode-block" id="fixLowest">
-<a class="viewcode-back" href="../../../_autosummary/ppcpy.qc.overlapCor.html#ppcpy.qc.overlapCor.fixLowest">[docs]</a>
+<a class="viewcode-back" href="../../../api_doc/qc.html#ppcpy.qc.overlapCor.fixLowest">[docs]</a>
 <span class="k">def</span> <span class="nf">fixLowest</span><span class="p">(</span><span class="n">overlap</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">indexsearchmax</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">thres</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;very rough fix for exploding values in the very near range of the overlap function</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Very rough fix for exploding values in the very near range of the overlap function.</span>
 
 <span class="sd">    in the lowest heights (below indexsearchmax, e.g. 800m)</span>
-<span class="sd">    search for chunks, where the overlap function is smaller than 0.05</span>
+<span class="sd">    search for chunks, where the overlap function is smaller than a treshold (thres e.g. 0.05)</span>
 <span class="sd">    in that chunk take the miniumum and fill heights below</span>
 <span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    overlap : list</span>
+<span class="sd">        List of dicts including ovelap functions per cloud free period.</span>
+<span class="sd">    indexsearchmax :int</span>
+<span class="sd">        Maximum height index for the applying the fix.</span>
+<span class="sd">    thres : float</span>
+<span class="sd">        Threshold for searching for a stable low overlap value. Default is 0.05.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">grp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">overlap</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">channel</span><span class="p">,</span> <span class="n">vals</span> <span class="ow">in</span> <span class="n">grp</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">var</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="s1">&#39;olFunc&#39;</span><span class="p">][:</span><span class="n">indexsearchmax</span><span class="p">]</span>
@@ -471,7 +548,7 @@
                 <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">lt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">lt</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> 
                 <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">longestrun</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Fix not applied for channel </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2"> in cloud free group </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fix not applied for channel </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2"> in cloud free group </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
                 <span class="k">continue</span>
             <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">var</span><span class="p">[</span><span class="n">longestrun</span><span class="p">])</span> <span class="o">+</span> <span class="n">longestrun</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">vals</span><span class="p">[</span><span class="s1">&#39;olFunc&#39;</span><span class="p">][:</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="s1">&#39;olFunc&#39;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span></div>
@@ -479,7 +556,7 @@
 
 
 <div class="viewcode-block" id="hFullOLbyGrp">
-<a class="viewcode-back" href="../../../_autosummary/ppcpy.qc.overlapCor.html#ppcpy.qc.overlapCor.hFullOLbyGrp">[docs]</a>
+<a class="viewcode-back" href="../../../api_doc/qc.html#ppcpy.qc.overlapCor.hFullOLbyGrp">[docs]</a>
 <span class="k">def</span> <span class="nf">hFullOLbyGrp</span><span class="p">(</span><span class="n">clFreeGrps</span><span class="p">,</span> <span class="n">heightFullOverCor</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -530,7 +607,7 @@
 
   <p class="copyright">
     
-      © Copyright 2025 Andi Klamt, Martin Radenz and Håvard Buholdt.
+      © Copyright 2026 Andi Klamt, Martin Radenz and Håvard Buholdt.
       <br/>
     
   </p>

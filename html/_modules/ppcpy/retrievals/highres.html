@@ -316,13 +316,16 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">ppcpy.qc.transCor</span> <span class="k">as</span> <span class="nn">transCor</span>
 <span class="kn">import</span> <span class="nn">ppcpy.retrievals.depolarization</span> <span class="k">as</span> <span class="nn">depolarization</span>
+<span class="kn">import</span> <span class="nn">ppcpy.misc.helper</span> <span class="k">as</span> <span class="nn">helper</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp1d</span>
 
 
 <div class="viewcode-block" id="attbsc_2d">
 <a class="viewcode-back" href="../../../api_doc/retrievals.html#ppcpy.retrievals.highres.attbsc_2d">[docs]</a>
 <span class="k">def</span> <span class="nf">attbsc_2d</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">nr</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">collect_debug</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Attenuated Backscatter</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Attenuated Backscatter.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -332,7 +335,22 @@
 <span class="sd">        If Ture, calculate the attbsc for FR and NR channels. Default is True.</span>
 <span class="sd">    collect_debug : bool, optional</span>
 <span class="sd">        If True, collects debug information. Default is False.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_cube.retrievals_highres[f&quot;attBsc_{channel}&quot;] : ndarray</span>
+<span class="sd">        Time-height attenuated backscatter per channel.</span>
 <span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - If ´nr=True´ also yeild the attenuated backscatter of the near-range</span>
+<span class="sd">      channels.</span>
+<span class="sd">    - In addition to the standard far-range channels the function also yeilds</span>
+<span class="sd">      the attenuated backscatter of the overlap corrected far-range channels.</span>
+<span class="sd">      </span>
+<span class="sd">    ..TODO:: is it correct to transmission correct the overlap corrected signals</span>
+<span class="sd">             before calculating their attenuated backscatter? Are not the OL</span>
+<span class="sd">             signals already transmission corrected?</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">rgs</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span>
@@ -353,12 +371,10 @@
         <span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span>
             <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;sigTCor&#39;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)])</span>
         
-        <span class="k">if</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">LCused</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="k">pass</span>
-        <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">channel</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">LCused</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s1"> skipped at attbsc_2d&#39;</span><span class="p">)</span>
             <span class="k">continue</span>
-        <span class="n">attBsc</span> <span class="o">=</span> <span class="n">sig</span> <span class="o">*</span> <span class="n">ranges2d</span> <span class="o">/</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">LCused</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span>
+        <span class="n">attBsc</span> <span class="o">=</span> <span class="n">sig</span> <span class="o">*</span> <span class="n">ranges2d</span> <span class="o">/</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">LCused</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;LC&#39;</span><span class="p">]</span>
         <span class="n">attBsc</span><span class="p">[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;depCalMask&#39;</span><span class="p">],</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 
         <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;attBsc_</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">attBsc</span>
@@ -366,8 +382,8 @@
 
     <span class="c1"># experimental, the calibration constant requires the OL corrected signal</span>
     <span class="k">if</span> <span class="s1">&#39;sigOLCor&#39;</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exprimental, attenuated backscatter solution for </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">sigOLTCor</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">transCor</span><span class="o">.</span><span class="n">transCorGHK_cube</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s1">&#39;OLCor&#39;</span><span class="p">)</span> 
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exprimental, attenuated backscatter solution for </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">sigOLTCor</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">transCor</span><span class="o">.</span><span class="n">transCorGHK_cube</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s1">&#39;OLCor&#39;</span><span class="p">)</span>
         <span class="n">channels</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">355</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">532</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">1064</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">)]</span>
         <span class="k">for</span> <span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
             <span class="n">channel</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -376,13 +392,11 @@
             <span class="c1">#    data_cube.retrievals_highres[f&#39;sigOLCor&#39;][:, :, data_cube.gf(wv, t, tel)])</span>
             <span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">sigOLTCor</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)])</span>
 
-            <span class="k">if</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">LCused</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="k">pass</span>
-            <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">channel</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">LCused</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s1"> skipped at attbsc_2d OL&#39;</span><span class="p">)</span>
                 <span class="k">continue</span>
             
-            <span class="n">attBsc</span> <span class="o">=</span> <span class="n">sig</span> <span class="o">*</span> <span class="n">ranges2d</span> <span class="o">/</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">LCused</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span>
+            <span class="n">attBsc</span> <span class="o">=</span> <span class="n">sig</span> <span class="o">*</span> <span class="n">ranges2d</span> <span class="o">/</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">LCused</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;LC&#39;</span><span class="p">]</span>
             <span class="n">attBsc</span><span class="p">[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;depCalMask&#39;</span><span class="p">],</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 
             <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;attBsc_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">_OC&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">attBsc</span></div>
@@ -392,22 +406,28 @@
 <div class="viewcode-block" id="voldepol_2d">
 <a class="viewcode-back" href="../../../api_doc/retrievals.html#ppcpy.retrievals.highres.voldepol_2d">[docs]</a>
 <span class="k">def</span> <span class="nf">voldepol_2d</span><span class="p">(</span><span class="n">data_cube</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the volume depolarisation ratio</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the volume depolarisation ratio.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    data_cube : object</span>
-<span class="sd">        Main PicassoProc object</span>
+<span class="sd">        Main PicassoProc object.</span>
 <span class="sd">    </span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_cube.retrievals_highres[f&quot;voldepol_{wv}_total_{tel}&quot;] : ndarray</span>
+<span class="sd">        Time-hight volume depolarization ratio at wavelengths</span>
+<span class="sd">        353 nm, 532 nm, 1064 nm, and 532 nm DFOV.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">config_dict</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span>
 
     <span class="n">channels</span> <span class="o">=</span> <span class="p">[</span>
             <span class="p">(</span><span class="mi">532</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">355</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">1064</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">)]</span>
+    
     <span class="k">if</span> <span class="s1">&#39;532_DFOV&#39;</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">etaused</span><span class="p">:</span>
         <span class="n">channels</span> <span class="o">+=</span> <span class="p">[(</span><span class="mi">532</span><span class="p">,</span> <span class="s1">&#39;DFOV&#39;</span><span class="p">)]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;voldepol also for DFOV&#39;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;voldepol also for DFOV&quot;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">wv</span><span class="p">,</span> <span class="n">tel</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">tel</span> <span class="o">==</span> <span class="s1">&#39;DFOV&#39;</span><span class="p">:</span>
@@ -424,12 +444,90 @@
 
 
             <span class="n">vdr</span><span class="p">,</span> <span class="n">vdrStd</span> <span class="o">=</span> <span class="n">depolarization</span><span class="o">.</span><span class="n">calc_profile_vdr</span><span class="p">(</span>
-                <span class="n">sigt</span><span class="p">,</span> <span class="n">sigc</span><span class="p">,</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">][</span><span class="n">flagt</span><span class="p">],</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">][</span><span class="n">flagc</span><span class="p">],</span>
-                <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">][</span><span class="n">flagt</span><span class="p">],</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">][</span><span class="n">flagc</span><span class="p">],</span>
-                <span class="n">data_cube</span><span class="o">.</span><span class="n">etaused</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">],</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;voldepol_error_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">],</span>
-                <span class="n">window</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">sigt</span><span class="o">=</span><span class="n">sigt</span><span class="p">,</span> <span class="n">sigc</span><span class="o">=</span><span class="n">sigc</span><span class="p">,</span>
+                <span class="n">Gt</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">][</span><span class="n">flagt</span><span class="p">],</span> <span class="n">Gr</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">][</span><span class="n">flagc</span><span class="p">],</span>
+                <span class="n">Ht</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">][</span><span class="n">flagt</span><span class="p">],</span> <span class="n">Hr</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">][</span><span class="n">flagc</span><span class="p">],</span>
+                <span class="n">eta</span><span class="o">=</span><span class="n">data_cube</span><span class="o">.</span><span class="n">etaused</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;eta&#39;</span><span class="p">],</span>
+                <span class="n">voldepol_error</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;voldepol_error_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">],</span>
+                <span class="n">window</span><span class="o">=</span><span class="mi">1</span>
+            <span class="p">)</span>
             <span class="n">vdr</span><span class="p">[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;depCalMask&#39;</span><span class="p">],</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
             <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;voldepol_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">_total_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vdr</span></div>
+
+
+
+<div class="viewcode-block" id="wvmr_2d">
+<a class="viewcode-back" href="../../../api_doc/retrievals.html#ppcpy.retrievals.highres.wvmr_2d">[docs]</a>
+<span class="k">def</span> <span class="nf">wvmr_2d</span><span class="p">(</span><span class="n">data_cube</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Water Vapor Mixing Ratio.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_cube : object</span>
+<span class="sd">        Main PicassoProc object.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_cube.retrievals_highres[f&quot;wvmr_407_FR&quot;] : ndarray</span>
+<span class="sd">        Time-height water vapor mixing ratio at 407 nm FR.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    .. TODO:: Save highres wvmr data to .nc file</span>
+
+<span class="sd">    **History**</span>
+
+<span class="sd">    - 2026-09-11: First edition by Jakob</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">height</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span>
+    <span class="n">config_dict</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span>
+
+    <span class="n">tel</span> <span class="o">=</span> <span class="s1">&#39;FR&#39;</span> <span class="c1"># Only applied for far-range channels.</span>
+
+    <span class="c1"># interpolation</span>
+    <span class="n">molExt_387</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+        <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_2d</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[s]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+        <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_2d</span><span class="p">[</span><span class="s1">&#39;mExt_387&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)(</span>
+    <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;time64&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[s]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+    
+    <span class="n">molExt_407</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+        <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_2d</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[s]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+        <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_2d</span><span class="p">[</span><span class="s1">&#39;mExt_407&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)(</span>
+    <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;time64&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[s]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+
+    <span class="c1"># transmission correction</span>
+    <span class="n">molOD_387</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nancumsum</span><span class="p">(</span><span class="n">molExt_387</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="n">height</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">height</span><span class="p">))),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">molOD_407</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nancumsum</span><span class="p">(</span><span class="n">molExt_407</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="n">height</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">height</span><span class="p">))),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">trans_387</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">molOD_387</span><span class="p">)</span>
+    <span class="n">trans_407</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">molOD_407</span><span class="p">)</span>
+
+    <span class="c1"># apply smoothing (same as for quasi)</span>
+    <span class="n">flag387</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="s1">&#39;387&#39;</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="n">tel</span><span class="p">)</span>
+    <span class="n">flag407</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="s1">&#39;407&#39;</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="n">tel</span><span class="p">)</span>
+    <span class="n">sig387</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span>
+        <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;sigBGCor&#39;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="n">flag387</span><span class="p">])</span>
+    <span class="n">sig407</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span>
+        <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;sigBGCor&#39;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="n">flag407</span><span class="p">])</span>
+    
+    <span class="n">smooth_t</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;quasi_smooth_t&#39;</span><span class="p">])[</span><span class="n">flag407</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">smooth_h</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;quasi_smooth_h&#39;</span><span class="p">])[</span><span class="n">flag407</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">sig387</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">smooth2a</span><span class="p">(</span><span class="n">sig387</span><span class="p">,</span> <span class="n">smooth_t</span><span class="p">,</span> <span class="n">smooth_h</span><span class="p">)</span>
+    <span class="n">sig407</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">smooth2a</span><span class="p">(</span><span class="n">sig407</span><span class="p">,</span> <span class="n">smooth_t</span><span class="p">,</span> <span class="n">smooth_h</span><span class="p">)</span>
+
+    <span class="n">wvmr_raw</span> <span class="o">=</span> <span class="p">(</span><span class="n">sig407</span> <span class="o">/</span> <span class="n">sig387</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">trans_387</span> <span class="o">/</span> <span class="n">trans_407</span><span class="p">)</span>
+
+    <span class="c1"># apply wv_const</span>
+    <span class="n">wvmr</span> <span class="o">=</span> <span class="n">wvmr_raw</span> <span class="o">*</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">WVCused</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;407_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="s1">&#39;WVC&#39;</span><span class="p">]</span>
+
+    <span class="c1"># quality mask</span>
+    <span class="k">if</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;flagOnlyUseValidQuasiData&#39;</span><span class="p">]:</span>
+        <span class="n">quality_mask_387</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;quality_mask&#39;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="n">flag387</span><span class="p">])</span>
+        <span class="n">quality_mask_407</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;quality_mask&#39;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="n">flag407</span><span class="p">])</span>
+        <span class="n">wvmr</span><span class="p">[(</span><span class="n">quality_mask_387</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">quality_mask_407</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;wvmr_407_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wvmr</span></div>
 
 </pre></div>
 

@@ -787,6 +787,101 @@ differentiation filter for even number data. Signal Process.
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.uniform_filter_2d">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">uniform_filter_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">nan</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#uniform_filter_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.uniform_filter_2d" title="Link to this definition">#</a></dt>
+<dd><p>2 dimensional uniform smoothing filter.</p>
+<p>The regions affected by edge/padding effects are replaced with ´fill_val´.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">ndarray (time, height, channel, )</span></dt><dd><p>2 dimensional time-height signal(s) to be smooth.</p>
+</dd>
+<dt><strong>Nr</strong><span class="classifier">int</span></dt><dd><p>Smoothing window size along x-axis (rows).</p>
+</dd>
+<dt><strong>Nc</strong><span class="classifier">int</span></dt><dd><p>Smoothing window size along y-axis (columns).</p>
+</dd>
+<dt><strong>fill_val</strong><span class="classifier">float, optional</span></dt><dd><p>Value to be used for filling edges, in order to recreate the input
+dimension. Default is np.nan.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>out</strong><span class="classifier">ndarray (time, height, channel, )</span></dt><dd><p>Smoothed 2 dimensional time-height signal(s).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Invalid pixels are masked out and replaced with 0 during
+the convolution process to avoid propagation during smoothing
+process.</p></li>
+<li><p>scipy.ndimage.uniform_filter is used instead of alternative convolution
+based filters due to its increased efficiency.</p></li>
+</ul>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2026-07-17: first edition by Buholdt</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.misc.helper.moving_average_2d">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">moving_average_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#moving_average_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.moving_average_2d" title="Link to this definition">#</a></dt>
+<dd><p>2 dimensional uniform smoothing filter ala. 2d version of smooth(y, span, method=’moving’)
+in Matlab.</p>
+<p>This function uses a centered moving filter with dynamic size reduction at edges.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">ndarray (time, height, channel, )</span></dt><dd><p>2 dimensional time-height signal(s) to be smooth.</p>
+</dd>
+<dt><strong>Nr</strong><span class="classifier">int</span></dt><dd><p>Smoothing window size along x-axis (rows).</p>
+</dd>
+<dt><strong>Nc</strong><span class="classifier">int</span></dt><dd><p>Smoothing window size along y-axis (columns).</p>
+</dd>
+<dt><strong>sum</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, return moving sum results. Otherwise, return
+moving average results. Default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>out</strong><span class="classifier">ndarray (time, height, channel, )</span></dt><dd><p>Smoothed 2 dimensional time-height signal(s).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Invalid pixels are masked out and replaced with 0 during
+the convolution process to avoid propagation during smoothing
+process. However, unlike in ´uniform_filter_2d´ these pixels
+are not counted in the averaging procedure if ´sum=False´.</p></li>
+<li><p>By using <cite>sum=True</cite> the function will return the moving sum result
+instead of the moving average.</p></li>
+<li><p>scipy.ndimage.uniform_filter is used instead of alternative convolution
+based filters due to its increased efficiency.</p></li>
+</ul>
+<p>** History **</p>
+<ul class="simple">
+<li><p>2026-07-17: first edition by Buholdt</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<p>The output of the function for win = 5 in one dimension follows the following logic:
+out[0] = x[0]/1
+out[1] = (x[0] + x[1] + x[2])/3
+out[2] = (x[0] + x[1] + x[2] + x[3] + x[4])/5
+out[3] = (x[1] + x[2] + x[3] + x[4] + x[5])/5
+…
+out[-4] = (x[-6] + x[-5] + x[-4] + x[-3] + x[-2])/5
+out[-3] = (x[-5] + x[-4] + x[-3] + x[-2] + x[-1])/5
+out[-2] = (x[-3] + x[-2] + x[-1])/3
+out[-1] = x[-1]/1</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.misc.helper.mean_stable">
 <span class="sig-prename descclassname"><span class="pre">ppcpy.misc.helper.</span></span><span class="sig-name descname"><span class="pre">mean_stable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minBin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxBin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minRelStd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/misc/helper.html#mean_stable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.helper.mean_stable" title="Link to this definition">#</a></dt>
 <dd><p>Calculate the mean value of x based on the least fluctuated 
@@ -1809,18 +1904,102 @@ backscatter (mBsc) and molecular extinction (mExt) per wavelength.</p>
 <span id="ppcpy-misc-pollychanneltags"></span><h2>ppcpy.misc.pollyChannelTags<a class="headerlink" href="#module-ppcpy.misc.pollyChannelTags" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.misc.pollyChannelTags.pollyChannelTags">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.pollyChannelTags.</span></span><span class="sig-name descname"><span class="pre">pollyChannelTags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chTagsIn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">Channels</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/ppcpy/misc/pollyChannelTags.html#pollyChannelTags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.pollyChannelTags.pollyChannelTags" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.pollyChannelTags.</span></span><span class="sig-name descname"><span class="pre">pollyChannelTags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chTagsIn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">channel_attributes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/ppcpy/misc/pollyChannelTags.html#pollyChannelTags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.pollyChannelTags.pollyChannelTags" title="Link to this definition">#</a></dt>
+<dd><p>Assign channel tags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>chTagsIn</strong><span class="classifier">list</span></dt><dd><p>Original channel tags.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>chTagsOut_ls</strong><span class="classifier">list</span></dt><dd><p>Channel tags.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The key-word parameter <cite>flagRotRaman</cite> is a bit redundant
+after the change to the naming of rotational raman channels
+and may therefore be removed in the future.</p></li>
+</ul>
+<p>** History **</p>
+<ul class="simple">
+<li><p>2021-04-23: first edition by Zhenping</p></li>
+<li><p>xxxx-xx-xx: translated to python</p></li>
+<li><dl class="simple">
+<dt>2026-07-30: Changed to naming rotational Raman channel by</dt><dd><p>there wavelength and added channels FR-460 nm,
+FR-total-353 nm and FR-parallel-1064 nm.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.misc.pollyChannelTags.polly_config_channel_corrections">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.pollyChannelTags.</span></span><span class="sig-name descname"><span class="pre">polly_config_channel_corrections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chTagsOut_ls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polly_config_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/pollyChannelTags.html#polly_config_channel_corrections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.pollyChannelTags.polly_config_channel_corrections" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.pollyChannelTags.</span></span><span class="sig-name descname"><span class="pre">polly_config_channel_corrections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chTagsOut_ls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polly_config_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/misc/pollyChannelTags.html#polly_config_channel_corrections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.pollyChannelTags.polly_config_channel_corrections" title="Link to this definition">#</a></dt>
+<dd><p>Remove channel with tags ‘none’ as well as the respective config variables
+for these channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>chTagsOut_ls</strong><span class="classifier">list</span></dt><dd><p>List of channel tags.</p>
+</dd>
+<dt><strong>polly_config_dict</strong><span class="classifier">dict</span></dt><dd><p>Dictionary of polly config variables.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>chTagsOut_ls</strong><span class="classifier">list</span></dt><dd><p>List of channel tags without ‘none’ - channels.</p>
+</dd>
+<dt><strong>polly_config_dict</strong><span class="classifier">dict</span></dt><dd><p>Dictionary of polly config variables without the config variables of ‘none’ - channels.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.misc.pollyChannelTags.pollyChannelflags">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.pollyChannelTags.</span></span><span class="sig-name descname"><span class="pre">pollyChannelflags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_dict_length</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">Channels</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/misc/pollyChannelTags.html#pollyChannelflags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.pollyChannelTags.pollyChannelflags" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="ppcpy.misc.pollyChannelTags.pollyChannelFlags">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.misc.pollyChannelTags.</span></span><span class="sig-name descname"><span class="pre">pollyChannelFlags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_dict_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">channel_attributes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/ppcpy/misc/pollyChannelTags.html#pollyChannelFlags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.misc.pollyChannelTags.pollyChannelFlags" title="Link to this definition">#</a></dt>
+<dd><p>Assign channel flags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>channel_dict_length</strong><span class="classifier">int</span></dt><dd><p>Number of channels.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>flags</strong><span class="classifier">list</span></dt><dd><p>Nested list with boolean flag for each channel.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The key-word parameter <cite>flagRotRaman</cite> is a bit redundant
+after the change to the naming of rotational raman channels
+and may therefore be removed in the future.</p></li>
+</ul>
+<p>** History **</p>
+<ul class="simple">
+<li><p>2021-04-23: first edition by Zhenping</p></li>
+<li><p>xxxx-xx-xx: translated to python</p></li>
+<li><dl class="simple">
+<dt>2026-07-30: Changed to naming rotational Raman channel by</dt><dd><p>there wavelength and added channels FR-460 nm,
+FR-total-353 nm and FR-parallel-1064 nm.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
 
 </section>
 <section id="module-ppcpy.misc.startscreen">
@@ -1897,6 +2076,8 @@ backscatter (mBsc) and molecular extinction (mExt) per wavelength.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.uniform_filter"><code class="docutils literal notranslate"><span class="pre">uniform_filter()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.moving_average"><code class="docutils literal notranslate"><span class="pre">moving_average()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.savgol_filter"><code class="docutils literal notranslate"><span class="pre">savgol_filter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.uniform_filter_2d"><code class="docutils literal notranslate"><span class="pre">uniform_filter_2d()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.moving_average_2d"><code class="docutils literal notranslate"><span class="pre">moving_average_2d()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.mean_stable"><code class="docutils literal notranslate"><span class="pre">mean_stable()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.smooth2a"><code class="docutils literal notranslate"><span class="pre">smooth2a()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.helper.get_wv_pol_telescope_from_dictkeyname"><code class="docutils literal notranslate"><span class="pre">get_wv_pol_telescope_from_dictkeyname()</span></code></a></li>
@@ -1952,7 +2133,7 @@ backscatter (mBsc) and molecular extinction (mExt) per wavelength.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.misc.pollyChannelTags">ppcpy.misc.pollyChannelTags</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.pollyChannelTags.pollyChannelTags"><code class="docutils literal notranslate"><span class="pre">pollyChannelTags()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.pollyChannelTags.polly_config_channel_corrections"><code class="docutils literal notranslate"><span class="pre">polly_config_channel_corrections()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.pollyChannelTags.pollyChannelflags"><code class="docutils literal notranslate"><span class="pre">pollyChannelflags()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.misc.pollyChannelTags.pollyChannelFlags"><code class="docutils literal notranslate"><span class="pre">pollyChannelFlags()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.misc.startscreen">ppcpy.misc.startscreen</a><ul class="nav section-nav flex-column">

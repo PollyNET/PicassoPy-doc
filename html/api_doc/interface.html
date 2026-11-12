@@ -340,22 +340,58 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ppcpy.interface.picassoProc.</span></span><span class="sig-name descname"><span class="pre">PicassoProc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawdata_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polly_config_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">picasso_config_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc" title="Link to this definition">#</a></dt>
-<dd><p>Initialize the data_cube.</p>
+<dd><p>Picasso Processor.</p>
+<p>This class is responsible for perfoming the processing of PollyXT data.</p>
+<p>Initialize the PicassoProc object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>rawdata_dict</strong><span class="classifier">dict</span></dt><dd><p>The dict returned by readPollyRawData.readPollyRawData(filename=rawfile)</p>
+<dt><strong>rawdata_dict</strong><span class="classifier">dict</span></dt><dd><p>The dict returned by readPollyRawData.readPollyRawData(filename=rawfile).</p>
 </dd>
-<dt><strong>polly_config_dict</strong><span class="classifier">dict</span></dt><dd><p>The configuration specific to the specific polly loadConfigs.loadPollyConfig(polly_config_file_fullname, polly_default_config_file)</p>
+<dt><strong>polly_config_dict</strong><span class="classifier">dict</span></dt><dd><p>The configuration specific to the specific polly loadConfigs.loadPollyConfig(polly_config_file_fullname, polly_default_config_file).</p>
 </dd>
-<dt><strong>picasso_config_dict</strong><span class="classifier">dict</span></dt><dd><p>The general picasso config loadConfigs.loadPicassoConfig(args.picasso_config_file,picasso_default_config_file)</p>
+<dt><strong>picasso_config_dict</strong><span class="classifier">dict</span></dt><dd><p>The general picasso config loadConfigs.loadPicassoConfig(args.picasso_config_file,picasso_default_config_file).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>self.rawfile</strong><span class="classifier">str</span></dt><dd><p>Path to level0-file.</p>
+</dd>
+<dt><strong>self.rawdata_dict</strong><span class="classifier">dict</span></dt><dd><p>The input parameter <cite>rawdata_dict</cite>.</p>
+</dd>
+<dt><strong>self.polly_config_dict</strong><span class="classifier">dict</span></dt><dd><p>The input parameter <cite>polly_config_dict</cite>.</p>
+</dd>
+<dt><strong>self.picasso_config_dict</strong><span class="classifier">dict</span></dt><dd><p>The input parameter <cite>picasso_config_dict</cite>.</p>
+</dd>
+<dt><strong>self.device</strong><span class="classifier">str</span></dt><dd><p>Name of pollyXT device.</p>
+</dd>
+<dt><strong>self.location</strong><span class="classifier">…</span></dt><dd><p>Location of PollyXT device during the measurement.</p>
+</dd>
+<dt><strong>self.date</strong><span class="classifier">str</span></dt><dd><p>Measurement date.</p>
+</dd>
+<dt><strong>self.num_of_channels</strong><span class="classifier">int</span></dt><dd><p>Number of measurment channels.</p>
+</dd>
+<dt><strong>self.num_of_profiles</strong><span class="classifier">int</span></dt><dd><p>Number of profiles in the measurment (time-dimension).</p>
+</dd>
+<dt><strong>self.retrievals_highres</strong><span class="classifier">dict</span></dt><dd><p>Dictionary to store high resolution time, height data.</p>
+</dd>
+<dt><strong>self.retrievals_profile</strong><span class="classifier">dict</span></dt><dd><p>Dictionary to store profile date.</p>
+</dd>
+<dt><strong>self.retrievals_profile[‘avail_optical_profiles’]</strong><span class="classifier">list</span></dt><dd><p>Availabele optical profiles.</p>
+</dd>
+<dt><strong>self.pol_cali</strong><span class="classifier">dict</span></dt><dd><p>Dictionary to store polarization calibration constants.</p>
+</dd>
+<dt><strong>self.LC</strong><span class="classifier">dict</span></dt><dd><p>Dictionary to store lidar calibration constants.</p>
+</dd>
+<dt><strong>self.wv_cali</strong><span class="classifier">dict</span></dt><dd><p>Dictionary to store water vapor calibration constants.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
 <ul class="simple">
-<li><p>The <cite>polly_default_dict</cite> is not longer available as a separate variable, but is included into the <cite>polly_config_dict</cite></p></li>
+<li><p>The <cite>polly_default_dict</cite> is not longer available as a separate variable, but is included into the <cite>polly_config_dict</cite>.</p></li>
 </ul>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.counter">
@@ -364,13 +400,21 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.mdate_filename">
-<span class="sig-name descname"><span class="pre">mdate_filename</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.mdate_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.mdate_filename" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">mdate_filename</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.mdate_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.mdate_filename" title="Link to this definition">#</a></dt>
 <dd><p>Get the date from filename in YYYYMMDD.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>Measurement date.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.gf">
-<span class="sig-name descname"><span class="pre">gf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">telescope</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.gf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.gf" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">gf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">telescope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.gf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.gf" title="Link to this definition">#</a></dt>
 <dd><p>Get flag shorthand.</p>
 <p>i.e., the following two calls are equivalent
 <code class="docutils literal notranslate"><span class="pre">`</span>
@@ -382,17 +426,17 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>wavelength</strong></dt><dd><p>wavelength tag</p>
+<dt><strong>wavelength</strong><span class="classifier">float or int or str</span></dt><dd><p>Wavelength tag.</p>
 </dd>
-<dt><strong>meth</strong></dt><dd><p>method</p>
+<dt><strong>meth</strong><span class="classifier">str</span></dt><dd><p>Method type.</p>
 </dd>
-<dt><strong>telescope</strong></dt><dd><p>telescope</p>
+<dt><strong>telescope</strong><span class="classifier">str</span></dt><dd><p>Telescope type.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>array</dt><dd><p>with bool flag</p>
+<dt>ndarray</dt><dd><p>With bool flag</p>
 </dd>
 </dl>
 </dd>
@@ -401,14 +445,30 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.mdate_infile">
-<span class="sig-name descname"><span class="pre">mdate_infile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.mdate_infile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.mdate_infile" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">mdate_infile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.mdate_infile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.mdate_infile" title="Link to this definition">#</a></dt>
 <dd><p>First date in file as string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>Measurement date.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.check_for_correct_mshots">
-<span class="sig-name descname"><span class="pre">check_for_correct_mshots</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.check_for_correct_mshots"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.check_for_correct_mshots" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">check_for_correct_mshots</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.check_for_correct_mshots"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.check_for_correct_mshots" title="Link to this definition">#</a></dt>
 <dd><p>Check if mshots are more than 1.1 * laser_prf * deltatime or smaller 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>condition_check_matrix</strong><span class="classifier">ndarray</span></dt><dd><p>Boolean array. True for elements where the condition above holds, otherwise False.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -417,20 +477,63 @@
 <dd><p>Filter or correct the mshots (currently only logging).</p>
 <div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
-<p>that might be covered via the mcps conversion</p>
+<p>that might be covered via the mcps conversion
+–&gt; How exactly???</p>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.rawdata_dict</strong><span class="classifier">dict</span></dt><dd><p>With filtered or corrected enteries for timestamps where <cite>data_cube.check_for_correct_mshots()=True</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Now includes a first try for the function. I Do not know if it actually is needed yet.</p></li>
+</ul>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Not yet crosschecked with the matlab version.</p>
+</div>
+<p>** History **</p>
+<ul class="simple">
+<li><p>2026-06-24: Translated to python</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.mdate_consistency">
 <span class="sig-name descname"><span class="pre">mdate_consistency</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.mdate_consistency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.mdate_consistency" title="Link to this definition">#</a></dt>
 <dd><p>Check mdate consistency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>bool</dt><dd><p>True, if measurement date of file name equals
+that of in the file, otherwise False.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.reset_date_infile">
 <span class="sig-name descname"><span class="pre">reset_date_infile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.reset_date_infile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.reset_date_infile" title="Link to this definition">#</a></dt>
 <dd><p>Correct the date in the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.rawdata_dict[‘measurement_time’][‘var_data’]</strong><span class="classifier">ndarray</span></dt><dd><p>Updated ….</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id3">
+<p class="admonition-title">Todo</p>
+<p>Finish docstring.</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -455,9 +558,52 @@
 <span class="pre">data_cube.flag_355_total_FR</span>
 <span class="pre">`</span></code></p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt>self</dt><dd></dd>
+<dt><strong>self.retrievals_highres[‘channel’]</strong><span class="classifier">list</span></dt><dd><p>Updated channel tags.</p>
+</dd>
+<dt><strong>self.polly_config_dict[‘channelTags’]</strong><span class="classifier">list</span></dt><dd><p>updated channel tags.</p>
+</dd>
+<dt><strong>self.flag_355_total_FR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>355nm total FR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_355_cross_FR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>355nm cross FR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_355_parallel_FR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>355nm parallel FR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_355_total_NR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>355nm total NR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_387_total_FR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>387nm total FR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_387_total_NR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>387nm total NR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_407_total_FR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>407nm total FR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_407_total_NR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>407nm total NR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_532_total_FR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>532nm total FR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_532_cross_FR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>532nm cross FR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_532_parallel_FR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>532nm parallel FR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_532_total_NR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>532nm total NR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_532_cross_DFOV</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>532nm cross DFOV</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_532_rr_FR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>532nm rr FR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_607_total_FR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>607nm total FR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_607_total_NR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>607nm total NR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_1058_total_FR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>1058nm total FR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_1064_total_FR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>1064nm total FR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_1064_cross_FR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>1064nm cross FR</cite> else False.</p>
+</dd>
+<dt><strong>self.flag_1064_total_NR</strong><span class="classifier">ndarray</span></dt><dd><p>True if the channel is <cite>1064nm total NR</cite> else False.</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -466,100 +612,269 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.preprocessing">
 <span class="sig-name descname"><span class="pre">preprocessing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.preprocessing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.preprocessing" title="Link to this definition">#</a></dt>
-<dd><p>Preprocessing of Lidar data.</p>
-<dl class="simple">
-<dt>Including in the followin processes in order:</dt><dd><p>Dead time correction
-Background correction
-Range correction
-etc.</p>
+<dd><dl class="simple">
+<dt>Preprocessing of Lidar data. Includes the followin processes in order:</dt><dd><ol class="arabic simple">
+<li><p>Deadtime correction</p></li>
+<li><p>Background correction</p></li>
+<li><p>First-bin shift</p></li>
+<li><p>Mask for low-SNR</p></li>
+<li><p>Mask bins with laser shutter on</p></li>
+<li><p>Mask bins with fog</p></li>
+<li><p>Mask for depolarization-calibration process</p></li>
+<li><p>Range correction.</p></li>
+</ol>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>collect_debug</strong><span class="classifier">bool</span></dt><dd><p>If true, collect debug information. Default is False.</p>
+<dt><strong>collect_debug</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, collects debug information. Default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>self.retrievals_highres</strong><span class="classifier">dict</span></dt><dd><p>With preprocessed lidar data.</p>
 </dd>
 </dl>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id4">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>This is just a first draft for a docstring. Improve it. There is more processes and outputs of the function.</p></li>
+<li><p>Also go over the inputs and see if all of them are actually needed.</p></li>
+</ul>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.SaturationDetect">
 <span class="sig-name descname"><span class="pre">SaturationDetect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.SaturationDetect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.SaturationDetect" title="Link to this definition">#</a></dt>
 <dd><p>Saturation Detection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.flagSaturation</strong><span class="classifier">ndarray</span></dt><dd><p>1 dimensional temporal boolean array per channel.
+True if the channel is saturated, else False.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.polarizationCaliD90">
-<span class="sig-name descname"><span class="pre">polarizationCaliD90</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.polarizationCaliD90"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.polarizationCaliD90" title="Link to this definition">#</a></dt>
-<dd><p>Calibration with the Delta-90 method.</p>
+<span class="sig-name descname"><span class="pre">polarizationCaliD90</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">defaults</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.polarizationCaliD90"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.polarizationCaliD90" title="Link to this definition">#</a></dt>
+<dd><p>Calculate/Estimate and select optimal Depol calibration constants with
+the Delta-90° method.</p>
+<p>The function calculates/estimates Depol calibration constants (DCs) through
+the Delta-90° method. If configured, DCs from a defined database are also loaded.
+The optimal DC per channel is chosen as the DC with the lowest relative error
+from both the calculated/estimated and loaded DCs. If no DC is found for a
+channel its default value is taken.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>db_path</strong><span class="classifier">str</span></dt><dd><p>Path to database to read DC values from in case none
-are successfully retrieved. Default is None.</p>
+<dt><strong>db_path</strong><span class="classifier">str, optional</span></dt><dd><p>Path to calibration constant database. If <code class="docutils literal notranslate"><span class="pre">db_path</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>
+and config variable <code class="docutils literal notranslate"><span class="pre">flagUsePreviousDepolCali</span></code> is enabled,
+a standard path is constructed from the config variable
+<code class="docutils literal notranslate"><span class="pre">calibrationDB</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd>
-<dt><strong>The stuff that starts here in the matlab version</strong></dt><dd></dd>
-<dt><strong>https://github.com/PollyNET/Pollynet_Processing_Chain/blob/5efd7d35596c67ef8672f5948e47d1f9d46ab867/lib/interface/picassoProcV3.m#L442</strong></dt><dd></dd>
+<dt><strong>collect_debug</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, collects debug information. Default is False.</p>
+</dd>
+<dt><strong>polCaliEta355</strong><span class="classifier">float, optional</span></dt><dd><p>Default depol calibration constant at 355 nm.</p>
+</dd>
+<dt><strong>polCaliEtaStd355</strong><span class="classifier">float, optional</span></dt><dd><p>Default depol calibration constant error at 355 nm.</p>
+</dd>
+<dt><strong>polCaliEta532</strong><span class="classifier">float, optional</span></dt><dd><p>Default depol calibration constant at 532 nm.</p>
+</dd>
+<dt><strong>polCaliEtaStd532</strong><span class="classifier">float, optional</span></dt><dd><p>Default depol calibration constant error at 532 nm.</p>
+</dd>
+<dt><strong>polCaliEta1064</strong><span class="classifier">float, optional</span></dt><dd><p>Default depol calibration constant at 1064 nm.</p>
+</dd>
+<dt><strong>polCaliEtaStd1064</strong><span class="classifier">float, optional</span></dt><dd><p>Default depol calibration constant error at 1064 nm.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>self.pol_cali[‘D90’ &amp; ‘D90_db’]</strong><span class="classifier">dict</span></dt><dd><p>All retrieved and read delta-90° depol calibration constants
+and retrieval information.</p>
+</dd>
+<dt><strong>self.pol_cali[‘default’]</strong><span class="classifier">dict</span></dt><dd><p>Default depol calibration constants and retrieval information.</p>
+</dd>
+<dt><strong>self.etaused</strong><span class="classifier">dict</span></dt><dd><p>The optimal depol calibration constants per channel.</p>
+</dd>
 </dl>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>The function uses the following configuration flags:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">flagLCCalibration</span></code>: Enables or disables calculation of Depol</dt><dd><p>calibration constants through Delta-90° method.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">flagUsePreviousLC</span></code>: Enables or disables loading previously determined</dt><dd><p>Depol calibration constants from the calibration
+database.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>All calibration constants are stored in <code class="docutils literal notranslate"><span class="pre">self.pol_cali</span></code>.
+The selected optimal constants are stored in <code class="docutils literal notranslate"><span class="pre">self.etaused</span></code>.</p>
+<p>Default values are by standard taken from their config variable but can be
+overwritten if passed as an input to this function.</p>
+<p>The stuff that starts here in the matlab version
+<a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/5efd7d35596c67ef8672f5948e47d1f9d46ab867/lib/interface/picassoProcV3.m#L442">PollyNET/Pollynet_Processing_Chain</a></p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>xxxx-xx-xx: First edition by …</p></li>
+<li><dl class="simple">
+<dt>2026-10-08: Consider retrieved and database constants equally</dt><dd><p>and added default calibration constants.</p>
+</dd>
+</dl>
+</li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.cloudScreen">
 <span class="sig-name descname"><span class="pre">cloudScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.cloudScreen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.cloudScreen" title="Link to this definition">#</a></dt>
-<dd><p>Basic cloud screenting.</p>
-<p><a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/b3b8ec7726b75d9db6287dcba29459587ca34491/lib/interface/picassoProcV3.m#L663">PollyNET/Pollynet_Processing_Chain</a></p>
+<dd><p>Basic cloud screening.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>collect_debug</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, collects debug information. Default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>self.flagCloudFree</strong><span class="classifier">ndarray</span></dt><dd><p>1 dimensional temporal boolean array. 0 = cloudy, 1 = cloud free.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Matlab equivalent code at:
+<a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/b3b8ec7726b75d9db6287dcba29459587ca34491/lib/interface/picassoProcV3.m#L663">PollyNET/Pollynet_Processing_Chain</a></p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.genFlagValPrf">
+<span class="sig-name descname"><span class="pre">genFlagValPrf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.genFlagValPrf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.genFlagValPrf" title="Link to this definition">#</a></dt>
+<dd><p>combine the cloudFree, depCal, shutterOn and fog masks to obtain valid profiles</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.cloudFreeSeg">
 <span class="sig-name descname"><span class="pre">cloudFreeSeg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.cloudFreeSeg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.cloudFreeSeg" title="Link to this definition">#</a></dt>
 <dd><p>Cloud free profile segmentation.</p>
-<p><a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/b3b8ec7726b75d9db6287dcba29459587ca34491/lib/interface/picassoProcV3.m#L707">PollyNET/Pollynet_Processing_Chain</a></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_cube</span><span class="o">.</span><span class="n">clFreGrps</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">[</span><span class="mi">35</span><span class="p">,</span><span class="mi">300</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">2500</span><span class="p">,</span><span class="mi">2800</span><span class="p">]</span>
-<span class="p">]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.aggregate_profiles">
-<span class="sig-name descname"><span class="pre">aggregate_profiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.aggregate_profiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.aggregate_profiles" title="Link to this definition">#</a></dt>
-<dd><p>Aggregate highres profiles over cloud free segments.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>var</strong><span class="classifier">str</span></dt><dd><p>Name of variables to aggregate.
-Default is <cite>RCS</cite>, <cite>sigBGCor</cite>, and <cite>BG</cite>.</p>
+<dt><strong>self.clFreeGrps</strong><span class="classifier">nested list</span></dt><dd><p>List with start, stop index of each cloud free segement.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<div class="admonition-todo admonition" id="id2">
+<ul class="simple">
+<li><p>The matlab eqvivalent code starts here:
+<a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/b3b8ec7726b75d9db6287dcba29459587ca34491/lib/interface/picassoProcV3.m#L707">PollyNET/Pollynet_Processing_Chain</a></p></li>
+</ul>
+<div class="admonition-todo admonition" id="id5">
 <p class="admonition-title">Todo</p>
-<p>Decide on a consistent way for doing the aggregation, do not mix mean and sum</p>
+<p>Write a more extensive example for the docstring.</p>
 </div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.aggregate_profiles">
+<span class="sig-name descname"><span class="pre">aggregate_profiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">list</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func=&lt;function</span> <span class="pre">nansum&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flagVal:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.aggregate_profiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.aggregate_profiles" title="Link to this definition">#</a></dt>
+<dd><p>Aggregate highres profiles over cloud free segments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>var</strong><span class="classifier">str or array_like</span></dt><dd><p>Name(s) of variable to aggregate. Default is None.</p>
+</dd>
+<dt><strong>func</strong><span class="classifier">function, optional</span></dt><dd><p>Function to do the aggregation (mean, sum, median, etc.). Default is np.nansum.</p>
+</dd>
+<dt><strong>flagVal</strong><span class="classifier">None | bool | np.ndarray</span></dt><dd><p>cut out single invalid profiles form <cite>clFreeGrps</cite>. If <cite>True</cite> the <cite>data_cube.flagValPrf</cite> is used. 
+Individual array can also be supplied.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>self.retrievals_profiles[`var`]</strong><span class="classifier">ndarray</span></dt><dd><p>Aggregated profile.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The variable(s) <cite>var</cite> need to be stored in the dictionary data_cube.retrievals_highres.
+All aggregated profiles will be stored in the dictionary data_cube.retrievals_profiles under the
+the same key.</p></li>
+<li><p>If var is None. The following variables will be aggregated:
+<cite>sigBGCor</cite>, <cite>BG</cite>, <cite>RCS</cite>, <cite>mShots</cite>, <cite>mask387Off</cite>, <cite>mask607Off</cite>, <cite>mask407Off</cite></p></li>
+<li><p><cite>func=np.nansum</cite> is needed for correct SNR calculations.</p></li>
+</ul>
+<p>** History **</p>
+<ul class="simple">
+<li><p>xxxx-xx-xx: First edition by …</p></li>
+<li><dl class="simple">
+<dt>2026-07-28: Added option to aggregate multiple variables in the same call.</dt><dd><p>And corrected the aggregation for PCR-signals like <cite>RCS</cite>.</p>
+</dd>
+</dl>
+</li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.loadMeteo">
 <span class="sig-name descname"><span class="pre">loadMeteo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.loadMeteo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.loadMeteo" title="Link to this definition">#</a></dt>
 <dd><p>Load meteorological data.</p>
+<p>Meteorological data like;
+- Temperatue
+- Pressure
+- Relative Humidity
+- Spesific Humidity</p>
+<p>is read form the cloudnet ECMWF file specified by the config variable;
+- <cite>meteorDataSource</cite>
+- <cite>meteo_folder</cite>
+- <cite>meteo_file</cite></p>
+<p>and saved in the dataFrame <cite>self.met</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.met</strong><span class="classifier">object</span></dt><dd><p>Object to handle meterological data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Only <cite>meteorDataSource = ‘nc_cloudnet’</cite> is currently suported.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.loadAOD">
 <span class="sig-name descname"><span class="pre">loadAOD</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.loadAOD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.loadAOD" title="Link to this definition">#</a></dt>
-<dd><p>Load the AOD from a co-located fotometer</p>
-<div class="admonition-todo admonition" id="id3">
+<dd><p>Load the AOD from a co-located fotometer.</p>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id6">
 <p class="admonition-title">Todo</p>
-<p>Not yet implemented!</p>
+<p>Implement the option to load AOD from co-located fotometer.</p>
 </div>
 </dd></dl>
 
@@ -569,6 +884,93 @@ Default is <cite>RCS</cite>, <cite>sigBGCor</cite>, and <cite>BG</cite>.</p>
 <dd><p>Calculate the molecular scattering for the cloud free periods
 with the strategy of first averaging the met data and then
 calculating the rayleigh scattering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.mol_profiles</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing calculated molecular profiles for each channel.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id7">
+<p class="admonition-title">Todo</p>
+<p>How are these molecular profiles aggregated (mean or sum??).</p>
+</div>
+<div class="admonition-todo admonition" id="id8">
+<p class="admonition-title">Todo</p>
+<p>Idea: As we already need the highres molecular signal for the WV-product. Would it not make more sens to
+retrieve this first and then use the aggregate_profile() function to get the cloud free profiles?
+–&gt; This only makes sens if we can directly retrieve the highres molecular signal which I dout we can.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.watervaporCali">
+<span class="sig-name descname"><span class="pre">watervaporCali</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">defaults</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.watervaporCali"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.watervaporCali" title="Link to this definition">#</a></dt>
+<dd><p>Perform water vapor calibration on aggregated profiles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>db_path</strong><span class="classifier">str, optional</span></dt><dd><p>Path to calibration constant database. If <code class="docutils literal notranslate"><span class="pre">db_path</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>
+and config variable <code class="docutils literal notranslate"><span class="pre">flagUsePreviousWVconst</span></code> is enabled,
+a standard path is constructed from the config variable
+<code class="docutils literal notranslate"><span class="pre">calibrationDB</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt><strong>collect_debug</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, collects debug information. Default is False.</p>
+</dd>
+<dt><strong>wvconst</strong><span class="classifier">float</span></dt><dd><p>Default water vapor calibration constant.</p>
+</dd>
+<dt><strong>wvconstStd</strong><span class="classifier">float</span></dt><dd><p>Default water vapor calibration constant error.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>self.wv_cali[‘model_profile’ &amp; ‘model_profile_db’]</strong><span class="classifier">dict</span></dt><dd><p>All retrieved and read water vapor calibration constants
+and retrieval information from model data with profile method.</p>
+</dd>
+<dt><strong>self.wv_cali[‘model_regression’ &amp; ‘model_regression_db’]</strong><span class="classifier">dict</span></dt><dd><p>All retrieved and read water vapor calibration constants
+and retrieval information from model data with regression method.</p>
+</dd>
+<dt><strong>self.wv_cali[‘default’]</strong><span class="classifier">dict</span></dt><dd><p>Default depol calibration constants and retrieval information.</p>
+</dd>
+<dt><strong>self.WVCused</strong><span class="classifier">dict</span></dt><dd><p>The optimal depol calibration constants.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The function uses the following configuration flags:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">flagWVCalibration</span></code>: Enables or disables calculation of water vapor</dt><dd><p>calibration constants through Delta-90° method.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">flagUsePreviousWVconst</span></code>: Enables or disables loading previously determined</dt><dd><p>water vapor calibration constants from the calibration
+database.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>All calibration constants are stored in <code class="docutils literal notranslate"><span class="pre">self.wv_cali</span></code>.
+The selected optimal constants are stored in <code class="docutils literal notranslate"><span class="pre">self.WVCused</span></code>.</p>
+<p>Default values are by standard taken from their config variable but can be
+overwritten if passed as an input to this function.</p>
+<p>At the moment, only calibration results form the model regression method is 
+considerd when selecting the optimal constant. There currently exist no option
+to select the best WVC over all calibration instruments and methods.</p>
+<div class="admonition-todo admonition" id="id9">
+<p class="admonition-title">Todo</p>
+<p>How to select best WVC over all calibration instruments and methods.</p>
+</div>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>xxxx-xx-xx: First edition by …</p></li>
+<li><p>2026-09-11: Implemented in python by Jakob.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
@@ -578,7 +980,13 @@ calculating the rayleigh scattering.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>collect_debug</strong><span class="classifier">bool</span></dt><dd><p>If true, collects debug information. Default is False.</p>
+<dt><strong>collect_debug</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, collects debug information. Default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>self.retrievals_profiles[‘refH’][idx][ch]</strong><span class="classifier">dict</span></dt><dd><p>Reference height information for cloud free segment <cite>idx</cite> and channel <cite>ch</cite>.</p>
 </dd>
 </dl>
 </dd>
@@ -587,7 +995,7 @@ calculating the rayleigh scattering.</p>
 <ul class="simple">
 <li><p>Direct translation from the matlab code. There might be noticeable numerical discrepancies (especially in the residual)
 seemed to work ok for 532, 1064, but with issues for 355.</p></li>
-<li><p>The Douglas Peucker algorithm works fine (gives the same result as the Matlab version). However, due the numerical discrepancies
+<li><p>The Douglas Peucker algorithm works fine (gives the same result as the Matlab version). However, due to the numerical discrepancies
 In the residuals of the fit algorithm sometimes different refH segments are chosen.</p></li>
 </ul>
 </dd></dl>
@@ -596,38 +1004,106 @@ In the residuals of the fit algorithm sometimes different refH segments are chos
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.polarizationCaliMol">
 <span class="sig-name descname"><span class="pre">polarizationCaliMol</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.polarizationCaliMol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.polarizationCaliMol" title="Link to this definition">#</a></dt>
 <dd><p>Calibration with molecular signal in reference height.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.pol_cali[‘mol’][ch][idx]</strong><span class="classifier">dict</span></dt><dd><p>Molecular depol calibration constants and retrieval information for 
+channel <cite>ch</cite> and cloud free index <cite>idx</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Calibration is only performed if the config variable <cite>flagMolDepolCali = True</cite>.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.transCor">
 <span class="sig-name descname"><span class="pre">transCor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.transCor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.transCor" title="Link to this definition">#</a></dt>
-<dd><p>GHK-Transmission correction</p>
-<div class="admonition-todo admonition" id="id4">
-<p class="admonition-title">Todo</p>
-<dl class="simple">
-<dt>flagTransCor = True:</dt><dd><p>Fix the GHK - Transmission correction</p>
-</dd>
-<dt>flagTransCor = False:</dt><dd><p>Check if it is correct to use the BG corrected signal and find a better solution.
-It is a bit confusing to overwrite the signal as it is called sigTCor but actually is sigBGCor
-Like storing a dedicated signal dict to be used throuhot the processing, the dictionary could
-have elements like signal (sig), background (bg), and name. which we could overwrite each time 
-a new correction is made. And by checking the name of the signal (TCor, BGCor) you can find out
-which signal it is.</p>
+<dd><p>Perform GHK-transmission correction on the signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.retrievals_highres</strong><span class="classifier">dict</span></dt><dd><p>With corrected signal.</p>
 </dd>
 </dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>if the config entry <cite>flagTransCor = False</cite>, no GHK transmission correction
+will be done and the background corrected signal will replace the transmission
+corrected signal for the rest of the processing steps.</p></li>
+</ul>
+<div class="admonition-todo admonition" id="id10">
+<p class="admonition-title">Todo</p>
+<p>Overwriting <cite>sigTCor</cite> with <cite>sigBGCor</cite> when <cite>flagTransCor = False</cite> can
+cause confiusion among useres. It would be more intutive to not have
+a <cite>sigTCor</cite> variable in this case. However, this requiers re… the
+rest of the processing chain.</p>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.retrievalKlett">
-<span class="sig-name descname"><span class="pre">retrievalKlett</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.retrievalKlett"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.retrievalKlett" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">retrievalKlett</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.retrievalKlett"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.retrievalKlett" title="Link to this definition">#</a></dt>
 <dd><p>Apply Klett retrieval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>oc</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, apply the retrieval on the overlap corrected profiles. The outupt will then also be saved under
+the key ‘klett_OC’ insted of ‘klett’. Default is False.</p>
+</dd>
+<dt><strong>nr</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, apply the retrieval on the near range profiles as well as the far range profiles. Default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>self.retrievals_profile[‘klett’ or ‘klett_OC’][idx][ch]</strong><span class="classifier">dict</span></dt><dd><p>Klett retrieved optical profiles and retrieval information
+for cloud free segment <cite>idx</cite> and channel <cite>ch</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The retrieval is by default applied on the FR profiles. if <cite>nr=True</cite> the retrieval will be applied both on
+the NR and FR profiles.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.retrievalRaman">
-<span class="sig-name descname"><span class="pre">retrievalRaman</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.retrievalRaman"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.retrievalRaman" title="Link to this definition">#</a></dt>
-<dd><p>Apply Raman retrieval (nighttime only).</p>
+<span class="sig-name descname"><span class="pre">retrievalRaman</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.retrievalRaman"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.retrievalRaman" title="Link to this definition">#</a></dt>
+<dd><p>Apply raman retrieval (nighttime only).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>oc</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, apply the retrieval on the overlap corrected profiles. The outupt will then also be saved under
+the key ‘raman_OC’ insted of ‘raman’. Default is False.</p>
+</dd>
+<dt><strong>nr</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, apply the retrieval on the near range profiles as well as the far range profiles. Default is False.</p>
+</dd>
+<dt><strong>collect_debug</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, collects debug information. Default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>self.retrievals_profile[‘raman’ or ‘raman_OC’][idx][ch]</strong><span class="classifier">dict</span></dt><dd><p>Raman retrieved optical profiles and retrieval information
+for cloud free segment <cite>idx</cite> and channel <cite>ch</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The retrieval is by default applied on the FR profiles. if <cite>nr=True</cite> the retrieval will be applied both on
+the NR and FR profiles.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
@@ -637,7 +1113,14 @@ which signal it is.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>collect_debug</strong><span class="classifier">bool</span></dt><dd><p>If true, collects debug information. Default is False.</p>
+<dt><strong>collect_debug</strong><span class="classifier">str, optional</span></dt><dd><p>If true, collects debug information. Default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>self.retrievals_profile[‘overlap’][‘frnr’][idx][ch]</strong><span class="classifier">list of dicts</span></dt><dd><p>Far-range-Near-range retrieved overlap function and retrieval
+information for cloud free segment <cite>idx</cite> and channel <cite>ch</cite>.</p>
 </dd>
 </dl>
 </dd>
@@ -645,92 +1128,281 @@ which signal it is.</p>
 <p class="rubric">Notes</p>
 <ul class="simple">
 <li><p>Different to the matlab version, where an average over all cloud
-free periods is taken, it is done here per cloud free segment</p></li>
+free periods is taken. Here the overlap is applied per cloud free period.</p></li>
 </ul>
-<div class="admonition-todo admonition" id="id5">
-<p class="admonition-title">Todo</p>
-<p>The data structure of retrievals_profile[‘overlap’] differs from
-retrievals_profile[‘raman’]!</p>
-</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.overlapFixLowestBins">
 <span class="sig-name descname"><span class="pre">overlapFixLowestBins</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.overlapFixLowestBins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.overlapFixLowestBins" title="Link to this definition">#</a></dt>
 <dd><p>The lowest bins are affected by stange near range effects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.retrievals_profile[‘overlap’][‘frnr’][idx][ch][‘olFunc’]</strong><span class="classifier">ndarray</span></dt><dd><p>FRNR retrieved overlap func with subdued near-range effect.</p>
+</dd>
+<dt><strong>self.retrievals_profile[‘overlap’][‘raman’][idx][ch][‘olFunc’]</strong><span class="classifier">ndarray</span></dt><dd><p>Raman retrieved overlap func with subdued near-range effect.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.overlapCor">
 <span class="sig-name descname"><span class="pre">overlapCor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.overlapCor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.overlapCor" title="Link to this definition">#</a></dt>
-<dd><p>Overlap correction</p>
-<p>the overlap correction is implemented differently to the matlab version
+<dd><p>Overlap correction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.retrieval_highres</strong><span class="classifier">dict</span></dt><dd><p>With overlap corrected signal and retrieval information.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>the overlap correction is implemented differently to the matlab version
 first a 2d (time, height) correction array is constructed then it is applied.
-In future this will allow for time varing overlap functions</p>
+In future this will allow for time varing overlap functions</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.calcDepol">
 <span class="sig-name descname"><span class="pre">calcDepol</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.calcDepol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.calcDepol" title="Link to this definition">#</a></dt>
 <dd><p>Calculate the volume depol and the particle depol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.retrievals_profiles[sig][idx][ch]</strong><span class="classifier">dict</span></dt><dd><p>Volume and particle depolarization profiles and retrieval info
+for signal type <cite>sig</cite> for cloud free segment <cite>idx</cite> and channel <cite>ch</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>This retrieval is done for all avaiable optical profiles.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.estQualityMask">
 <span class="sig-name descname"><span class="pre">estQualityMask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.estQualityMask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.estQualityMask" title="Link to this definition">#</a></dt>
 <dd><p>Estimate the quality mask.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.retrievals_highres[‘quality_mask’]</strong><span class="classifier">ndarray</span></dt><dd><dl class="simple">
+<dt>High resolution (time, height) quality masks per channel.</dt><dd><p>0 : good data
+1 : low-SNR data
+2 : depolarization calibration periods
+3 : shutter on
+4 : fog
+5 : saturated (NEW)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>If the config variables <cite>flagUseImprovedSNR=True</cite>, SNR and the lowSNRMask are
+recalculated with quasi-smoothed signals to improve data quality.</p></li>
+</ul>
+<p>** History **</p>
+<ul class="simple">
+<li><p>xxxx-xx-xx: First edition by …</p></li>
+<li><p>2026-07-17: Added quasi-smoothed SNR and lowSNRMask.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.Angstroem">
 <span class="sig-name descname"><span class="pre">Angstroem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.Angstroem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.Angstroem" title="Link to this definition">#</a></dt>
 <dd><p>Calculate the angstrom exponent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.retrievals_profiles[sig][idx][ch]</strong><span class="classifier">dict</span></dt><dd><p>Volume and particle depolarization profiles and retrieval info
+for signal type <cite>sig</cite> for cloud free segment <cite>idx</cite> and channel <cite>ch</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>AE_{prod}_{wv1}_{wv2} = log(prod_wv1 / prod_wv2) / log(wv2 / wv1)</p></li>
+<li><p>This retrieval is done for all avaiable optical profiles.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.LidarCalibration">
-<span class="sig-name descname"><span class="pre">LidarCalibration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.LidarCalibration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.LidarCalibration" title="Link to this definition">#</a></dt>
-<dd><p>calculate the lidar constant</p>
-<div class="admonition-todo admonition" id="id6">
-<p class="admonition-title">Todo</p>
-<p>Find out how we prioritise raman, klett, and database retrieved LC…</p>
-</div>
+<span class="sig-name descname"><span class="pre">LidarCalibration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">defaults</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.LidarCalibration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.LidarCalibration" title="Link to this definition">#</a></dt>
+<dd><p>Calculate/Estimate and select optimal lidar calibration constants.</p>
+<p>The function calculates/estimates lidar calibration constants (LCs) from
+both klett and Raman retrieved optical profiles. If configured, LCs from
+a defined database are also loaded. The optimal LC per channel is chosen as
+the LC with the lowest relative error per channel form both the
+calculated/estimated and loaded LCs. If no LC is found for a channel its
+default value is taken.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>db_path</strong><span class="classifier">str or Path, optional</span></dt><dd><p>Path to calibration constant database. If <code class="docutils literal notranslate"><span class="pre">db_path</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>
+and config variable <code class="docutils literal notranslate"><span class="pre">flagUsePreviousLC</span></code> is enabled, a standard
+path is constructed from the config variable <code class="docutils literal notranslate"><span class="pre">calibrationDB</span></code>.
+Default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt><strong>collect_debug</strong><span class="classifier">bool, optional</span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, collects debug information. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt><strong>LC</strong><span class="classifier">list, optional</span></dt><dd><p>Default Lidar constant value per channel.</p>
+</dd>
+<dt><strong>LCStd</strong><span class="classifier">list, optional</span></dt><dd><p>Default Lidar constant error per channel.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>self.LC[‘klett’ &amp; ‘klett_db’]</strong><span class="classifier">dict</span></dt><dd><p>All retrieved and read Klett lidar calibration constants
+and retrieval information.</p>
+</dd>
+<dt><strong>self.LC[‘raman’ &amp; ‘raman_db’]</strong><span class="classifier">dict</span></dt><dd><p>All retrieved and read Raman lidar calibration constants
+and retrieval information.</p>
+</dd>
+<dt><strong>self.LC[‘default’]</strong><span class="classifier">dict</span></dt><dd><p>Default lidar calibration constants and retrieval information.</p>
+</dd>
+<dt><strong>self.LCused</strong><span class="classifier">dict</span></dt><dd><p>The optimal lidar calibration constant per channel.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The function uses the following configuration flags:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">flagLCCalibration</span></code>: Enables or disables calculation of Lidar</dt><dd><p>calibration constants from klett and Raman retrieval.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">flagUsePreviousLC</span></code>: Enables or disables loading previously determined</dt><dd><p>lidar calibration constants from the calibration
+database.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>All calibration constants are stored in <code class="docutils literal notranslate"><span class="pre">self.LC</span></code>.
+The selected optimal constants are stored in <code class="docutils literal notranslate"><span class="pre">self.LCused</span></code>.</p>
+<p>Default values are by standard taken from their config variable but can be
+overwritten if passed as an input to this function.</p>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>xxxx-xx-xx: First edition by …</p></li>
+<li><dl class="simple">
+<dt>2026-10-08: Consider retrieved and database constants equally</dt><dd><p>and added default calibration constants.</p>
+</dd>
+</dl>
+</li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.attBsc_volDepol">
 <span class="sig-name descname"><span class="pre">attBsc_volDepol</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.attBsc_volDepol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.attBsc_volDepol" title="Link to this definition">#</a></dt>
-<dd><p>highres attBsc and voldepol in 2D.</p>
+<dd><p>High resolution attenuated backscatter and volume depolarization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.retrievals_highres</strong><span class="classifier">dict</span></dt><dd><p>With attenuated backscatter.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.molecularHighres">
 <span class="sig-name descname"><span class="pre">molecularHighres</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.molecularHighres"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.molecularHighres" title="Link to this definition">#</a></dt>
-<dd><p>calculate the molecular signal for the 2d high resolution.</p>
+<dd><p>Calculate the molecular signal for the 2d high resolution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.mol_2d</strong><span class="classifier">xr.Dataset</span></dt><dd><p>xarray dataset with dimensions time and height and variables molecular
+backscatter (mBsc) and molecular extinction (mExt) per wavelength.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>mol_2d’s time dimension differe from the time dimension of the measurement.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.wvmr">
+<span class="sig-name descname"><span class="pre">wvmr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.wvmr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.wvmr" title="Link to this definition">#</a></dt>
+<dd><p>High resolution water vapor mixing ratio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.retrieval_highres</strong><span class="classifier">dict</span></dt><dd><p>With water vapor mixing rato.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.quasiV1">
 <span class="sig-name descname"><span class="pre">quasiV1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.quasiV1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.quasiV1" title="Link to this definition">#</a></dt>
-<dd><p>QuasiV1 retrivals and target categorisation.</p>
+<dd><p>QuasiV1 retrievals and target categorisation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.retrieval_highres</strong><span class="classifier">dict</span></dt><dd><p>With high resolution Quasi version 1 products as well as Target categorization.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>QuasiV1 products uses Klett-retrieved products.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.quasiV2">
 <span class="sig-name descname"><span class="pre">quasiV2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.quasiV2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.quasiV2" title="Link to this definition">#</a></dt>
-<dd><p>QuasiV2 retrivals and target categorisation.</p>
+<dd><p>QuasiV2 retrievals and target categorisation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.retrieval_highres</strong><span class="classifier">dict</span></dt><dd><p>With high resolution Quasi version 2 products as well as Target categorization.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>QuasiV2 products uses Raman-retrieved products.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.write_2_sql_db">
 <span class="sig-name descname"><span class="pre">write_2_sql_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.write_2_sql_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.write_2_sql_db" title="Link to this definition">#</a></dt>
-<dd><p>Write LC or eta to sqlite db table.</p>
+<dd><p>Write LC, eta or WVC to sqlite db table.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>parameter</strong><span class="classifier">str</span></dt><dd><p>can be LC (Lidar-calibration-constant) or DC (Depol-calibration-constant)</p>
+<dt><strong>parameter</strong><span class="classifier">str</span></dt><dd><p>can be LC (Lidar-calibration-constant), DC (Depol-calibration-constant) or WVC (WaterVapor-calibration-constant)</p>
 </dd>
-<dt><strong>method</strong><span class="classifier">str</span></dt><dd><p>‘raman’ or ‘klett’</p>
+<dt><strong>method</strong><span class="classifier">str</span></dt><dd><p>‘raman’, ‘klett’, ‘D90’, ‘transfer’, ‘profile’ or ‘regression’</p>
 </dd>
 <dt><strong>db_path</strong><span class="classifier">str</span></dt><dd><p>location of the sqlite db-file</p>
 </dd>
@@ -751,19 +1423,53 @@ otherwise they are just added to the table with same timestamps.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>db_path</strong><span class="classifier">str</span></dt><dd><p>path to database of calibration values.</p>
+<dt><strong>db_path</strong><span class="classifier">str or NoneType</span></dt><dd><p>path to database file… Default is None.</p>
 </dd>
-<dt><strong>Time interval includes 24h before and after the actual date</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>self.LC</strong><span class="classifier">dict</span></dt><dd><p>Original <cite>LC</cite> with all additinal lidar calibration constant availabel
+in the datafram <cite>db_path</cite> in the time period of the measurement +-24h.</p>
+</dd>
+<dt><strong>self.pol_cali</strong><span class="classifier">dict</span></dt><dd><p>Original <cite>pol_cali</cite> with all additinal polarization calibration constant
+availabel in the datafram <cite>db_path</cite> in the time period of the measurement +-24h.</p>
+</dd>
 </dl>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Time interval includes 24h before start of the measurement and after the end of the measurement.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.adding_retrieving_infos_2_polly_config_dict">
 <span class="sig-name descname"><span class="pre">adding_retrieving_infos_2_polly_config_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.adding_retrieving_infos_2_polly_config_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.adding_retrieving_infos_2_polly_config_dict" title="Link to this definition">#</a></dt>
-<dd><p>Some infos from the polly_config_dict should have there own keys,
-e.g. reference_search_range.</p>
+<dd><p>Some infos from the polly_config_dict should have there own keys, e.g. reference_search_range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>self.polly_config_dict</strong><span class="classifier">dict</span></dt><dd><p>With additional info.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id11">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Finish docstring.</p></li>
+<li><p>Is this function necessary?</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ppcpy.interface.picassoProc.PicassoProc.runProcessing">
+<span class="sig-name descname"><span class="pre">runProcessing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/interface/picassoProc.html#PicassoProc.runProcessing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.interface.picassoProc.PicassoProc.runProcessing" title="Link to this definition">#</a></dt>
+<dd><p>Idea: Include a run function in the object as an alternative to the default run script…</p>
 </dd></dl>
 
 </dd></dl>
@@ -833,11 +1539,13 @@ e.g. reference_search_range.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.SaturationDetect"><code class="docutils literal notranslate"><span class="pre">PicassoProc.SaturationDetect()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.polarizationCaliD90"><code class="docutils literal notranslate"><span class="pre">PicassoProc.polarizationCaliD90()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.cloudScreen"><code class="docutils literal notranslate"><span class="pre">PicassoProc.cloudScreen()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.genFlagValPrf"><code class="docutils literal notranslate"><span class="pre">PicassoProc.genFlagValPrf()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.cloudFreeSeg"><code class="docutils literal notranslate"><span class="pre">PicassoProc.cloudFreeSeg()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.aggregate_profiles"><code class="docutils literal notranslate"><span class="pre">PicassoProc.aggregate_profiles()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.loadMeteo"><code class="docutils literal notranslate"><span class="pre">PicassoProc.loadMeteo()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.loadAOD"><code class="docutils literal notranslate"><span class="pre">PicassoProc.loadAOD()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.calcMolecular"><code class="docutils literal notranslate"><span class="pre">PicassoProc.calcMolecular()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.watervaporCali"><code class="docutils literal notranslate"><span class="pre">PicassoProc.watervaporCali()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.rayleighFit"><code class="docutils literal notranslate"><span class="pre">PicassoProc.rayleighFit()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.polarizationCaliMol"><code class="docutils literal notranslate"><span class="pre">PicassoProc.polarizationCaliMol()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.transCor"><code class="docutils literal notranslate"><span class="pre">PicassoProc.transCor()</span></code></a></li>
@@ -852,11 +1560,13 @@ e.g. reference_search_range.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.LidarCalibration"><code class="docutils literal notranslate"><span class="pre">PicassoProc.LidarCalibration()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.attBsc_volDepol"><code class="docutils literal notranslate"><span class="pre">PicassoProc.attBsc_volDepol()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.molecularHighres"><code class="docutils literal notranslate"><span class="pre">PicassoProc.molecularHighres()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.wvmr"><code class="docutils literal notranslate"><span class="pre">PicassoProc.wvmr()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.quasiV1"><code class="docutils literal notranslate"><span class="pre">PicassoProc.quasiV1()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.quasiV2"><code class="docutils literal notranslate"><span class="pre">PicassoProc.quasiV2()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.write_2_sql_db"><code class="docutils literal notranslate"><span class="pre">PicassoProc.write_2_sql_db()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.read_calibration_db"><code class="docutils literal notranslate"><span class="pre">PicassoProc.read_calibration_db()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.adding_retrieving_infos_2_polly_config_dict"><code class="docutils literal notranslate"><span class="pre">PicassoProc.adding_retrieving_infos_2_polly_config_dict()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.interface.picassoProc.PicassoProc.runProcessing"><code class="docutils literal notranslate"><span class="pre">PicassoProc.runProcessing()</span></code></a></li>
 </ul>
 </li>
 </ul>

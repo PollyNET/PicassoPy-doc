@@ -20,4 +20,4 @@ Boxes marked with grey background are not implemented yet.
 
 
 .. raw:: html
-    :file: ./PicassoPy_data_flow.drawio.html
+    :file: ./PicassoPy_data_flow_v2.drawio.html

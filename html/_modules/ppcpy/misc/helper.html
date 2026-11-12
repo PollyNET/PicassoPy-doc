@@ -325,7 +325,8 @@
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">diags</span>
-<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">savgol_coeffs</span>
+<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">convolve</span><span class="p">,</span> <span class="n">savgol_coeffs</span>
+<span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">uniform_filter</span> <span class="k">as</span> <span class="n">_uniform_filter</span>
 
 
 <div class="viewcode-block" id="detect_path_type">
@@ -622,9 +623,9 @@
 
         <span class="n">laserlog_filename</span> <span class="o">=</span> <span class="n">polly_laserlog_files_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">laserlog_filename</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">laserlog_filename</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
-        <span class="n">laserlog_filename_left</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;_[0-9][0-9]_[0-9][0-9]_[0-9][0-9]\.nc&#39;</span><span class="p">,</span><span class="n">laserlog_filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">laserlog_filename_left</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;_[0-9][0-9]_[0-9][0-9]_[0-9][0-9]\.nc&#39;</span><span class="p">,</span> <span class="n">laserlog_filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">laserlog_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">laserlog_filename_left</span><span class="si">}</span><span class="s1">_00_00_01.nc.laserlogbook.txt&#39;</span>
-        <span class="n">destination_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span><span class="n">laserlog_filename</span><span class="p">)</span>
+        <span class="n">destination_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">laserlog_filename</span><span class="p">)</span>
 
         <span class="c1"># Open the source file in binary mode and read its content</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">result_file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">source</span><span class="p">:</span>
@@ -697,10 +698,10 @@
                         <span class="s1">&#39;measurement_height_resolution&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;laser_rep_rate&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;laser_power&#39;</span><span class="p">,</span>
-<span class="c1">#                        &#39;laser_flashlamp&#39;,</span>
+                        <span class="c1"># &#39;laser_flashlamp&#39;,</span>
                         <span class="s1">&#39;location_height&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;neutral_density_filter&#39;</span><span class="p">,</span>
-<span class="c1">#                        &#39;location_coordinates&#39;,</span>
+                        <span class="c1"># &#39;location_coordinates&#39;,</span>
                         <span class="s1">&#39;pm_voltage&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;pinhole&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;polstate&#39;</span><span class="p">,</span>
@@ -725,23 +726,23 @@
     <span class="n">diff_var</span><span class="o">=</span><span class="mi">0</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;checking differences in selected variables ...&#39;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">polly_file_ds_ls</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-<span class="c1">#        print(&#39;\n&#39;)</span>
-<span class="c1">#        print(polly_files_list[ds] + &#39;   vs.   &#39; + polly_files_list[ds+1])</span>
+    <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">polly_file_ds_ls</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># print(&#39;\n&#39;)</span>
+        <span class="c1"># print(polly_files_list[ds] + &#39;   vs.   &#39; + polly_files_list[ds+1])</span>
         <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">vars_of_interest</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1">## check if var is available within the polly-datastructure (depending on polly-system)</span>
                 <span class="n">var_value_1</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">][:])</span>
                 <span class="n">var_value_2</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">][:])</span>
-    <span class="c1">#            print(var + &quot;: &quot; + var_value_1)</span>
-    <span class="c1">#            print(var + &quot;: &quot; + var_value_2)</span>
+                <span class="c1"># print(var + &quot;: &quot; + var_value_1)</span>
+                <span class="c1"># print(var + &quot;: &quot; + var_value_2)</span>
                 <span class="k">if</span> <span class="n">var_value_1</span> <span class="o">==</span> <span class="n">var_value_2</span> <span class="ow">and</span> <span class="n">diff_var</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
                     <span class="c1"># print(&#39;no difference found ...&#39;)</span>
                     <span class="n">add_to_list</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">polly_files_list</span><span class="p">,</span> <span class="n">selected_var_nc_ls</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="n">var_value_1</span> <span class="o">!=</span> <span class="n">var_value_2</span> <span class="ow">and</span> <span class="n">diff_var</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;difference found in var:&#39;</span><span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
-                    <span class="c1">#print(var + &quot;: &quot; + var_value_1)</span>
-                    <span class="c1">#print(var + &quot;: &quot; + var_value_2)</span>
+                    <span class="c1"># print(var + &quot;: &quot; + var_value_1)</span>
+                    <span class="c1"># print(var + &quot;: &quot; + var_value_2)</span>
                     <span class="n">diff_var</span><span class="o">=</span><span class="mi">1</span>
                     <span class="n">add_to_list</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">polly_files_list</span><span class="p">,</span> <span class="n">selected_var_nc_ls</span><span class="p">)</span> <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="kc">None</span>
                 <span class="k">elif</span> <span class="n">var_value_1</span> <span class="o">==</span> <span class="n">var_value_2</span> <span class="ow">and</span> <span class="n">diff_var</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
@@ -756,7 +757,7 @@
         <span class="n">add_to_list</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">polly_files_list</span><span class="p">,</span> <span class="n">selected_var_nc_ls</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">no differences found in selected variables!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">diff_var</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="c1">#        add_to_list(-1,polly_files_list,selected_var_nc_ls) if force == True else None</span>
+        <span class="c1"># add_to_list(-1, polly_files_list, selected_var_nc_ls) if force == True else None</span>
         <span class="c1">## if force==true, merge, but if force==false: the whole day will not be in list anymore</span>
         <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">add_to_list</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">polly_files_list</span><span class="p">,</span> <span class="n">selected_var_nc_ls</span><span class="p">)</span>
@@ -815,15 +816,15 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;checking differences in attributes ...&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">polly_file_ds_ls</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
         <span class="c1">## get global attributes as a list of strings</span>
-<span class="c1">#        print(selected_var_nc_ls[ds] + &#39;   vs.   &#39; + selected_var_nc_ls[ds+1])</span>
-<span class="c1">#        print(&#39;\nglobal attributes:&#39;)</span>
+        <span class="c1"># print(selected_var_nc_ls[ds] + &#39;   vs.   &#39; + selected_var_nc_ls[ds+1])</span>
+        <span class="c1"># print(&#39;\nglobal attributes:&#39;)</span>
         <span class="k">for</span> <span class="n">nc_attr</span> <span class="ow">in</span> <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ncattrs</span><span class="p">():</span>
             <span class="c1"># att_value=repr(input_nc_file.getncattr(nc_attr))</span>
             <span class="n">att_value_1</span> <span class="o">=</span> <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="p">]</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">nc_attr</span><span class="p">)</span>
             <span class="n">att_value_2</span> <span class="o">=</span> <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">nc_attr</span><span class="p">)</span>
-<span class="c1">#            print(nc_attr)</span>
-<span class="c1">#            print(&quot;   &quot; + att_value_1)</span>
-<span class="c1">#            print(&quot;   &quot; + att_value_2)</span>
+            <span class="c1"># print(nc_attr)</span>
+            <span class="c1"># print(&quot;   &quot; + att_value_1)</span>
+            <span class="c1"># print(&quot;   &quot; + att_value_2)</span>
             <span class="k">if</span> <span class="n">att_value_1</span> <span class="o">==</span> <span class="n">att_value_2</span> <span class="ow">and</span> <span class="n">diff_att</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
                 <span class="n">add_to_list</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">selected_var_nc_ls</span><span class="p">,</span> <span class="n">selected_att_nc_ls</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">att_value_1</span> <span class="o">!=</span> <span class="n">att_value_2</span> <span class="ow">and</span> <span class="n">diff_att</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
@@ -839,15 +840,15 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;difference found!&#39;</span><span class="p">)</span>
                 <span class="n">add_to_list</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">selected_var_nc_ls</span><span class="p">,</span> <span class="n">selected_att_nc_ls</span><span class="p">)</span> <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="kc">None</span>
 
-<span class="c1">#        print(&quot;\nvariable attributes:&quot;)</span>
+        <span class="c1"># print(&quot;\nvariable attributes:&quot;)</span>
         <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-<span class="c1">#            print(var)</span>
+            <span class="c1"># print(var)</span>
             <span class="k">for</span> <span class="n">var_att</span> <span class="ow">in</span> <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">ncattrs</span><span class="p">():</span>
                 <span class="n">var_att_value_1</span> <span class="o">=</span> <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">var_att</span><span class="p">)</span>
                 <span class="n">var_att_value_2</span> <span class="o">=</span> <span class="n">polly_file_ds_ls</span><span class="p">[</span><span class="n">ds</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">getncattr</span><span class="p">(</span><span class="n">var_att</span><span class="p">)</span>
-<span class="c1">#                print(&quot;   &quot; + var_att)</span>
-<span class="c1">#                print(&quot;      &quot; + var_att_value_1)</span>
-<span class="c1">#                print(&quot;      &quot; + var_att_value_2)</span>
+                <span class="c1"># print(&quot;   &quot; + var_att)</span>
+                <span class="c1"># print(&quot;      &quot; + var_att_value_1)</span>
+                <span class="c1"># print(&quot;      &quot; + var_att_value_2)</span>
                 <span class="k">if</span> <span class="n">var_att_value_1</span> <span class="o">==</span> <span class="n">var_att_value_2</span> <span class="ow">and</span> <span class="n">diff_var_att</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="k">pass</span>
                 <span class="k">elif</span> <span class="n">var_att_value_1</span> <span class="o">!=</span> <span class="n">var_att_value_2</span> <span class="ow">and</span> <span class="n">diff_var_att</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -869,7 +870,7 @@
         <span class="n">add_to_list</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">selected_var_nc_ls</span><span class="p">,</span> <span class="n">selected_att_nc_ls</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">no differences found in global attributes!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">diff_att</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="c1">#        add_to_list(-1,selected_var_nc_ls,selected_att_nc_ls) if force == True else None</span>
+        <span class="c1"># add_to_list(-1, selected_var_nc_ls, selected_att_nc_ls) if force == True else None</span>
 
         <span class="c1">## if force==true, merge, but if force==false: the whole day will not be in list anymore</span>
         <span class="k">if</span> <span class="n">force</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
@@ -883,14 +884,14 @@
 
     <span class="k">if</span> <span class="n">diff_var_att</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">no differences found in variable attributes!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="c1">#   elif diff_var_att != 0:</span>
-<span class="c1">#        ## if force==true, merge, but if force==false: the whole day will not be in list anymore</span>
-<span class="c1">#        if force == True:</span>
-<span class="c1">#            add_to_list(-1,selected_var_nc_ls,selected_att_nc_ls)</span>
-<span class="c1">#           print(&#39;\ndifferences found in variable attributes! But will be force-merged.\n&#39;)</span>
-<span class="c1">#        else:</span>
-<span class="c1">#           print(&#39;\ndifferences found in variable attributes! Selected Date will be skipped.\n&#39;)</span>
-<span class="c1">#           sys.exit()</span>
+    <span class="c1"># elif diff_var_att != 0:</span>
+    <span class="c1">#     ## if force==true, merge, but if force==false: the whole day will not be in list anymore</span>
+    <span class="c1">#     if force == True:</span>
+    <span class="c1">#         add_to_list(-1, selected_var_nc_ls, selected_att_nc_ls)</span>
+    <span class="c1">#         print(&#39;\ndifferences found in variable attributes! But will be force-merged.\n&#39;)</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         print(&#39;\ndifferences found in variable attributes! Selected Date will be skipped.\n&#39;)</span>
+    <span class="c1">#         sys.exit()</span>
 
 
     <span class="nb">print</span><span class="p">(</span><span class="n">selected_att_nc_ls</span><span class="p">)</span>
@@ -933,8 +934,8 @@
         <span class="n">polly_file_ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
         <span class="n">polly_file_ds_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">polly_file_ds</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">elementNR</span><span class="p">,</span><span class="n">ds</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">polly_file_ds_ls</span><span class="p">):</span>
-    <span class="c1">#    print(selected_timestamp_nc_ls[elementNR])</span>
+    <span class="k">for</span> <span class="n">elementNR</span><span class="p">,</span> <span class="n">ds</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">polly_file_ds_ls</span><span class="p">):</span>
+        <span class="c1"># print(selected_timestamp_nc_ls[elementNR])</span>
         <span class="n">timestamp_ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;measurement_time&#39;</span><span class="p">][:]</span>
         <span class="k">if</span> <span class="mi">19700101</span> <span class="ow">in</span> <span class="n">timestamp_ds</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The file: </span><span class="si">{</span><span class="n">selected_timestamp_nc_ls</span><span class="p">[</span><span class="n">elementNR</span><span class="p">]</span><span class="si">}</span><span class="s1"> contains incorrect timestamps!&#39;</span><span class="p">)</span>
@@ -942,9 +943,9 @@
             <span class="c1">## get correct timestamp_ds from filename</span>
             <span class="n">timestamp_filename</span> <span class="o">=</span> <span class="n">selected_timestamp_nc_ls</span><span class="p">[</span><span class="n">elementNR</span><span class="p">]</span>
             <span class="n">timestamp_filename</span> <span class="o">=</span> <span class="n">timestamp_filename</span><span class="o">.</span><span class="n">stem</span>
-            <span class="n">timestamp_filename</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">timestamp_filename</span><span class="p">))[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span>
+            <span class="n">timestamp_filename</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">timestamp_filename</span><span class="p">))[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span>
             <span class="c1">## del. nc-file</span>
-            <span class="c1">#os.remove(selected_timestamp_nc_ls[elementNR]) ### remove unzipped nc-file with incorrect timestamps</span>
+            <span class="c1"># os.remove(selected_timestamp_nc_ls[elementNR]) ### remove unzipped nc-file with incorrect timestamps</span>
             <span class="c1">## calc. the deltaT between measurementdatapoints</span>
             <span class="n">laser_rep_rate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;laser_rep_rate&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
             <span class="n">measurement_shots</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;measurement_shots&#39;</span><span class="p">][:]</span>
@@ -971,7 +972,7 @@
                 <span class="c1">## check if seconds_ls does not contain seonds of day larger than 86400 ## TODO</span>
                 <span class="c1">## if so, remove file from list and del. file ## TODO</span>
                 <span class="n">t_check</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">86400</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">seconds_ls</span><span class="p">)</span>
-                <span class="c1">#t_check = False ## do not skip files which are longer than 24h, seconds_ls &gt; 86400</span>
+                <span class="c1"># t_check = False ## do not skip files which are longer than 24h, seconds_ls &gt; 86400</span>
                 <span class="k">if</span> <span class="n">t_check</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;seconds of day exceeds 86400. file will be removed from merging list.&#39;</span><span class="p">)</span>
                     <span class="n">ds</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -1044,7 +1045,7 @@
 
     <span class="c1">## merge selected files</span>
 
-<span class="c1">#    concat=&#39;concat&#39;</span>
+    <span class="c1"># concat=&#39;concat&#39;</span>
 
     <span class="n">sel_polly_files_list</span> <span class="o">=</span> <span class="n">checking_timestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">raw_folder</span><span class="p">,</span> <span class="n">output_path</span><span class="p">)</span>
 
@@ -1061,12 +1062,12 @@
         <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">sel_polly_files_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">filestring</span><span class="p">))</span>
         <span class="k">return</span> <span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
-<span class="c1">#        sel_polly_files_list = [ str(el) for el in sel_polly_files_list]</span>
+        <span class="c1"># sel_polly_files_list = [ str(el) for el in sel_polly_files_list]</span>
         <span class="c1">## parameters for controlling the merging process</span>
         <span class="n">compat</span><span class="o">=</span><span class="s1">&#39;override&#39;</span> <span class="c1">## Values of variable &quot;laser_flashlamp&quot; often changes, but those files will be merged anyway. This option picks the value from first dataset.</span>
         <span class="n">coords</span><span class="o">=</span><span class="s1">&#39;minimal&#39;</span>
 
-        <span class="n">ds</span> <span class="o">=</span> <span class="n">xarray</span><span class="o">.</span><span class="n">open_mfdataset</span><span class="p">(</span><span class="n">sel_polly_files_list</span><span class="p">,</span><span class="n">combine</span> <span class="o">=</span> <span class="s1">&#39;nested&#39;</span><span class="p">,</span> <span class="n">data_vars</span><span class="o">=</span><span class="s2">&quot;minimal&quot;</span><span class="p">,</span> <span class="n">concat_dim</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">compat</span><span class="o">=</span><span class="n">compat</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="n">coords</span><span class="p">)</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">xarray</span><span class="o">.</span><span class="n">open_mfdataset</span><span class="p">(</span><span class="n">sel_polly_files_list</span><span class="p">,</span> <span class="n">combine</span> <span class="o">=</span> <span class="s1">&#39;nested&#39;</span><span class="p">,</span> <span class="n">data_vars</span><span class="o">=</span><span class="s2">&quot;minimal&quot;</span><span class="p">,</span> <span class="n">concat_dim</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">compat</span><span class="o">=</span><span class="n">compat</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="n">coords</span><span class="p">)</span>
         <span class="c1">## save to a single nc-file</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">merged nc-file &#39;</span><span class="si">{</span><span class="n">filestring</span><span class="si">}</span><span class="s2">&#39; will be stored to &#39;</span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">writing merged file ...&quot;</span><span class="p">)</span>
@@ -1082,8 +1083,8 @@
                 <span class="n">enc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
                     <span class="s2">&quot;zlib&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                     <span class="s2">&quot;complevel&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-<span class="c1">#                    &quot;fletcher32&quot;: True,</span>
-<span class="c1">#                    &quot;chunksizes&quot;: tuple(map(lambda x: x//2, ds[k].shape))</span>
+                    <span class="c1"># &quot;fletcher32&quot;: True,</span>
+                    <span class="c1"># &quot;chunksizes&quot;: tuple(map(lambda x: x//2, ds[k].shape))</span>
                 <span class="p">}</span>
 
             <span class="n">ds</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">out_file</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;NETCDF4&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;netcdf4&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">enc</span><span class="p">)</span>
@@ -1219,11 +1220,16 @@
 <span class="sd">    **History**</span>
 <span class="sd">    </span>
 <span class="sd">    - 2026-02-02: First edition by Buholdt</span>
+<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Support for smoothing of mulitdimensional arrays is not yet implemented&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">win</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;`win` is bigger than `x`. No smoothig applied.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">x</span>
         
         <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">win</span><span class="p">)</span><span class="o">/</span><span class="n">win</span>
         <span class="n">x_smoothed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
@@ -1287,12 +1293,17 @@
 <span class="sd">    - 2026-03-24: First edition by Buholdt</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Support for smoothing of mulitdimensional arrays is not yet implemented&#39;</span><span class="p">)</span>
         
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">win</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;`win` is bigger than `x`. No smoothig applied.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">x</span>
+        
         <span class="k">if</span> <span class="n">win</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Odd smoothinglengs not allowd, will preform smoothing with length win - 1.&quot;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Warning: Odd smoothinglengs not allowd, will preform smoothing with length win - 1.&quot;</span><span class="p">)</span>
             <span class="n">win</span> <span class="o">-=</span> <span class="mi">1</span>
         
         <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">win</span><span class="p">)</span><span class="o">/</span><span class="n">win</span>
@@ -1362,8 +1373,12 @@
 <span class="sd">    [3] Jianwen Luo, Kui Ying, and Jing Bai. 2005. Savitzky-Golay smoothing and</span>
 <span class="sd">    differentiation filter for even number data. Signal Process.</span>
 <span class="sd">    85, 7 (July 2005), 1429-1434.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">window_length</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;`window_length` is bigger than `x`. No smoothig applied.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
     <span class="n">f</span> <span class="o">=</span> <span class="n">savgol_coeffs</span><span class="p">(</span><span class="n">window_length</span><span class="p">,</span> <span class="n">polyorder</span><span class="p">,</span> <span class="n">deriv</span><span class="o">=</span><span class="n">deriv</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
     <span class="n">x_smooth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
     <span class="n">fill</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="n">window_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="n">fill_val</span><span class="p">)</span>
@@ -1374,6 +1389,175 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">fill</span><span class="p">,</span> <span class="n">x_smooth</span><span class="p">,</span> <span class="n">fill</span><span class="p">))</span>
     
+    <span class="k">return</span> <span class="n">out</span></div>
+
+
+
+<div class="viewcode-block" id="uniform_filter_2d">
+<a class="viewcode-back" href="../../../api_doc/misc.html#ppcpy.misc.helper.uniform_filter_2d">[docs]</a>
+<span class="k">def</span> <span class="nf">uniform_filter_2d</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Nr</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">Nc</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">fill_val</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;2 dimensional uniform smoothing filter.</span>
+
+<span class="sd">    The regions affected by edge/padding effects are replaced with ´fill_val´.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : ndarray (time, height, channel, )</span>
+<span class="sd">        2 dimensional time-height signal(s) to be smooth.</span>
+<span class="sd">    Nr : int</span>
+<span class="sd">        Smoothing window size along x-axis (rows).</span>
+<span class="sd">    Nc : int</span>
+<span class="sd">        Smoothing window size along y-axis (columns).</span>
+<span class="sd">    fill_val : float, optional</span>
+<span class="sd">        Value to be used for filling edges, in order to recreate the input</span>
+<span class="sd">        dimension. Default is np.nan.</span>
+<span class="sd">   </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out : ndarray (time, height, channel, )</span>
+<span class="sd">        Smoothed 2 dimensional time-height signal(s).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - Invalid pixels are masked out and replaced with 0 during</span>
+<span class="sd">      the convolution process to avoid propagation during smoothing</span>
+<span class="sd">      process.</span>
+<span class="sd">    - scipy.ndimage.uniform_filter is used instead of alternative convolution</span>
+<span class="sd">      based filters due to its increased efficiency.</span>
+
+<span class="sd">    **History**</span>
+<span class="sd">   </span>
+<span class="sd">    - 2026-07-17: first edition by Buholdt</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Copy and check input dimensions</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">filterShape</span> <span class="o">=</span> <span class="p">(</span><span class="n">Nr</span><span class="p">,</span> <span class="n">Nc</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">filterShape</span> <span class="o">=</span> <span class="p">(</span><span class="n">Nr</span><span class="p">,</span> <span class="n">Nc</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;´x´ must either be a 2D or 3D array (multiple 2D arrays). Not </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">D.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Smoothing process</span>
+    <span class="n">invalid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+    <span class="n">x0</span><span class="p">[</span><span class="n">invalid</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">_uniform_filter</span><span class="p">(</span>
+        <span class="n">x0</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="n">filterShape</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span>
+        <span class="n">cval</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">out</span><span class="p">[</span><span class="n">invalid</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="c1"># Mask edge affected pixels</span>
+    <span class="n">top</span> <span class="o">=</span> <span class="n">Nr</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">bottom</span> <span class="o">=</span> <span class="p">(</span><span class="n">Nr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+    <span class="k">if</span> <span class="n">top</span><span class="p">:</span>
+        <span class="n">out</span><span class="p">[:</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="n">fill_val</span>
+    <span class="k">if</span> <span class="n">bottom</span><span class="p">:</span>
+        <span class="n">out</span><span class="p">[</span><span class="o">-</span><span class="n">bottom</span><span class="p">:]</span> <span class="o">=</span> <span class="n">fill_val</span>
+    
+    <span class="n">left</span> <span class="o">=</span> <span class="n">Nc</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="p">(</span><span class="n">Nc</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+    <span class="k">if</span> <span class="n">left</span><span class="p">:</span>
+        <span class="n">out</span><span class="p">[:,</span> <span class="p">:</span><span class="n">left</span><span class="p">]</span> <span class="o">=</span> <span class="n">fill_val</span>
+    <span class="k">if</span> <span class="n">right</span><span class="p">:</span>
+        <span class="n">out</span><span class="p">[:,</span> <span class="o">-</span><span class="n">right</span><span class="p">:]</span> <span class="o">=</span> <span class="n">fill_val</span>
+
+    <span class="k">return</span> <span class="n">out</span></div>
+
+
+
+<div class="viewcode-block" id="moving_average_2d">
+<a class="viewcode-back" href="../../../api_doc/misc.html#ppcpy.misc.helper.moving_average_2d">[docs]</a>
+<span class="k">def</span> <span class="nf">moving_average_2d</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Nr</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">Nc</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="nb">sum</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;2 dimensional uniform smoothing filter ala. 2d version of smooth(y, span, method=&#39;moving&#39;)</span>
+<span class="sd">    in Matlab.</span>
+
+<span class="sd">    This function uses a centered moving filter with dynamic size reduction at edges.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    The output of the function for win = 5 in one dimension follows the following logic:</span>
+<span class="sd">    out[0] = x[0]/1</span>
+<span class="sd">    out[1] = (x[0] + x[1] + x[2])/3</span>
+<span class="sd">    out[2] = (x[0] + x[1] + x[2] + x[3] + x[4])/5</span>
+<span class="sd">    out[3] = (x[1] + x[2] + x[3] + x[4] + x[5])/5</span>
+<span class="sd">    ...</span>
+<span class="sd">    out[-4] = (x[-6] + x[-5] + x[-4] + x[-3] + x[-2])/5</span>
+<span class="sd">    out[-3] = (x[-5] + x[-4] + x[-3] + x[-2] + x[-1])/5</span>
+<span class="sd">    out[-2] = (x[-3] + x[-2] + x[-1])/3</span>
+<span class="sd">    out[-1] = x[-1]/1</span>
+<span class="sd">   </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : ndarray (time, height, channel, )</span>
+<span class="sd">        2 dimensional time-height signal(s) to be smooth.</span>
+<span class="sd">    Nr : int</span>
+<span class="sd">        Smoothing window size along x-axis (rows).</span>
+<span class="sd">    Nc : int</span>
+<span class="sd">        Smoothing window size along y-axis (columns).</span>
+<span class="sd">    sum : bool, optional</span>
+<span class="sd">        If True, return moving sum results. Otherwise, return</span>
+<span class="sd">        moving average results. Default is False.</span>
+<span class="sd">   </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out : ndarray (time, height, channel, )</span>
+<span class="sd">        Smoothed 2 dimensional time-height signal(s).</span>
+<span class="sd">   </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - Invalid pixels are masked out and replaced with 0 during</span>
+<span class="sd">      the convolution process to avoid propagation during smoothing</span>
+<span class="sd">      process. However, unlike in ´uniform_filter_2d´ these pixels</span>
+<span class="sd">      are not counted in the averaging procedure if ´sum=False´.</span>
+<span class="sd">    - By using `sum=True` the function will return the moving sum result</span>
+<span class="sd">      instead of the moving average.</span>
+<span class="sd">    - scipy.ndimage.uniform_filter is used instead of alternative convolution</span>
+<span class="sd">      based filters due to its increased efficiency.</span>
+
+<span class="sd">    ** History **</span>
+
+<span class="sd">    - 2026-07-17: first edition by Buholdt</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Copy and check input dimensions</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">filterShape</span> <span class="o">=</span> <span class="p">(</span><span class="n">Nr</span><span class="p">,</span> <span class="n">Nc</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">filterShape</span> <span class="o">=</span> <span class="p">(</span><span class="n">Nr</span><span class="p">,</span> <span class="n">Nc</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;´x´ must either be a 2D or 3D array (multiple 2D arrays). Not </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">D.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Smoothing process</span>
+    <span class="n">invalid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+    <span class="n">x0</span><span class="p">[</span><span class="n">invalid</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="n">_uniform_filter</span><span class="p">(</span>
+        <span class="n">x0</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="n">filterShape</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span>
+        <span class="n">cval</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">:</span>
+        <span class="n">num</span> <span class="o">*=</span> <span class="n">Nr</span> <span class="o">*</span> <span class="n">Nc</span>
+        <span class="n">den</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">den</span> <span class="o">=</span> <span class="n">_uniform_filter</span><span class="p">(</span>
+            <span class="p">(</span><span class="o">~</span><span class="n">invalid</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
+            <span class="n">size</span><span class="o">=</span><span class="n">filterShape</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span>
+            <span class="n">cval</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">num</span><span class="o">/</span><span class="n">den</span>
+    <span class="n">out</span><span class="p">[</span><span class="n">invalid</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
     <span class="k">return</span> <span class="n">out</span></div>
 
 

@@ -310,159 +310,279 @@
                 <article class="bd-article">
                   
   <h1>Source code for ppcpy.io.sql_interaction</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span><span class="p">,</span> <span class="n">timedelta</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">import</span> <span class="nn">ppcpy.misc.helper</span> <span class="k">as</span> <span class="nn">helper</span>
 <span class="kn">from</span> <span class="nn">ppcpy.misc.helper</span> <span class="kn">import</span> <span class="n">default_to_regular</span>
 
-<span class="n">mapping</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;far_range&#39;</span><span class="p">:</span> <span class="s1">&#39;FR&#39;</span><span class="p">,</span> <span class="s1">&#39;near_range&#39;</span><span class="p">:</span> <span class="s1">&#39;NR&#39;</span><span class="p">,</span> <span class="s1">&#39;dfov&#39;</span><span class="p">:</span> <span class="s1">&#39;DFOV&#39;</span><span class="p">}</span>
-<span class="n">mapping_inverse</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+<span class="n">MAPPING</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;far_range&#39;</span><span class="p">:</span> <span class="s1">&#39;FR&#39;</span><span class="p">,</span> <span class="s1">&#39;near_range&#39;</span><span class="p">:</span> <span class="s1">&#39;NR&#39;</span><span class="p">,</span> <span class="s1">&#39;dfov&#39;</span><span class="p">:</span> <span class="s1">&#39;DFOV&#39;</span><span class="p">}</span>
+<span class="n">MAPPING_INVERSE</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">MAPPING</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+<span class="n">DB_SCHEME</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;LC&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;table_name&#39;</span><span class="p">:</span> <span class="s1">&#39;lidar_calibration_constant&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;column_names&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;cali_start_time&#39;</span><span class="p">,</span> <span class="s1">&#39;cali_stop_time&#39;</span><span class="p">,</span> <span class="s1">&#39;liconst&#39;</span><span class="p">,</span> <span class="s1">&#39;uncertainty_liconst&#39;</span><span class="p">,</span> <span class="s1">&#39;used_for_processing&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;wavelength&#39;</span><span class="p">,</span> <span class="s1">&#39;nc_zip_file&#39;</span><span class="p">,</span> <span class="s1">&#39;polly_type&#39;</span><span class="p">,</span> <span class="s1">&#39;cali_method&#39;</span><span class="p">,</span> <span class="s1">&#39;telescope&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;data_types&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;real&#39;</span><span class="p">,</span> <span class="s1">&#39;real&#39;</span><span class="p">,</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;unique&#39;</span><span class="p">:</span> <span class="s1">&#39;, UNIQUE(cali_start_time, cali_stop_time, wavelength, polly_type, telescope, cali_method)&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;DC&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;table_name&#39;</span><span class="p">:</span> <span class="s1">&#39;depol_calibration_constant&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;column_names&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;cali_start_time&#39;</span><span class="p">,</span> <span class="s1">&#39;cali_stop_time&#39;</span><span class="p">,</span> <span class="s1">&#39;depol_const&#39;</span><span class="p">,</span> <span class="s1">&#39;uncertainty_depol_const&#39;</span><span class="p">,</span> <span class="s1">&#39;used_for_processing&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;wavelength&#39;</span><span class="p">,</span> <span class="s1">&#39;nc_zip_file&#39;</span><span class="p">,</span> <span class="s1">&#39;polly_type&#39;</span><span class="p">,</span> <span class="s1">&#39;cali_method&#39;</span><span class="p">,</span> <span class="s1">&#39;telescope&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;data_types&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;real&#39;</span><span class="p">,</span> <span class="s1">&#39;real&#39;</span><span class="p">,</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;unique&#39;</span><span class="p">:</span> <span class="s1">&#39;, UNIQUE(cali_start_time, cali_stop_time, wavelength, polly_type, telescope, cali_method)&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;WVC&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;table_name&#39;</span><span class="p">:</span> <span class="s1">&#39;wv_calibration_constant&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;column_names&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;cali_start_time&#39;</span><span class="p">,</span> <span class="s1">&#39;cali_stop_time&#39;</span><span class="p">,</span> <span class="s1">&#39;wv_const&#39;</span><span class="p">,</span> <span class="s1">&#39;uncertainty_wv_const&#39;</span><span class="p">,</span> <span class="s1">&#39;used_for_processing&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;wavelength&#39;</span><span class="p">,</span> <span class="s1">&#39;nc_zip_file&#39;</span><span class="p">,</span> <span class="s1">&#39;polly_type&#39;</span><span class="p">,</span> <span class="s1">&#39;cali_method&#39;</span><span class="p">,</span> <span class="s1">&#39;telescope&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;data_types&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;real&#39;</span><span class="p">,</span> <span class="s1">&#39;real&#39;</span><span class="p">,</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;unique&#39;</span><span class="p">:</span> <span class="s1">&#39;, UNIQUE(cali_start_time, cali_stop_time, wavelength, polly_type, telescope, cali_method)&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">METHOD_DB_NAMES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;raman&quot;</span><span class="p">:</span> <span class="s2">&quot;Raman_Method&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;klett&quot;</span><span class="p">:</span> <span class="s2">&quot;Klett_Method&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;D90&quot;</span><span class="p">:</span> <span class="s2">&quot;D90&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;transfer&quot;</span><span class="p">:</span> <span class="s2">&quot;transfer&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;model_profile&quot;</span><span class="p">:</span> <span class="s2">&quot;Model_Profile_Method&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;model_regression&quot;</span><span class="p">:</span> <span class="s2">&quot;Model_Regression_Method&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">METHOD_DB_NAMES_INVERSE</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">METHOD_DB_NAMES</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 
 <div class="viewcode-block" id="string_to_ts">
 <a class="viewcode-back" href="../../../api_doc/io.html#ppcpy.io.sql_interaction.string_to_ts">[docs]</a>
 <span class="k">def</span> <span class="nf">string_to_ts</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;string of format %Y-%m-%d %H:%M:%S to timestamp (timezone-aware)&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;String of format %Y-%m-%d %H:%M:%S to timestamp (timezone-aware)&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span></div>
+
+
+<span class="k">def</span> <span class="nf">_format_ts</span><span class="p">(</span><span class="n">unix_timestamp</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a Unix timestamp to a UTC database timestamp.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span>
+        <span class="n">unix_timestamp</span><span class="p">,</span>
+        <span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="get_from_sql_db">
 <a class="viewcode-back" href="../../../api_doc/io.html#ppcpy.io.sql_interaction.get_from_sql_db">[docs]</a>
-<span class="k">def</span> <span class="nf">get_from_sql_db</span><span class="p">(</span><span class="n">db_path</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">ts_interval</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;read lidar calibration constant or depol calibration from database</span>
+<span class="k">def</span> <span class="nf">get_from_sql_db</span><span class="p">(</span><span class="n">db_path</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">ts_interval</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">ts_delta</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read lidar calibration constant or depol calibration from database.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    db_path : str</span>
-<span class="sd">        name of the specific sqlite db file.</span>
+<span class="sd">        Name of the specific sqlite db file.</span>
 <span class="sd">    table_name : str</span>
-<span class="sd">        default &#39;lidar_calibration_constant&#39;</span>
+<span class="sd">        Default &#39;lidar_calibration_constant&#39;.</span>
 <span class="sd">    ts_interval : str</span>
-<span class="sd">        the date or timestamp to look for</span>
-
+<span class="sd">        The date or timestamp to look for.</span>
 <span class="sd">    </span>
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    dict</span>
 <span class="sd">        in calibration storage format</span>
+<span class="sd">    </span>
+<span class="sd">    **History**</span>
+<span class="sd">    </span>
+<span class="sd">    - 2026-03-28: First edition by Radenz.</span>
+<span class="sd">    - 2026-05-08: Added check for table existence. Added retrieval methods.</span>
+<span class="sd">    - 2026-11-01: Gently tried to make it more pythonic</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">delta</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="n">ts_delta</span><span class="p">)</span>
     <span class="n">start</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">ts_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span> <span class="o">-</span> <span class="n">delta</span>
         <span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M&quot;</span><span class="p">)</span>
     <span class="n">end</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">ts_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span> <span class="o">+</span> <span class="n">delta</span>
+        <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">ts_interval</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span> <span class="o">+</span> <span class="n">delta</span>
         <span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">db_path</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Path to Database does not exist </span><span class="si">{</span><span class="n">db_path</span><span class="si">}</span><span class="s2">, likely directory is missing.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
     <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="n">exists</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s2">&quot;SELECT 1 FROM sqlite_master WHERE type=&#39;table&#39; AND name=?;&quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">table_name</span><span class="p">,)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">exists</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Database </span><span class="si">{</span><span class="n">db_path</span><span class="si">}</span><span class="s2"> not found.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ret</span>
+        
         <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span>
             <span class="sa">f</span><span class="s1">&#39;SELECT * FROM </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s1"> WHERE cali_start_time BETWEEN ? AND ?;&#39;</span><span class="p">,</span> 
             <span class="n">conn</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
     <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-    <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
-
+    <span class="c1">## Lidar calibration constants</span>
     <span class="k">if</span> <span class="n">table_name</span> <span class="o">==</span> <span class="s1">&#39;lidar_calibration_constant&#39;</span><span class="p">:</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">cali_method</span> <span class="o">==</span> <span class="s1">&#39;Raman_Method&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_total_</span><span class="si">{</span><span class="n">mapping</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;telescope&#39;</span><span class="p">]]</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-                <span class="s1">&#39;LC&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;liconst&#39;</span><span class="p">],</span> <span class="s1">&#39;LCStd&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;uncertainty_liconst&#39;</span><span class="p">],</span>
-                <span class="s1">&#39;time_start&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">string_to_ts</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;cali_start_time&#39;</span><span class="p">])),</span> 
-                <span class="s1">&#39;time_end&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">string_to_ts</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;cali_stop_time&#39;</span><span class="p">])),</span> 
-            <span class="p">})</span>
-        <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;raman_db&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_to_regular</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">method_db</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Raman_Method&quot;</span><span class="p">,</span> <span class="s2">&quot;Klett_Method&quot;</span><span class="p">]:</span>
+            <span class="n">method</span> <span class="o">=</span> <span class="n">METHOD_DB_NAMES_INVERSE</span><span class="p">[</span><span class="n">method_db</span><span class="p">]</span>
+            <span class="n">method_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">_db&quot;</span>
 
-        <span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">cali_method</span> <span class="o">==</span> <span class="s1">&#39;Klett_Method&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_total_</span><span class="si">{</span><span class="n">mapping</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;telescope&#39;</span><span class="p">]]</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-                <span class="s1">&#39;LC&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;liconst&#39;</span><span class="p">],</span> <span class="s1">&#39;LCStd&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;uncertainty_liconst&#39;</span><span class="p">],</span>
-                <span class="s1">&#39;time_start&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">string_to_ts</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;cali_start_time&#39;</span><span class="p">])),</span> 
-                <span class="s1">&#39;time_end&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">string_to_ts</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;cali_stop_time&#39;</span><span class="p">])),</span> 
-            <span class="p">})</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+            <span class="n">df_method</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;cali_method&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">method_db</span><span class="p">)]</span>
+            <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df_method</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_total_</span><span class="si">{</span><span class="n">MAPPING</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;telescope&#39;</span><span class="p">]]</span><span class="si">}</span><span class="s2">&quot;</span>
 
-        <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;klett_db&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_to_regular</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s2">&quot;LC&quot;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;liconst&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;LCStd&quot;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;uncertainty_liconst&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;time_start&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">string_to_ts</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;cali_start_time&quot;</span><span class="p">])),</span>
+                    <span class="s2">&quot;time_end&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">string_to_ts</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;cali_stop_time&quot;</span><span class="p">])),</span>
+                    <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">method_key</span><span class="p">,</span>
+                <span class="p">})</span>
+            <span class="n">ret</span><span class="p">[</span><span class="n">method_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_to_regular</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded </span><span class="si">{</span><span class="n">df_method</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> lines from table </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> with &#39;</span><span class="si">{</span><span class="n">method_db</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
 
+    <span class="c1">## Depolarization calibration constants</span>
     <span class="k">if</span> <span class="n">table_name</span> <span class="o">==</span> <span class="s1">&#39;depol_calibration_constant&#39;</span><span class="p">:</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">mapping</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;telescope&#39;</span><span class="p">]]</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-                <span class="s1">&#39;eta&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;depol_const&#39;</span><span class="p">],</span> <span class="s1">&#39;eta_std&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;uncertainty_depol_const&#39;</span><span class="p">],</span>
-                <span class="s1">&#39;time_start&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">string_to_ts</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;cali_start_time&#39;</span><span class="p">])),</span> 
-                <span class="s1">&#39;time_end&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">string_to_ts</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;cali_stop_time&#39;</span><span class="p">])),</span> 
-            <span class="p">})</span>
-        <span class="n">ret</span><span class="p">[</span><span class="s1">&#39;D90_db&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_to_regular</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="n">methods</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;D90&quot;</span><span class="p">,</span> <span class="s2">&quot;transfer&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="s2">&quot;cali_method&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">else</span> <span class="p">(</span><span class="s2">&quot;D90&quot;</span><span class="p">,)</span>
+        <span class="k">for</span> <span class="n">method_db</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">:</span>
+            <span class="n">method</span> <span class="o">=</span> <span class="n">METHOD_DB_NAMES_INVERSE</span><span class="p">[</span><span class="n">method_db</span><span class="p">]</span>
+            <span class="n">method_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">_db&quot;</span>
+
+            <span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+            <span class="c1"># to capture if reading in an old db that lacks the column cali_method</span>
+            <span class="n">df_method</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;cali_method&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">method_db</span><span class="p">)]</span> <span class="k">if</span> <span class="s2">&quot;cali_method&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">else</span> <span class="n">df</span>
+            <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df_method</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">MAPPING</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;telescope&#39;</span><span class="p">]]</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s2">&quot;eta&quot;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;depol_const&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;eta_std&quot;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;uncertainty_depol_const&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;time_start&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">string_to_ts</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;cali_start_time&quot;</span><span class="p">])),</span>
+                    <span class="s2">&quot;time_end&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">string_to_ts</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;cali_stop_time&quot;</span><span class="p">])),</span>
+                    <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">method_key</span><span class="p">,</span>
+                <span class="p">})</span>
+            <span class="n">ret</span><span class="p">[</span><span class="n">method_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_to_regular</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded </span><span class="si">{</span><span class="n">df_method</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> lines from table </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> with &#39;</span><span class="si">{</span><span class="n">method_db</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+    <span class="c1">## Water Vapor calibration constants</span>
+    <span class="k">if</span> <span class="n">table_name</span> <span class="o">==</span> <span class="s1">&#39;wv_calibration_constant&#39;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">method_db</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;Model_Profile_Method&quot;</span><span class="p">,</span> <span class="s2">&quot;Model_Regression_Method&quot;</span><span class="p">):</span>
+            <span class="n">method</span> <span class="o">=</span> <span class="n">METHOD_DB_NAMES_INVERSE</span><span class="p">[</span><span class="n">method_db</span><span class="p">]</span>
+            <span class="n">method_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">_db&quot;</span>
         
+            <span class="n">df_method</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;cali_method&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">method_db</span><span class="p">)]</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df_method</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">MAPPING</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;telescope&#39;</span><span class="p">]]</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s2">&quot;WVC&quot;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;wv_const&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;WVCStd&quot;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;uncertainty_wv_const&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;time_start&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">string_to_ts</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;cali_start_time&quot;</span><span class="p">])),</span>
+                    <span class="s2">&quot;time_end&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">string_to_ts</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;cali_stop_time&quot;</span><span class="p">])),</span>
+                    <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">method_key</span><span class="p">,</span>
+                <span class="p">})</span>
+            <span class="n">ret</span><span class="p">[</span><span class="n">method_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_to_regular</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded </span><span class="si">{</span><span class="n">df_method</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> lines from table </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> with &#39;</span><span class="si">{</span><span class="n">method_db</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
     <span class="k">return</span> <span class="n">ret</span></div>
+
 
 
 <div class="viewcode-block" id="prepare_for_sql_db_writing">
 <a class="viewcode-back" href="../../../api_doc/io.html#ppcpy.io.sql_interaction.prepare_for_sql_db_writing">[docs]</a>
 <span class="k">def</span> <span class="nf">prepare_for_sql_db_writing</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Collect all necessary variable and save it to a list of tuples for inserting into a SQLite table.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Collect all necessary variable and save it to a list of </span>
+<span class="sd">    tuples for inserting into a SQLite table.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    data_cube : object</span>
+<span class="sd">        Main PicassoProc object</span>
 <span class="sd">    parameter :str</span>
-<span class="sd">        LC or DC</span>
+<span class="sd">        Name of parameter to stoere eg. &#39;LC&#39; or &#39;DC&#39;.</span>
 <span class="sd">    method : str</span>
-<span class="sd">        klett or raman</span>
+<span class="sd">        Name of retrieval method used to retrieve the parameter (see `METHOD_DB_NAMES`)</span>
+<span class="sd">        eg. &#39;klett&#39; or &#39;raman&#39;.</span>
 <span class="sd">        </span>
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    rows_to_insert : list of tuples</span>
+<span class="sd">        Rows to insert in the database.</span>
+
+<span class="sd">    ** History **</span>
+
+<span class="sd">    - xxxx-xx-xx: First edition by</span>
+<span class="sd">    - xxxx-xx-xx: Translated to python.</span>
+<span class="sd">    - 2026-11-01: Gently tried to make it more pythonic</span>
+<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">rows_to_insert</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;raman&#39;</span><span class="p">:</span>
-        <span class="n">method_db</span> <span class="o">=</span> <span class="s1">&#39;Raman_Method&#39;</span>
-    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;klett&#39;</span><span class="p">:</span>
-        <span class="n">method_db</span> <span class="o">=</span> <span class="s1">&#39;Klett_Method&#39;</span>
+    <span class="n">method_db</span> <span class="o">=</span> <span class="n">METHOD_DB_NAMES</span><span class="p">[</span><span class="n">method</span><span class="p">]</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">LC</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="c1">## Lidar calibration constants</span>
     <span class="k">if</span> <span class="n">parameter</span> <span class="o">==</span> <span class="s1">&#39;LC&#39;</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">LC</span><span class="p">[</span><span class="n">method</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">LC</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="n">wv</span><span class="p">,</span> <span class="n">pol</span><span class="p">,</span> <span class="n">tel</span> <span class="o">=</span>  <span class="n">helper</span><span class="o">.</span><span class="n">get_wv_pol_telescope_from_dictkeyname</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-            <span class="n">tel_db</span> <span class="o">=</span> <span class="n">mapping_inverse</span><span class="p">[</span><span class="n">tel</span><span class="p">]</span>
+            <span class="n">tel_db</span> <span class="o">=</span> <span class="n">MAPPING_INVERSE</span><span class="p">[</span><span class="n">tel</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">LC</span><span class="p">[</span><span class="n">method</span><span class="p">][</span><span class="n">e</span><span class="p">]:</span>
                 <span class="n">LC</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="s1">&#39;LC&#39;</span><span class="p">]</span>
                 <span class="n">LC_std</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="s1">&#39;LCStd&#39;</span><span class="p">]</span>
-                <span class="n">LC_is_used</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">LC</span> <span class="o">==</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">LCused</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="k">else</span> <span class="kc">False</span>
-                <span class="n">start_unix</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="s1">&#39;time_start&#39;</span><span class="p">]</span>
-                <span class="n">stop_unix</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="s1">&#39;time_end&#39;</span><span class="p">]</span>
-                <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">start_unix</span><span class="p">,</span> <span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
-                <span class="n">stop</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">stop_unix</span><span class="p">,</span> <span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+                <span class="n">LC_is_used</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">LC</span> <span class="o">==</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">LCused</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="s1">&#39;LC&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">False</span>
                 <span class="n">rows_to_insert</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
-                    <span class="nb">str</span><span class="p">(</span><span class="n">start</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">stop</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">LC</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">LC_std</span><span class="p">),</span> <span class="n">LC_is_used</span><span class="p">,</span> 
+                    <span class="n">_format_ts</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="s1">&#39;time_start&#39;</span><span class="p">]),</span> <span class="n">_format_ts</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="s1">&#39;time_end&#39;</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">LC</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">LC_std</span><span class="p">),</span> <span class="n">LC_is_used</span><span class="p">,</span> 
                     <span class="n">wv</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">rawfile</span><span class="p">),</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">method_db</span><span class="p">,</span> <span class="n">tel_db</span><span class="p">))</span>
 
+    <span class="c1">## Depolarization calibration constants</span>
     <span class="k">elif</span> <span class="n">parameter</span> <span class="o">==</span> <span class="s1">&#39;DC&#39;</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">pol_cali</span><span class="p">[</span><span class="s1">&#39;D90&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">pol_cali</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="n">wv</span><span class="p">,</span> <span class="n">tel</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
-            <span class="n">tel_db</span> <span class="o">=</span> <span class="n">mapping_inverse</span><span class="p">[</span><span class="n">tel</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">pol_cali</span><span class="p">[</span><span class="s1">&#39;D90&#39;</span><span class="p">][</span><span class="n">e</span><span class="p">]:</span>
+            <span class="n">tel_db</span> <span class="o">=</span> <span class="n">MAPPING_INVERSE</span><span class="p">[</span><span class="n">tel</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">pol_cali</span><span class="p">[</span><span class="n">method</span><span class="p">][</span><span class="n">e</span><span class="p">]:</span>
                 <span class="n">eta</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="s1">&#39;eta&#39;</span><span class="p">]</span>
                 <span class="n">eta_std</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="s1">&#39;eta_std&#39;</span><span class="p">]</span>
-                <span class="n">eta_is_used</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">eta</span> <span class="o">==</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">etaused</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="k">else</span> <span class="kc">False</span>
-                <span class="n">start_unix</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="s1">&#39;time_start&#39;</span><span class="p">]</span>
-                <span class="n">stop_unix</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="s1">&#39;time_end&#39;</span><span class="p">]</span>
-                <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">start_unix</span><span class="p">,</span> <span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
-                <span class="n">stop</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">stop_unix</span><span class="p">,</span> <span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+                <span class="n">eta_is_used</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">eta</span> <span class="o">==</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">etaused</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="s1">&#39;eta&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">False</span>
                 <span class="n">rows_to_insert</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
-                    <span class="nb">str</span><span class="p">(</span><span class="n">start</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">stop</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">eta</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">eta_std</span><span class="p">),</span> <span class="n">eta_is_used</span><span class="p">,</span> 
-                    <span class="n">wv</span><span class="p">,</span> <span class="n">tel_db</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">rawfile</span><span class="p">),</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">device</span><span class="p">))</span>
+                    <span class="n">_format_ts</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="s1">&#39;time_start&#39;</span><span class="p">]),</span> <span class="n">_format_ts</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="s1">&#39;time_end&#39;</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">eta</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">eta_std</span><span class="p">),</span> <span class="n">eta_is_used</span><span class="p">,</span> 
+                    <span class="n">wv</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">rawfile</span><span class="p">),</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">method_db</span><span class="p">,</span> <span class="n">tel_db</span><span class="p">))</span>
+
+    <span class="c1">## Water vapor calibration constants</span>
+    <span class="k">elif</span> <span class="n">parameter</span> <span class="o">==</span> <span class="s1">&#39;WVC&#39;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">wv_cali</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">wv</span><span class="p">,</span> <span class="n">tel</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+            <span class="n">tel_db</span> <span class="o">=</span> <span class="n">MAPPING_INVERSE</span><span class="p">[</span><span class="n">tel</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">wv_cali</span><span class="p">[</span><span class="n">method</span><span class="p">][</span><span class="n">e</span><span class="p">]:</span>
+                <span class="n">WVC</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="s1">&#39;WVC&#39;</span><span class="p">]</span>
+                <span class="n">WVCStd</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="s1">&#39;WVCStd&#39;</span><span class="p">]</span>
+                <span class="n">WVC_is_used</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">WVC</span> <span class="o">==</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">WVCused</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="s1">&#39;WVC&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">False</span>
+                <span class="n">rows_to_insert</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
+                    <span class="n">_format_ts</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="s1">&#39;time_start&#39;</span><span class="p">]),</span> <span class="n">_format_ts</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="s1">&#39;time_end&#39;</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">WVC</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">WVCStd</span><span class="p">),</span> <span class="n">WVC_is_used</span><span class="p">,</span> 
+                    <span class="n">wv</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">rawfile</span><span class="p">),</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">method_db</span><span class="p">,</span> <span class="n">tel_db</span><span class="p">))</span>
+    
     <span class="k">return</span> <span class="n">rows_to_insert</span></div>
+
 
 
 <div class="viewcode-block" id="setup_empty">
 <a class="viewcode-back" href="../../../api_doc/io.html#ppcpy.io.sql_interaction.setup_empty">[docs]</a>
-<span class="k">def</span> <span class="nf">setup_empty</span><span class="p">(</span><span class="n">db_path</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">column_names</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">data_types</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">unique</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">setup_empty</span><span class="p">(</span><span class="n">db_path</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">column_names</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+                <span class="n">data_types</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">unique</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create/Initialise an empty database.</span>
 
 <span class="sd">    Parameters</span>
@@ -476,22 +596,63 @@
 <span class="sd">    data_types : list of str</span>
 <span class="sd">        List of SQLite data types for each respective columns (e.g. [&#39;text&#39;, &#39;real&#39;])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">db_path</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Path to Database does not exist </span><span class="si">{</span><span class="n">db_path</span><span class="si">}</span><span class="s2">, will be generated&quot;</span><span class="p">)</span>
+        <span class="n">table_exists</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># check if table exists</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                <span class="s2">&quot;SELECT 1 FROM pragma_table_list WHERE name = ?&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">table_name</span><span class="p">,),</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+            <span class="n">table_exists</span> <span class="o">=</span> <span class="n">cursor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-    <span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">column_names</span>
-    <span class="n">data_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;INTEGER PRIMARY KEY&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">data_types</span>
-    <span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">column_names</span><span class="p">,</span> <span class="n">data_types</span><span class="p">)])</span>
-    <span class="n">sql</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;CREATE TABLE IF NOT EXISTS </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">columns</span><span class="si">}{</span><span class="n">unique</span><span class="si">}</span><span class="s2">) &quot;</span>
-    <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
-        <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
-        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">table_exists</span><span class="p">:</span>
+        <span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">column_names</span>
+        <span class="n">data_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;INTEGER PRIMARY KEY&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">data_types</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">column_names</span><span class="p">,</span> <span class="n">data_types</span><span class="p">)])</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;CREATE TABLE IF NOT EXISTS </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">columns</span><span class="si">}{</span><span class="n">unique</span><span class="si">}</span><span class="s2">) &quot;</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;added table </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># check he columns</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="n">rows</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;PRAGMA table_info(</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">actual</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
+        <span class="n">missing_columns</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span> <span class="o">^</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">column_names</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="n">missing_columns</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;missing columns </span><span class="si">{</span><span class="n">missing_columns</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> .... fixing database scheme HIC SUNT DRACONES&quot;</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_columns</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Currently only implemented for a single missing column&quot;</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">missing_columns</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">assert</span> <span class="n">col</span> <span class="o">==</span> <span class="s1">&#39;cali_method&#39;</span><span class="p">,</span> <span class="s2">&quot;at the moment the default value is hard-coded (i.e. the used calibration method is an educated guess)&quot;</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">column_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="n">data_types</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;EXECUTING: ALTER TABLE &quot;</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s1">&quot; ADD COLUMN &quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&quot; </span><span class="si">{</span><span class="n">dtype</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
+            <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+                <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s1">&#39;ALTER TABLE &quot;</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s1">&quot; ADD COLUMN &quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&quot; </span><span class="si">{</span><span class="n">dtype</span><span class="si">}</span><span class="s1"> NOT NULL DEFAULT </span><span class="se">\&#39;</span><span class="s1">D90</span><span class="se">\&#39;</span><span class="s1">&#39;</span>
+                <span class="p">)</span>
+                <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CREATE UNIQUE INDEX IF NOT EXISTS uq_</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> ON </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">unique</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="s1">&#39;, UNIQUE&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+            <span class="c1"># enforcing the unique constraint later on is internally a bit different, shown by &quot;c&quot; in the origin key instead of &quot;c&quot;</span>
+            <span class="c1"># the alternative would be to recreate the table and move all the contents</span>
+            <span class="c1"># not the safest waters to sail in ;)</span>
+            
 
 <div class="viewcode-block" id="write_rows_to_sql_db">
 <a class="viewcode-back" href="../../../api_doc/io.html#ppcpy.io.sql_interaction.write_rows_to_sql_db">[docs]</a>
-<span class="k">def</span> <span class="nf">write_rows_to_sql_db</span><span class="p">(</span><span class="n">db_path</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">column_names</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">rows_to_insert</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+<span class="k">def</span> <span class="nf">write_rows_to_sql_db</span><span class="p">(</span><span class="n">db_path</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">column_names</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+                         <span class="n">rows_to_insert</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Insert multiple rows into a SQLite table.</span>
 
 <span class="sd">    Parameters</span>
@@ -508,33 +669,44 @@
 <span class="sd">        </span>
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    The IGNORE syntax somehow did not work.</span>
-<span class="sd">    With the UNIQUE colums defined and INSERT OR REPLACE at least the new values are updated.</span>
-<span class="sd">    Though they are given a new ID.</span>
+<span class="sd">    - The IGNORE syntax somehow did not work.</span>
+<span class="sd">      With the UNIQUE colums defined and INSERT OR REPLACE at least the new values are updated.</span>
+<span class="sd">      Though they are given a new ID.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;PRAGMA table_info(</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
+    
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected: </span><span class="si">{</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">column_names</span><span class="si">}</span><span class="se">\n</span><span class="s2">Actual:   </span><span class="si">{</span><span class="n">actual</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">column_names</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;missing column names </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">column_names</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">actual</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">column_names</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Order of table differs. Not nice, but columns should be accessed explicitely&quot;</span><span class="p">)</span>
+
     <span class="n">placeholders</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;?&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">column_names</span><span class="p">))</span>
     <span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">column_names</span><span class="p">)</span>
-    <span class="c1">#sql = f&quot;INSERT INTO {table_name} ({columns}) VALUES ({placeholders}) ON CONFLICT(cali_start_time, cali_stop_time, wavelength, polly_type, telescope) DO UPDATE SET data = excluded.data&quot;</span>
     <span class="n">sql</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;INSERT OR REPLACE INTO </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">columns</span><span class="si">}</span><span class="s2">) VALUES (</span><span class="si">{</span><span class="n">placeholders</span><span class="si">}</span><span class="s2">)&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+            <span class="c1">#print(&quot;\nBefore:&quot;)</span>
+            <span class="c1">#print(pd.read_sql_query(f&quot;SELECT * FROM {table_name}&quot;, conn).to_string(index=False))</span>
             <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
             <span class="n">before_changes</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">total_changes</span>
             <span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">rows_to_insert</span><span class="p">)</span>
             <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-            <span class="n">inserted</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">total_changes</span> <span class="o">-</span> <span class="n">before_changes</span>
+            <span class="n">affected</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">total_changes</span> <span class="o">-</span> <span class="n">before_changes</span>
+            <span class="c1">#print(&quot;\nAfter:&quot;)</span>
+            <span class="c1">#print(pd.read_sql_query(f&quot;SELECT * FROM {table_name}&quot;, conn).to_string(index=False))</span>
         <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">inserted</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;no new rows inserted into &#39;</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">affected</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;no rows added/changed in &#39;</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">inserted</span><span class="si">}</span><span class="s2"> rows inserted into &#39;</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">affected</span><span class="si">}</span><span class="s2"> rows inserted/updated in &#39;</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SQLite error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
-
-
 
 </pre></div>
 

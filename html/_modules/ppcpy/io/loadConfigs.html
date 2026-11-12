@@ -316,22 +316,32 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
 
+
+<span class="n">configIdxKeys</span><span class="p">:</span><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;first_range_gate_indx&#39;</span><span class="p">,</span> <span class="s1">&#39;bgCorRangeIndx&#39;</span><span class="p">,</span> <span class="s1">&#39;bgCorRangeIndxLow&#39;</span><span class="p">,</span> <span class="s1">&#39;bgCorRangeIndxHigh&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;LCMeanMinIndx&#39;</span><span class="p">,</span> <span class="s1">&#39;LCMeanMaxIndx&#39;</span><span class="p">,</span> <span class="s1">&#39;depol_cal_minbin_355&#39;</span><span class="p">,</span> <span class="s1">&#39;depol_cal_minbin_532&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;depol_cal_minbin_1064&#39;</span>
+<span class="p">]</span>
+
+
 <div class="viewcode-block" id="loadPicassoConfig">
-<a class="viewcode-back" href="../../../_autosummary/ppcpy.io.loadConfigs.html#ppcpy.io.loadConfigs.loadPicassoConfig">[docs]</a>
-<span class="k">def</span> <span class="nf">loadPicassoConfig</span><span class="p">(</span><span class="n">picasso_config_file</span><span class="p">,</span> <span class="n">picasso_default_config_file</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;load the general Picasso config file</span>
+<a class="viewcode-back" href="../../../api_doc/io.html#ppcpy.io.loadConfigs.loadPicassoConfig">[docs]</a>
+<span class="k">def</span> <span class="nf">loadPicassoConfig</span><span class="p">(</span><span class="n">picasso_config_file</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">picasso_default_config_file</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load the general Picasso config file.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    picasso_config_file : str or path</span>
-<span class="sd">        the specific config file</span>
+<span class="sd">        The specific config file.</span>
 <span class="sd">    picasso_default_config_fil : str or path</span>
-<span class="sd">        the default (template) file</span>
+<span class="sd">        The default (template) file.</span>
 <span class="sd">        </span>
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    picasso_config_dict</span>
+<span class="sd">    picasso_config_dict : dict</span>
+<span class="sd">        Mereged config file containing all config variables.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">picasso_default_config_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">picasso_default_config_file</span><span class="p">)</span>
     <span class="n">picasso_config_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">picasso_config_file</span><span class="p">)</span>
     <span class="n">picasso_config_dict</span> <span class="o">=</span> <span class="p">{}</span>
@@ -362,7 +372,7 @@
                         <span class="n">picasso_config_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">picasso_config_file_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
                 <span class="k">return</span> <span class="n">picasso_config_dict</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;picasso_default_config_file: </span><span class="si">{picasso_default_config_file}</span><span class="s1"> can not be read.&#39;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;picasso_default_config_file: </span><span class="si">{</span><span class="n">picasso_default_config_file</span><span class="si">}</span><span class="s1"> can not be read.&#39;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;picasso config file: </span><span class="si">{</span><span class="n">picasso_config_file</span><span class="si">}</span><span class="s1"> does not exist&#39;</span><span class="p">)</span>
@@ -375,27 +385,45 @@
 
 
 <div class="viewcode-block" id="readPollyNetConfigLinkTable">
-<a class="viewcode-back" href="../../../_autosummary/ppcpy.io.loadConfigs.html#ppcpy.io.loadConfigs.readPollyNetConfigLinkTable">[docs]</a>
-<span class="k">def</span> <span class="nf">readPollyNetConfigLinkTable</span><span class="p">(</span><span class="n">polly_config_table_file</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a class="viewcode-back" href="../../../api_doc/io.html#ppcpy.io.loadConfigs.readPollyNetConfigLinkTable">[docs]</a>
+<span class="k">def</span> <span class="nf">readPollyNetConfigLinkTable</span><span class="p">(</span><span class="n">polly_config_table_file</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read PollyNet processing chain config link table.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    polly_config_table_file : str</span>
+<span class="sd">        Path to the link tabele file.</span>
+<span class="sd">    timestamp : str</span>
+<span class="sd">        Date of measurement.</span>
+<span class="sd">    device : str</span>
+<span class="sd">        Name of polly device.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    config_array : pd.DataFrame</span>
+<span class="sd">        Row of intrest in the PollyNet processing chain config link table.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">polly_config_table_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">polly_config_table_file</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">polly_config_table_file_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;pollynet_config_link_file: </span><span class="si">{</span><span class="n">polly_config_table_file</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="n">excel_file_ds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">polly_config_table_file</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;openpyxl&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">polly_config_table_file_path</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;.xlsx&quot;</span><span class="p">:</span>
+            <span class="n">file_ds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">polly_config_table_file</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;openpyxl&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">polly_config_table_file_path</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;.csv&quot;</span><span class="p">:</span>
+            <span class="n">file_ds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">polly_config_table_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
         <span class="c1">## search for timerange for given timestamp</span>
         <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
-        <span class="n">after_start_date</span> <span class="o">=</span> <span class="n">excel_file_ds</span><span class="p">[</span><span class="s1">&#39;Starttime of config&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">timestamp</span>
-        <span class="n">before_end_date</span> <span class="o">=</span> <span class="n">excel_file_ds</span><span class="p">[</span><span class="s1">&#39;Stoptime of config&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">timestamp</span>
+        <span class="n">after_start_date</span> <span class="o">=</span> <span class="n">file_ds</span><span class="p">[</span><span class="s1">&#39;Starttime of config&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">timestamp</span>
+        <span class="n">before_end_date</span> <span class="o">=</span> <span class="n">file_ds</span><span class="p">[</span><span class="s1">&#39;Stoptime of config&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">timestamp</span>
         <span class="n">between_two_dates</span> <span class="o">=</span> <span class="n">after_start_date</span> <span class="o">&amp;</span> <span class="n">before_end_date</span>
-        <span class="n">filtered_result</span> <span class="o">=</span> <span class="n">excel_file_ds</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">between_two_dates</span><span class="p">]</span>
-    <span class="c1">#    print(filtered_result)</span>
+        <span class="n">filtered_result</span> <span class="o">=</span> <span class="n">file_ds</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">between_two_dates</span><span class="p">]</span>
+        <span class="c1"># print(filtered_result)</span>
         <span class="c1">## get config-file for timeperiod and instrument</span>
         <span class="n">config_array</span> <span class="o">=</span> <span class="n">filtered_result</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">filtered_result</span><span class="p">[</span><span class="s1">&#39;Instrument&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">device</span><span class="p">)]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">config_array</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="c1">#polly_config_file = str(config_array[&#39;Config file&#39;].to_string(index=False)).strip() ## get rid of whtiespaces</span>
-            <span class="c1">#return polly_config_file</span>
+            <span class="c1"># polly_config_file = str(config_array[&#39;Config file&#39;].to_string(index=False)).strip() ## get rid of whtiespaces</span>
+            <span class="c1"># return polly_config_file</span>
             <span class="k">return</span> <span class="n">config_array</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;no polly-config file could be found for </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s1">@</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
@@ -406,11 +434,22 @@
 
 
 
-<span class="c1"># def fix_indexing(config_dict, keys=[&#39;first_range_gate_indx&#39;, ]):</span>
 <div class="viewcode-block" id="fix_indexing">
-<a class="viewcode-back" href="../../../_autosummary/ppcpy.io.loadConfigs.html#ppcpy.io.loadConfigs.fix_indexing">[docs]</a>
-<span class="k">def</span> <span class="nf">fix_indexing</span><span class="p">(</span><span class="n">config_dict</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;first_range_gate_indx&#39;</span><span class="p">,</span> <span class="s1">&#39;bgCorRangeIndx&#39;</span><span class="p">,</span> <span class="s1">&#39;bgCorRangeIndxLow&#39;</span><span class="p">,</span> <span class="s1">&#39;bgCorRangeIndxHigh&#39;</span><span class="p">,</span> <span class="s1">&#39;LCMeanMinIndx&#39;</span><span class="p">,</span> <span class="s1">&#39;LCMeanMaxIndx&#39;</span><span class="p">,</span> <span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a class="viewcode-back" href="../../../api_doc/io.html#ppcpy.io.loadConfigs.fix_indexing">[docs]</a>
+<span class="k">def</span> <span class="nf">fix_indexing</span><span class="p">(</span><span class="n">config_dict</span><span class="p">:</span><span class="nb">dict</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span><span class="nb">list</span><span class="o">=</span><span class="n">configIdxKeys</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fix indexing convention of config variables to 0based.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    config_dict : dict</span>
+<span class="sd">        A dictionary containing all config variables.</span>
+<span class="sd">    keys : list</span>
+<span class="sd">        Key(s) of `config_dict` variables to fix indexing convention.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    config_dict : dict</span>
+<span class="sd">        `config_dict` with 0based indexing.  </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;indexing_convention&#39;</span> <span class="ow">in</span> <span class="n">config_dict</span><span class="p">:</span>
@@ -430,39 +469,40 @@
 
 
 <div class="viewcode-block" id="getPollyConfigfromArray">
-<a class="viewcode-back" href="../../../_autosummary/ppcpy.io.loadConfigs.html#ppcpy.io.loadConfigs.getPollyConfigfromArray">[docs]</a>
-<span class="k">def</span> <span class="nf">getPollyConfigfromArray</span><span class="p">(</span><span class="n">polly_config_array</span><span class="p">,</span> <span class="n">picasso_config_dict</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;function to load the config for the time identified</span>
+<a class="viewcode-back" href="../../../api_doc/io.html#ppcpy.io.loadConfigs.getPollyConfigfromArray">[docs]</a>
+<span class="k">def</span> <span class="nf">getPollyConfigfromArray</span><span class="p">(</span><span class="n">polly_config_array</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">picasso_config_dict</span><span class="p">:</span><span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to load the config for the time identified.</span>
 <span class="sd">    </span>
-<span class="sd">    aim is to declutter the runscript</span>
+<span class="sd">    Aim is to declutter the runscript</span>
 
-<span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    polly_config_array : pandas dataframe</span>
-<span class="sd">        selected line form the links.xlsx</span>
+<span class="sd">        Selected line form the links.xlsx.</span>
 <span class="sd">    picasso_config_dict : dict</span>
-<span class="sd">        general picasso config</span>
+<span class="sd">        General picasso config.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    polly_config_dict : dict</span>
-<span class="sd">    </span>
+<span class="sd">        A dictionary with the polly config / default parameters.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">polly_config_array</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;given config array has more than one value&#39;</span>
 
     <span class="n">polly_config_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
         <span class="n">picasso_config_dict</span><span class="p">[</span><span class="s1">&#39;polly_config_folder&#39;</span><span class="p">],</span>
-        <span class="n">polly_config_array</span><span class="p">[</span><span class="s1">&#39;Config file&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
-    <span class="c1">#print(polly_config_file)</span>
+        <span class="n">polly_config_array</span><span class="p">[</span><span class="s1">&#39;Config file&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="c1"># print(polly_config_file)</span>
     <span class="n">polly_default_config_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
         <span class="n">picasso_config_dict</span><span class="p">[</span><span class="s1">&#39;path_config&#39;</span><span class="p">],</span>
         <span class="s1">&#39;polly_global_config.json&#39;</span>
     <span class="p">)</span>
-    <span class="c1">#print(polly_default_config_file)</span>
+    <span class="c1"># print(polly_default_config_file)</span>
     <span class="n">polly_config_dict</span> <span class="o">=</span> <span class="n">loadPollyConfig</span><span class="p">(</span>
-        <span class="n">polly_config_file</span><span class="p">,</span> <span class="n">polly_default_config_file</span><span class="p">)</span>
-
+        <span class="n">polly_config_file</span><span class="p">,</span> <span class="n">polly_default_config_file</span>
+    <span class="p">)</span>
     <span class="n">polly_config_dict</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">polly_config_array</span><span class="p">[</span><span class="s1">&#39;Instrument&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
     <span class="n">polly_config_dict</span><span class="p">[</span><span class="s1">&#39;site&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">polly_config_array</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
     <span class="n">polly_config_dict</span><span class="p">[</span><span class="s1">&#39;asl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">polly_config_array</span><span class="p">[</span><span class="s1">&#39;asl.&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
@@ -474,10 +514,29 @@
 
 
 <div class="viewcode-block" id="loadPollyConfig">
-<a class="viewcode-back" href="../../../_autosummary/ppcpy.io.loadConfigs.html#ppcpy.io.loadConfigs.loadPollyConfig">[docs]</a>
-<span class="k">def</span> <span class="nf">loadPollyConfig</span><span class="p">(</span><span class="n">polly_config_file</span><span class="p">,</span> <span class="n">polly_default_config_file</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a class="viewcode-back" href="../../../api_doc/io.html#ppcpy.io.loadConfigs.loadPollyConfig">[docs]</a>
+<span class="k">def</span> <span class="nf">loadPollyConfig</span><span class="p">(</span><span class="n">polly_config_file</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">polly_default_config_file</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load the spesific and default config files and combine them into one dictionary.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    polly_config_file : str</span>
+<span class="sd">        Path to polly config file.</span>
+<span class="sd">    polly_default_config_file : str</span>
+<span class="sd">        path to polly default file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        A dictionary with the polly config / default parameters.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    .. TODO:: </span>
+<span class="sd">        - Maybe change `polly_default_config_file` to `polly_global_config_file`</span>
+<span class="sd">          as the defualt one is no longer used.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">polly_default_config_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">polly_default_config_file</span><span class="p">)</span>
     <span class="n">polly_config_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">polly_config_file</span><span class="p">)</span>
     <span class="n">polly_config_dict</span> <span class="o">=</span> <span class="p">{}</span>
@@ -520,8 +579,10 @@
                             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">polly_default_config_file_dict</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">polly_default_config_file_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">4</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">polly_default_config_file_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">!=</span> <span class="n">channels</span><span class="p">:</span>
                                 <span class="c1">## number of channels from the default-polly-config has to be adapted to the correct number of channels, taken from the local-polly-config</span>
                                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">polly_default_config_file_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">channels</span><span class="p">:</span>
+                                    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;length of </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> exceeds the number of channels (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">polly_default_config_file_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="si">}</span><span class="s1"> vs </span><span class="si">{</span><span class="n">channels</span><span class="si">}</span><span class="s1">). Only the first </span><span class="si">{</span><span class="n">channels</span><span class="si">}</span><span class="s1"> values will be considered.&#39;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                                     <span class="n">polly_config_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">polly_default_config_file_dict</span><span class="p">[</span><span class="n">key</span><span class="p">][:</span><span class="n">channels</span><span class="p">]</span>
                                 <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">polly_default_config_file_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">channels</span><span class="p">:</span>
+                                    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;length of </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> is less than the number of channels (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">polly_default_config_file_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="si">}</span><span class="s1"> vs </span><span class="si">{</span><span class="n">channels</span><span class="si">}</span><span class="s1">). The last value </span><span class="si">{</span><span class="n">polly_default_config_file_dict</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> will be used for the last </span><span class="si">{</span><span class="n">channels</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">polly_default_config_file_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="si">}</span><span class="s1"> channels.&#39;</span><span class="p">)</span>
                                     <span class="n">polly_config_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">polly_default_config_file_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
                                     <span class="n">last_element</span> <span class="o">=</span> <span class="n">polly_default_config_file_dict</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
                                     <span class="n">extension_length</span> <span class="o">=</span> <span class="n">channels</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">polly_default_config_file_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
@@ -537,9 +598,11 @@
 
                 <span class="k">if</span> <span class="s1">&#39;first_range_gate_indx&#39;</span> <span class="ow">in</span> <span class="n">polly_default_config_file_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                     <span class="n">fix_indexing_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;first_range_gate_indx&#39;</span><span class="p">]</span>
-                <span class="k">elif</span> <span class="s1">&#39;LC&#39;</span> <span class="ow">in</span> <span class="n">polly_default_config_file_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                    <span class="n">fix_indexing_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;LC&#39;</span><span class="p">]</span>
-                <span class="k">return</span> <span class="n">fix_indexing</span><span class="p">(</span><span class="n">polly_config_dict</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="n">fix_indexing_keys</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;bgCorRangeIndx&#39;</span><span class="p">,</span> <span class="s1">&#39;bgCorRangeIndxLow&#39;</span><span class="p">,</span> <span class="s1">&#39;bgCorRangeIndxHigh&#39;</span><span class="p">,</span> <span class="s1">&#39;LCMeanMinIndx&#39;</span><span class="p">,</span> <span class="s1">&#39;LCMeanMaxIndx&#39;</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">fix_indexing_keys</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">return</span> <span class="n">fix_indexing</span><span class="p">(</span><span class="n">polly_config_dict</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="n">fix_indexing_keys</span> <span class="o">+</span> <span class="p">[</span>
+                    <span class="s1">&#39;bgCorRangeIndx&#39;</span><span class="p">,</span> <span class="s1">&#39;bgCorRangeIndxLow&#39;</span><span class="p">,</span> <span class="s1">&#39;bgCorRangeIndxHigh&#39;</span><span class="p">,</span> <span class="s1">&#39;LCMeanMinIndx&#39;</span><span class="p">,</span> 
+                    <span class="s1">&#39;LCMeanMaxIndx&#39;</span><span class="p">,</span> <span class="s1">&#39;depol_cal_minbin_355&#39;</span><span class="p">,</span> <span class="s1">&#39;depol_cal_minbin_532&#39;</span><span class="p">,</span> <span class="s1">&#39;depol_cal_minbin_1064&#39;</span><span class="p">])</span>
                 
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;polly_config_file: </span><span class="si">{</span><span class="n">polly_config_file</span><span class="si">}</span><span class="s1"> can not be processed.&#39;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -549,25 +612,33 @@
             <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;polly_default_config_file: </span><span class="si">{</span><span class="n">polly_default_config_file</span><span class="si">}</span><span class="s1"> will be used&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="s1">&#39;first_range_gate_indx&#39;</span> <span class="ow">in</span> <span class="n">polly_default_config_file_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="n">fix_indexing_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;first_range_gate_indx&#39;</span><span class="p">]</span>
-            <span class="k">elif</span> <span class="s1">&#39;LC&#39;</span> <span class="ow">in</span> <span class="n">polly_default_config_file_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="n">fix_indexing_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;LC&#39;</span><span class="p">]</span>
-            <span class="k">return</span> <span class="n">fix_indexing</span><span class="p">(</span><span class="n">polly_default_config_file_dict</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="n">fix_indexing_keys</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;bgCorRangeIndx&#39;</span><span class="p">,</span> <span class="s1">&#39;bgCorRangeIndxLow&#39;</span><span class="p">,</span> <span class="s1">&#39;bgCorRangeIndxHigh&#39;</span><span class="p">,</span> <span class="s1">&#39;LCMeanMinIndx&#39;</span><span class="p">,</span> <span class="s1">&#39;LCMeanMaxIndx&#39;</span><span class="p">])</span>
-    <span class="k">else</span><span class="p">:</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fix_indexing_keys</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">return</span> <span class="n">fix_indexing</span><span class="p">(</span><span class="n">polly_default_config_file_dict</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="n">fix_indexing_keys</span> <span class="o">+</span>  <span class="p">[</span>
+                    <span class="s1">&#39;bgCorRangeIndx&#39;</span><span class="p">,</span> <span class="s1">&#39;bgCorRangeIndxLow&#39;</span><span class="p">,</span> <span class="s1">&#39;bgCorRangeIndxHigh&#39;</span><span class="p">,</span> <span class="s1">&#39;LCMeanMinIndx&#39;</span><span class="p">,</span> 
+                    <span class="s1">&#39;LCMeanMaxIndx&#39;</span><span class="p">,</span> <span class="s1">&#39;depol_cal_minbin_355&#39;</span><span class="p">,</span> <span class="s1">&#39;depol_cal_minbin_532&#39;</span><span class="p">,</span> <span class="s1">&#39;depol_cal_minbin_1064&#39;</span><span class="p">])</span>
+        
         <span class="n">logging</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;polly_default_config_file:  </span><span class="si">{</span><span class="n">polly_default_config_file</span><span class="si">}</span><span class="s1"> can not be found. Aborting&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="checkPollyConfigDict">
-<a class="viewcode-back" href="../../../_autosummary/ppcpy.io.loadConfigs.html#ppcpy.io.loadConfigs.checkPollyConfigDict">[docs]</a>
-<span class="k">def</span> <span class="nf">checkPollyConfigDict</span><span class="p">(</span><span class="n">polly_config_dict</span><span class="p">:</span><span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Check and potentially modify polly config dict</span>
 
-<span class="sd">    Parameters:</span>
-<span class="sd">    - polly_config_dict (dict): polly config dict to be checked</span>
-<span class="sd">    Output:</span>
-<span class="sd">    - new_polly_config_dict (dict): checked (and modified) polly config dict</span>
+<div class="viewcode-block" id="checkPollyConfigDict">
+<a class="viewcode-back" href="../../../api_doc/io.html#ppcpy.io.loadConfigs.checkPollyConfigDict">[docs]</a>
+<span class="k">def</span> <span class="nf">checkPollyConfigDict</span><span class="p">(</span><span class="n">polly_config_dict</span><span class="p">:</span><span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check and potentially modify polly config dict.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    polly_config_dict : dict</span>
+<span class="sd">        Polly config dict to be checked.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    new_polly_config_dict : dict</span>
+<span class="sd">        Checked (and modified) polly config dict.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;.. checking polly config dict&quot;</span><span class="p">)</span>
     <span class="n">new_polly_config_dict</span> <span class="o">=</span> <span class="n">polly_config_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
@@ -647,7 +718,7 @@
 
   <p class="copyright">
     
-      © Copyright 2025 Andi Klamt, Martin Radenz and Håvard Buholdt.
+      © Copyright 2026 Andi Klamt, Martin Radenz and Håvard Buholdt.
       <br/>
     
   </p>

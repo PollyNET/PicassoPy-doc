@@ -313,13 +313,17 @@
 <span></span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">ppcpy.retrievals.collection</span> <span class="kn">import</span> <span class="n">calc_snr</span>
+<span class="kn">from</span> <span class="nn">ppcpy.misc.helper</span> <span class="kn">import</span> <span class="n">uniform_filter_2d</span><span class="p">,</span> <span class="n">moving_average_2d</span>
+
 
 <div class="viewcode-block" id="qualityMask">
 <a class="viewcode-back" href="../../../api_doc/qc.html#ppcpy.qc.qualityMask.qualityMask">[docs]</a>
-<span class="k">def</span> <span class="nf">qualityMask</span><span class="p">(</span><span class="n">data_cube</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">qualityMask</span><span class="p">(</span><span class="n">data_cube</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimate quality mask.</span>
 <span class="sd">    </span>
-<span class="sd">    Categories:</span>
+<span class="sd">    Categories</span>
+<span class="sd">    ----------</span>
 <span class="sd">        0 : good data</span>
 <span class="sd">        1 : low-SNR data</span>
 <span class="sd">        2 : depolarization calibration periods</span>
@@ -331,30 +335,123 @@
 <span class="sd">    ----------</span>
 <span class="sd">    data_cube : object</span>
 <span class="sd">        Main picassoProc object.</span>
-
-<span class="sd">    Notes</span>
-<span class="sd">    -----</span>
-<span class="sd">    - The lowSNRMask is actually calculated twice, once in pollyPreprocess.m</span>
-<span class="sd">      and then again when the quality mask is evaluated in picassoProcV3.m.</span>
-<span class="sd">      Also the original processing chain has a quality_mask_vdr, which should be a composite</span>
-<span class="sd">      of cross and total, maybe this can be handled more logically here.</span>
+<span class="sd">    useQuasiSNR : bool</span>
+<span class="sd">        If True, use `lowSNRMask_quasi`. Otherwise use `lowSNRMask`.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    quality_mask : ndarray</span>
+<span class="sd">        Quality mask with categories listed above.</span>
 <span class="sd">    </span>
 <span class="sd">    ** History **</span>
 
 <span class="sd">    - xxxx-xx-xx: First edition by ...</span>
+<span class="sd">    - xxxx-xx-xx: translated to python</span>
+<span class="sd">    - 2026-07-03: vectorized and added option to use `lowSNRMask_quasi`</span>
+<span class="sd">    - 2026-07-03: added resistance toward missing mask-variables</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">quality_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;sigBGCor&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">ich</span><span class="p">,</span> <span class="n">ch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">]):</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;channel </span><span class="si">{</span><span class="n">ich</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ch</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">quality_mask</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">ich</span><span class="p">][</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;lowSNRMask&#39;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="n">ich</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">quality_mask</span><span class="p">[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;depCalMask&#39;</span><span class="p">],</span> <span class="p">:,</span> <span class="n">ich</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
-        <span class="n">quality_mask</span><span class="p">[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;shutterOnMask&#39;</span><span class="p">],</span> <span class="p">:,</span> <span class="n">ich</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
-        <span class="n">quality_mask</span><span class="p">[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;fogMask&#39;</span><span class="p">],</span> <span class="p">:,</span> <span class="n">ich</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
-        <span class="n">quality_mask</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">ich</span><span class="p">][</span><span class="n">data_cube</span><span class="o">.</span><span class="n">flagSaturation</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">ich</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="c1"># Flagg pixels with low SNR</span>
+    <span class="k">if</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span><span class="p">[</span><span class="s1">&#39;flagUseImprovedSNR&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="s1">&#39;lowSNRMask_quasi&#39;</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using improved SNR in quality mask estimation.&quot;</span><span class="p">)</span>
+        <span class="n">quality_mask</span><span class="p">[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;lowSNRMask_quasi&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="s1">&#39;lowSNRMask&#39;</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using raw SNR in quality mask estimation.&quot;</span><span class="p">)</span>
+        <span class="n">quality_mask</span><span class="p">[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;lowSNRMask&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Missing SNR information!&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Flagg pixels during depol. calibration periods</span>
+    <span class="k">if</span> <span class="s1">&#39;depCalMask&#39;</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">:</span>
+        <span class="n">quality_mask</span><span class="p">[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;depCalMask&#39;</span><span class="p">],</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Missing depol. calibration period information!&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Flagg pixels where the shutter is on</span>
+    <span class="k">if</span> <span class="s1">&#39;shutterOnMask&#39;</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">:</span>
+        <span class="n">quality_mask</span><span class="p">[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;shutterOnMask&#39;</span><span class="p">],</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Missing shutter position information!&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Flagg pixels affected by fog</span>
+    <span class="k">if</span> <span class="s1">&#39;fogMask&#39;</span> <span class="ow">in</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">:</span>
+        <span class="n">quality_mask</span><span class="p">[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;fogMask&#39;</span><span class="p">],</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Missing fog information!&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Flagg saturated pixels</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="s2">&quot;flagSaturation&quot;</span><span class="p">):</span>
+        <span class="n">quality_mask</span><span class="p">[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">flagSaturation</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Missing saturation information!&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">quality_mask</span></div>
+
+
+
+<div class="viewcode-block" id="improvedSNR">
+<a class="viewcode-back" href="../../../api_doc/qc.html#ppcpy.qc.qualityMask.improvedSNR">[docs]</a>
+<span class="k">def</span> <span class="nf">improvedSNR</span><span class="p">(</span><span class="n">data_cube</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Artificially improve SNR by smoothing the signal and background.</span>
+<span class="sd">   </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_cube : object</span>
+<span class="sd">        Main picassoProc object.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    SNR : ndarray</span>
+<span class="sd">        Improved signal to noise ratio</span>
+<span class="sd">    lowSNRMask : ndarray</span>
+<span class="sd">        True if SNR is lower than the config variable &#39;mask_SNRmin&#39;. Otherwise False.</span>
+<span class="sd">   </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - Could also be in the collection retrieval together with ´calc_snr´.</span>
+<span class="sd">   </span>
+<span class="sd">    ** History **</span>
+
+<span class="sd">    - xxxx-xx-xx: First edition by ...</span>
+<span class="sd">    - 2026-07-03: translated to python</span>
+<span class="sd">    - 2026-07-12: vectorized for better efficiency</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Calculating SNR from smoothed signal to improve data quality...&quot;</span><span class="p">)</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;sigBGCor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">BG</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;BG&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:],</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">quasi_smooth_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span><span class="p">[</span><span class="s1">&#39;quasi_smooth_t&#39;</span><span class="p">])</span>
+    <span class="n">quasi_smooth_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span><span class="p">[</span><span class="s1">&#39;quasi_smooth_h&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Group based vectorization</span>
+    <span class="n">windows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">quasi_smooth_t</span><span class="p">,</span> <span class="n">quasi_smooth_h</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">unique_windows</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">windows</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">smoothFunc</span> <span class="o">=</span> <span class="n">uniform_filter_2d</span>
+    <span class="k">if</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span><span class="p">[</span><span class="s1">&#39;flagPicassoComparison&#39;</span><span class="p">]:</span>
+        <span class="n">smoothFunc</span> <span class="o">=</span> <span class="n">moving_average_2d</span>
+    
+    <span class="k">for</span> <span class="n">grp_idx</span><span class="p">,</span> <span class="p">(</span><span class="n">Nr</span><span class="p">,</span> <span class="n">Nc</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">unique_windows</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vectorized group </span><span class="si">{</span><span class="n">grp_idx</span><span class="si">}</span><span class="s2">, Nr = </span><span class="si">{</span><span class="n">Nr</span><span class="si">}</span><span class="s2">, Nc = </span><span class="si">{</span><span class="n">Nc</span><span class="si">}</span><span class="s2"> ...&quot;</span><span class="p">)</span>
+        <span class="n">grp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">order</span> <span class="o">==</span> <span class="n">grp_idx</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">signal</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">grp</span><span class="p">]</span> <span class="o">=</span> <span class="n">smoothFunc</span><span class="p">(</span><span class="n">signal</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">grp</span><span class="p">],</span> <span class="n">Nr</span><span class="p">,</span> <span class="n">Nc</span><span class="p">)</span>
+        <span class="n">BG</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">grp</span><span class="p">]</span> <span class="o">=</span> <span class="n">smoothFunc</span><span class="p">(</span><span class="n">BG</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">grp</span><span class="p">],</span> <span class="n">Nr</span><span class="p">,</span> <span class="n">Nc</span><span class="p">)</span>
+
+    <span class="c1"># Multiply with smoothing window size to get back to photon counts</span>
+    <span class="n">signal</span> <span class="o">*=</span> <span class="n">quasi_smooth_t</span> <span class="o">*</span> <span class="n">quasi_smooth_h</span>
+    <span class="n">BG</span> <span class="o">*=</span> <span class="n">quasi_smooth_t</span> <span class="o">*</span> <span class="n">quasi_smooth_h</span>
+
+    <span class="n">SNR</span> <span class="o">=</span> <span class="n">calc_snr</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">BG</span><span class="p">)</span>
+    
+    <span class="n">lowSNRMask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">lowSNRMask</span><span class="p">[</span><span class="n">SNR</span> <span class="o">&lt;</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span><span class="p">[</span><span class="s1">&#39;mask_SNRmin&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="n">SNR</span><span class="p">,</span> <span class="n">lowSNRMask</span></div>
 
 </pre></div>
 

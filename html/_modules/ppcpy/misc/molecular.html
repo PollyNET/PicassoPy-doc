@@ -314,6 +314,7 @@
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="c1"># Global variable</span>
 <span class="n">ASSUME_AIR_IDEAL</span><span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1211,10 +1212,10 @@
 <span class="sd">        input wavelength.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;len mean_profiles&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">met_profiles</span><span class="p">))</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;len mean_profiles: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">met_profiles</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">shp</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">met_profiles</span><span class="p">),</span> <span class="n">met_profiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">height</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;shape of the molecular scattering&#39;</span><span class="p">,</span> <span class="n">shp</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;for the wavelengths &#39;</span><span class="p">,</span> <span class="n">wavelengths</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;shape of the molecular scattering </span><span class="si">{</span><span class="n">shp</span><span class="si">}</span><span class="s2"> for the wavelengths </span><span class="si">{</span><span class="n">wavelengths</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
     <span class="n">m_p</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shp</span><span class="p">))</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">met_profiles</span><span class="p">):</span>

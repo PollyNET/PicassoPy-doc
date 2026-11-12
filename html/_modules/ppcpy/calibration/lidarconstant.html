@@ -324,10 +324,86 @@
 
 <span class="n">elastic2raman</span><span class="p">:</span><span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">355</span><span class="p">:</span> <span class="mi">387</span><span class="p">,</span> <span class="mi">532</span><span class="p">:</span> <span class="mi">607</span><span class="p">}</span>
 
+
+<div class="viewcode-block" id="loadDefaults">
+<a class="viewcode-back" href="../../../api_doc/calibration.html#ppcpy.calibration.lidarconstant.loadDefaults">[docs]</a>
+<span class="k">def</span> <span class="nf">loadDefaults</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="o">**</span><span class="n">defaults</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prepare default Lidar calibration values.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_cube : object</span>
+<span class="sd">        Main PicassoProc object.</span>
+<span class="sd">    LC : list, optional</span>
+<span class="sd">        Default Lidar constant value per channel.</span>
+<span class="sd">    LCStd : list, optional</span>
+<span class="sd">        Default Lidar constant error per channel.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    defaultDict : dict</span>
+<span class="sd">        Default Lidar calibration result per channel.</span>
+
+<span class="sd">        Each channel contains a list with one single sub-dict with entries:</span>
+
+<span class="sd">        ``LC`` : float</span>
+<span class="sd">            Default Lidar calibration constant.</span>
+<span class="sd">    </span>
+<span class="sd">        ``LCStd`` : float</span>
+<span class="sd">            Default uncertainty of lidar calibration constant.</span>
+<span class="sd">    </span>
+<span class="sd">        ``method`` : str</span>
+<span class="sd">            Name of retrieval method.</span>
+<span class="sd">        </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Default values are by standard taken from their config variable but can be</span>
+<span class="sd">    overwritten if passed as an input to this function. </span>
+<span class="sd">    The order of ``LC`` and ``LCStd`` must match the channel order in</span>
+<span class="sd">    ``data_cube.retrievals_highres[&#39;channel&#39;]``.</span>
+<span class="sd">    </span>
+<span class="sd">    .. TODO:: Consider allowing default values for a single channel to passed as input.</span>
+
+<span class="sd">    **History**</span>
+
+<span class="sd">    - 2026-08-07: First edition by Buholdt</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt; loadDefaults(data_cube,</span>
+<span class="sd">           LC=[1e13, 1, 1, 1, 4e14, 1, ...],</span>
+<span class="sd">           LCStd=[1e-3, 1, 1, 1, 2e-2, 1, ...]</span>
+<span class="sd">           )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">default_values</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">polly_config_dict</span> <span class="o">|</span> <span class="n">defaults</span>
+    <span class="n">default_LC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">default_values</span><span class="p">[</span><span class="s1">&#39;LC&#39;</span><span class="p">])</span>
+    <span class="n">default_LCStd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">default_values</span><span class="p">[</span><span class="s1">&#39;LCStd&#39;</span><span class="p">])</span>
+
+    <span class="n">defaultDict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">channels</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="mi">355</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">532</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">1064</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">387</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">607</span><span class="p">,</span> <span class="s1">&#39;FR&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">355</span><span class="p">,</span> <span class="s1">&#39;NR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">532</span><span class="p">,</span> <span class="s1">&#39;NR&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">387</span><span class="p">,</span> <span class="s1">&#39;NR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">607</span><span class="p">,</span> <span class="s1">&#39;NR&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">tel</span><span class="p">)</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
+        <span class="n">defaultDict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2">_total_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span>
+            <span class="s1">&#39;LC&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">default_LC</span><span class="p">[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="n">tel</span><span class="p">)])),</span>
+            <span class="s1">&#39;LCStd&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">default_LCStd</span><span class="p">[</span><span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="n">tel</span><span class="p">)])),</span>
+            <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;default&#39;</span> 
+        <span class="p">}]</span>
+
+    <span class="k">return</span> <span class="n">defaultDict</span></div>
+
+
+
 <div class="viewcode-block" id="lc_for_cldFreeGrps">
 <a class="viewcode-back" href="../../../api_doc/calibration.html#ppcpy.calibration.lidarconstant.lc_for_cldFreeGrps">[docs]</a>
-<span class="k">def</span> <span class="nf">lc_for_cldFreeGrps</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">retrieval</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">collect_debug</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimate the lidar constant from the optical profiles.</span>
+<span class="k">def</span> <span class="nf">lc_for_cldFreeGrps</span><span class="p">(</span><span class="n">data_cube</span><span class="p">,</span> <span class="n">retrieval</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">collect_debug</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimate lidar calibration constant from the optical profiles.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -335,29 +411,53 @@
 <span class="sd">        Main PicassoProc object.</span>
 <span class="sd">    retrieval : str</span>
 <span class="sd">        Retrieval type. &#39;klett&#39; or &#39;raman&#39;.</span>
-<span class="sd">    collect_debug : bool</span>
-<span class="sd">        If true, collects debug information.</span>
+<span class="sd">    collect_debug : bool, optional</span>
+<span class="sd">        If true, collects debug information. Default is False</span>
 <span class="sd">    </span>
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    LCs : list</span>
-<span class="sd">        Lidar constant for retrieval type per channel per cloud free period.</span>
+<span class="sd">    LCs : dict</span>
+<span class="sd">        Lidar calibration results for ``retrieval`` retrieved optical profiles per channel.</span>
+
+<span class="sd">        Each channel contains a list of sub-dicts with entries:</span>
+
+<span class="sd">        ``LC`` : float</span>
+<span class="sd">            Lidar calibration constant.</span>
+
+<span class="sd">        ``LCStd`` : float</span>
+<span class="sd">            Uncertainty of lidar calibration constant.</span>
+
+<span class="sd">        ``time_start``, ``time_end`` : int</span>
+<span class="sd">            Start and stop times for successful calibration.</span>
+
+<span class="sd">        ``method`` : str</span>
+<span class="sd">            Name of retrieval method.</span>
+
+<span class="sd">        The number of elements in each list depends on the number of successful retrievals.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    - For NR, done directly form the optical profiles, whereas in the matlab version, the ``LC*olAttri387.sigRatio`` is taken.</span>
-<span class="sd">    - Through the config variable &#39;flagUseRetrievedExt4LCCalc&#39;, the extinction used to calculate the LCs can be specified.</span>
-<span class="sd">      if &#39;flagUseRetrievedExt4LCCalc&#39; is True the retrieved extinction will be used otherwise the extinction approximated by</span>
-<span class="sd">      the backscatter times the assumed lidar constant will be used.</span>
-<span class="sd">    - Missing Rotational Raman and Aeronet LC retrieval.</span>
+<span class="sd">    For NR channels, the LC is calculated directly form the optical profiles, whereas in the matlab version,</span>
+<span class="sd">    it is estimated by multiplying the respective FR LC with ``olAttri387.sigRatio``.</span>
+
+<span class="sd">    The function uses the following configuration flags:</span>
+
+<span class="sd">    - ``flagUseRetrievedExt4LCCalc``: If enabled the retrieved extinction when calculating the LCs.</span>
+<span class="sd">                                      If disabled the extinction will be estimated by the retrieved </span>
+<span class="sd">                                      backscatter times the assumed LR.</span>
+<span class="sd">                                      </span>
+
+<span class="sd">    The options for Rotational Raman and Aeronet LC retrievals are currently missing.</span>
 
 <span class="sd">    .. TODO:: Check if LC&#39;s are normalized with respect to the mean of the profiles.</span>
-<span class="sd">    .. TODO:: Add option for Aeronet and rotational Raman retrieved LC.</span>
 
+<span class="sd">    .. TODO:: Add option for Aeronet and rotational Raman retrieved LC.</span>
+<span class="sd">    </span>
 <span class="sd">    **History**</span>
 
 <span class="sd">    xxxx-xx-xx: First edition by ...</span>
 <span class="sd">    2026-03-18: Changed beta_mol for inelastic wavelengths and added the &#39;flagUseRetrievedExt4LCCalc&#39; variable.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;LC retrieval: </span><span class="si">{</span><span class="n">retrieval</span><span class="si">}</span><span class="s1"> method&#39;</span><span class="p">)</span>
@@ -375,7 +475,7 @@
         <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">profiles</span><span class="p">:</span>
             <span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
 
-            <span class="c1"># Telescope type dependent configurations:</span>
+            <span class="c1">## Telescope type dependent configurations</span>
             <span class="k">if</span> <span class="n">tel</span> <span class="o">==</span> <span class="s1">&#39;NR&#39;</span><span class="p">:</span>
                 <span class="n">key_smooth</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;smoothWin_</span><span class="si">{</span><span class="n">retrieval</span><span class="si">}</span><span class="s1">_NR_&#39;</span>
                 <span class="n">key_LR</span> <span class="o">=</span> <span class="s1">&#39;LR_NR_&#39;</span>
@@ -387,29 +487,29 @@
             <span class="n">hBaseInd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span>
                 <span class="n">height</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">hFullOverlap</span> <span class="o">+</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key_smooth</span><span class="si">}{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">hres</span><span class="p">))</span>
 
-            <span class="c1"># Elastic signal:</span>
+            <span class="c1">## Elastic signal</span>
             <span class="n">sig</span> <span class="o">=</span> <span class="n">profiles</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;signal&#39;</span><span class="p">]</span>
-            <span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span>
+            <span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span> <span class="c1"># TODO: try to use PCR --&gt; normalized</span>
                 <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;sig</span><span class="si">{</span><span class="n">sig</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">cldFree</span><span class="p">),</span> <span class="p">:,</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             <span class="n">molBsc</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_profiles</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mBsc_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="n">molExt</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_profiles</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mExt_</span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-            <span class="c1"># Check for avaiabel retrievals:</span>
+            <span class="c1">## Check for available retrievals</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="s1">&#39;aerExt&#39;</span> <span class="ow">in</span> <span class="n">profiles</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="ow">and</span> <span class="s1">&#39;aerBsc&#39;</span> <span class="ow">in</span> <span class="n">profiles</span><span class="p">[</span><span class="n">channel</span><span class="p">]):</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;No availabel retrievals, skipping </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">cldFree</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;No available retrievals, skipping </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">cldFree</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
                 <span class="k">continue</span>
 
-            <span class="c1"># Backscatter and extinction retrievals:</span>
+            <span class="c1">## Backscatter and extinction retrievals</span>
             <span class="n">aerBsc</span> <span class="o">=</span> <span class="n">profiles</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;aerBsc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;flagUseRetrievedExt4LCCalc&#39;</span><span class="p">]</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;flagPicassoComparison&#39;</span><span class="p">]:</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Using Retrieved Exticntion&#39;</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using Retrieved Extinction&quot;</span><span class="p">)</span>
                 <span class="n">aerExt</span> <span class="o">=</span> <span class="n">profiles</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="s1">&#39;aerExt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Using approximated Extinction&#39;</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using approximated Extinction&quot;</span><span class="p">)</span>
                 <span class="n">aerBsc</span><span class="p">[</span><span class="n">aerBsc</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
                 <span class="n">aerExt</span> <span class="o">=</span> <span class="n">aerBsc</span> <span class="o">*</span> <span class="n">config_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key_LR</span><span class="si">}{</span><span class="n">wv</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
 
-            <span class="c1"># Interpolate extinction to ground</span>
+            <span class="c1">## Interpolate extinction to ground</span>
             <span class="n">aerExt</span><span class="p">[:</span><span class="n">hBaseInd</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">aerExt</span><span class="p">[</span><span class="n">hBaseInd</span><span class="p">]</span>
 
             <span class="c1">## Optical depth (OD)</span>
@@ -429,22 +529,22 @@
                 <span class="n">minBin</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;LCMeanMinIndx&#39;</span><span class="p">],</span>
                 <span class="n">maxBin</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;LCMeanMaxIndx&#39;</span><span class="p">]</span>
             <span class="p">)</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;cldFreGrp </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">, Channel </span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1">, LC_stable </span><span class="si">{</span><span class="n">LC_stable</span><span class="si">}</span><span class="s1">, LCStd </span><span class="si">{</span><span class="n">LCStd</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cldFreGrp </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">, Channel </span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">, LC_stable </span><span class="si">{</span><span class="n">LC_stable</span><span class="si">}</span><span class="s2">, LCStd </span><span class="si">{</span><span class="n">LCStd</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">LC_stable</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Can not find a stable LC value, skipping </span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s1"> nm </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1"> channel for cloud free period </span><span class="si">{</span><span class="n">cldFree</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Can not find a stable LC value, skipping </span><span class="si">{</span><span class="n">wv</span><span class="si">}</span><span class="s2"> nm </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2"> channel for cloud free period </span><span class="si">{</span><span class="n">cldFree</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="k">continue</span>
-            
+
+            <span class="c1">## save LC result</span>
+            <span class="n">LCs</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;LC&#39;</span><span class="p">:</span> <span class="n">LC_stable</span><span class="p">,</span> <span class="s1">&#39;LCStd&#39;</span><span class="p">:</span> <span class="n">LC_stable</span> <span class="o">*</span> <span class="n">LCStd</span><span class="p">,</span>
+                <span class="s1">&#39;time_start&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cldFreeTime</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="s1">&#39;time_end&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cldFreeTime</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">retrieval</span>
+            <span class="p">})</span>
+
+            <span class="c1">## Collect debug info</span>
             <span class="k">if</span> <span class="n">collect_debug</span><span class="p">:</span>
-                <span class="n">LCs</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-                    <span class="s1">&#39;LC&#39;</span><span class="p">:</span> <span class="n">LC_stable</span><span class="p">,</span> <span class="s1">&#39;LCStd&#39;</span><span class="p">:</span> <span class="n">LC_stable</span> <span class="o">*</span> <span class="n">LCStd</span><span class="p">,</span> <span class="s1">&#39;LC_profile&#39;</span><span class="p">:</span> <span class="n">LC</span><span class="p">,</span>
-                    <span class="s1">&#39;time_start&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cldFreeTime</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="s1">&#39;time_end&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cldFreeTime</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                <span class="p">})</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">LCs</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-                    <span class="s1">&#39;LC&#39;</span><span class="p">:</span> <span class="n">LC_stable</span><span class="p">,</span> <span class="s1">&#39;LCStd&#39;</span><span class="p">:</span> <span class="n">LC_stable</span> <span class="o">*</span> <span class="n">LCStd</span><span class="p">,</span>
-                    <span class="s1">&#39;time_start&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cldFreeTime</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="s1">&#39;time_end&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cldFreeTime</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                <span class="p">})</span>
+                <span class="n">LCs</span><span class="p">[</span><span class="n">channel</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;LC_profile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">LC</span>
 
             <span class="c1"># -----------------------------------------------------------------------------------</span>
             <span class="c1"># LC for raman / inelastic channels</span>
@@ -453,7 +553,7 @@
                 <span class="n">wv_r</span> <span class="o">=</span> <span class="n">elastic2raman</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">wv</span><span class="p">)]</span>
 
                 <span class="c1">## Inelastic signal, backscatter and extinction:</span>
-                <span class="n">signal_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span>
+                <span class="n">signal_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span> <span class="c1"># TODO: try to use PCR --&gt; normalized</span>
                     <span class="n">data_cube</span><span class="o">.</span><span class="n">retrievals_highres</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;sig</span><span class="si">{</span><span class="n">sig</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">cldFree</span><span class="p">),</span> <span class="p">:,</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">gf</span><span class="p">(</span><span class="n">wv_r</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tel</span><span class="p">)]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
                 <span class="n">molBsc_r</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_profiles</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mBsc_</span><span class="si">{</span><span class="n">wv_r</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
                 <span class="n">molExt_r</span> <span class="o">=</span> <span class="n">data_cube</span><span class="o">.</span><span class="n">mol_profiles</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mExt_</span><span class="si">{</span><span class="n">wv_r</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -469,7 +569,7 @@
                 <span class="k">if</span> <span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;flagPicassoComparison&#39;</span><span class="p">]:</span>
                     <span class="n">bsc_r</span> <span class="o">=</span> <span class="n">molBsc</span>
                 
-                <span class="c1">## Lidar clibration constant</span>
+                <span class="c1">## Lidar calibration constant</span>
                 <span class="n">LC_r</span> <span class="o">=</span> <span class="p">(</span><span class="n">signal_r</span> <span class="o">*</span> <span class="n">height</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">bsc_r</span> <span class="o">*</span> <span class="n">trans_r</span><span class="p">)</span>
                 <span class="n">LC_r</span><span class="p">[</span><span class="n">LC_r</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
                 <span class="n">LC_r_stable</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">LCStd_r</span> <span class="o">=</span> <span class="n">mean_stable</span><span class="p">(</span>
@@ -478,22 +578,22 @@
                     <span class="n">minBin</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;LCMeanMinIndx&#39;</span><span class="p">],</span>
                     <span class="n">maxBin</span><span class="o">=</span><span class="n">config_dict</span><span class="p">[</span><span class="s1">&#39;LCMeanMaxIndx&#39;</span><span class="p">]</span>
                 <span class="p">)</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;cldFreGrp </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">, Channel </span><span class="si">{</span><span class="n">wv_r</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1">, LC_stable </span><span class="si">{</span><span class="n">LC_r_stable</span><span class="si">}</span><span class="s1">, LCStd </span><span class="si">{</span><span class="n">LCStd_r</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cldFreGrp </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">, Channel </span><span class="si">{</span><span class="n">wv_r</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">, LC_stable </span><span class="si">{</span><span class="n">LC_r_stable</span><span class="si">}</span><span class="s2">, LCStd </span><span class="si">{</span><span class="n">LCStd_r</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="n">LC_r_stable</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Can not find a stable LC value, skipping </span><span class="si">{</span><span class="n">wv_r</span><span class="si">}</span><span class="s1"> nm </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s1"> channel for cloud free period </span><span class="si">{</span><span class="n">cldFree</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Can not find a stable LC value, skipping </span><span class="si">{</span><span class="n">wv_r</span><span class="si">}</span><span class="s2"> nm </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2"> channel for cloud free period </span><span class="si">{</span><span class="n">cldFree</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                     <span class="k">continue</span>
                 
+                <span class="c1">## Save LC result</span>
+                <span class="n">LCs</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv_r</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s1">&#39;LC&#39;</span><span class="p">:</span> <span class="n">LC_r_stable</span><span class="p">,</span> <span class="s1">&#39;LCStd&#39;</span><span class="p">:</span> <span class="n">LC_r_stable</span> <span class="o">*</span> <span class="n">LCStd_r</span><span class="p">,</span>
+                    <span class="s1">&#39;time_start&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cldFreeTime</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="s1">&#39;time_end&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cldFreeTime</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                    <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">retrieval</span>
+                <span class="p">})</span>
+
+                <span class="c1">## Collect debug info</span>
                 <span class="k">if</span> <span class="n">collect_debug</span><span class="p">:</span>
-                    <span class="n">LCs</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv_r</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-                        <span class="s1">&#39;LC&#39;</span><span class="p">:</span> <span class="n">LC_r_stable</span><span class="p">,</span> <span class="s1">&#39;LCStd&#39;</span><span class="p">:</span> <span class="n">LC_r_stable</span> <span class="o">*</span> <span class="n">LCStd_r</span><span class="p">,</span> <span class="s1">&#39;LC_profile&#39;</span><span class="p">:</span> <span class="n">LC_r</span><span class="p">,</span> 
-                        <span class="s1">&#39;time_start&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cldFreeTime</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="s1">&#39;time_end&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cldFreeTime</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                    <span class="p">})</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">LCs</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv_r</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-                        <span class="s1">&#39;LC&#39;</span><span class="p">:</span> <span class="n">LC_r_stable</span><span class="p">,</span> <span class="s1">&#39;LCStd&#39;</span><span class="p">:</span> <span class="n">LC_r_stable</span> <span class="o">*</span> <span class="n">LCStd_r</span><span class="p">,</span>
-                        <span class="s1">&#39;time_start&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cldFreeTime</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="s1">&#39;time_end&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cldFreeTime</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                    <span class="p">})</span>
+                    <span class="n">LCs</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wv_r</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">tel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;LC_profile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">LC_r</span>
 
     <span class="k">return</span> <span class="n">default_to_regular</span><span class="p">(</span><span class="n">LCs</span><span class="p">)</span></div>
 

@@ -340,30 +340,38 @@
 <span id="ppcpy-qc-pollysaturationdetect"></span><h2>ppcpy.qc.pollySaturationDetect<a class="headerlink" href="#module-ppcpy.qc.pollySaturationDetect" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.qc.pollySaturationDetect.pollySaturationDetect">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.qc.pollySaturationDetect.</span></span><span class="sig-name descname"><span class="pre">pollySaturationDetect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rfill</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigSaturateThresh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/qc/pollySaturationDetect.html#pollySaturationDetect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.pollySaturationDetect.pollySaturationDetect" title="Link to this definition">#</a></dt>
-<dd><p>detect the bins which are fully saturated by the clouds.</p>
-<dl class="simple">
-<dt>INPUTS:</dt><dd><dl class="simple">
-<dt>data: dict</dt><dd><p>Data dictionary. See documentation for format.</p>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.qc.pollySaturationDetect.</span></span><span class="sig-name descname"><span class="pre">pollySaturationDetect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rfill</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigSaturateThresh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/qc/pollySaturationDetect.html#pollySaturationDetect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.pollySaturationDetect.pollySaturationDetect" title="Link to this definition">#</a></dt>
+<dd><p>Detect the bins which are fully saturated by the clouds.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+<dt><strong>rfill</strong><span class="classifier">float, optional</span></dt><dd><p>Minimum range gap to fill [m]. Default is 250.</p>
+</dd>
+<dt><strong>sigSaturateThresh</strong><span class="classifier">float, optional</span></dt><dd><p>Threshold of saturated signal [photon count]. Default is 500.</p>
 </dd>
 </dl>
 </dd>
-<dt>KEYWORDS:</dt><dd><dl class="simple">
-<dt>hfill: float </dt><dd><p>Minimum range gap to fill (m). Default: 250</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>flagSaturation</strong><span class="classifier">boolean ndarray</span></dt><dd><p>True indicates current range bin is saturated by clouds.</p>
 </dd>
-<dt>sigSaturateThresh: float</dt><dd><p>Threshold of saturated signal (photon count). Default: 500</p>
-</dd>
+<dt>** History **</dt><dd></dd>
 </dl>
-</dd>
-<dt>OUTPUTS:</dt><dd><dl class="simple">
-<dt>flag: boolean ndarray</dt><dd><p>True indicates current range bin is saturated by clouds.</p>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt>2018-12-21: First Edition by Zhenping</dt><dd></dd>
 </dl>
-</dd>
-<dt>HISTORY:</dt><dd><ul class="simple">
-<li><p>2018-12-21: First Edition by Zhenping</p></li>
-<li><p>2019-07-08: Fix the bug of converting signal to PCR.</p></li>
-<li><p>2025-05-14: translated and changed the algorithm to use scipy.ndimage</p></li>
+</li>
+<li><dl class="simple">
+<dt>2019-07-08: Fix the bug of converting signal to PCR.</dt><dd></dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>2025-05-14: translated and changed the algorithm to use scipy.ndimage</dt><dd></dd>
+</dl>
+</li>
 </ul>
 </dd>
 </dl>
@@ -374,21 +382,42 @@
 <span id="ppcpy-qc-transcor"></span><h2>ppcpy.qc.transCor<a class="headerlink" href="#module-ppcpy.qc.transCor" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.qc.transCor.transCorGHK_cube">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.qc.transCor.</span></span><span class="sig-name descname"><span class="pre">transCorGHK_cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'BGCor'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/qc/transCor.html#transCorGHK_cube"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.transCor.transCorGHK_cube" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.qc.transCor.transCor_E16_channel">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.qc.transCor.</span></span><span class="sig-name descname"><span class="pre">transCor_E16_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voldepol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HT</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/qc/transCor.html#transCor_E16_channel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.transCor.transCor_E16_channel" title="Link to this definition">#</a></dt>
-<dd><p>transmission correction for the total channel using the Mattis 2009/Engelmann 2016 method</p>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.qc.transCor.</span></span><span class="sig-name descname"><span class="pre">transCorGHK_cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'BGCor'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/qc/transCor.html#transCorGHK_cube"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.transCor.transCorGHK_cube" title="Link to this definition">#</a></dt>
+<dd><p>Perform GHK transmission correction.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>sigT</strong><span class="classifier">array</span></dt><dd><p>Signal in total channel (background-corrected)</p>
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
 </dd>
-<dt><strong>bgT</strong><span class="classifier">array</span></dt><dd><p>Background in total channel</p>
+<dt><strong>signal</strong><span class="classifier">str</span></dt><dd><p>Signal type. Default is ‘BGCor’.</p>
 </dd>
-<dt><strong>voldepol</strong><span class="classifier">array</span></dt><dd><p>Volume depolarization ratio</p>
+<dt><strong>collect_debug</strong><span class="classifier">bool</span></dt><dd><p>If True, collects debug information. Default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>sigTCor</strong><span class="classifier">ndarray</span></dt><dd><p>Transmission corrected signal [Photon counts].</p>
+</dd>
+<dt><strong>BGTCor</strong><span class="classifier">ndarray</span></dt><dd><p>Transmission corrected background.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.qc.transCor.transCor_E16_channel">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.qc.transCor.</span></span><span class="sig-name descname"><span class="pre">transCor_E16_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigT</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgT</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voldepol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HT</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/qc/transCor.html#transCor_E16_channel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.transCor.transCor_E16_channel" title="Link to this definition">#</a></dt>
+<dd><p>Transmission correction for the total channel using the Mattis 2009/Engelmann 2016 method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sigT</strong><span class="classifier">ndarray</span></dt><dd><p>Signal in total channel (background-corrected)</p>
+</dd>
+<dt><strong>bgT</strong><span class="classifier">ndarray</span></dt><dd><p>Background in total channel</p>
+</dd>
+<dt><strong>voldepol</strong><span class="classifier">ndarray</span></dt><dd><p>Volume depolarization ratio</p>
 </dd>
 <dt><strong>HT</strong><span class="classifier">float</span></dt><dd><p>Transmission ratio of total channel in GHK notation</p>
 </dd>
@@ -396,9 +425,9 @@
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>sigTCor</strong><span class="classifier">array</span></dt><dd><p>Signal in total channel corrected for polarization induced transmission effects</p>
+<dt><strong>sigTCor</strong><span class="classifier">ndarray</span></dt><dd><p>Signal in total channel corrected for polarization induced transmission effects</p>
 </dd>
-<dt><strong>bgTCor</strong><span class="classifier">array</span></dt><dd><p>Background of total signal</p>
+<dt><strong>bgTCor</strong><span class="classifier">ndarray</span></dt><dd><p>Background of total signal</p>
 </dd>
 </dl>
 </dd>
@@ -427,54 +456,63 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.qc.transCor.transCorGHK_channel">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.qc.transCor.</span></span><span class="sig-name descname"><span class="pre">transCorGHK_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transGT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transGR</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transHT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transHR</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polCaliEta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polCaliEtaStd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/qc/transCor.html#transCorGHK_channel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.transCor.transCorGHK_channel" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.qc.transCor.</span></span><span class="sig-name descname"><span class="pre">transCorGHK_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigT</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgT</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigC</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgC</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transGT</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transGR</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transHT</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transHR</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polCaliEta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polCaliEtaStd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/qc/transCor.html#transCorGHK_channel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.transCor.transCorGHK_channel" title="Link to this definition">#</a></dt>
 <dd><p>Corrects the effect of different polarization-dependent transmission inside the total and depol channel.</p>
-<p><a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/master/lib/qc/transCorGHK.m">PollyNET/Pollynet_Processing_Chain</a></p>
-<dl class="simple">
-<dt>INPUTS:</dt><dd><dl class="simple">
-<dt>sigT: array</dt><dd><p>Signal in total channel.</p>
+<p>Follows the matlab code at:
+<a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/master/lib/qc/transCorGHK.m">PollyNET/Pollynet_Processing_Chain</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sigT</strong><span class="classifier">ndarray</span></dt><dd><p>Signal in total channel.</p>
 </dd>
-<dt>bgT: array</dt><dd><p>Background in total channel.</p>
+<dt><strong>bgT</strong><span class="classifier">ndarray</span></dt><dd><p>Background in total channel.</p>
 </dd>
-<dt>sigC: array</dt><dd><p>Signal in cross channel.</p>
+<dt><strong>sigC</strong><span class="classifier">ndarray</span></dt><dd><p>Signal in cross channel.</p>
 </dd>
-<dt>bgC: array</dt><dd><p>Background in cross channel.</p>
+<dt><strong>bgC</strong><span class="classifier">ndarray</span></dt><dd><p>Background in cross channel.</p>
 </dd>
-<dt>transGT: float</dt><dd><p>G parameter in total channel.</p>
+<dt><strong>transGT</strong><span class="classifier">float</span></dt><dd><p>G parameter in total channel.</p>
 </dd>
-<dt>transGR: float</dt><dd><p>G parameter in cross channel.</p>
+<dt><strong>transGR</strong><span class="classifier">float</span></dt><dd><p>G parameter in cross channel.</p>
 </dd>
-<dt>transHT: float</dt><dd><p>H parameter in total channel.</p>
+<dt><strong>transHT</strong><span class="classifier">float</span></dt><dd><p>H parameter in total channel.</p>
 </dd>
-<dt>transHR: float</dt><dd><p>H parameter in cross channel.</p>
+<dt><strong>transHR</strong><span class="classifier">float</span></dt><dd><p>H parameter in cross channel.</p>
 </dd>
-<dt>polCaliEta: float</dt><dd><p>Depolarization calibration constant (eta).</p>
+<dt><strong>polCaliEta</strong><span class="classifier">float</span></dt><dd><p>Depolarization calibration constant (eta).</p>
 </dd>
-<dt>polCaliEtaStd: float</dt><dd><p>Uncertainty of the depolarization calibration constant.</p>
-</dd>
-</dl>
-</dd>
-<dt>OUTPUTS:</dt><dd><dl class="simple">
-<dt>sigTCor: array</dt><dd><p>Transmission corrected elastic signal.</p>
-</dd>
-<dt>bgTCor: array</dt><dd><p>Background of transmission corrected elastic signal.</p>
+<dt><strong>polCaliEtaStd</strong><span class="classifier">float</span></dt><dd><p>Uncertainty of the depolarization calibration constant.</p>
 </dd>
 </dl>
 </dd>
-<dt>REFERENCES:</dt><dd><p>Mattis, I., Tesche, M., Grein, M., Freudenthaler, V., and Müller, D.: 
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>sigTCor</strong><span class="classifier">ndarray</span></dt><dd><p>Transmission corrected elastic signal.</p>
+</dd>
+<dt><strong>bgTCor</strong><span class="classifier">ndarray</span></dt><dd><p>Background of transmission corrected elastic signal.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id6">
+<p class="admonition-title">Todo</p>
+<p>Input parameter ´polCaliEtaStd´ is not used.</p>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p>Mattis, I., Tesche, M., Grein, M., Freudenthaler, V., and Müller, D.: 
 Systematic error of lidar profiles caused by a polarization-dependent receiver transmission: 
-Quantification and error correction scheme, Appl. Opt., 48, 2742-2751, 2009.
-Freudenthaler, V. About the effects of polarising optics on lidar signals and the Delta90 calibration. 
-Atmos. Meas. Tech., 9, 4181–4255 (2016).</p>
-</dd>
-<dt>HISTORY:</dt><dd><ul class="simple">
+Quantification and error correction scheme, Appl. Opt., 48, 2742-2751, 2009.</p></li>
+<li><p>Freudenthaler, V. About the effects of polarising optics on lidar signals and the Delta90 calibration. 
+Atmos. Meas. Tech., 9, 4181–4255 (2016).</p></li>
+</ul>
+<p>** History **</p>
+<ul class="simple">
 <li><p>2021-05-27: First edition by Zhenping.</p></li>
 <li><p>2024-08-14: Change to GHK parameterization by Moritz.</p></li>
 <li><p>2024-12-28: AI translation</p></li>
 </ul>
-</dd>
-</dl>
-<p>Authors: - <a class="reference external" href="mailto:zhenping&#37;&#52;&#48;tropos&#46;de">zhenping<span>&#64;</span>tropos<span>&#46;</span>de</a>, <a class="reference external" href="mailto:haarig&#37;&#52;&#48;tropos&#46;de">haarig<span>&#64;</span>tropos<span>&#46;</span>de</a></p>
 </dd></dl>
 
 </section>
@@ -495,8 +533,6 @@ Atmos. Meas. Tech., 9, 4181–4255 (2016).</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>overlap</strong><span class="classifier">list of dicts</span></dt><dd><p>Per channel per cloud free period:</p>
-</dd>
 <dt><strong>overlap</strong><span class="classifier">ndarray</span></dt><dd><p>Overlap function.</p>
 </dd>
 <dt><strong>overlapStd</strong><span class="classifier">ndarray</span></dt><dd><p>Standard deviation of overlap function.</p>
@@ -537,9 +573,9 @@ Atmos. Meas. Tech., 9, 4181–4255 (2016).</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>overlap</strong><span class="classifier">ndarray</span></dt><dd><p>Overlap function.</p>
+<dt><strong>olFunc</strong><span class="classifier">ndarray</span></dt><dd><p>Overlap function.</p>
 </dd>
-<dt><strong>overlapStd</strong><span class="classifier">ndarray</span></dt><dd><p>Standard deviation of overlap function.</p>
+<dt><strong>olFuncStd</strong><span class="classifier">ndarray</span></dt><dd><p>Standard deviation of overlap function.</p>
 </dd>
 <dt><strong>sigRatio</strong><span class="classifier">float</span></dt><dd><p>Signal ratio between near-range and far-range signals.</p>
 </dd>
@@ -555,6 +591,18 @@ Atmos. Meas. Tech., 9, 4181–4255 (2016).</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id7">
+<p class="admonition-title">Todo</p>
+<p>Define the Default values of the output ei. olFunc = 1 &amp; olFuncStd = 0.</p>
+</div>
+<div class="admonition-todo admonition" id="id8">
+<p class="admonition-title">Todo</p>
+<p>Is the first if-statment needed?</p>
+</div>
+<div class="admonition-todo admonition" id="id9">
+<p class="admonition-title">Todo</p>
+<p>are bgFR and bgNR actually ndarrays of floats??</p>
+</div>
 <p><strong>History</strong></p>
 <ul class="simple">
 <li><p>2021-05-18: First edition by Zhenping</p></li>
@@ -576,13 +624,13 @@ Atmos. Meas. Tech., 9, 4181–4255 (2016).</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>overlap</strong><span class="classifier">list of dicts</span></dt><dd><p>Per channel per cloud free period:</p>
-</dd>
 <dt><strong>olFunc</strong><span class="classifier">ndarray</span></dt><dd><p>Overlap function.</p>
 </dd>
-<dt><strong>olStd</strong><span class="classifier">float</span></dt><dd><p>Standard deviation of overlap function.</p>
+<dt><strong>olFunc_raw</strong><span class="classifier">ndarray</span></dt><dd><p>Overlap function with no smoothing.</p>
 </dd>
-<dt><strong>olFunc0</strong><span class="classifier">ndarray</span></dt><dd><p>Overlap function with no smoothing.</p>
+<dt><strong>LR</strong><span class="classifier">float</span></dt><dd><p>Optimal Lidar Ratio for …</p>
+</dd>
+<dt><strong>normRange</strong><span class="classifier">list</span></dt><dd><p>Height index of the signal normalization range.</p>
 </dd>
 </dl>
 </dd>
@@ -629,25 +677,27 @@ based on Wandinger and Ansmann 2002 <a class="reference external" href="https://
 <dd class="field-even"><dl class="simple">
 <dt><strong>olFunc</strong><span class="classifier">ndarray</span></dt><dd><p>Overlap function.</p>
 </dd>
-<dt><strong>olStd</strong><span class="classifier">float</span></dt><dd><p>Standard deviation of overlap function.</p>
+<dt><strong>olFunc_raw</strong><span class="classifier">ndarray</span></dt><dd><p>Overlap function with no smoothing.</p>
 </dd>
-<dt><strong>olFunc0</strong><span class="classifier">ndarray</span></dt><dd><p>Overlap function with no smoothing.</p>
+<dt><strong>LR</strong><span class="classifier">float</span></dt><dd><p>Optimal Lidar Ratio for …</p>
+</dd>
+<dt><strong>normRange</strong><span class="classifier">list</span></dt><dd><p>Height index of the signal normalization range.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<div class="admonition-todo admonition" id="id6">
+<div class="admonition-todo admonition" id="id10">
 <p class="admonition-title">Todo</p>
-<p>What is returned by the function and what is described in the docstring does not corresponed.</p>
+<p>Finish docsting! (LR output…)</p>
 </div>
-<div class="admonition-todo admonition" id="id7">
+<div class="admonition-todo admonition" id="id11">
 <p class="admonition-title">Todo</p>
 <p>This function uses a mix of ppcpy.misc.helper.unifrom_filter and scipy.ndimage.uniform_filter1d
 for smoothing. This is done to avoid NaN-value related errors. A better more cohesive solution
 should be precude in the future.</p>
 </div>
-<div class="admonition-todo admonition" id="id8">
+<div class="admonition-todo admonition" id="id12">
 <p class="admonition-title">Todo</p>
 <p>Be cearfull with NaN values! scipy.ndimage.uniform_filter1d used for smoothing in this module
 will propagate any NaN values present in the signal throughot the rest of the smoothed signal.
@@ -657,16 +707,26 @@ be considered. Optimally, should we designe our own filter for this purpuse that
 the issue with propagating NaN values, Like what is used in the rest of the modules. However,
 without reducing dimension or filling in NaN values.</p>
 </div>
+<div class="admonition-todo admonition" id="id13">
+<p class="admonition-title">Todo</p>
+<p>Is the if statment that privusly checked if len(aerBsc) &gt; 0, now len(aerBsc) &gt; 6 to be consistant
+with the action of the statment actually needed. I believe it might be a leftover from the Matlab
+version where they often used staments like this to check if the aerBsc existed or not…</p>
+</div>
 <p>** History **</p>
 <ul class="simple">
 <li><p>2023-06-06: First edition by Cristofer</p></li>
+<li><p>xxxx-xx-xx: Translated to python</p></li>
 </ul>
+<p class="rubric">References</p>
+<p>Wandinger, U. and Ansmann, A. (2002) ‘Experimental determination of the lidar overlap profile with 
+Raman lidar’, Applied Optics, 41(3), pp. 511–514. Available at: <a class="reference external" href="https://doi.org/10.1364/ao.41.000511">https://doi.org/10.1364/ao.41.000511</a>.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.qc.overlapEst.load">
 <span class="sig-prename descclassname"><span class="pre">ppcpy.qc.overlapEst.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/ppcpy/qc/overlapEst.html#load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.overlapEst.load" title="Link to this definition">#</a></dt>
-<dd><p>read the overlap function from files into a structure similar to the others.</p>
+<dd><p>Read the overlap function from files into a structure similar to the others.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -676,7 +736,8 @@ without reducing dimension or filling in NaN values.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>overlap</strong><span class="classifier">list of dicts</span></dt><dd></dd>
+<dt><strong>overlap</strong><span class="classifier">list of dicts</span></dt><dd><p>…</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -688,30 +749,115 @@ without reducing dimension or filling in NaN values.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.qc.overlapCor.spread">
 <span class="sig-prename descclassname"><span class="pre">ppcpy.qc.overlapCor.</span></span><span class="sig-name descname"><span class="pre">spread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/qc/overlapCor.html#spread"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.overlapCor.spread" title="Link to this definition">#</a></dt>
-<dd><p>select the correct overlap method, spread the profiles to 2d for each wavelength</p>
+<dd><p>Select the correct overlap method, spread the profiles to 2d for each wavelength.</p>
 <p>design decision for now:
 drop the signal glue option (overlapCorMode == 3)</p>
-<p>in the matlab version any olFunc is additionally smoothed with
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>2d overlap function per channel.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>in the matlab version any olFunc is additionally smoothed with
 <cite>olSm = smooth(olFuncDeft, p.Results.overlapSmWin, ‘sgolay’, 2);</cite>
 (e.g. here <a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/e413f9254094ff2c0a18fcdac4e9bebb5385d526/lib/qc/pollyOLCor.m#L106">PollyNET/Pollynet_Processing_Chain</a>)
-This should probably be done more explicitly</p>
-<p>Also the ‘glueing’ in function [sigCor] = olCor(sigFR, overlap, height, normRange)
-seems wired
-(<a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/e413f9254094ff2c0a18fcdac4e9bebb5385d526/lib/qc/olCor.m#L34">PollyNET/Pollynet_Processing_Chain</a>)</p>
+This should probably be done more explicitly.</p></li>
+<li><p>Also the ‘glueing’ in function [sigCor] = olCor(sigFR, overlap, height, normRange)
+seems wired (<a class="github reference external" href="https://github.com/PollyNET/Pollynet_Processing_Chain/blob/e413f9254094ff2c0a18fcdac4e9bebb5385d526/lib/qc/olCor.m#L34">PollyNET/Pollynet_Processing_Chain</a>).</p></li>
+</ul>
+<div class="admonition-todo admonition" id="id14">
+<p class="admonition-title">Todo</p>
+<p>Using different overlap function at different periods of the signal introduces harsh transitions as long as the overlap functions
+are not stable. Look into options for smoothing the overlap function in the time dimension to ease the transition from
+one period to another.</p>
+</div>
+<p>** History **</p>
+<ul class="simple">
+<li><p>xxxx-xx-xx: First edition by …</p></li>
+<li><p>xxxx-xx-xx: Translated to python.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.qc.overlapCor.apply_cube">
 <span class="sig-prename descclassname"><span class="pre">ppcpy.qc.overlapCor.</span></span><span class="sig-name descname"><span class="pre">apply_cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/qc/overlapCor.html#apply_cube"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.overlapCor.apply_cube" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Apply overlap function to 2d (time, height) signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>sigOLCor</strong><span class="classifier">ndarray</span></dt><dd><p>Overlap corrected signal (time, height).</p>
+</dd>
+<dt><strong>BGOLCor</strong><span class="classifier">ndarray</span></dt><dd><p>Overlap corrected background (time, ).</p>
+</dd>
+<dt><strong>heightFullOverlapCor</strong><span class="classifier">ndarray</span></dt><dd><p>Height of full overlap [m?].</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Shoud we apply the overlap correction on the GHK-Transmission corrected signal or the Background Corrrected signal??</dt><dd><p>Currentlly we are using a wired mix here. sigOLCor is inintialized with the sigTCor but the correction is applied 
+based on the sigBGCor. The correction to the BG is alwaysed based on the BGTCor.</p>
+</dd>
+</dl>
+</li>
+<li><p>Also, in highres the GHK-Transmission correction is again applied on sigOLCor before the OC_attBsc is calculated.</p></li>
+</ul>
+<div class="admonition-todo admonition" id="id15">
+<p class="admonition-title">Todo</p>
+<p>At times the retrieved overlap function is outside the range [0, 1], the values of the function should 
+be checked and corrected before applying. Currnetly only values less then 0.07 are corrected (set to NaN).</p>
+</div>
+<div class="admonition-todo admonition" id="id16">
+<p class="admonition-title">Todo</p>
+<p>This function could be easaly vectorized by cunstructing all the 2d overlap function into a 3d Matrix / Tensor
+Channels that do not have overlap function can be replaced by ones. This alongside the use of alternative overlap
+functions (using 355 insted of 386 etc.) can be handled in the construction of the 3d Matrix / Tensor. 
+Then the correction itself can be applied like this: sigOLCor = sigTCor / olFunc_3d</p>
+</div>
+<p>** History **</p>
+<ul class="simple">
+<li><p>xxxx-xx-xx: First edition by …</p></li>
+<li><p>xxxx-xx-xx: Translated to python.</p></li>
+</ul>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.qc.overlapCor.fixLowest">
 <span class="sig-prename descclassname"><span class="pre">ppcpy.qc.overlapCor.</span></span><span class="sig-name descname"><span class="pre">fixLowest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overlap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indexsearchmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thres</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/qc/overlapCor.html#fixLowest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.overlapCor.fixLowest" title="Link to this definition">#</a></dt>
-<dd><p>very rough fix for exploding values in the very near range of the overlap function</p>
+<dd><p>Very rough fix for exploding values in the very near range of the overlap function.</p>
 <p>in the lowest heights (below indexsearchmax, e.g. 800m)
-search for chunks, where the overlap function is smaller than 0.05
+search for chunks, where the overlap function is smaller than a treshold (thres e.g. 0.05)
 in that chunk take the miniumum and fill heights below</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>overlap</strong><span class="classifier">list</span></dt><dd><p>List of dicts including ovelap functions per cloud free period.</p>
+</dd>
+<dt><strong>indexsearchmax :int</strong></dt><dd><p>Maximum height index for the applying the fix.</p>
+</dd>
+<dt><strong>thres</strong><span class="classifier">float</span></dt><dd><p>Threshold for searching for a stable low overlap value. Default is 0.05.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -724,17 +870,49 @@ in that chunk take the miniumum and fill heights below</p>
 <span id="ppcpy-qc-qualitymask"></span><h2>ppcpy.qc.qualityMask<a class="headerlink" href="#module-ppcpy.qc.qualityMask" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.qc.qualityMask.qualityMask">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.qc.qualityMask.</span></span><span class="sig-name descname"><span class="pre">qualityMask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/qc/qualityMask.html#qualityMask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.qualityMask.qualityMask" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.qc.qualityMask.</span></span><span class="sig-name descname"><span class="pre">qualityMask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/qc/qualityMask.html#qualityMask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.qualityMask.qualityMask" title="Link to this definition">#</a></dt>
 <dd><p>Estimate quality mask.</p>
-<dl class="simple">
-<dt>Categories:</dt><dd><p>0 : good data
-1 : low-SNR data
-2 : depolarization calibration periods
-3 : shutter on
-4 : fog
-5 : saturated (NEW)</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main picassoProc object.</p>
+</dd>
+<dt><strong>useQuasiSNR</strong><span class="classifier">bool</span></dt><dd><p>If True, use <cite>lowSNRMask_quasi</cite>. Otherwise use <cite>lowSNRMask</cite>.</p>
 </dd>
 </dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>quality_mask</strong><span class="classifier">ndarray</span></dt><dd><p>Quality mask with categories listed above.</p>
+</dd>
+<dt>** History **</dt><dd></dd>
+</dl>
+<ul class="simple">
+<li><dl class="simple">
+<dt>xxxx-xx-xx: First edition by …</dt><dd></dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>xxxx-xx-xx: translated to python</dt><dd></dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>2026-07-03: vectorized and added option to use <cite>lowSNRMask_quasi</cite></dt><dd></dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>2026-07-03: added resistance toward missing mask-variables</dt><dd></dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.qc.qualityMask.improvedSNR">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.qc.qualityMask.</span></span><span class="sig-name descname"><span class="pre">improvedSNR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/qc/qualityMask.html#improvedSNR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.qc.qualityMask.improvedSNR" title="Link to this definition">#</a></dt>
+<dd><p>Artificially improve SNR by smoothing the signal and background.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -742,17 +920,24 @@ in that chunk take the miniumum and fill heights below</p>
 </dd>
 </dl>
 </dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>SNR</strong><span class="classifier">ndarray</span></dt><dd><p>Improved signal to noise ratio</p>
+</dd>
+<dt><strong>lowSNRMask</strong><span class="classifier">ndarray</span></dt><dd><p>True if SNR is lower than the config variable ‘mask_SNRmin’. Otherwise False.</p>
+</dd>
+</dl>
+</dd>
 </dl>
 <p class="rubric">Notes</p>
 <ul class="simple">
-<li><p>The lowSNRMask is actually calculated twice, once in pollyPreprocess.m
-and then again when the quality mask is evaluated in picassoProcV3.m.
-Also the original processing chain has a quality_mask_vdr, which should be a composite
-of cross and total, maybe this can be handled more logically here.</p></li>
+<li><p>Could also be in the collection retrieval together with ´calc_snr´.</p></li>
 </ul>
 <p>** History **</p>
 <ul class="simple">
 <li><p>xxxx-xx-xx: First edition by …</p></li>
+<li><p>2026-07-03: translated to python</p></li>
+<li><p>2026-07-12: vectorized for better efficiency</p></li>
 </ul>
 </dd></dl>
 
@@ -833,6 +1018,7 @@ of cross and total, maybe this can be handled more logically here.</p></li>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.qc.qualityMask">ppcpy.qc.qualityMask</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.qc.qualityMask.qualityMask"><code class="docutils literal notranslate"><span class="pre">qualityMask()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.qc.qualityMask.improvedSNR"><code class="docutils literal notranslate"><span class="pre">improvedSNR()</span></code></a></li>
 </ul>
 </li>
 </ul>

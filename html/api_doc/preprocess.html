@@ -338,329 +338,421 @@
 <section id="module-ppcpy.preprocess.pollyPreprocess">
 <span id="ppcpy-preprocess-pollypreprocess"></span><h2>ppcpy.preprocess.pollyPreprocess<a class="headerlink" href="#module-ppcpy.preprocess.pollyPreprocess" title="Link to this heading">#</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.preprocess.pollyPreprocess.compute_channel_pcr">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">compute_channel_pcr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#compute_channel_pcr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.compute_channel_pcr" title="Link to this definition">#</a></dt>
-<dd><p>Computes PCR for a single channel.</p>
+<dt class="sig sig-object py" id="ppcpy.preprocess.pollyPreprocess.pollyPreprocess">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">pollyPreprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawdata_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flagPicassoComparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#pollyPreprocess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.pollyPreprocess" title="Link to this definition">#</a></dt>
+<dd><p>Preprocessing of Lidar-data.</p>
 <dl class="simple">
-<dt>Parameters:</dt><dd><p>args: Tuple containing (rawSignal, mShots, scale_factor, channel_index).</p>
+<dt>Includes the following processes in order:</dt><dd><ol class="arabic simple">
+<li><p>Deadtime correction</p></li>
+<li><p>Background correction</p></li>
+<li><p>First-bin shift</p></li>
+<li><p>Mask for low-SNR</p></li>
+<li><p>Mask for depolarization-calibration process</p></li>
+<li><p>Range correction.</p></li>
+</ol>
 </dd>
-<dt>Returns:</dt><dd><p>np.ndarray: Computed PCR for the given channel.</p>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>rawdata_dict</strong><span class="classifier">dict</span></dt><dd><dl class="simple">
+<dt>rawSignal<span class="classifier">ndarray</span></dt><dd><p>Signal [Photon Count].</p>
+</dd>
+<dt>mShots<span class="classifier">ndarray</span></dt><dd><p>Number of the laser shots for each profile.</p>
+</dd>
+<dt>mTime<span class="classifier">ndarray</span></dt><dd><p>Datetime array for the measurement time of each profile.</p>
+</dd>
+<dt>depCalAng<span class="classifier">ndarray</span></dt><dd><p>Angle of the polarizer in the receiving channel
+(&gt;0 means calibration process starts).</p>
+</dd>
+<dt>zenithAng<span class="classifier">ndarray</span></dt><dd><p>Zenith angle of the laer beam.</p>
+</dd>
+<dt>repRate<span class="classifier">float</span></dt><dd><p>Laser pulse repetition rate [s^-1].</p>
+</dd>
+<dt>hRes<span class="classifier">float</span></dt><dd><p>Spatial resolution [m].</p>
+</dd>
+<dt>mSite<span class="classifier">str</span></dt><dd><p>Measurement site.</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>collect_debug</strong><span class="classifier">bool</span></dt><dd><p>If true, collects debug information. Default is False.</p>
+</dd>
+<dt><strong>flagPicassoComparison</strong><span class="classifier">bool</span></dt><dd><p>If true, use Picasso values and logic.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>data_dict</strong><span class="classifier">dict</span></dt><dd><dl class="simple">
+<dt>mShots<span class="classifier">ndarray</span></dt><dd><p>Number of the laser shots for each profile.</p>
+</dd>
+<dt>sigDTCor<span class="classifier">ndarray</span></dt><dd><p>Dead time corrected signal [photon count].</p>
+</dd>
+<dt>BG<span class="classifier">ndarray</span></dt><dd><p>Background.</p>
+</dd>
+<dt>sigBGCor<span class="classifier">ndarray</span></dt><dd><p>Backgound corrected signal [photon count].</p>
+</dd>
+<dt>range<span class="classifier">ndarray</span></dt><dd><p>Height above ground at zenith angle [m].</p>
+</dd>
+<dt>height<span class="classifier">ndarray</span></dt><dd><p>Height above ground [m].</p>
+</dd>
+<dt>alt<span class="classifier">ndarray</span></dt><dd><p>Altitude [m].</p>
+</dd>
+<dt>time<span class="classifier">list</span></dt><dd><p>Measurement time in unix time.</p>
+</dd>
+<dt>time64<span class="classifier">ndarray</span></dt><dd><p>Measurement time in numpy.datetime.</p>
+</dd>
+<dt>SNR<span class="classifier">ndarray</span></dt><dd><p>Signal to noise ratio.</p>
+</dd>
+<dt>lowSNRMask<span class="classifier">ndarray</span></dt><dd><p>True if SNR is less SNRmin. Otherwise False.</p>
+</dd>
+<dt>shutterOnMask<span class="classifier">ndarray</span></dt><dd><p>True if at timesteps where the shutters was on. Otherwise False.</p>
+</dd>
+<dt>fogMask<span class="classifier">ndarray</span></dt><dd><p>If it is foggy which means the signal will be very weak, 
+fogMask will be set True. Otherwise, False.</p>
+</dd>
+<dt>mask607Off<span class="classifier">ndarray</span></dt><dd><p>Mask of PMT on/off status at 607 nm channel.</p>
+</dd>
+<dt>mask387Off<span class="classifier">ndarray</span></dt><dd><p>Mask of PMT on/off status at 387 nm channel.</p>
+</dd>
+<dt>mask407Off<span class="classifier">ndarray</span></dt><dd><p>Mask of PMT on/off status at 407 nm channel.</p>
+</dd>
+<dt>mask355RROff<span class="classifier">ndarray</span></dt><dd><p>Mask of PMT on/off status at 355 nm rotational Raman channel.</p>
+</dd>
+<dt>mask532RROff<span class="classifier">ndarray</span></dt><dd><p>Mask of PMT on/off status at 532 nm rotational Raman channel.</p>
+</dd>
+<dt>mask1064RROff<span class="classifier">ndarray</span></dt><dd><p>Mask of PMT on/off status at 1064 nm rotational Raman channel.</p>
+</dd>
+<dt>depCal_P_Ang_time_start<span class="classifier">list</span></dt><dd><p>Time for the first profile with valid positive angle depolarization 
+calibration.</p>
+</dd>
+<dt>depCal_P_Ang_time_end<span class="classifier">list</span></dt><dd><p>Time for the last profile with valid positive angle depolarization 
+calibration.</p>
+</dd>
+<dt>depCal_N_Ang_time_start<span class="classifier">list</span></dt><dd><p>Time for the first profile with valid negative angle depolarization 
+calibration.</p>
+</dd>
+<dt>depCal_N_Ang_time_end<span class="classifier">list</span></dt><dd><p>Time for the last profile with valid negative angle depolarization
+calibration.</p>
+</dd>
+<dt>maskDepCal<span class="classifier">ndarray</span></dt><dd><p>If polly was doing polarization calibration, depCalMask is set
+True. Otherwise, False.</p>
+</dd>
+<dt>RCS<span class="classifier">ndarray</span></dt><dd><p>Range Corrected signal [MCPS].</p>
+</dd>
+<dt>PCR_slice<span class="classifier">ndarray</span></dt><dd><p>Background corrected signal in photon count rate [MCPS].</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Remove all unecesary comments.</p></li>
+<li><p>Why does this function not take data_cube as an input like the rest of the functions?</p></li>
+<li><p>Implement Temperature correction.</p></li>
+<li><p>Is using mShots_norm to convert back needed?</p></li>
+</ul>
+</div>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2018-12-16: First edition by Zhenping.</p></li>
+<li><p>2019-07-10: Add mask for laser shutter due to approaching airplanes.</p></li>
+<li><p>2019-08-27: Add mask for turnoff of PMT at 607 and 387nm.</p></li>
+<li><p>2021-01-19: Add keyword of ‘flagForceMeasTime’ to align measurement time.</p></li>
+<li><p>2021-01-20: Re-sample the profiles into temporal resolution of 30-s.</p></li>
+<li><p>xxxx-xx-xx: Translated to Python by …</p></li>
+<li><p>2026-06-24: Cleaned and revamped by Buholdt.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.preprocess.pollyPreprocess.photonCount2PCR">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">photonCount2PCR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mShots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hRes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#photonCount2PCR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.photonCount2PCR" title="Link to this definition">#</a></dt>
+<dd><p>Compute PCR from photon counts.</p>
+<blockquote>
+<div><p>PCR = (c * signal)/(2 * hRes * mShots)</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>signal</strong><span class="classifier">ndarray</span></dt><dd><p>Signal [Photon Count] (shape: [M, N, P]).</p>
+</dd>
+<dt><strong>mShots</strong><span class="classifier">ndarray</span></dt><dd><p>Mesurments shots [counts] (shape: [M, P]).</p>
+</dd>
+<dt><strong>hRes</strong><span class="classifier">float</span></dt><dd><p>Reight or range resolution [m].</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>PCR</strong><span class="classifier">ndarray</span></dt><dd><p>Photon count rate signal [MCPS].</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.preprocess.pollyPreprocess.compute_pcr_parallel">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">compute_pcr_parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawSignal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mShots</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#compute_pcr_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.compute_pcr_parallel" title="Link to this definition">#</a></dt>
-<dd><p>Computes PCR using multiprocessing for channel-wise parallelism.</p>
-<dl class="simple">
-<dt>Parameters:</dt><dd><p>rawSignal: 3D input array (shape: [M, N, P]).
-mShots: 2D multiplicative factors array (shape: [M, P]).
-scale_factor: Scaling factor for the computation.</p>
+<dt class="sig sig-object py" id="ppcpy.preprocess.pollyPreprocess.PCR2PhotonCount">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">PCR2PhotonCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PCR</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mShots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hRes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#PCR2PhotonCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.PCR2PhotonCount" title="Link to this definition">#</a></dt>
+<dd><p>Compute photon counts from PCR.</p>
+<blockquote>
+<div><p>photonCount = 2 * PCR * mShot * hRes / c</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>PCR</strong><span class="classifier">ndarray</span></dt><dd><p>Photon count rate signal [MCPS] (shape: [M, N, P]).</p>
 </dd>
-<dt>Returns:</dt><dd><p>np.ndarray: 3D output array (PCR) with the same shape as rawSignal.</p>
+<dt><strong>mShots</strong><span class="classifier">ndarray</span></dt><dd><p>Mesurments shots [counts] (shape: [M, P]).</p>
+</dd>
+<dt><strong>hRes</strong><span class="classifier">float</span></dt><dd><p>Reight or range resolution [m].</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>photonCount</strong><span class="classifier">ndarray</span></dt><dd><p>Signal [Photon Count] (shape: [M, N, P]).</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.preprocess.pollyPreprocess.faster_polyval">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">faster_polyval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#faster_polyval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.faster_polyval" title="Link to this definition">#</a></dt>
-<dd><p>faster version than np.polyval(), using numba would provide 10% increase, but with different function</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.preprocess.pollyPreprocess.pollyDTCor">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">pollyDTCor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawSignal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mShots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hRes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">varargin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#pollyDTCor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.pollyDTCor" title="Link to this definition">#</a></dt>
-<dd><p>Dead Time Correction</p>
-<dl class="field-list">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">faster_polyval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#faster_polyval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.faster_polyval" title="Link to this definition">#</a></dt>
+<dd><p>Faster version of np.polyval().</p>
+<p>If <cite>p</cite> is of length N, this function returns:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">N</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="o">...</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>rawSignal (ndarray): Raw signal [Photon counts].</strong></dt><dd></dd>
-<dt><strong>mShots (ndarray): Measurment shots per … [].</strong></dt><dd></dd>
-<dt><strong>hRes (ndarray): Height resolution [m].</strong></dt><dd></dd>
-<dt><strong>keyword arguments:</strong></dt><dd></dd>
-<dt><strong>device (str or bool): Name of PollyXT device, default: False</strong></dt><dd></dd>
-<dt><strong>flagDeadTimeCorrection (bool): ….., default: Flase</strong></dt><dd></dd>
-<dt><strong>DeadTimeCorrectionMode (int): deadtime correction mode:</strong></dt><dd><p>1: use the parameters saved in the netcdf files,
-2: nonparalyzable correction with user define deadtime (default),
-3: paralyzable correction with user defined parameters,
-4: no deadtime correction,</p>
+<dt><strong>p</strong><span class="classifier">ArrayLike</span></dt><dd><p>Polynomial coefficient including coefficients equal to 0, from constant term to highest order term.</p>
 </dd>
-<dt><strong>deadtimeParams (list): …., default: []</strong></dt><dd></dd>
-<dt><strong>deadtime (list): …., default: []</strong></dt><dd></dd>
+<dt><strong>x</strong><span class="classifier">float or ArrayLike</span></dt><dd><p>Value(s) at which to evaluate the polynomial <cite>p</cite>.</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>signalDTCor (ndarray): Dead time corrected signal [Photon counts].</dt><dd></dd>
-</dl>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<ul class="simple">
-<li><p>Finish docstring and remove all unnecessary comments</p></li>
-<li><p>Could think of moving the scale convertion to after the loops ie. form PCR to PC</p></li>
-</ul>
-</div>
+<dt><strong>y</strong><span class="classifier">float or ArrayLike</span></dt><dd><p>Polynomial <cite>p</cite> evaluated at values <cite>x</cite>.</p>
 </dd>
 </dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Using numba would provide 10% increase, but with different function.</p></li>
+</ul>
+<p>** History **</p>
+<ul class="simple">
+<li><p>xxxx-xx-xx: first edition by</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ppcpy.preprocess.pollyPreprocess.pollyDTCor">
+<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">pollyDTCor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PCR</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">varargin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#pollyDTCor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.pollyDTCor" title="Link to this definition">#</a></dt>
+<dd><p>Dead Time Correction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>PCR</strong><span class="classifier">ndarray</span></dt><dd><p>Photon count rate signal [MCPS].</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>PCR_DTCor</strong><span class="classifier">ndarray</span></dt><dd><p>Dead time corrected photon count rate signal [MCPS].</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>** History **</p>
+<ul class="simple">
+<li><p>2021-05-16: first edition by Zhenping</p></li>
+<li><p>2025-02-19: edition by Cristofer Jimenez</p></li>
+<li><p>xxxx-xx-xx: translated to python</p></li>
+<li><p>2026-06-24: Removed signal conversion (photon count to PCR) from function</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.preprocess.pollyPreprocess.pollyRemoveBG">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">pollyRemoveBG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawSignal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgCorrectionIndexLow</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgCorrectionIndexHigh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxHeightBin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstBinIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#pollyRemoveBG"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.pollyRemoveBG" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">pollyRemoveBG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawSignal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgCorrectionIndexLow</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgCorrectionIndexHigh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgCorrectionIndexLow_upper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgCorrectionIndexHigh_upper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxHeightBin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstBinIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#pollyRemoveBG"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.pollyRemoveBG" title="Link to this definition">#</a></dt>
 <dd><p>Background correction. Remove mean background noise from signal.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>rawSignal (np.ndarray): Lidar Signal to be processed</strong></dt><dd></dd>
-<dt><strong>bgCorrectionIndexLow (list of int): lower index of background noise per channel</strong></dt><dd></dd>
-<dt><strong>bgCorrectionIndexHigh (list of int): upper index of background noise per channel</strong></dt><dd></dd>
-<dt><strong>maxHeightBin (int): maximum height bin index (default: 3000)</strong></dt><dd></dd>
-<dt><strong>firstBinIndex (list of int): first height bin index per channel (default: 0 per chanel)</strong></dt><dd></dd>
+<dt><strong>rawSignal</strong><span class="classifier">ndarray</span></dt><dd><p>Signal to be processed [MCPS or Photon counts].</p>
+</dd>
+<dt><strong>bgCorrectionIndexLow</strong><span class="classifier">list of int</span></dt><dd><p>Lower index of background noise per channel.</p>
+</dd>
+<dt><strong>bgCorrectionIndexHigh</strong><span class="classifier">list of int</span></dt><dd><p>Upper index of background noise per channel.</p>
+</dd>
+<dt><strong>maxHeightBin</strong><span class="classifier">int</span></dt><dd><p>Maximum height bin index. Default is 3000).</p>
+</dd>
+<dt><strong>firstBinIndex</strong><span class="classifier">list of int</span></dt><dd><p>First height bin index per channel. Default is 0 per channel.</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><dl class="simple">
-<dt>signal_out (np.ndarray): Background corrected signal</dt><dd></dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>bg (np.ndarray): Removed background noise</dt><dd></dd>
-</dl>
-</li>
-</ul>
+<dd class="field-even"><dl class="simple">
+<dt><strong>signal_out</strong><span class="classifier">ndarray</span></dt><dd><p>Background corrected signal [MCPs or Photon counts].</p>
+</dd>
+<dt><strong>bg</strong><span class="classifier">ndarray</span></dt><dd><p>Removed background noise [MCPS or Photon counts].</p>
 </dd>
 </dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>** History **</p>
+<ul class="simple">
+<li><p>2021-05-16: first edition by Zhenping</p></li>
+<li><p>xxxx-xx-xx: translated to pyhton</p></li>
+<li><p>2025-08-13: allow channel dependent background range</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.preprocess.pollyPreprocess.slicerange">
 <span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">slicerange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxHeightBin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstBinIndex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#slicerange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.slicerange" title="Link to this definition">#</a></dt>
 <dd><p>Slice a given array across the height/range dimension from firstBinIndex to maxHeightBin + firstBinIndex.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>array (np.ndarray): array to be sliced</strong></dt><dd></dd>
-<dt><strong>maxHeightBin (int): length of slice</strong></dt><dd></dd>
-<dt><strong>firstBinIndex (list of int): start hight/range index of slice per channel</strong></dt><dd></dd>
+<dt><strong>array</strong><span class="classifier">ndarray</span></dt><dd><p>Array to be sliced.</p>
+</dd>
+<dt><strong>maxHeightBin</strong><span class="classifier">int</span></dt><dd><p>Length of slice.</p>
+</dd>
+<dt><strong>firstBinIndex</strong><span class="classifier">list of int</span></dt><dd><p>Start hight/range index of slice per channel.</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>out (np.ndarray): sliced array</dt><dd></dd>
+<dt><strong>out</strong><span class="classifier">ndarray</span></dt><dd><p>Sliced array.</p>
+</dd>
+<dt>** History **</dt><dd></dd>
 </dl>
+<ul class="simple">
+<li><dl class="simple">
+<dt>xxxx-xx-xx: first edition by …</dt><dd></dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>2025-08-13: vectorized by Buholdt</dt><dd></dd>
+</dl>
+</li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.preprocess.pollyPreprocess.pollyPolCaliTime">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">pollyPolCaliTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depCalAng</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mTime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_depAng</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maskDepCalAng</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#pollyPolCaliTime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.pollyPolCaliTime" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">pollyPolCaliTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depCalAng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mTime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_depAng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maskDepCalAng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#pollyPolCaliTime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.pollyPolCaliTime" title="Link to this definition">#</a></dt>
+<dd><p>Retrieve the time for the polly depolarization calibration 
+period. depolarization calibration: 5 min (+45Â°) + 5 min (-45Â°) + 0.5 min.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>depCalAng</strong><span class="classifier">ndarray</span></dt><dd><p>Angle of the polarizer in the receiving channel
+(&gt;0 means calibration process starts).</p>
+</dd>
+<dt><strong>mTime</strong><span class="classifier">list</span></dt><dd><p>Datetime ndarray for the measurement time of each profile.</p>
+</dd>
+<dt><strong>init_depAng</strong><span class="classifier">float</span></dt><dd><p>Initial polarization angle of the polarizer for polarization
+calibration. Default is 0.</p>
+</dd>
+<dt><strong>maskDepCalAng</strong><span class="classifier">list</span></dt><dd><p>Mask for positive and negative calibration angle of the polarizer, in
+which ‘p’ stands for positive angle, while ‘n’ for negative angle.
+Default is {}.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>depCal_P_Ang_time_start</strong><span class="classifier">list</span></dt><dd><p>Time for the first profile with valid positive angle depolarization 
+calibration.</p>
+</dd>
+<dt><strong>depCal_P_Ang_time_end</strong><span class="classifier">list</span></dt><dd><p>time for the last profile with valid positive angle depolarization 
+calibration.</p>
+</dd>
+<dt><strong>depCal_N_Ang_time_start</strong><span class="classifier">list</span></dt><dd><p>time for the first profile with valid negative angle depolarization 
+calibration.</p>
+</dd>
+<dt><strong>depCal_N_Ang_time_end</strong><span class="classifier">list</span></dt><dd><p>time for the last profile with valid negative angle depolarization
+calibration.</p>
+</dd>
+<dt><strong>maskDepCal</strong><span class="classifier">ndarray</span></dt><dd><p>If polly was doing polarization calibration, depCalMask is set
+True. Otherwise, False.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Clean comments of the function.</p>
+</div>
+<p><strong>History</strong></p>
+<ul class="simple">
+<li><p>2021-04-21: First edition by Zhenping</p></li>
+<li><p>xxxx-xx-xx: Translated to Python by …</p></li>
+</ul>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.preprocess.pollyPreprocess.calculate_rcs">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">calculate_rcs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datasignal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ranges</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#calculate_rcs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.calculate_rcs" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">calculate_rcs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ranges</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#calculate_rcs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.calculate_rcs" title="Link to this definition">#</a></dt>
 <dd><p>Function for calculating RCS.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>datasignal:</strong></dt><dd><p>signal to range correct</p>
+<dt><strong>signal</strong><span class="classifier">ndarray</span></dt><dd><p>Signal to range correct [PCR].</p>
 </dd>
-<dt><strong>ranges:</strong></dt><dd><p>ranges that are squared</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>np.ndarray: Computed RCS array.</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ppcpy.preprocess.pollyPreprocess.pollyPreprocess">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">pollyPreprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawdata_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collect_debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#pollyPreprocess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.pollyPreprocess" title="Link to this definition">#</a></dt>
-<dd><p>Deadtime correction, background correction, first-bin shift, mask for low-SNR and mask for depolarization-calibration process.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data: struct</strong></dt><dd><dl class="simple">
-<dt>rawSignal: array</dt><dd><p>signal. [Photon Count]</p>
-</dd>
-<dt>mShots: array</dt><dd><p>number of the laser shots for each profile.</p>
-</dd>
-<dt>mTime: array</dt><dd><p>datetime array for the measurement time of each profile.</p>
-</dd>
-<dt>depCalAng: array</dt><dd><p>angle of the polarizer in the receiving channel. (&gt;0 means 
-calibration process starts)</p>
-</dd>
-<dt>zenithAng: array</dt><dd><p>zenith angle of the laer beam.</p>
-</dd>
-<dt>repRate: float</dt><dd><p>laser pulse repetition rate. [s^-1]</p>
-</dd>
-<dt>hRes: float</dt><dd><p>spatial resolution [m]</p>
-</dd>
-<dt>mSite: string</dt><dd><p>measurement site.</p>
-</dd>
-</dl>
-</dd>
-<dt><strong>deltaT: numeric</strong></dt><dd><p>integration time (in seconds) for single profile. (default: 30)</p>
-</dd>
-<dt><strong>flagForceMeasTime: logical</strong></dt><dd><p>flag to control whether to align measurement time with file creation
-time, instead of taking the measurement time in the data file.
-(default: false)</p>
-</dd>
-<dt><strong>maxHeightBin: numeric</strong></dt><dd><p>number of range bins to read out from data file. (default: 3000)</p>
-</dd>
-<dt><strong>firstBinIndex: numeric</strong></dt><dd><p>index of first bin to read out. (default: 1)</p>
-</dd>
-<dt><strong>pollyType: char</strong></dt><dd><p>polly version. (default: ‘arielle’)</p>
-</dd>
-<dt><strong>flagDeadTimeCorrection: logical</strong></dt><dd><p>flag to control whether to apply deadtime correction. (default: false)</p>
-</dd>
-<dt><strong>deadtimeCorrectionMode: numeric</strong></dt><dd><p>deadtime correction mode. (default: 2)
-1: polynomial correction with parameters saved in data file.
-2: non-paralyzable correction
-3: polynomail correction with user defined parameters
-4: disable deadtime correction</p>
-</dd>
-<dt><strong>deadtimeParams: numeric</strong></dt><dd><p>deadtime parameters. (default: [])</p>
-</dd>
-<dt><strong>flagSigTempCor: logical</strong></dt><dd><p>flag to implement signal temperature correction.</p>
-</dd>
-<dt><strong>tempCorFunc: cell</strong></dt><dd><p>symbolic function for signal temperature correction.
-“1”: no correction
-“exp(-0.001*T)”: exponential correction function. (Unit: Kelvin)</p>
-</dd>
-<dt><strong>meteorDataSource: str</strong></dt><dd><p>meteorological data type.
-e.g., ‘gdas1’(default), ‘standard_atmosphere’, ‘websonde’, ‘radiosonde’</p>
-</dd>
-<dt><strong>gdas1Site: str</strong></dt><dd><p>the GDAS1 site for the current campaign.</p>
-</dd>
-<dt><strong>meteo_folder: str</strong></dt><dd><p>the main folder of the GDAS1 profiles.</p>
-</dd>
-<dt><strong>radiosondeSitenum: integer</strong></dt><dd><p>site number, which can be found in 
-doc/radiosonde-station-list.txt.</p>
-</dd>
-<dt><strong>radiosondeFolder: str</strong></dt><dd><p>the folder of the sonding files.</p>
-</dd>
-<dt><strong>radiosondeType: integer</strong></dt><dd><p>file type of the radiosonde file.
-- 1: radiosonde file for MOSAiC (default)
-- 2: radiosonde file for MUA</p>
-</dd>
-<dt><strong>bgCorrectionIndexLow: 1-dim. array</strong></dt><dd><p>base indecis of bins for background estimation.
-(defults: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10])</p>
-</dd>
-<dt><strong>bgCorrectionIndexHigh: 1-dim. array</strong></dt><dd><p>top index of bins for background estimation.
-(defults: [240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240])</p>
-</dd>
-<dt><strong>asl: numeric</strong></dt><dd><p>above sea level in meters. (default: 0)</p>
-</dd>
-<dt><strong>initialPolAngle: numeric</strong></dt><dd><p>initial polarization angle of the polarizer for polarization
-calibration. (default: 0)</p>
-</dd>
-<dt><strong>maskPolCalAngle: cell</strong></dt><dd><p>mask for positive and negative calibration angle of the polarizer, in
-which ‘p’ stands for positive angle, while ‘n’ for negative angle.
-(default: {})</p>
-</dd>
-<dt><strong>minSNRThresh: numeric</strong></dt><dd><p>lower bound of signal-noise ratio.</p>
-</dd>
-<dt><strong>minPC_fog: numeric</strong></dt><dd><p>minimun number of photon count after strong attenuation by fog.</p>
-</dd>
-<dt><strong>flagFarRangeChannel: logical</strong></dt><dd><p>flags of far-range channel.</p>
-</dd>
-<dt><strong>flag532nmChannel: logical</strong></dt><dd><p>flags of channels with central wavelength (CW) at 532 nm.</p>
-</dd>
-<dt><strong>flagTotalChannel: logical</strong></dt><dd><p>flags of channels receiving total elastic signal.</p>
-</dd>
-<dt><strong>flag355nmChannel: logical</strong></dt><dd><p>flags of channels with CW at 355 nm.</p>
-</dd>
-<dt><strong>flag607nmChannel: logical</strong></dt><dd><p>flags of channels with CW at 607 nm.</p>
-</dd>
-<dt><strong>flag387nmChannel: logical</strong></dt><dd><p>flags of channels with CW at 387 nm.</p>
-</dd>
-<dt><strong>flag407nmChannel: logical</strong></dt><dd><p>flags of channels with CW at 407 nm.</p>
-</dd>
-<dt><strong>flag532nmRotRaman: logical</strong></dt><dd><p>flags of rotational Raman channels with CW at 532 nm.</p>
-</dd>
-<dt><strong>flag1064nmRotRaman: logical</strong></dt><dd><p>flags of rotational Raman channels with CW at 1064 nm.</p>
+<dt><strong>ranges</strong><span class="classifier">ndarray</span></dt><dd><p>Ranges dimension [m].</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>data: struct</dt><dd><dl class="simple">
-<dt>rawSignal: array</dt><dd><p>signal. [Photon Count]</p>
-</dd>
-<dt>mShots: array</dt><dd><p>number of the laser shots for each profile.</p>
-</dd>
-<dt>mTime: array</dt><dd><p>datetime array for the measurement time of each profile.</p>
-</dd>
-<dt>depCalAng: array</dt><dd><p>angle of the polarizer in the receiving channel. (&gt;0 means 
-calibration process starts)</p>
-</dd>
-<dt>zenithAng: array</dt><dd><p>zenith angle of the laer beam.</p>
-</dd>
-<dt>repRate: float</dt><dd><p>laser pulse repetition rate. [s^-1]</p>
-</dd>
-<dt>hRes: float</dt><dd><p>spatial resolution [m]</p>
-</dd>
-<dt>mSite: string</dt><dd><p>measurement site.</p>
-</dd>
-<dt>deadtime: matrix (channel x polynomial_orders)</dt><dd><p>deadtime correction parameters.</p>
-</dd>
-<dt>signal: array</dt><dd><p>Background removed signal</p>
-</dd>
-<dt>bg: array</dt><dd><p>background</p>
-</dd>
-<dt>height: array</dt><dd><p>height. [m]</p>
-</dd>
-<dt>lowSNRMask: logical</dt><dd><p>If SNR less SNRmin, mask is set true. Otherwise, false</p>
-</dd>
-<dt>depCalMask: logical</dt><dd><p>If polly was doing polarization calibration, depCalMask is set
-true. Otherwise, false.</p>
-</dd>
-<dt>fogMask: logical</dt><dd><p>If it is foggy which means the signal will be very weak, 
-fogMask will be set true. Otherwise, false</p>
-</dd>
-<dt>mask607Off: logical</dt><dd><p>mask of PMT on/off status at 607 nm channel.</p>
-</dd>
-<dt>mask387Off: logical</dt><dd><p>mask of PMT on/off status at 387 nm channel.</p>
-</dd>
-<dt>mask407Off: logical</dt><dd><p>mask of PMT on/off status at 407 nm channel.</p>
-</dd>
-<dt>mask355RROff: logical</dt><dd><p>mask of PMT on/off status at 355 nm rotational Raman channel.</p>
-</dd>
-<dt>mask532RROff: logical</dt><dd><p>mask of PMT on/off status at 532 nm rotational Raman channel.</p>
-</dd>
-<dt>mask1064RROff: logical</dt><dd><p>mask of PMT on/off status at 1064 nm rotational Raman channel.</p>
+<dt><strong>RCS</strong><span class="classifier">ndarray</span></dt><dd><p>Range corrected signal [PCR].</p>
 </dd>
 </dl>
 </dd>
 </dl>
-</dd>
-</dl>
+<p class="rubric">Notes</p>
+<p>** History **</p>
+<ul class="simple">
+<li><p>xxxx-xx-xx: First edition by …</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.preprocess.pollyPreprocess.any_signal">
 <span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.pollyPreprocess.</span></span><span class="sig-name descname"><span class="pre">any_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sig</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/preprocess/pollyPreprocess.html#any_signal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.pollyPreprocess.any_signal" title="Link to this definition">#</a></dt>
-<dd><p>check if there is any signal
+<dd><p>Check if there is any signal
 POLLYISLASERSHUTTERON determine whether the laser shutter is on due to the flying object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>sig: np.ndarray</strong></dt><dd><p>BGCor signal with shape [height, time].</p>
+<dt><strong>sig: ndarray</strong></dt><dd><p>BGCor signal with shape [height, time].</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>flag: np.ndarray</dt><dd><p>Boolean array of shape [time,] where True indicates the laser shutter is turned on.</p>
+<dt>flag: ndarray</dt><dd><p>Boolean array of shape [time,] where True indicates the laser shutter is turned on.</p>
 </dd>
 </dl>
 </dd>
@@ -678,18 +770,26 @@ POLLYISLASERSHUTTERON determine whether the laser shutter is on due to the flyin
 <span id="ppcpy-preprocess-profiles"></span><h2>ppcpy.preprocess.profiles<a class="headerlink" href="#module-ppcpy.preprocess.profiles" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="ppcpy.preprocess.profiles.aggregate_clFreeGrps">
-<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.profiles.</span></span><span class="sig-name descname"><span class="pre">aggregate_clFreeGrps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func=&lt;function</span> <span class="pre">nansum&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ppcpy/preprocess/profiles.html#aggregate_clFreeGrps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.profiles.aggregate_clFreeGrps" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ppcpy.preprocess.profiles.</span></span><span class="sig-name descname"><span class="pre">aggregate_clFreeGrps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cube</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func=&lt;function</span> <span class="pre">nansum&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flagVal:</span> <span class="pre">~numpy.ndarray</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../_modules/ppcpy/preprocess/profiles.html#aggregate_clFreeGrps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ppcpy.preprocess.profiles.aggregate_clFreeGrps" title="Link to this definition">#</a></dt>
 <dd><p>Aggregate the highres signal over the periods of the cloud free signal.</p>
-<dl class="simple">
-<dt>Input:</dt><dd><ul class="simple">
-<li><p>data_cube (object): Main PicassoProc object.</p></li>
-<li><p>var (string): name of variable to be aggregated.</p></li>
-<li><p>func (function): function to do the aggregateion (mean, sum, median, etc), defult: np.nansum.</p></li>
-</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_cube</strong><span class="classifier">object</span></dt><dd><p>Main PicassoProc object.</p>
 </dd>
-<dt>Output:</dt><dd><ul class="simple">
-<li><p>out (np.ndarray): Aggregated highres signal for each cloud free segment.</p></li>
-</ul>
+<dt><strong>var</strong><span class="classifier">string</span></dt><dd><p>name of variable to be aggregated.</p>
+</dd>
+<dt><strong>func</strong><span class="classifier">function</span></dt><dd><p>function to do the aggregateion (mean, sum, median, etc), defult: np.nansum.</p>
+</dd>
+<dt><strong>flagVal</strong><span class="classifier">None | np.ndarray</span></dt><dd><p>boolean flag for valid profiles</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>out</strong><span class="classifier">np.ndarray</span></dt><dd><p>Aggregated highres signal for each cloud free segment.</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -745,15 +845,15 @@ POLLYISLASERSHUTTERON determine whether the laser shutter is on due to the flyin
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ppcpy.preprocess.pollyPreprocess">ppcpy.preprocess.pollyPreprocess</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.preprocess.pollyPreprocess.compute_channel_pcr"><code class="docutils literal notranslate"><span class="pre">compute_channel_pcr()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.preprocess.pollyPreprocess.compute_pcr_parallel"><code class="docutils literal notranslate"><span class="pre">compute_pcr_parallel()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.preprocess.pollyPreprocess.pollyPreprocess"><code class="docutils literal notranslate"><span class="pre">pollyPreprocess()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.preprocess.pollyPreprocess.photonCount2PCR"><code class="docutils literal notranslate"><span class="pre">photonCount2PCR()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.preprocess.pollyPreprocess.PCR2PhotonCount"><code class="docutils literal notranslate"><span class="pre">PCR2PhotonCount()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.preprocess.pollyPreprocess.faster_polyval"><code class="docutils literal notranslate"><span class="pre">faster_polyval()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.preprocess.pollyPreprocess.pollyDTCor"><code class="docutils literal notranslate"><span class="pre">pollyDTCor()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.preprocess.pollyPreprocess.pollyRemoveBG"><code class="docutils literal notranslate"><span class="pre">pollyRemoveBG()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.preprocess.pollyPreprocess.slicerange"><code class="docutils literal notranslate"><span class="pre">slicerange()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.preprocess.pollyPreprocess.pollyPolCaliTime"><code class="docutils literal notranslate"><span class="pre">pollyPolCaliTime()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.preprocess.pollyPreprocess.calculate_rcs"><code class="docutils literal notranslate"><span class="pre">calculate_rcs()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.preprocess.pollyPreprocess.pollyPreprocess"><code class="docutils literal notranslate"><span class="pre">pollyPreprocess()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppcpy.preprocess.pollyPreprocess.any_signal"><code class="docutils literal notranslate"><span class="pre">any_signal()</span></code></a></li>
 </ul>
 </li>
